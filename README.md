@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# WC26 Live — FIFA World Cup 2026 Dashboard
 
-## Getting Started
+A personal, self-hosted live companion for the 2026 FIFA World Cup (Jun 11 – Jul 19 · USA · Canada · Mexico): real-time scores, Polymarket win probabilities, breaking news, standings, squads, formation diagrams and all 16 stadiums — in a broadcast-style dark UI themed per match in team colors.
 
-First, run the development server:
+Built with **Next.js 14 (App Router) + TypeScript + Tailwind CSS + SWR**, per `FIFA_WC2026_Dashboard_PRD.md`.
+
+## Quick start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**It works with zero API keys** — live scores arrive from worldcup26.ir (open, keyless) and Polymarket odds are public. For the full experience add the two free keys to `.env.local`:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Key | Where to get it | Unlocks |
+|---|---|---|
+| `FOOTBALL_DATA_API_KEY` | [football-data.org/client/register](https://www.football-data.org/client/register) (free, 10 req/min) | Primary live feed, cards/subs events, referees, **squads + coaches + predicted XI** |
+| `GNEWS_API_KEY` | [gnews.io](https://gnews.io/) (free, 100 req/day) | Live news headlines (otherwise an offline digest with search links is shown) |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Restart `npm run dev` after editing `.env.local`.
 
-## Learn More
+## Data sources & fallback chain
 
-To learn more about Next.js, take a look at the following resources:
+```
+matches/standings/scorers : football-data.org → worldcup26.ir → bundled schedule (data/schedule.json)
+match stats & lineups     : ESPN public JSON API (keyless) — possession, shots, passes, corners,
+                            confirmed formations, per-player stats, headshots, attendance
+players                   : ESPN rosters + athlete bios (keyless) · preferred foot via Wikidata
+odds & betting money      : Polymarket Gamma API (keyless) → tournament-winner market → hidden
+news                      : GNews → offline digest
+ticket prices (optional)  : SeatGeek (free client id) — hidden without a key
+flags                     : FlagCDN (keyless)   crests: football-data.org
+stadium photos            : Wikimedia Commons (pre-curated in data/stadiums.json)
+maps                      : OpenStreetMap embeds (keyless)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Every payload carries its provenance; fallback sources are labeled in the UI (small tags, or the amber banner in full offline mode). Caching respects free-tier limits: live 25–30s, schedule 2–5m, news 10m, teams 6h, plus a client-side 8-req/min guard for football-data.org.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Pages
 
-## Deploy on Vercel
+- `/` — war room: live hero (or next-match countdown), tournament-wide betting totals (traded / at stake / settled pools), today's matches with odds bars, news grid with tag filters, group standings accordion, Golden Boot
+- `/match/[id]` — match centre: team-color theming, live scoreboard + estimated clock, goal banner, events timeline with goal-clip search links, ESPN match stats (possession, shots, passes, corners, free kicks won, penalties, saves, cards), confirmed lineups with player photos (predicted XI before they drop), squads, Polymarket panel, attendance, optional avg ticket price, venue card with map
+- `/upcoming` — all 104 fixtures, filterable by status/group/team/host country/date
+- `/standings` — 12 group tables with qualification color-coding, knockout bracket, top scorers
+- `/teams` & `/teams/[id]` — all 48 nations: squad with headshots, coach, schedule, W/D/L + cards + average possession, next-match odds, odds to win the World Cup, and the money picture (bet on them, traded on their matches, at stake, settled pools won/lost)
+- `/players/[id]` — player profiles: photo, age, height, weight, nationality, birthplace, club, preferred foot (Wikidata, when recorded), tournament totals (apps, est. minutes, goals, assists, shots, accuracy, fouls, cards), per-match log, prediction markets naming them, goal-clip search links
+- `/stadiums` — the 16 venues by country, each expandable to its full fixture list
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Honest limits of free data
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **"Money won/lost"** uses Polymarket's public pool math: a settled market's open interest is paid in full to the winning side. Per-bettor P&L is not published anywhere, so the app reports pools and labels them as such.
+- **Viewers per game** isn't published in real time by anyone (TV ratings land days later) — the app shows official **attendance** from ESPN instead.
+- **Goal clips** have no free API; scorer names link to targeted YouTube / X / Reddit searches, plus ESPN's own match clips when available.
+- **Possession & advanced stats** come from ESPN's public feed; football-data's free tier doesn't carry them.
+
+## Deploy
+
+```bash
+npx vercel --prod    # or push to a Git repo and import in Vercel/Netlify
+```
+
+Set the two env vars in your hosting dashboard. No database, no auth — everything is fetched server-side and cached in memory.
+
+## Security posture
+
+`npm audit` reports advisories against Next 14 (all fixed only in Next 15/16) and a dev-only `glob` issue inside `eslint-config-next`. This app does not use the affected surfaces — no `next/image` optimizer, no middleware/rewrites, no CSP nonces, no `beforeInteractive` scripts, no WebSockets — and it is a single-user personal dashboard, so the practical exposure is minimal. The PRD pins Next.js 14; if you ever expose this publicly at scale, upgrade to the latest Next major (`npx @next/codemod@latest upgrade`) and re-run `npm audit`.
+
+## Notes & known trade-offs
+
+- **Match ids are namespaced** (`fd-…`, `wc26-…`, `demo-…`) so links stay consistent within whichever source is active.
+- The **live clock is an estimate** when the provider doesn't report an official minute (free tiers) — it's labeled `est`.
+- **Lineups aren't on free tiers**, so formation diagrams show a squad-based *predicted* 4-3-3 (PRD §7.2a fallback).
+- worldcup26.ir reports kickoff in stadium-local time; conversion to your timezone uses each stadium's IANA zone in `data/stadiums.json`.
+- "Sort by odds spread" from the PRD was dropped to avoid hammering Polymarket with 100+ market lookups per page; odds load only for matches within 48h.

@@ -1,0 +1,290 @@
+[
+  {
+    "code": "MEX",
+    "name": "Mexico",
+    "group": "A",
+    "wc26Id": "1"
+  },
+  {
+    "code": "RSA",
+    "name": "South Africa",
+    "group": "A",
+    "wc26Id": "2"
+  },
+  {
+    "code": "KOR",
+    "name": "South Korea",
+    "group": "A",
+    "wc26Id": "3"
+  },
+  {
+    "code": "CZE",
+    "name": "Czech Republic",
+    "group": "A",
+    "wc26Id": "4"
+  },
+  {
+    "code": "CAN",
+    "name": "Canada",
+    "group": "B",
+    "wc26Id": "5"
+  },
+  {
+    "code": "BIH",
+    "name": "Bosnia and Herzegovina",
+    "group": "B",
+    "wc26Id": "6"
+  },
+  {
+    "code": "QAT",
+    "name": "Qatar",
+    "group": "B",
+    "wc26Id": "7"
+  },
+  {
+    "code": "SUI",
+    "name": "Switzerland",
+    "group": "B",
+    "wc26Id": "8"
+  },
+  {
+    "code": "BRA",
+    "name": "Brazil",
+    "group": "C",
+    "wc26Id": "9"
+  },
+  {
+    "code": "MAR",
+    "name": "Morocco",
+    "group": "C",
+    "wc26Id": "10"
+  },
+  {
+    "code": "HAI",
+    "name": "Haiti",
+    "group": "C",
+    "wc26Id": "11"
+  },
+  {
+    "code": "SCO",
+    "name": "Scotland",
+    "group": "C",
+    "wc26Id": "12"
+  },
+  {
+    "code": "USA",
+    "name": "United States",
+    "group": "D",
+    "wc26Id": "13"
+  },
+  {
+    "code": "PAR",
+    "name": "Paraguay",
+    "group": "D",
+    "wc26Id": "14"
+  },
+  {
+    "code": "AUS",
+    "name": "Australia",
+    "group": "D",
+    "wc26Id": "15"
+  },
+  {
+    "code": "TUR",
+    "name": "Turkey",
+    "group": "D",
+    "wc26Id": "16"
+  },
+  {
+    "code": "GER",
+    "name": "Germany",
+    "group": "E",
+    "wc26Id": "17"
+  },
+  {
+    "code": "CUW",
+    "name": "Curaçao",
+    "group": "E",
+    "wc26Id": "18"
+  },
+  {
+    "code": "CIV",
+    "name": "Ivory Coast",
+    "group": "E",
+    "wc26Id": "19"
+  },
+  {
+    "code": "ECU",
+    "name": "Ecuador",
+    "group": "E",
+    "wc26Id": "20"
+  },
+  {
+    "code": "NED",
+    "name": "Netherlands",
+    "group": "F",
+    "wc26Id": "21"
+  },
+  {
+    "code": "JPN",
+    "name": "Japan",
+    "group": "F",
+    "wc26Id": "22"
+  },
+  {
+    "code": "SWE",
+    "name": "Sweden",
+    "group": "F",
+    "wc26Id": "23"
+  },
+  {
+    "code": "TUN",
+    "name": "Tunisia",
+    "group": "F",
+    "wc26Id": "24"
+  },
+  {
+    "code": "BEL",
+    "name": "Belgium",
+    "group": "G",
+    "wc26Id": "25"
+  },
+  {
+    "code": "EGY",
+    "name": "Egypt",
+    "group": "G",
+    "wc26Id": "26"
+  },
+  {
+    "code": "IRN",
+    "name": "Iran",
+    "group": "G",
+    "wc26Id": "27"
+  },
+  {
+    "code": "NZL",
+    "name": "New Zealand",
+    "group": "G",
+    "wc26Id": "28"
+  },
+  {
+    "code": "ESP",
+    "name": "Spain",
+    "group": "H",
+    "wc26Id": "29"
+  },
+  {
+    "code": "CPV",
+    "name": "Cape Verde",
+    "group": "H",
+    "wc26Id": "30"
+  },
+  {
+    "code": "KSA",
+    "name": "Saudi Arabia",
+    "group": "H",
+    "wc26Id": "31"
+  },
+  {
+    "code": "URU",
+    "name": "Uruguay",
+    "group": "H",
+    "wc26Id": "32"
+  },
+  {
+    "code": "FRA",
+    "name": "France",
+    "group": "I",
+    "wc26Id": "33"
+  },
+  {
+    "code": "SEN",
+    "name": "Senegal",
+    "group": "I",
+    "wc26Id": "34"
+  },
+  {
+    "code": "IRQ",
+    "name": "Iraq",
+    "group": "I",
+    "wc26Id": "35"
+  },
+  {
+    "code": "NOR",
+    "name": "Norway",
+    "group": "I",
+    "wc26Id": "36"
+  },
+  {
+    "code": "ARG",
+    "name": "Argentina",
+    "group": "J",
+    "wc26Id": "37"
+  },
+  {
+    "code": "ALG",
+    "name": "Algeria",
+    "group": "J",
+    "wc26Id": "38"
+  },
+  {
+    "code": "AUT",
+    "name": "Austria",
+    "group": "J",
+    "wc26Id": "39"
+  },
+  {
+    "code": "JOR",
+    "name": "Jordan",
+    "group": "J",
+    "wc26Id": "40"
+  },
+  {
+    "code": "POR",
+    "name": "Portugal",
+    "group": "K",
+    "wc26Id": "41"
+  },
+  {
+    "code": "COD",
+    "name": "Democratic Republic of the Congo",
+    "group": "K",
+    "wc26Id": "42"
+  },
+  {
+    "code": "UZB",
+    "name": "Uzbekistan",
+    "group": "K",
+    "wc26Id": "43"
+  },
+  {
+    "code": "COL",
+    "name": "Colombia",
+    "group": "K",
+    "wc26Id": "44"
+  },
+  {
+    "code": "ENG",
+    "name": "England",
+    "group": "L",
+    "wc26Id": "45"
+  },
+  {
+    "code": "CRO",
+    "name": "Croatia",
+    "group": "L",
+    "wc26Id": "46"
+  },
+  {
+    "code": "GHA",
+    "name": "Ghana",
+    "group": "L",
+    "wc26Id": "47"
+  },
+  {
+    "code": "PAN",
+    "name": "Panama",
+    "group": "L",
+    "wc26Id": "48"
+  }
+]

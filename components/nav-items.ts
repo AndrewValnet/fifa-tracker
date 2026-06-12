@@ -1,0 +1,13 @@
+export interface NavItem {
+  href: string;
+  label: string;
+  icon: string; // emoji keeps the nav dependency-free
+}
+
+export const NAV_ITEMS: NavItem[] = [
+  { href: "/", label: "War Room", icon: "🏠" },
+  { href: "/upcoming", label: "Matches", icon: "📅" },
+  { href: "/standings", label: "Standings", icon: "🏆" },
+  { href: "/teams", label: "Teams", icon: "👕" },
+  { href: "/stadiums", label: "Stadiums", icon: "🏟️" },
+];

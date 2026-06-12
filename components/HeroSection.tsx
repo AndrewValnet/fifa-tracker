@@ -1,0 +1,168 @@
+"use client";
+
+// Home hero (PRD §7.1): live match war-room ticker when a game is in play,
+// otherwise a countdown to the next kickoff. Fully themed in team colors.
+
+import Link from "next/link";
+import { ClipLink } from "@/components/ClipLink";
+import { CountdownTimer } from "@/components/CountdownTimer";
+import { Flag } from "@/components/Flag";
+import { GoalBanner } from "@/components/GoalBanner";
+import { LiveBadge } from "@/components/LiveBadge";
+import { LocalTime } from "@/components/LocalTime";
+import { OddsBar } from "@/components/OddsBar";
+import { Scoreboard } from "@/components/Scoreboard";
+import { TeamColorProvider } from "@/components/TeamColorProvider";
+import { useLiveMatches, useUpcomingMatches } from "@/hooks/useFixtures";
+import { useMatchOdds } from "@/hooks/useMatchOdds";
+import { stageLabel } from "@/lib/format";
+import { getStadium } from "@/lib/schedule";
+import type { Match, Sourced } from "@/lib/types";
+
+function HeroTeam({ match, side }: { match: Match; side: "home" | "away" }) {
+  const team = side === "home" ? match.homeTeam : match.awayTeam;
+  const label = side === "home" ? match.homeLabel : match.awayLabel;
+  return (
+    <div className="flex flex-col items-center gap-3 text-center">
+      <Flag code={team?.code} name={team?.name ?? label} width={120} className="md:!h-[120px] md:!w-[160px]" />
+      <p
+        className="max-w-[180px] font-display text-xl font-semibold uppercase leading-tight tracking-wide md:text-2xl"
+        style={{ color: `var(--${side}-color)` }}
+      >
+        {team?.name ?? label ?? "TBD"}
+      </p>
+    </div>
+  );
+}
+
+function HeroOdds({ match }: { match: Match }) {
+  const { odds } = useMatchOdds(match.id);
+  if (!odds || odds.kind !== "match") return null;
+  return (
+    <div className="mx-auto mt-5 w-full max-w-md">
+      <OddsBar
+        home={odds.home}
+        draw={odds.draw}
+        away={odds.away}
+        homeLabel={match.homeTeam?.code ?? "Home"}
+        awayLabel={match.awayTeam?.code ?? "Away"}
+      />
+      <p className="mt-1 text-center text-[10px] text-dim">Polymarket implied probabilities</p>
+    </div>
+  );
+}
+
+function FeaturedMatch({ match, live }: { match: Match; live: boolean }) {
+  const stadium = getStadium(match.stadiumId);
+  const recentGoals = match.events.filter((e) => e.type === "GOAL").slice(-3).reverse();
+
+  return (
+    <TeamColorProvider homeCode={match.homeTeam?.code} awayCode={match.awayTeam?.code}>
+      {live ? <GoalBanner match={match} /> : null}
+      <div className="team-gradient rounded-2xl border border-edge/70 px-4 py-8 md:px-10">
+        <p className="mb-6 text-center text-xs uppercase tracking-[0.3em] text-dim">
+          {live ? "Live from" : "Next match"} · {stadium ? `${stadium.name}, ${stadium.city}` : "World Cup 2026"}
+        </p>
+
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 md:gap-8">
+          <HeroTeam match={match} side="home" />
+
+          <div className="flex min-w-[150px] flex-col items-center gap-2 md:min-w-[260px]">
+            {live ? (
+              <Scoreboard match={match} />
+            ) : (
+              <>
+                <p className="font-mono text-xs uppercase tracking-widest text-dim">
+                  {stageLabel(match.stage, match.group)}
+                </p>
+                <CountdownTimer targetIso={match.utcDate} />
+                <LocalTime iso={match.utcDate} style="datetime" className="text-sm text-dim" />
+              </>
+            )}
+          </div>
+
+          <HeroTeam match={match} side="away" />
+        </div>
+
+        {live && recentGoals.length ? (
+          <ul className="mx-auto mt-5 flex max-w-md flex-col gap-1 text-center text-sm text-dim">
+            {recentGoals.map((g, i) => (
+              <li key={`${g.minute}-${g.player}-${i}`}>
+                <span aria-hidden>⚽</span> {g.minute}’{" "}
+                <ClipLink
+                  player={g.player}
+                  home={match.homeTeam?.name ?? "Home"}
+                  away={match.awayTeam?.name ?? "Away"}
+                />
+                {g.secondary ? <span className="text-dim/70"> ({g.secondary})</span> : null}
+              </li>
+            ))}
+          </ul>
+        ) : null}
+
+        <HeroOdds match={match} />
+
+        <div className="mt-6 text-center">
+          <Link
+            href={`/match/${match.id}`}
+            prefetch={false}
+            className="inline-block rounded-full bg-pitch px-6 py-2.5 font-display text-sm font-semibold uppercase tracking-wider text-navy transition-transform hover:scale-105"
+          >
+            {live ? "Open match centre" : "Match preview"}
+          </Link>
+        </div>
+      </div>
+    </TeamColorProvider>
+  );
+}
+
+export function HeroSection({
+  initialLive,
+  initialUpcoming,
+}: {
+  initialLive?: Sourced<Match[]>;
+  initialUpcoming?: Sourced<Match[]>;
+}) {
+  const { matches: live } = useLiveMatches(initialLive);
+  const { matches: upcoming } = useUpcomingMatches(initialUpcoming);
+
+  const featured = live[0] ?? upcoming[0] ?? null;
+  const others = live.slice(1);
+
+  return (
+    <section aria-label="Featured match" className="pitch-bg border-b border-edge">
+      <div className="mx-auto max-w-shell px-4 pb-8 pt-6 md:pt-10">
+        <div className="mb-6 flex items-end justify-between">
+          <h1 className="font-display text-2xl font-bold uppercase tracking-wide md:text-3xl">
+            World Cup <span className="text-pitch">2026</span> War Room
+          </h1>
+          {live.length ? <LiveBadge /> : null}
+        </div>
+
+        {featured ? (
+          <FeaturedMatch match={featured} live={live.length > 0} />
+        ) : (
+          <p className="rounded-xl border border-edge bg-panel px-4 py-10 text-center text-dim">
+            The tournament schedule is loading…
+          </p>
+        )}
+
+        {others.length ? (
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            <span className="text-xs uppercase tracking-widest text-dim">Also live:</span>
+            {others.map((m) => (
+              <Link
+                key={m.id}
+                href={`/match/${m.id}`}
+                prefetch={false}
+                className="rounded-full border border-live/40 bg-live/10 px-3 py-1.5 font-mono text-xs hover:bg-live/20"
+              >
+                {(m.homeTeam?.code ?? "TBD")} {m.score.home ?? "–"}:{m.score.away ?? "–"} {(m.awayTeam?.code ?? "TBD")}
+              </Link>
+            ))}
+          </div>
+        ) : null}
+      </div>
+    </section>
+  );
+}
