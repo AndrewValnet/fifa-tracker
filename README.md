@@ -73,3 +73,4 @@ Set the two env vars in your hosting dashboard. No database, no auth — everyth
 - **Lineups aren't on free tiers**, so formation diagrams show a squad-based *predicted* 4-3-3 (PRD §7.2a fallback).
 - worldcup26.ir reports kickoff in stadium-local time; conversion to your timezone uses each stadium's IANA zone in `data/stadiums.json`.
 - "Sort by odds spread" from the PRD was dropped to avoid hammering Polymarket with 100+ market lookups per page; odds load only for matches within 48h.
+Trigger deploy Fri, Jun 12, 2026  6:46:53 PM
