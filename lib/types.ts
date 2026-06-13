@@ -159,6 +159,8 @@ export interface OddsData {
   volume: number | null;
   volume24h: number | null;
   liquidity: number | null;
+  /** Open interest = pool currently at stake across the event's outcomes. */
+  openInterest?: number | null;
   url: string | null;
   homeHistory?: OddsHistoryPoint[];
   awayHistory?: OddsHistoryPoint[];

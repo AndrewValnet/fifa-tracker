@@ -206,6 +206,7 @@ export async function getMatchMarket(match: Match): Promise<OddsData | null> {
     volume: num(event.volume),
     volume24h: num(event.volume24hr),
     liquidity: num(event.liquidity),
+    openInterest: num((event as GammaEventTotals).openInterest),
     url: `https://polymarket.com/event/${event.slug}`,
     updated: new Date().toISOString(),
   };
@@ -308,6 +309,22 @@ export async function getOddsForMatch(match: Match): Promise<OddsData | null> {
     const matchOdds = await getMatchMarket(match);
     if (matchOdds) return matchOdds;
     return await getTournamentOdds(match);
+  });
+}
+
+/** Per-team outright "win the World Cup" volume + price (single fetch). */
+export async function getOutrightVolumes(): Promise<Record<string, { volume: number | null; price: number | null }>> {
+  return cached("pm:outright-volumes", 10 * 60_000, async () => {
+    const ev = await winnerEvent();
+    const out: Record<string, { volume: number | null; price: number | null }> = {};
+    if (!ev?.markets?.length) return out;
+    for (const m of ev.markets) {
+      const label = (m.groupItemTitle || m.question || "").replace(/^will\s+/i, "").replace(/\s+win.*$/i, "");
+      const code = resolveTeamCode(null, label);
+      if (!code) continue;
+      out[code] = { volume: num(m.volume), price: yesPrice(m) };
+    }
+    return out;
   });
 }
 
