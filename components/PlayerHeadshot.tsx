@@ -1,8 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-/** ESPN headshot with initials fallback (not every player has a photo). */
+/**
+ * ESPN headshot with a keyless name-based fallback (Wikidata/Wikipedia via
+ * /api/player-image) and an initials avatar as the last resort. The fallback
+ * is fetched only when the ESPN image fails or no ESPN photo exists, so the
+ * common case stays a single direct <img> with zero extra requests.
+ */
 export function PlayerHeadshot({
   src,
   name,
@@ -16,7 +21,47 @@ export function PlayerHeadshot({
   colors?: { primary: string; secondary: string };
   className?: string;
 }) {
+  const [resolvedSrc, setResolvedSrc] = useState<string | null | undefined>(src);
+  const [triedFallback, setTriedFallback] = useState(false);
   const [failed, setFailed] = useState(false);
+
+  // Reset when the player (src) changes within a reused component instance.
+  useEffect(() => {
+    setResolvedSrc(src);
+    setTriedFallback(false);
+    setFailed(false);
+  }, [src]);
+
+  async function tryFallback() {
+    if (triedFallback) {
+      setFailed(true);
+      return;
+    }
+    setTriedFallback(true);
+    if (!name) {
+      setFailed(true);
+      return;
+    }
+    try {
+      const res = await fetch(`/api/player-image?name=${encodeURIComponent(name)}`);
+      const json = (await res.json()) as { url?: string | null };
+      if (json?.url) {
+        setResolvedSrc(json.url);
+        return;
+      }
+    } catch {
+      /* fall through to initials */
+    }
+    setFailed(true);
+  }
+
+  // No ESPN photo at all (unmatched player) → try the name-based fallback
+  // before settling on initials.
+  useEffect(() => {
+    if (!src && name && !triedFallback) void tryFallback();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [src, name]);
+
   const initials = name
     .split(/\s+/)
     .filter(Boolean)
@@ -24,7 +69,7 @@ export function PlayerHeadshot({
     .map((p) => p[0]?.toUpperCase() ?? "")
     .join("");
 
-  if (!src || failed) {
+  if (failed || !resolvedSrc) {
     return (
       <span
         aria-hidden
@@ -46,12 +91,12 @@ export function PlayerHeadshot({
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={src}
+      src={resolvedSrc}
       alt=""
       width={size}
       height={size}
       loading="lazy"
-      onError={() => setFailed(true)}
+      onError={() => void tryFallback()}
       className={`inline-block shrink-0 rounded-full bg-panel2 object-cover ring-1 ring-black/30 ${className}`}
       style={{ width: size, height: size }}
     />

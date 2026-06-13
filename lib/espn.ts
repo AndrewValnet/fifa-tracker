@@ -362,7 +362,8 @@ function normalizeName(s: string): string {
 /**
  * Match a football-data squad name ("M. Crépeau" / "Maxime Crépeau") to an
  * ESPN roster entry. Last name must match; first name or initial must agree
- * when both are present.
+ * when both are present. Falls back to a unique significant-token overlap so
+ * reordered names and nicknames ("Rodrygo" / "Rodrygo Silva") still resolve.
  */
 export function matchPlayerByName(name: string, roster: EspnRosterPlayer[]): EspnRosterPlayer | null {
   const target = normalizeName(name).split(" ").filter(Boolean);
@@ -383,7 +384,29 @@ export function matchPlayerByName(name: string, roster: EspnRosterPlayer[]): Esp
     const first = parts[0];
     if (first === targetFirst || first[0] === targetFirst[0]) return p; // exact-enough
   }
-  return best;
+  if (best) return best;
+
+  // Fuzzy fallback: most shared significant tokens (>=4 chars), but only when
+  // exactly one candidate is the best match — ambiguous matches are skipped to
+  // avoid attaching the wrong player.
+  const targetTokens = new Set(target.filter((t) => t.length >= 4));
+  if (!targetTokens.size) return null;
+  let bestScore = 0;
+  let bestCount = 0;
+  let fuzzy: EspnRosterPlayer | null = null;
+  for (const p of roster) {
+    const parts = normalizeName(p.name).split(" ").filter(Boolean);
+    let score = 0;
+    for (const t of parts) if (t.length >= 4 && targetTokens.has(t)) score++;
+    if (score > bestScore) {
+      bestScore = score;
+      fuzzy = p;
+      bestCount = 1;
+    } else if (score === bestScore && score > 0) {
+      bestCount++;
+    }
+  }
+  return bestScore > 0 && bestCount === 1 ? fuzzy : null;
 }
 
 export async function espnAthleteBio(espnId: string): Promise<Omit<PlayerBio, "foot"> | null> {
