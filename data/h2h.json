@@ -1,0 +1,20 @@
+{
+  "_note": "Approximate all-time records (all competitions) for marquee/likely WC26 matchups. Keyed by alphabetical FIFA codes; aWins = first code, bWins = second. Curated + fact-checked; counts vary slightly by source/federation.",
+  "ARG-BRA": { "played": 115, "aWins": 43, "draws": 26, "bWins": 46, "lastMeeting": "2024 WC qualifier — ARG 1-0 BRA (Maracanã, Nov 2023)", "note": "The Superclásico de las Américas — football's most even heavyweight feud (totals are officially disputed)." },
+  "FRA-GER": { "played": 33, "aWins": 15, "draws": 7, "bWins": 11, "lastMeeting": "France knocked Germany out of Euro 2016 & World Cup 2014", "note": "France finally exorcised the ghost of Seville '82 (the 3-3, 5-4 pens horror)." },
+  "ARG-GER": { "played": 23, "aWins": 10, "draws": 5, "bWins": 8, "lastMeeting": "2014 WC final — GER 1-0 ARG (Götze 113')", "note": "Three World Cup finals between them (1986, 1990, 2014) — nobody else can say that." },
+  "ARG-FRA": { "played": 13, "aWins": 7, "draws": 3, "bWins": 3, "lastMeeting": "2022 WC final — ARG 3-3 FRA (4-2 pens)", "note": "Mbappé's hat-trick still lost to Messi's coronation in the greatest final ever played." },
+  "BRA-FRA": { "played": 15, "aWins": 6, "draws": 3, "bWins": 6, "lastMeeting": "2006 WC quarter-final — FRA 1-0 BRA (Henry)", "note": "Dead even at 6-6. Zidane's 1998 final and 2006 masterclass are why Brazilians still flinch." },
+  "BRA-GER": { "played": 23, "aWins": 13, "draws": 5, "bWins": 5, "lastMeeting": "2018 friendly — GER 0-1 BRA (Berlin)", "note": "Brazil leads comfortably, yet lost the one that mattered most — the 7-1 Mineirazo." },
+  "ENG-GER": { "played": 35, "aWins": 14, "draws": 8, "bWins": 13, "lastMeeting": "2022 — ENG 3-3 GER (Nations League, Wembley)", "note": "1966 and a thousand penalty nightmares; Euro 2020 finally broke the tournament hoodoo." },
+  "ARG-ENG": { "played": 15, "aWins": 7, "draws": 3, "bWins": 5, "lastMeeting": "2005 friendly — ENG 3-2 ARG", "note": "Hand of God, the Maradona slalom, Beckham's red, and Owen's 1998 wonder-goal." },
+  "ARG-NED": { "played": 12, "aWins": 4, "draws": 4, "bWins": 4, "lastMeeting": "2022 WC quarter-final — ARG 2-2 NED (4-3 pens)", "note": "Five World Cup meetings, dead level. The 2022 tunnel brawl was just the latest chapter." },
+  "ESP-POR": { "played": 41, "aWins": 17, "draws": 18, "bWins": 6, "lastMeeting": "2025 Nations League final — POR 2-2 ESP (5-3 pens)", "note": "Iberian neighbours: Spain leads on paper, Portugal grabbed the trophy in Munich 2025." },
+  "NED-POR": { "played": 15, "aWins": 2, "draws": 5, "bWins": 8, "lastMeeting": "2019 Nations League final — POR 1-0 NED (Guedes)", "note": "The 2006 'Battle of Nuremberg' set a World Cup record: four reds and 16 yellows." },
+  "BEL-FRA": { "played": 74, "aWins": 30, "draws": 19, "bWins": 24, "lastMeeting": "2018 WC semi-final — FRA 1-0 BEL (Umtiti)", "note": "One of football's oldest fixtures (since 1904); Belgium leads, France won the one everyone remembers." },
+  "ARG-URU": { "played": 197, "aWins": 92, "draws": 46, "bWins": 59, "lastMeeting": "2024 WC qualifier — URU 2-0 ARG (Nov 2023)", "note": "The Clásico del Río de la Plata — among the most-played international fixtures on Earth (counts vary 196-214)." },
+  "MEX-USA": { "played": 79, "aWins": 38, "draws": 17, "bWins": 24, "lastMeeting": "2025 Gold Cup final — MEX 2-1 USA", "note": "Dos a Cero is the USMNT war cry, but Mexico's record 10th Gold Cup reasserted El Tri's throne." },
+  "ESP-MAR": { "played": 4, "aWins": 1, "draws": 3, "bWins": 0, "lastMeeting": "2022 WC R16 — MAR 0-0 ESP (3-0 pens)", "note": "Bono's shootout heroics sent Morocco past their former colonial power to a historic semi-final." },
+  "JPN-KOR": { "played": 82, "aWins": 16, "draws": 23, "bWins": 42, "lastMeeting": "2025 EAFF E-1 — KOR 0-1 JPN", "note": "South Korea dominates the all-time series; co-hosting 2002 made these neighbours uneasy allies." },
+  "NED-USA": { "played": 5, "aWins": 4, "draws": 0, "bWins": 1, "lastMeeting": "2022 WC R16 — NED 3-1 USA", "note": "Oranje have owned this one, ending the USMNT's 2022 run with a clinical counter." }
+}

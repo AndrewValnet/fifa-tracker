@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { GroupScenarios } from "@/components/GroupScenarios";
 import { GroupStandingsTable } from "@/components/GroupStandingsTable";
 import { KnockoutBracket } from "@/components/KnockoutBracket";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SourceTag } from "@/components/SourceTag";
 import { TopScorers } from "@/components/TopScorers";
 import { getAllMatches, getScorers, getStandings } from "@/lib/data";
+import { qualificationScenarios } from "@/lib/qualification";
 
 export const dynamic = "force-dynamic";
 
@@ -49,6 +51,11 @@ export default async function StandingsPage() {
           </section>
         ))}
       </div>
+
+      <section className="mt-12" aria-label="Qualification scenarios">
+        <SectionHeader title="Who's Going Through?" right="points-based projection · GD can still decide ties" />
+        <GroupScenarios groups={qualificationScenarios(all.data)} />
+      </section>
 
       <section className="mt-12" aria-label="Knockout bracket">
         <SectionHeader title="Road to the Final" right="Round of 32 → Final · MetLife Stadium, Jul 19" />

@@ -1,0 +1,67 @@
+[
+  { "country": "United States", "countryCode": "us", "broadcasters": [
+    { "name": "FOX", "kind": "tv", "free": true, "language": "English", "url": "https://www.fox.com/soccer/fifa-world-cup" },
+    { "name": "FS1", "kind": "tv", "free": false, "language": "English", "url": "https://www.fox.com/soccer/fifa-world-cup" },
+    { "name": "FOX One / FOX Sports app", "kind": "stream", "free": false, "language": "English", "url": "https://www.foxsports.com/soccer/fifa-world-cup" },
+    { "name": "Telemundo", "kind": "tv", "free": true, "language": "Spanish", "url": "https://www.telemundodeportes.com/copa-mundial" },
+    { "name": "Universo", "kind": "tv", "free": false, "language": "Spanish", "url": "https://www.telemundodeportes.com/copa-mundial" },
+    { "name": "Peacock", "kind": "stream", "free": false, "language": "Spanish", "url": "https://www.peacocktv.com/sports/soccer" }
+  ] },
+  { "country": "Canada", "countryCode": "ca", "broadcasters": [
+    { "name": "CTV / Noovo (select free)", "kind": "both", "free": true, "language": "English/French", "url": "https://www.ctv.ca/sports" },
+    { "name": "TSN (all 104)", "kind": "both", "free": false, "language": "English", "url": "https://www.tsn.ca/soccer/fifa-world-cup" },
+    { "name": "RDS / RDS2", "kind": "both", "free": false, "language": "French", "url": "https://www.rds.ca/" }
+  ] },
+  { "country": "Mexico", "countryCode": "mx", "broadcasters": [
+    { "name": "Canal 5 / Las Estrellas", "kind": "tv", "free": true, "language": "Spanish", "url": "https://www.televisa.com/" },
+    { "name": "Azteca 7 / Azteca Deportes", "kind": "tv", "free": true, "language": "Spanish", "url": "https://www.aztecadeportes.com/" },
+    { "name": "ViX (Pase Mundial — all 104)", "kind": "stream", "free": false, "language": "Spanish", "url": "https://www.vix.com/" }
+  ] },
+  { "country": "United Kingdom", "countryCode": "gb", "broadcasters": [
+    { "name": "BBC / iPlayer", "kind": "both", "free": true, "language": "English", "url": "https://www.bbc.co.uk/sport/football/world-cup" },
+    { "name": "ITV / ITVX", "kind": "both", "free": true, "language": "English", "url": "https://www.itv.com/watch/sport" }
+  ] },
+  { "country": "Brazil", "countryCode": "br", "broadcasters": [
+    { "name": "Globo / Globoplay", "kind": "both", "free": true, "language": "Portuguese", "url": "https://globoplay.globo.com/" },
+    { "name": "SporTV", "kind": "both", "free": false, "language": "Portuguese", "url": "https://sportv.globo.com/" },
+    { "name": "CazéTV (YouTube)", "kind": "stream", "free": true, "language": "Portuguese", "url": "https://www.youtube.com/@CazeTV" }
+  ] },
+  { "country": "Argentina", "countryCode": "ar", "broadcasters": [
+    { "name": "Telefe", "kind": "tv", "free": true, "language": "Spanish", "url": "https://www.telefe.com/" },
+    { "name": "TV Pública", "kind": "tv", "free": true, "language": "Spanish", "url": "https://www.tvpublica.com.ar/" },
+    { "name": "TyC Sports", "kind": "both", "free": false, "language": "Spanish", "url": "https://www.tycsports.com/" }
+  ] },
+  { "country": "France", "countryCode": "fr", "broadcasters": [
+    { "name": "M6 / W9 / TF1 (select)", "kind": "tv", "free": true, "language": "French", "url": "https://www.6play.fr/sport" },
+    { "name": "beIN Sports", "kind": "both", "free": false, "language": "French", "url": "https://www.beinsports.com/fr" }
+  ] },
+  { "country": "Germany", "countryCode": "de", "broadcasters": [
+    { "name": "ARD / ZDF", "kind": "both", "free": true, "language": "German", "url": "https://sportschau.de/" },
+    { "name": "MagentaTV (all 104)", "kind": "both", "free": false, "language": "German", "url": "https://www.magentasport.de/" }
+  ] },
+  { "country": "Spain", "countryCode": "es", "broadcasters": [
+    { "name": "RTVE (La 1)", "kind": "both", "free": true, "language": "Spanish", "url": "https://www.rtve.es/play/deportes/" },
+    { "name": "DAZN (all 104)", "kind": "stream", "free": false, "language": "Spanish", "url": "https://www.dazn.com/es-ES/" }
+  ] },
+  { "country": "Italy", "countryCode": "it", "broadcasters": [
+    { "name": "RAI (Rai 1 / Rai 2)", "kind": "both", "free": true, "language": "Italian", "url": "https://www.raiplay.it/" },
+    { "name": "DAZN (all 104)", "kind": "stream", "free": false, "language": "Italian", "url": "https://www.dazn.com/it-IT/" }
+  ] },
+  { "country": "Australia", "countryCode": "au", "broadcasters": [
+    { "name": "SBS / SBS On Demand", "kind": "both", "free": true, "language": "English", "url": "https://www.sbs.com.au/sport/football" }
+  ] },
+  { "country": "India", "countryCode": "in", "broadcasters": [
+    { "name": "Sony / ZEE5", "kind": "both", "free": false, "language": "English", "url": "https://www.zee5.com/" },
+    { "name": "DD Sports (select free, expected)", "kind": "tv", "free": true, "language": "Hindi", "url": "https://prasarbharati.gov.in/" }
+  ] },
+  { "country": "Japan", "countryCode": "jp", "broadcasters": [
+    { "name": "NHK / Nippon TV / Fuji TV", "kind": "both", "free": true, "language": "Japanese", "url": "https://www.nhk.or.jp/sports/" },
+    { "name": "DAZN (all 104)", "kind": "stream", "free": false, "language": "Japanese", "url": "https://www.dazn.com/ja-JP/" }
+  ] },
+  { "country": "Saudi Arabia / MENA", "countryCode": "sa", "broadcasters": [
+    { "name": "beIN Sports (regional exclusive)", "kind": "both", "free": false, "language": "Arabic", "url": "https://www.beinsports.com/en-mena" }
+  ] },
+  { "country": "Global / elsewhere", "countryCode": "global", "broadcasters": [
+    { "name": "FIFA+ (live only in unsold territories; clips elsewhere)", "kind": "stream", "free": true, "language": "Multiple", "url": "https://www.plus.fifa.com/" }
+  ] }
+]
