@@ -2,13 +2,21 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Oswald, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import { BottomNav } from "@/components/BottomNav";
+import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import { Sidebar } from "@/components/Sidebar";
+
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
 const oswald = Oswald({ subsets: ["latin"], variable: "--font-oswald", display: "swap" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const robotoMono = Roboto_Mono({ subsets: ["latin"], variable: "--font-roboto-mono", display: "swap" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  applicationName: "WC26 Live",
+  appleWebApp: { capable: true, statusBarStyle: "black-translucent", title: "WC26 Live" },
   title: {
     default: "WC26 Live — World Cup 2026 War Room",
     template: "%s · WC26 Live",
@@ -42,6 +50,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           </main>
         </div>
         <BottomNav />
+        <ServiceWorkerRegister />
       </body>
     </html>
   );

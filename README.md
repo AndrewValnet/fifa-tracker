@@ -27,7 +27,15 @@ matches/standings/scorers : football-data.org → worldcup26.ir → bundled sche
 match stats & lineups     : ESPN public JSON API (keyless) — possession, shots, passes, corners,
                             confirmed formations, per-player stats, headshots, attendance
 players                   : ESPN rosters + athlete bios (keyless) · preferred foot via Wikidata
+player photos             : ESPN headshots → Wikidata P18 / Wikimedia Commons → Wikipedia thumbnail → initials (all keyless)
 odds & betting money      : Polymarket Gamma API (keyless) → tournament-winner market → hidden
+audience estimate         : transparent model (lib/audience.ts) — match stage + team reach + kickoff time, anchored to FIFA 2022 (labeled "est.")
+on-site viewer counts     : Upstash Redis (optional) — real concurrent + cumulative visitors to this dashboard
+pick'em / reactions       : Upstash Redis (optional) — score predictions + leaderboard, live match reactions
+push notifications        : Web Push + VAPID (optional) — goal alerts + kickoff reminders; sent by /api/cron/alerts
+insights / analytics      : Polymarket volume + open interest + odds history · ESPN per-match/per-player stats + attendance
+advancement calculator    : pure simulation over the fixture list (lib/qualification.ts, no new data)
+broadcasters / h2h        : bundled, fact-checked (data/broadcasters.json, data/h2h.json)
 news                      : GNews → offline digest
 ticket prices (optional)  : SeatGeek (free client id) — hidden without a key
 flags                     : FlagCDN (keyless)   crests: football-data.org
@@ -39,18 +47,23 @@ Every payload carries its provenance; fallback sources are labeled in the UI (sm
 
 ## Pages
 
-- `/` — war room: live hero (or next-match countdown), tournament-wide betting totals (traded / at stake / settled pools), today's matches with odds bars, news grid with tag filters, group standings accordion, Golden Boot
-- `/match/[id]` — match centre: team-color theming, live scoreboard + estimated clock, goal banner, events timeline with goal-clip search links, ESPN match stats (possession, shots, passes, corners, free kicks won, penalties, saves, cards), confirmed lineups with player photos (predicted XI before they drop), squads, Polymarket panel, attendance, optional avg ticket price, venue card with map
+- `/` — war room: live hero (or next-match countdown), tournament-wide betting totals (traded / at stake / settled pools), **"Your Teams" strip (followed teams, pinned fixtures) + goal-alert opt-in**, today's matches with odds bars, news grid with tag filters, group standings accordion, Golden Boot
+- `/match/[id]` — match centre: team-color theming, live scoreboard + estimated clock, **live emoji reactions**, goal banner, events timeline with goal-clip search links, **live win-probability graph with goal markers**, ESPN match stats (possession, shots, passes, corners, free kicks won, penalties, saves, cards), confirmed lineups with player photos (predicted XI before they drop), squads, Polymarket panel, **audience panel (real on-site "watching now" + labeled global-audience estimate)**, **head-to-head record**, **where-to-watch (broadcaster by country)**, attendance, optional avg ticket price, venue card with map
 - `/upcoming` — all 104 fixtures, filterable by status/group/team/host country/date
-- `/standings` — 12 group tables with qualification color-coding, knockout bracket, top scorers
-- `/teams` & `/teams/[id]` — all 48 nations: squad with headshots, coach, schedule, W/D/L + cards + average possession, next-match odds, odds to win the World Cup, and the money picture (bet on them, traded on their matches, at stake, settled pools won/lost)
-- `/players/[id]` — player profiles: photo, age, height, weight, nationality, birthplace, club, preferred foot (Wikidata, when recorded), tournament totals (apps, est. minutes, goals, assists, shots, accuracy, fouls, cards), per-match log, prediction markets naming them, goal-clip search links
+- `/predict` — **score pick'em + champion pick + leaderboard** (requires Upstash)
+- `/standings` — 12 group tables with qualification color-coding, **"Who's Going Through?" advancement calculator**, knockout bracket, top scorers
+- `/insights` — tournament "cheeky aggregate" analytics: money that backed the losing side, biggest bottle jobs, biggest upsets + how sharp the betting crowd was, per-capita national betting, dirtiest teams, theatrics index, clutch index, stadium fill rate, plus labeled estimates (carbon footprint, fan cardiac-risk multiplier, productivity "skived", a World Cup baby-boom gag)
+- `/compare` — **side-by-side player stat comparison**
+- `/teams` & `/teams/[id]` — all 48 nations: squad with headshots, **follow toggle + calendar (.ics) export**, **"Road to the Final" knockout path**, coach, schedule, W/D/L + cards + average possession, next-match odds, odds to win the World Cup, and the money picture (bet on them, traded on their matches, at stake, settled pools won/lost)
+- `/players/[id]` — player profiles: photo, age, height, weight, nationality, birthplace, club, preferred foot (Wikidata, when recorded), tournament totals (apps, est. minutes, goals, assists, shots, accuracy, fouls, cards), per-match log, prediction markets naming them, goal-clip search links, **compare link**
 - `/stadiums` — the 16 venues by country, each expandable to its full fixture list
+
+Installable **PWA** (manifest + service worker), dynamic **OG share images** for the war room / matches / insights, a sidebar **team search**, and a **calendar feed** at `/api/calendar` (`?team=ESP` for one nation).
 
 ## Honest limits of free data
 
 - **"Money won/lost"** uses Polymarket's public pool math: a settled market's open interest is paid in full to the winning side. Per-bettor P&L is not published anywhere, so the app reports pools and labels them as such.
-- **Viewers per game** isn't published in real time by anyone (TV ratings land days later) — the app shows official **attendance** from ESPN instead.
+- **Viewers per game** still isn't published in real time by anyone (no free API — verified June 2026: FOX/Telemundo own US streams, YouTube concurrents are owner-only, Wikimedia pageviews lag ~24h, Google Trends killed its free API). So the match page pairs two honest numbers: a **real** count of people on *this dashboard* (concurrent + cumulative, via optional Upstash Redis — labeled as site presence, not TV viewership) and a clearly-labeled **estimated global audience** model anchored to FIFA's published Qatar-2022 figures (avg 175M/match; final ~571M/min, 1.42B reach). Official **attendance** from ESPN is still shown too.
 - **Goal clips** have no free API; scorer names link to targeted YouTube / X / Reddit searches, plus ESPN's own match clips when available.
 - **Possession & advanced stats** come from ESPN's public feed; football-data's free tier doesn't carry them.
 

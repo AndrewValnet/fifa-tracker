@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { NAV_ITEMS } from "@/components/nav-items";
 import { LiveBadge } from "@/components/LiveBadge";
+import { SearchBox } from "@/components/SearchBox";
 import { useLiveMatches } from "@/hooks/useFixtures";
 
 /** Desktop persistent side panel (PRD §8.4). Hidden below lg. */
@@ -20,6 +21,8 @@ export function Sidebar() {
           WC<span className="text-pitch">26</span> LIVE
         </span>
       </Link>
+
+      <SearchBox />
 
       <nav className="flex flex-col gap-1 px-3" aria-label="Primary">
         {NAV_ITEMS.map((item) => {

@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Flag } from "@/components/Flag";
+import { FollowButton } from "@/components/FollowButton";
 import { MatchCard } from "@/components/MatchCard";
 import { NewsCard } from "@/components/NewsCard";
 import { OddsBar } from "@/components/OddsBar";
+import { RouteToFinal } from "@/components/RouteToFinal";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SourceTag } from "@/components/SourceTag";
 import { SquadSection } from "@/components/SquadSection";
@@ -98,6 +100,17 @@ export default async function TeamPage({ params }: { params: { id: string } }) {
               ) : null}
               <SourceTag source={res.source} />
             </p>
+            {code ? (
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                <FollowButton code={code} />
+                <a
+                  href={`/api/calendar?team=${code}`}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-edge px-3 py-1 text-xs text-dim hover:text-ink"
+                >
+                  📅 Add fixtures to calendar
+                </a>
+              </div>
+            ) : null}
           </div>
         </header>
 
@@ -132,6 +145,16 @@ export default async function TeamPage({ params }: { params: { id: string } }) {
               />
             </div>
           </TeamColorProvider>
+        ) : null}
+
+        {/* route to the final */}
+        {team.group ? (
+          <section className="mt-10 max-w-3xl" aria-label="Route to the final">
+            <SectionHeader title="Road to the Final" right="🏟️ MetLife · Jul 19" />
+            <div className="rounded-xl border border-edge bg-panel p-4">
+              <RouteToFinal group={team.group} outrightPrice={hub?.finance?.outright?.price ?? null} />
+            </div>
+          </section>
         ) : null}
 
         {/* money */}

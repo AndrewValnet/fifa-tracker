@@ -63,9 +63,17 @@ export default async function PlayerPage({ params, searchParams }: Props) {
       style={{ background: `linear-gradient(180deg, color-mix(in srgb, ${accent} 16%, transparent), transparent 340px)` }}
     >
       <div className="mx-auto max-w-shell px-4 py-8">
-        <Link href={teamCode ? `/teams/${teamCode}` : "/teams"} className="text-xs text-dim hover:text-ink">
-          ← {team ?? "Teams"}
-        </Link>
+        <div className="flex items-center justify-between gap-3">
+          <Link href={teamCode ? `/teams/${teamCode}` : "/teams"} className="text-xs text-dim hover:text-ink">
+            ← {team ?? "Teams"}
+          </Link>
+          <Link
+            href={`/compare?a=${params.id}${teamCode ? `&teamA=${teamCode}` : ""}`}
+            className="text-xs text-dim hover:text-gold"
+          >
+            ⚖ Compare with another player →
+          </Link>
+        </div>
 
         {/* hero */}
         <header className="mt-4 flex flex-wrap items-center gap-6">

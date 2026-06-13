@@ -6,16 +6,19 @@
 // renders pre/live/post states.
 
 import Link from "next/link";
+import { AudiencePanel } from "@/components/AudiencePanel";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { EventTimeline } from "@/components/EventTimeline";
 import { Flag } from "@/components/Flag";
 import { FormationDiagram, pickPredictedXI, type FormationPlayer } from "@/components/FormationDiagram";
 import { GoalBanner } from "@/components/GoalBanner";
+import { HeadToHead } from "@/components/HeadToHead";
 import { LineupSection } from "@/components/LineupSection";
 import { LocalTime } from "@/components/LocalTime";
 import { MatchNews } from "@/components/MatchNews";
 import { MatchStatsPanel } from "@/components/MatchStatsPanel";
 import { OddsPanel } from "@/components/OddsPanel";
+import { ReactionsBar } from "@/components/ReactionsBar";
 import { Scoreboard } from "@/components/Scoreboard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SourceTag } from "@/components/SourceTag";
@@ -23,10 +26,13 @@ import { SquadSection } from "@/components/SquadSection";
 import { StatComparison } from "@/components/StatComparison";
 import { TeamColorProvider } from "@/components/TeamColorProvider";
 import { VenueCard } from "@/components/VenueCard";
+import { WhereToWatch } from "@/components/WhereToWatch";
+import { WinProbGraph } from "@/components/WinProbGraph";
 import { useLiveMatch } from "@/hooks/useLiveMatch";
 import { useMatchExtras } from "@/hooks/useMatchExtras";
 import { fmtNumber, stageLabel, statusKind } from "@/lib/format";
 import { matchPlayerByName, type EspnRosterPlayer } from "@/lib/espn";
+import { headToHead } from "@/lib/h2h";
 import { getAccentColor } from "@/lib/team-meta";
 import type { Match, Scorer, Sourced, Stadium, TeamDetail, TeamSeasonStats } from "@/lib/types";
 
@@ -199,6 +205,8 @@ export function MatchView({
             <TeamHeader match={match} side="away" detail={awayDetail} />
           </header>
 
+          <ReactionsBar matchId={match.id} />
+
           {/* content grid */}
           <div className="mt-10 grid gap-6 lg:grid-cols-3">
             <div className="flex flex-col gap-6 lg:col-span-2">
@@ -234,6 +242,8 @@ export function MatchView({
                   ) : null}
                 </Card>
               ) : null}
+
+              {kind !== "upcoming" ? <WinProbGraph match={match} /> : null}
 
               {confirmedLineups ? (
                 <Card title={kind === "upcoming" ? "Starting Lineups" : "Lineups"} right="confirmed · via ESPN">
@@ -281,8 +291,27 @@ export function MatchView({
             </div>
 
             <aside className="flex flex-col gap-6">
+              <Card title="Audience" right={kind === "live" ? "live" : undefined}>
+                <AudiencePanel match={match} />
+              </Card>
+
+              {headToHead(match.homeTeam?.code, match.awayTeam?.code) ? (
+                <Card title="Head to Head">
+                  <HeadToHead
+                    homeCode={match.homeTeam?.code}
+                    awayCode={match.awayTeam?.code}
+                    homeName={match.homeTeam?.name ?? "Home"}
+                    awayName={match.awayTeam?.name ?? "Away"}
+                  />
+                </Card>
+              ) : null}
+
               <Card title="Polymarket Odds">
                 <OddsPanel match={match} />
+              </Card>
+
+              <Card title="Where to Watch">
+                <WhereToWatch />
               </Card>
 
               {extras?.stats ? (

@@ -3,6 +3,7 @@
 // then client polling takes over.
 
 import Link from "next/link";
+import { FollowedStrip } from "@/components/FollowedStrip";
 import { HeroSection } from "@/components/HeroSection";
 import { NewsFeed } from "@/components/NewsFeed";
 import { OfflineNotice } from "@/components/OfflineNotice";
@@ -43,6 +44,7 @@ export default async function HomePage() {
       <OfflineNotice />
       <HeroSection initialLive={live} initialUpcoming={upcoming} />
       <TotalsBanner />
+      <FollowedStrip />
       <TodayStrip initial={today} />
 
       <div className="mx-auto grid max-w-shell gap-10 px-4 pt-10 xl:grid-cols-3">
