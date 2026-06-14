@@ -208,6 +208,11 @@ export function MatchView({
               ) : (
                 <Scoreboard match={match} />
               )}
+              {extras?.coolingBreakActive ? (
+                <p className="animate-pulse-dot rounded-full border border-gold/50 bg-gold/10 px-3 py-1 text-xs font-semibold text-gold">
+                  🥤 Hydration break in progress
+                </p>
+              ) : null}
             </div>
 
             <TeamHeader match={match} side="away" detail={awayDetail} />
@@ -220,7 +225,15 @@ export function MatchView({
             <div className="flex flex-col gap-6 lg:col-span-2">
               {kind !== "upcoming" ? (
                 <Card title="Match Events" right={<span>tap a scorer for clips</span>}>
-                  <EventTimeline match={match} />
+                  <EventTimeline events={extras?.timeline?.length ? extras.timeline : match.events} match={match} />
+                  {extras && (extras.addedTime.firstHalf !== null || extras.addedTime.secondHalf !== null) ? (
+                    <p className="mt-3 border-t border-edge/50 pt-2 text-[11px] text-dim">
+                      ⏱ Added time —
+                      {extras.addedTime.firstHalf !== null ? ` 1st half +${extras.addedTime.firstHalf}’` : ""}
+                      {extras.addedTime.firstHalf !== null && extras.addedTime.secondHalf !== null ? " ·" : ""}
+                      {extras.addedTime.secondHalf !== null ? ` 2nd half +${extras.addedTime.secondHalf}’` : ""}
+                    </p>
+                  ) : null}
                   {extras?.videos.length ? (
                     <div className="mt-4 border-t border-edge/50 pt-3">
                       <h4 className="mb-1.5 text-[10px] font-semibold uppercase tracking-widest text-dim">

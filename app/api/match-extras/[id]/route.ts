@@ -8,6 +8,6 @@ export const runtime = "nodejs";
 export async function GET(_req: Request, { params }: { params: { id: string } }) {
   const payload = await getMatchExtras(params.id);
   return NextResponse.json(payload, {
-    headers: { "Cache-Control": "public, s-maxage=30, stale-while-revalidate=300" },
+    headers: { "Cache-Control": "public, s-maxage=15, stale-while-revalidate=120" },
   });
 }

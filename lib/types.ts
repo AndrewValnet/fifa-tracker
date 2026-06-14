@@ -33,7 +33,7 @@ export interface TeamRef {
   crest: string | null;
 }
 
-export type MatchEventType = "GOAL" | "YELLOW" | "RED" | "SUB";
+export type MatchEventType = "GOAL" | "YELLOW" | "RED" | "SUB" | "BREAK";
 
 export interface MatchEvent {
   /** Display minute, e.g. "45+2" or "67" (no trailing apostrophe) */
@@ -265,6 +265,12 @@ export interface MatchExtras {
   stats: { home: TeamMatchStats; away: TeamMatchStats } | null;
   lineups: { home: TeamLineup | null; away: TeamLineup | null };
   videos: { headline: string; href: string | null }[];
+  /** Full ESPN-derived event timeline: goals, cards, subs, drinks breaks. */
+  timeline: MatchEvent[];
+  /** Announced stoppage/added minutes after each half (from the feed). */
+  addedTime: { firstHalf: number | null; secondHalf: number | null };
+  /** True while a drinks/cooling break is in progress (live). */
+  coolingBreakActive: boolean;
   updated: string;
 }
 

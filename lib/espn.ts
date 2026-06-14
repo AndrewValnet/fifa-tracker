@@ -6,11 +6,13 @@
 // League code for the 2026 FIFA World Cup: `fifa.world`.
 
 import { cached, fetchWithTimeout } from "@/lib/cache";
+import { parseMinute } from "@/lib/schedule";
 import { dateStringInTz } from "@/lib/time";
 import { resolveTeamCode } from "@/lib/team-meta";
 import type {
   LineupPlayer,
   Match,
+  MatchEvent,
   MatchExtras,
   PlayerBio,
   PlayerMatchStats,
@@ -147,12 +149,20 @@ interface RawSummary {
   }[];
   gameInfo?: { attendance?: number };
   keyEvents?: {
-    type?: { type?: string };
-    clock?: { value?: number };
-    participants?: { athlete?: { id: string } }[];
+    type?: { type?: string; text?: string };
+    clock?: { value?: number; displayValue?: string };
+    period?: { number?: number };
+    text?: string;
+    participants?: { athlete?: { id: string; displayName?: string } }[];
+    team?: { id?: string };
   }[];
   videos?: { headline?: string; links?: { web?: { href?: string } } }[];
-  header?: { competitions?: { status?: { type?: { state?: string } } }[] };
+  header?: {
+    competitions?: {
+      status?: { type?: { state?: string } };
+      competitors?: { homeAway?: string; team?: { id?: string } }[];
+    }[];
+  };
 }
 
 function statMap(stats: RawStat[] | undefined): Record<string, number> {
@@ -253,6 +263,26 @@ function lineupFrom(
   return { formation: roster.formation ?? null, players };
 }
 
+// "45'+5'" -> "45+5"; "84'" -> "84"; falls back to clock seconds.
+function espnMinute(displayValue: string | undefined, clockSec: number | undefined): string {
+  if (displayValue) {
+    const m = displayValue.match(/(\d+)(?:'?\s*\+\s*(\d+))?/);
+    if (m) return m[2] ? `${m[1]}+${m[2]}` : m[1];
+  }
+  return clockSec ? String(Math.round(clockSec / 60)) : "";
+}
+
+// Stoppage minutes are ONLY in displayValue ("45'+5'"); clock.value is clamped.
+function espnAddedMinutes(displayValue: string | undefined): number | null {
+  if (!displayValue) return null;
+  const m = displayValue.match(/\+\s*(\d+)/);
+  return m ? Number(m[1]) : 0;
+}
+
+// Drinks/cooling breaks share the generic delay type with injuries/VAR, so the
+// text is the only reliable discriminator. ESPN's wording is "drinks break".
+const DRINKS_RE = /drinks|cooling|water|hydrat/i;
+
 export async function espnMatchExtras(eventId: string, live: boolean): Promise<MatchExtras> {
   const data = await espnGet<RawSummary>(`${SITE}/summary?event=${eventId}&${EN}`, live ? 30_000 : 6 * 3600_000);
 
@@ -291,6 +321,57 @@ export async function espnMatchExtras(eventId: string, live: boolean): Promise<M
     }
   }
 
+  // Full event timeline from keyEvents (goals, cards, subs, drinks breaks).
+  const competitors = data.header?.competitions?.[0]?.competitors ?? [];
+  const homeId = competitors.find((c) => c.homeAway === "home")?.team?.id ?? homeRoster?.team?.id ?? null;
+  const rawEvents = data.keyEvents ?? [];
+  const sideOf = (teamId: string | undefined): "HOME" | "AWAY" => (teamId && homeId && teamId === homeId ? "HOME" : "AWAY");
+
+  const timeline: MatchEvent[] = [];
+  for (const e of rawEvents) {
+    const tt = e.type?.type ?? "";
+    const minute = espnMinute(e.clock?.displayValue, e.clock?.value);
+    const player = e.participants?.[0]?.athlete?.displayName ?? "";
+    if (tt === "goal" || tt === "goal---header" || tt === "penalty---scored" || tt === "own-goal") {
+      const scored = sideOf(e.team?.id);
+      timeline.push({
+        minute,
+        type: "GOAL",
+        side: tt === "own-goal" ? (scored === "HOME" ? "AWAY" : "HOME") : scored,
+        player,
+        note: tt === "own-goal" ? "og" : tt === "penalty---scored" ? "pen" : null,
+      });
+    } else if (tt === "yellow-card") {
+      timeline.push({ minute, type: "YELLOW", side: sideOf(e.team?.id), player });
+    } else if (tt === "red-card" || /red/.test(tt)) {
+      timeline.push({ minute, type: "RED", side: sideOf(e.team?.id), player });
+    } else if (tt === "substitution") {
+      timeline.push({ minute, type: "SUB", side: sideOf(e.team?.id), player, secondary: e.participants?.[1]?.athlete?.displayName ?? null });
+    } else if (tt === "start-delay" && DRINKS_RE.test(e.text ?? "")) {
+      timeline.push({ minute, type: "BREAK", side: "HOME", player: "Drinks break" });
+    }
+  }
+  timeline.sort((a, b) => parseMinute(a.minute) - parseMinute(b.minute));
+
+  const addedTime = {
+    firstHalf: espnAddedMinutes(rawEvents.find((e) => e.type?.type === "halftime")?.clock?.displayValue),
+    secondHalf: espnAddedMinutes(rawEvents.find((e) => e.type?.type === "end-regular-time")?.clock?.displayValue),
+  };
+
+  // A drinks break is "active" if its start-delay has no end-delay after it.
+  let coolingBreakActive = false;
+  if (state === "in") {
+    const ends = rawEvents.filter((e) => e.type?.type === "end-delay");
+    for (const d of rawEvents) {
+      if (d.type?.type !== "start-delay" || !DRINKS_RE.test(d.text ?? "")) continue;
+      const dv = d.clock?.value ?? 0;
+      if (!ends.some((en) => (en.clock?.value ?? 0) >= dv)) {
+        coolingBreakActive = true;
+        break;
+      }
+    }
+  }
+
   return {
     eventId,
     state,
@@ -300,6 +381,9 @@ export async function espnMatchExtras(eventId: string, live: boolean): Promise<M
     videos: (data.videos ?? [])
       .filter((v) => v.headline)
       .map((v) => ({ headline: v.headline!, href: v.links?.web?.href ?? null })),
+    timeline,
+    addedTime,
+    coolingBreakActive,
     updated: new Date().toISOString(),
   };
 }

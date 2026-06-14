@@ -1,6 +1,6 @@
-// Match events timeline (PRD §7.2): goals, cards, substitutions — home events
-// on the left, away on the right, team-color accents. Scorer names link to
-// clip searches (no free API serves per-goal video URLs).
+// Match events timeline (PRD §7.2): goals, cards, substitutions and drinks
+// breaks — home events on the left, away on the right, breaks centered.
+// Scorer names link to clip searches (no free API serves per-goal video URLs).
 
 import clsx from "clsx";
 import { ClipLink } from "@/components/ClipLink";
@@ -11,6 +11,7 @@ const ICONS: Record<MatchEvent["type"], string> = {
   YELLOW: "🟨",
   RED: "🟥",
   SUB: "🔁",
+  BREAK: "🥤",
 };
 
 function EventText({ e, match }: { e: MatchEvent; match: Match }) {
@@ -40,13 +41,23 @@ function EventText({ e, match }: { e: MatchEvent; match: Match }) {
   return <span className="truncate">{e.player}</span>;
 }
 
-export function EventTimeline({ match }: { match: Match }) {
-  if (!match.events.length) {
+export function EventTimeline({ events, match }: { events: MatchEvent[]; match: Match }) {
+  if (!events.length) {
     return <p className="py-4 text-center text-sm text-dim">No match events yet.</p>;
   }
   return (
     <ol className="flex flex-col gap-1.5">
-      {match.events.map((e, i) => {
+      {events.map((e, i) => {
+        // Drinks/cooling breaks are match-wide → centered, neutral.
+        if (e.type === "BREAK") {
+          return (
+            <li key={`break-${e.minute}-${i}`} className="flex justify-center py-0.5">
+              <span className="rounded-full border border-edge bg-panel2/60 px-3 py-1 text-xs text-dim">
+                🥤 Drinks break{e.minute ? ` · ${e.minute}’` : ""}
+              </span>
+            </li>
+          );
+        }
         const home = e.side === "HOME";
         return (
           <li
