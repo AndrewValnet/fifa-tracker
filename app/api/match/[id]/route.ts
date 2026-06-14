@@ -9,5 +9,7 @@ export async function GET(_req: Request, { params }: { params: { id: string } })
   if (!result) {
     return NextResponse.json({ error: "Match not found" }, { status: 404 });
   }
-  return NextResponse.json(result, { headers: { "Cache-Control": "no-store" } });
+  return NextResponse.json(result, {
+    headers: { "Cache-Control": "public, s-maxage=4, stale-while-revalidate=10" },
+  });
 }

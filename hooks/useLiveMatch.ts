@@ -15,7 +15,7 @@ export function useLiveMatch(id: string, initial?: Sourced<Match>) {
       const status = latest?.data?.status;
       if (!status) return 30_000;
       const kind = statusKind(status);
-      if (kind === "live") return 30_000;
+      if (kind === "live") return 7_000; // near-real-time goal updates
       if (kind === "upcoming") {
         // tighten polling as kickoff approaches
         const ms = new Date(latest!.data.utcDate).getTime() - Date.now();

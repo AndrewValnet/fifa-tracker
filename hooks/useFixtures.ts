@@ -17,7 +17,8 @@ function unwrap<T>(data: Sourced<T> | undefined) {
 export function useLiveMatches(initial?: Sourced<Match[]>) {
   const { data, error, isLoading } = useSWR<Sourced<Match[]>>("/api/live-matches", jsonFetcher, {
     fallbackData: initial,
-    refreshInterval: 30_000,
+    // Poll fast (7s) only while a match is actually live; idle otherwise.
+    refreshInterval: (latest) => ((latest?.data?.length ?? 0) > 0 ? 7_000 : 30_000),
     revalidateOnFocus: true,
   });
   return { ...unwrap(data), matches: data?.data ?? [], error, isLoading };

@@ -3,7 +3,7 @@
 // football-data.org. Responses are merged onto the static schedule skeleton
 // so knockout placeholders, stadiums and kickoff times stay consistent.
 
-import { cached, fetchWithTimeout } from "@/lib/cache";
+import { cacheGet, cacheGetStale, cacheSet, fetchWithTimeout } from "@/lib/cache";
 import { SCHEDULE, entryToMatch, parseMinute, sortMatches } from "@/lib/schedule";
 import { wc26IdToCode } from "@/lib/team-meta";
 import type { Match, MatchEvent } from "@/lib/types";
@@ -29,12 +29,28 @@ interface Wc26Game {
   away_team_label?: string;
 }
 
-async function getJson<T>(path: string, ttlMs: number): Promise<T> {
-  return cached(`wc26:${path}`, ttlMs, async () => {
-    const res = await fetchWithTimeout(`${BASE}${path}`, undefined, 9000);
-    if (!res.ok) throw new Error(`worldcup26.ir ${path} -> HTTP ${res.status}`);
-    return (await res.json()) as T;
-  });
+// Liveness-aware fetch+cache for the games feed: a tight 7s TTL while any match
+// is in play (the source is keyless and ~100 req/s, so this is safe and makes
+// goals appear in seconds), relaxing to 2 minutes when nothing is live. Serves
+// the last good payload on error.
+const GAMES_KEY = "wc26:/get/games";
+
+async function fetchGames(): Promise<{ games: Wc26Game[] }> {
+  const hit = cacheGet<{ games: Wc26Game[] }>(GAMES_KEY);
+  if (hit) return hit;
+  try {
+    const res = await fetchWithTimeout(`${BASE}/get/games`, undefined, 9000);
+    if (!res.ok) throw new Error(`worldcup26.ir /get/games -> HTTP ${res.status}`);
+    const payload = (await res.json()) as { games: Wc26Game[] };
+    if (!payload?.games?.length) throw new Error("worldcup26.ir returned no games");
+    const hasLive = payload.games.some((g) => g.time_elapsed === "live" || /^\d+$/.test(g.time_elapsed));
+    cacheSet(GAMES_KEY, payload, hasLive ? 7_000 : 120_000);
+    return payload;
+  } catch (err) {
+    const stale = cacheGetStale<{ games: Wc26Game[] }>(GAMES_KEY);
+    if (stale) return stale;
+    throw err;
+  }
 }
 
 /**
@@ -124,8 +140,7 @@ function applyGame(match: Match, g: Wc26Game): Match {
 
 /** All 104 matches: static skeleton + live overlay. Throws if the API is down. */
 export async function wc26GetMatches(): Promise<Match[]> {
-  const payload = await getJson<{ games: Wc26Game[] }>("/get/games", 25_000);
-  if (!payload?.games?.length) throw new Error("worldcup26.ir returned no games");
+  const payload = await fetchGames();
   const byId = new Map(payload.games.map((g) => [g.id, g]));
   const now = new Date();
   const matches = SCHEDULE.map((entry) => {

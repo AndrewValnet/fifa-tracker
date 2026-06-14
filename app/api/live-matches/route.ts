@@ -7,6 +7,6 @@ export const runtime = "nodejs";
 export async function GET() {
   const result = await getLiveMatches();
   return NextResponse.json(result, {
-    headers: { "Cache-Control": "no-store" },
+    headers: { "Cache-Control": "public, s-maxage=4, stale-while-revalidate=8" },
   });
 }
