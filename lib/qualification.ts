@@ -7,6 +7,7 @@
 // and "in the hunt" includes the best-third-place lottery without the full
 // cross-group comparison.
 
+import { cached } from "@/lib/cache";
 import { TEAMS, teamName } from "@/lib/team-meta";
 import type { Match } from "@/lib/types";
 
@@ -230,4 +231,20 @@ export function qualificationScenarios(matches: Match[]): GroupScenario[] {
     out.push({ group: letter, remaining: remaining.length, decided: remaining.length === 0, teams });
   }
   return out;
+}
+
+// Cross-request cache: the O(3^k)-per-group simulation only changes when a group
+// result lands, so key on the set of finished group scorelines.
+function resultsHash(matches: Match[]): string {
+  let h = "";
+  for (const m of matches) {
+    if (m.stage === "GROUP_STAGE" && m.status === "FINISHED" && m.score.home != null && m.score.away != null) {
+      h += `${m.homeTeam?.code}-${m.awayTeam?.code}:${m.score.home}-${m.score.away};`;
+    }
+  }
+  return h || "none";
+}
+
+export function getQualificationScenarios(matches: Match[]): Promise<GroupScenario[]> {
+  return cached(`qual:${resultsHash(matches)}`, 5 * 60_000, async () => qualificationScenarios(matches));
 }

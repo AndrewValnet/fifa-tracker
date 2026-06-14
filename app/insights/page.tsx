@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Flag } from "@/components/Flag";
@@ -70,18 +71,12 @@ function Row({
   );
 }
 
-export default async function InsightsPage() {
+async function InsightsBody() {
   const ins = await getInsights();
   const acc = ins.upsets.marketAccuracy;
 
   return (
-    <div className="mx-auto max-w-shell px-4 py-8">
-      <Link href="/" className="text-xs text-dim hover:text-ink">
-        ← War Room
-      </Link>
-      <h1 className="mt-3 font-display text-3xl font-bold uppercase tracking-wide md:text-4xl">
-        Tournament <span className="text-gold">Insights</span>
-      </h1>
+    <>
       <p className="mt-2 max-w-2xl text-sm text-dim">
         The mischievous numbers: where the smart money went wrong, who bottled big leads, the dirtiest teams, and some
         cheeky back-of-the-napkin estimates. Measured stats are unlabeled; modeled ones carry an{" "}
@@ -306,6 +301,40 @@ export default async function InsightsPage() {
         ESPN&apos;s public feed. Estimates labeled <span className="uppercase">est.</span> are transparent models, not official
         figures — see each card&apos;s note. Cached ~10 minutes.
       </p>
+    </>
+  );
+}
+
+function InsightsSkeleton() {
+  return (
+    <div className="mt-6 flex flex-col gap-4" aria-hidden>
+      <div className="skeleton h-8 w-56" />
+      <div className="grid gap-4 lg:grid-cols-2">
+        <div className="skeleton h-64" />
+        <div className="skeleton h-64" />
+      </div>
+      <div className="skeleton h-8 w-56" />
+      <div className="grid gap-4 lg:grid-cols-3">
+        <div className="skeleton h-48" />
+        <div className="skeleton h-48" />
+        <div className="skeleton h-48" />
+      </div>
+    </div>
+  );
+}
+
+export default function InsightsPage() {
+  return (
+    <div className="mx-auto max-w-shell px-4 py-8">
+      <Link href="/" className="text-xs text-dim hover:text-ink">
+        ← War Room
+      </Link>
+      <h1 className="mt-3 font-display text-3xl font-bold uppercase tracking-wide md:text-4xl">
+        Tournament <span className="text-gold">Insights</span>
+      </h1>
+      <Suspense fallback={<InsightsSkeleton />}>
+        <InsightsBody />
+      </Suspense>
     </div>
   );
 }

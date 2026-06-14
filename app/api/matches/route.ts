@@ -7,5 +7,7 @@ export const runtime = "nodejs";
 /** Full fixture list (all 104 matches, all statuses). */
 export async function GET() {
   const result = await getAllMatches();
-  return NextResponse.json(result, { headers: { "Cache-Control": "no-store" } });
+  return NextResponse.json(result, {
+    headers: { "Cache-Control": "public, s-maxage=30, stale-while-revalidate=120" },
+  });
 }

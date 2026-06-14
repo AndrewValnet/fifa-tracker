@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CompareClient } from "@/components/CompareClient";
+import { CompareClient } from "@/components/CompareClientLazy";
 import { Flag } from "@/components/Flag";
 import { PlayerHeadshot } from "@/components/PlayerHeadshot";
 import { SectionHeader } from "@/components/SectionHeader";
 import { getPlayerData, type PlayerData } from "@/lib/data";
 import { fmtNumber, fmtPct } from "@/lib/format";
 import { getTeamColors, resolveTeamCode, teamName } from "@/lib/team-meta";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Compare Players — WC26 Live",

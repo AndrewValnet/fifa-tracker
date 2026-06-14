@@ -1,20 +1,21 @@
 import type { Metadata } from "next";
 import { StadiumCard } from "@/components/StadiumCard";
-import { getAllMatches } from "@/lib/data";
-import { STADIUMS, sortMatches } from "@/lib/schedule";
+import { SCHEDULE, STADIUMS, entryToMatch, sortMatches } from "@/lib/schedule";
 import type { Match } from "@/lib/types";
 
-export const dynamic = "force-dynamic";
+// Venue→fixture mapping is fixed for the tournament (static schedule), so this
+// page is statically generated and CDN-served, refreshed daily.
+export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: "Stadiums",
   description: "The 16 venues of World Cup 2026 across the USA, Canada and Mexico — with every fixture they host.",
 };
 
-export default async function StadiumsPage() {
-  const all = await getAllMatches();
+export default function StadiumsPage() {
+  const all = SCHEDULE.map((e) => entryToMatch(e, "wc26"));
   const byStadium = new Map<string, Match[]>();
-  for (const m of all.data) {
+  for (const m of all) {
     if (!m.stadiumId) continue;
     const list = byStadium.get(m.stadiumId) ?? [];
     list.push(m);

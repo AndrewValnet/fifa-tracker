@@ -19,7 +19,10 @@ export function NewsCard({ article }: { article: NewsArticle }) {
         <img
           src={article.image}
           alt=""
+          width={640}
+          height={360}
           loading="lazy"
+          decoding="async"
           onError={() => setImgFailed(true)}
           className="h-36 w-full object-cover opacity-90 transition-opacity group-hover:opacity-100"
         />

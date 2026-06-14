@@ -11,5 +11,7 @@ export async function GET(req: NextRequest) {
   const away = sp.get("away");
   const max = Math.min(Number(sp.get("max")) || 10, 20);
   const result = await getNews(q, max, home || away ? { home, away } : undefined);
-  return NextResponse.json(result, { headers: { "Cache-Control": "no-store" } });
+  return NextResponse.json(result, {
+    headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=900" },
+  });
 }

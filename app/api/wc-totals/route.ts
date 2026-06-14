@@ -7,5 +7,7 @@ export const runtime = "nodejs";
 /** Tournament-wide prediction-market totals (Polymarket). */
 export async function GET() {
   const totals = await getWcTotalsData();
-  return NextResponse.json({ totals }, { headers: { "Cache-Control": "no-store" } });
+  return NextResponse.json({ totals }, {
+    headers: { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=900" },
+  });
 }

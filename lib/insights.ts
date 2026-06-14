@@ -6,6 +6,7 @@
 // before enough matches are played, and estimates are clearly labeled as such.
 
 import reachData from "@/data/team-reach.json";
+import { mapLimit } from "@/lib/async";
 import { cached } from "@/lib/cache";
 import { estimateAudience, type ReachLookup } from "@/lib/audience";
 import { extrasForMatch, getAllMatches } from "@/lib/data";
@@ -62,19 +63,6 @@ interface Gathered {
   extras: MatchExtras | null;
 }
 
-async function mapLimit<T, R>(items: T[], limit: number, fn: (item: T) => Promise<R>): Promise<R[]> {
-  const out: R[] = new Array(items.length);
-  let i = 0;
-  async function worker() {
-    while (i < items.length) {
-      const idx = i++;
-      out[idx] = await fn(items[idx]);
-    }
-  }
-  await Promise.all(Array.from({ length: Math.min(limit, items.length || 1) }, worker));
-  return out;
-}
-
 const codeName = (code: string | null | undefined) => (code ? teamName(code) ?? code : "—");
 const label = (m: Match) => `${m.homeTeam?.code ?? "?"} ${m.score.home ?? "–"}–${m.score.away ?? "–"} ${m.awayTeam?.code ?? "?"}`;
 
@@ -105,6 +93,9 @@ export async function getInsights(): Promise<InsightsData> {
       (m) => m.status === "FINISHED" && m.score.home != null && m.score.away != null && m.homeTeam?.code && m.awayTeam?.code,
     );
     const sample = finished.slice(-FINISHED_CAP); // most-recent finished matches
+
+    // Independent single fetch — overlap it with the per-match fan-out below.
+    const outrightP = getOutrightVolumes().catch(() => ({}) as Record<string, { volume: number | null; price: number | null }>);
 
     const gathered: Gathered[] = await mapLimit(sample, 6, async (match) => {
       const [odds, extras] = await Promise.all([
@@ -192,8 +183,8 @@ export async function getInsights(): Promise<InsightsData> {
     biggest.sort((a, b) => a.winnerProb - b.winnerProb);
     bottleJobs.sort((a, b) => b.drop - a.drop);
 
-    // per-capita outright faith (single futures-market fetch)
-    const outright = await getOutrightVolumes().catch(() => ({}));
+    // per-capita outright faith (single futures-market fetch, started above)
+    const outright = await outrightP;
     const perCapita = Object.entries(outright)
       .map(([code, v]) => {
         const pop = REACH[code]?.popMillions ?? 0;

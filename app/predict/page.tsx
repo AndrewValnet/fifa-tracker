@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PickemClient } from "@/components/PickemClient";
+import { PickemClient } from "@/components/PickemClientLazy";
 
-export const dynamic = "force-dynamic";
-
+// Pure static shell; all data loads client-side in PickemClient.
 export const metadata: Metadata = {
   title: "Predict & Pick'em — WC26 Live",
   description: "Predict scorelines and the champion, then climb the leaderboard.",

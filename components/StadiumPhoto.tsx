@@ -22,6 +22,15 @@ export function StadiumPhoto({
   }
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={src} alt={alt} loading="lazy" onError={() => setFailed(true)} className={className} />
+    <img
+      src={src}
+      alt={alt}
+      width={1600}
+      height={900}
+      loading="lazy"
+      decoding="async"
+      onError={() => setFailed(true)}
+      className={className}
+    />
   );
 }

@@ -2,8 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Oswald, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import { BottomNav } from "@/components/BottomNav";
+import { ResourceHints } from "@/components/ResourceHints";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import { Sidebar } from "@/components/Sidebar";
+import { SWRProvider } from "@/components/SWRProvider";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ??
@@ -43,13 +45,16 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         >
           Skip to content
         </a>
-        <div className="flex min-h-dvh">
-          <Sidebar />
-          <main id="main" className="min-w-0 flex-1 pb-20 lg:pb-8">
-            {children}
-          </main>
-        </div>
-        <BottomNav />
+        <SWRProvider>
+          <div className="flex min-h-dvh">
+            <Sidebar />
+            <main id="main" className="min-w-0 flex-1 pb-20 lg:pb-8">
+              {children}
+            </main>
+          </div>
+          <BottomNav />
+        </SWRProvider>
+        <ResourceHints />
         <ServiceWorkerRegister />
       </body>
     </html>
