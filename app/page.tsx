@@ -1,8 +1,11 @@
-// Home — the war room (PRD §7.1): hero, breaking news, today's matches,
-// standings summary, top scorers. Server-rendered with live initial data,
-// then client polling takes over.
+// Home — the war room (PRD §7.1). The shell + client islands (hero, totals,
+// today, news) paint immediately; the server-fetched standings, scorers and the
+// seeded hero stream in via Suspense so TTFB never waits on the slowest API.
 
+import { Suspense } from "react";
 import Link from "next/link";
+import { BetsLists } from "@/components/BetsLists";
+import { FavoritesRanking } from "@/components/FavoritesRanking";
 import { FollowedStrip } from "@/components/FollowedStrip";
 import { HeroSection } from "@/components/HeroSection";
 import { NewsFeed } from "@/components/NewsFeed";
@@ -13,39 +16,103 @@ import { StandingsAccordion } from "@/components/StandingsAccordion";
 import { TodayStrip } from "@/components/TodayStrip";
 import { TopScorers } from "@/components/TopScorers";
 import { TotalsBanner } from "@/components/TotalsBanner";
-import { getAllMatches, getLiveMatches, getScorers, getStandings } from "@/lib/data";
+import {
+  getAllMatches,
+  getFavoritesData,
+  getLiveMatches,
+  getScorers,
+  getStandings,
+  getTopBetsData,
+} from "@/lib/data";
 import { statusKind } from "@/lib/format";
 
-export const dynamic = "force-dynamic";
+async function HeroLoader() {
+  const [live, all] = await Promise.all([getLiveMatches(), getAllMatches()]);
+  const upcoming = { ...all, data: all.data.filter((m) => statusKind(m.status) === "upcoming") };
+  return <HeroSection initialLive={live} initialUpcoming={upcoming} />;
+}
 
-export default async function HomePage() {
-  const [live, all, standings, scorers] = await Promise.all([
-    getLiveMatches(),
-    getAllMatches(),
-    getStandings(),
-    getScorers(10),
-  ]);
+async function StandingsLoader() {
+  const standings = await getStandings();
+  return (
+    <>
+      <SectionHeader
+        title="Groups"
+        right={
+          <span className="flex items-center gap-2">
+            <SourceTag source={standings.source} />
+            <Link href="/standings" className="text-pitch hover:underline">
+              Full tables →
+            </Link>
+          </span>
+        }
+      />
+      <StandingsAccordion standings={standings.data} />
+    </>
+  );
+}
 
-  const now = Date.now();
-  const upcoming = {
-    ...all,
-    data: all.data.filter((m) => statusKind(m.status) === "upcoming"),
-  };
-  const today = {
-    ...all,
-    data: all.data.filter((m) => {
-      const t = new Date(m.utcDate).getTime();
-      return t >= now - 12 * 3600_000 && t <= now + 30 * 3600_000;
-    }),
-  };
+async function FavoritesLoader() {
+  const favorites = await getFavoritesData();
+  return <FavoritesRanking favorites={favorites} />;
+}
 
+async function BetsLoader() {
+  const { top, weird } = await getTopBetsData();
+  return <BetsLists top={top} weird={weird} />;
+}
+
+async function ScorersLoader() {
+  const scorers = await getScorers(10);
+  return (
+    <>
+      <SectionHeader title="Golden Boot" right={<SourceTag source={scorers.source} />} />
+      <div className="rounded-xl border border-edge bg-panel px-4 py-2">
+        <TopScorers scorers={scorers.data} />
+      </div>
+    </>
+  );
+}
+
+function HeroSkeleton() {
+  return (
+    <section className="pitch-bg border-b border-edge">
+      <div className="mx-auto max-w-shell px-4 pb-8 pt-6 md:pt-10">
+        <div className="skeleton mb-6 h-9 w-72" aria-hidden />
+        <div className="skeleton h-72 w-full rounded-2xl" aria-hidden />
+      </div>
+    </section>
+  );
+}
+
+export default function HomePage() {
   return (
     <>
       <OfflineNotice />
-      <HeroSection initialLive={live} initialUpcoming={upcoming} />
+      <Suspense fallback={<HeroSkeleton />}>
+        <HeroLoader />
+      </Suspense>
       <TotalsBanner />
       <FollowedStrip />
-      <TodayStrip initial={today} />
+      <TodayStrip />
+
+      <section aria-label="Title race" className="mx-auto max-w-shell px-4 pt-10">
+        <SectionHeader title="Title Race" right="Polymarket — odds to win it all" />
+        <div className="rounded-xl border border-edge bg-panel p-4">
+          <Suspense fallback={<div className="skeleton h-72 w-full" aria-hidden />}>
+            <FavoritesLoader />
+          </Suspense>
+        </div>
+      </section>
+
+      <section aria-label="Betting buzz" className="mx-auto max-w-shell px-4 pt-8">
+        <SectionHeader title="Betting Buzz" right="biggest &amp; weirdest markets · Polymarket" />
+        <div className="rounded-xl border border-edge bg-panel p-4">
+          <Suspense fallback={<div className="skeleton h-40 w-full" aria-hidden />}>
+            <BetsLoader />
+          </Suspense>
+        </div>
+      </section>
 
       <div className="mx-auto grid max-w-shell gap-10 px-4 pt-10 xl:grid-cols-3">
         <div className="xl:col-span-2">
@@ -54,28 +121,15 @@ export default async function HomePage() {
 
         <aside className="flex flex-col gap-10">
           <section aria-label="Group standings">
-            <SectionHeader
-              title="Groups"
-              right={
-                <span className="flex items-center gap-2">
-                  <SourceTag source={standings.source} />
-                  <Link href="/standings" className="text-pitch hover:underline">
-                    Full tables →
-                  </Link>
-                </span>
-              }
-            />
-            <StandingsAccordion standings={standings.data} />
+            <Suspense fallback={<div className="skeleton h-72 w-full" aria-hidden />}>
+              <StandingsLoader />
+            </Suspense>
           </section>
 
           <section aria-label="Top scorers">
-            <SectionHeader
-              title="Golden Boot"
-              right={<SourceTag source={scorers.source} />}
-            />
-            <div className="rounded-xl border border-edge bg-panel px-4 py-2">
-              <TopScorers scorers={scorers.data} />
-            </div>
+            <Suspense fallback={<div className="skeleton h-64 w-full" aria-hidden />}>
+              <ScorersLoader />
+            </Suspense>
           </section>
         </aside>
       </div>

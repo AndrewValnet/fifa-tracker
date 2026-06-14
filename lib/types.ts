@@ -351,6 +351,28 @@ export interface PlayerMarket {
   url: string;
 }
 
+/** A team in the outright "win the World Cup" market. */
+export interface Favorite {
+  code: string;
+  name: string;
+  /** Raw Polymarket implied win probability (0..1). */
+  price: number;
+  volume: number | null;
+}
+
+/** One Polymarket market shown in a "top/weird bets" list. */
+export interface BetRow {
+  label: string;
+  volume: number | null;
+  price: number | null;
+  url: string;
+}
+
+export interface BetBuckets {
+  top: BetRow[];
+  weird: BetRow[];
+}
+
 /** Envelope attached to every data response so the UI can surface provenance. */
 export interface Sourced<T> {
   data: T;

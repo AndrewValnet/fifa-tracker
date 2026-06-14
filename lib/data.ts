@@ -3,6 +3,9 @@
 //   football-data.org (if key set) -> worldcup26.ir (keyless) -> static schedule
 // Every result carries a Sourced<> envelope so the UI can show provenance.
 
+import { cache } from "react";
+import { mapLimit } from "@/lib/async";
+import { cached } from "@/lib/cache";
 import { demoMatch, demoMatches, offlineNews } from "@/lib/demo-data";
 import { statusKind } from "@/lib/format";
 import {
@@ -25,9 +28,12 @@ import {
 } from "@/lib/football-data";
 import { gnewsSearch } from "@/lib/gnews";
 import {
+  getFavorites,
+  getMatchBets,
   getOddsForMatch,
   getPlayerMarkets,
   getTeamFinance,
+  getTopAndWeirdBets,
   getWcTotals,
 } from "@/lib/polymarket";
 import {
@@ -91,7 +97,11 @@ async function overlayWc26Events(matches: Match[]): Promise<Match[]> {
   }
 }
 
-export async function getAllMatches(): Promise<Sourced<Match[]>> {
+// Wrapped in React cache() so the many getAllMatches() calls within a single
+// render/request (getTeamMatches, getTeamStats, getTeamHub, odds/extras lookups)
+// collapse to one. Per-request only — the cross-request TTL cache (lib/cache.ts)
+// still governs freshness.
+export const getAllMatches = cache(async (): Promise<Sourced<Match[]>> => {
   try {
     const matches = await fdGetMatches();
     if (matches.length) return sourced(await overlayWc26Events(matches), "football-data");
@@ -105,25 +115,47 @@ export async function getAllMatches(): Promise<Sourced<Match[]>> {
     logOnce("wc26:matches", err);
   }
   return sourced(demoMatches(), "demo");
-}
+});
 
 export async function getLiveMatches(): Promise<Sourced<Match[]>> {
-  // football-data first…
-  try {
-    const live = await fdGetMatches("LIVE");
-    if (live.length) return sourced(await overlayWc26Events(live), "football-data");
-  } catch (err) {
-    if (!(err instanceof FootballDataDisabled)) logOnce("fd:live", err);
-  }
-  // …but if it reports nothing live, double-check the keyless source
-  // (free tier can lag; PRD risk table calls for redundancy here).
+  // worldcup26.ir first: it's keyless and near-real-time, while football-data's
+  // free tier lags on live scores. When it's reachable it's authoritative for
+  // "what's live right now" — and it dodges football-data's 9 req/min budget.
   try {
     const all = await wc26GetMatches();
     return sourced(all.filter(isLive), "worldcup26");
   } catch (err) {
     logOnce("wc26:live", err);
   }
+  // Fallback to football-data if the keyless source is down.
+  try {
+    const live = await fdGetMatches("LIVE");
+    if (live.length) return sourced(await overlayWc26Events(live), "football-data");
+  } catch (err) {
+    if (!(err instanceof FootballDataDisabled)) logOnce("fd:live", err);
+  }
   return sourced(demoMatches().filter(isLive), "demo");
+}
+
+/** Overlay near-real-time worldcup26 score/minute/status onto a (possibly lagging)
+ *  football-data live match. Returns null when no fresher data is available. */
+async function wc26LiveOverlay(m: Match): Promise<Match | null> {
+  try {
+    const entry = findScheduleEntryByTeams(m.homeTeam?.code, m.awayTeam?.code, m.utcDate);
+    if (!entry) return null;
+    const w = await wc26GetMatch(entry.id);
+    if (!w) return null;
+    return {
+      ...m,
+      status: w.status,
+      minute: w.minute ?? m.minute,
+      score: w.score,
+      events: w.events.length ? w.events : m.events,
+      lastUpdated: w.lastUpdated ?? m.lastUpdated,
+    };
+  } catch {
+    return null;
+  }
 }
 
 export async function getMatchById(id: string): Promise<Sourced<Match> | null> {
@@ -132,6 +164,11 @@ export async function getMatchById(id: string): Promise<Sourced<Match> | null> {
   if (prefix === "fd") {
     try {
       const [enriched] = await overlayWc26Events([await fdGetMatch(rawId)]);
+      // While live, football-data's free feed lags — prefer the fresher keyless score.
+      if (isLive(enriched)) {
+        const fresh = await wc26LiveOverlay(enriched);
+        if (fresh) return sourced(fresh, "worldcup26");
+      }
       return sourced(enriched, "football-data");
     } catch (err) {
       // cached() already served stale data if any existed; nothing else maps
@@ -177,7 +214,7 @@ function splitId(id: string): [string, string] {
 // Standings & scorers
 // ---------------------------------------------------------------------------
 
-export async function getStandings(): Promise<Sourced<GroupStanding[]>> {
+export const getStandings = cache(async (): Promise<Sourced<GroupStanding[]>> => {
   try {
     const rows = await fdGetStandings();
     if (rows.length) return sourced(rows, "football-data");
@@ -185,10 +222,13 @@ export async function getStandings(): Promise<Sourced<GroupStanding[]>> {
     if (!(err instanceof FootballDataDisabled)) logOnce("fd:standings", err);
   }
   const matches = await getAllMatchesPreferKeyless();
-  return sourced(computeStandings(matches.data), matches.source);
-}
+  return sourced(
+    await cached(`compute:standings:${matches.source}`, 60_000, async () => computeStandings(matches.data)),
+    matches.source,
+  );
+});
 
-export async function getScorers(limit = 12): Promise<Sourced<Scorer[]>> {
+export const getScorers = cache(async (limit = 12): Promise<Sourced<Scorer[]>> => {
   try {
     const rows = await fdGetScorers(limit);
     if (rows.length) return sourced(rows, "football-data");
@@ -196,8 +236,11 @@ export async function getScorers(limit = 12): Promise<Sourced<Scorer[]>> {
     if (!(err instanceof FootballDataDisabled)) logOnce("fd:scorers", err);
   }
   const matches = await getAllMatchesPreferKeyless();
-  return sourced(computeScorers(matches.data, limit), matches.source);
-}
+  return sourced(
+    await cached(`compute:scorers:${limit}:${matches.source}`, 60_000, async () => computeScorers(matches.data, limit)),
+    matches.source,
+  );
+});
 
 /** Standings/scorers fallback path skips football-data (it just failed). */
 async function getAllMatchesPreferKeyless(): Promise<Sourced<Match[]>> {
@@ -231,7 +274,7 @@ function registryTeamDetail(code: string): TeamDetail | null {
   };
 }
 
-export async function getTeams(): Promise<Sourced<TeamDetail[]>> {
+export const getTeams = cache(async (): Promise<Sourced<TeamDetail[]>> => {
   try {
     const teams = await fdGetTeams();
     if (teams.length) return sourced(teams, "football-data");
@@ -240,7 +283,7 @@ export async function getTeams(): Promise<Sourced<TeamDetail[]>> {
   }
   const teams = TEAMS.map((t) => registryTeamDetail(t.code)!).filter(Boolean);
   return sourced(teams, "demo");
-}
+});
 
 /** Accepts a FIFA code ("ESP") or a football-data numeric id. */
 export async function getTeamDetail(idOrCode: string): Promise<Sourced<TeamDetail> | null> {
@@ -394,17 +437,19 @@ export async function getTeamHub(code: string, name: string): Promise<TeamHub> {
     espnTeamRoster(code).catch(() => [] as EspnRosterPlayer[]),
   ]);
 
-  // possession / cards averaged & summed from ESPN match stats
+  // possession / cards averaged & summed from ESPN match stats — fan out the
+  // per-match ESPN lookups with bounded concurrency instead of one-at-a-time.
   let posSum = 0;
   let posN = 0;
   let yellow = 0;
   let red = 0;
   let sawDiscipline = false;
-  for (const m of played.slice(-8)) {
-    const extras = await extrasForMatch(m);
+  const recent = played.slice(-8);
+  const recentExtras = await mapLimit(recent, 6, (m) => extrasForMatch(m).catch(() => null));
+  recent.forEach((m, i) => {
     const side = m.homeTeam?.code === code ? "home" : "away";
-    const st = extras?.stats?.[side];
-    if (!st) continue;
+    const st = recentExtras[i]?.stats?.[side];
+    if (!st) return;
     if (st.possession !== null) {
       posSum += st.possession;
       posN++;
@@ -414,7 +459,7 @@ export async function getTeamHub(code: string, name: string): Promise<TeamHub> {
       red += st.red ?? 0;
       sawDiscipline = true;
     }
-  }
+  });
 
   return {
     finance,
@@ -457,13 +502,17 @@ const EMPTY_PLAYER_STATS: PlayerMatchStats = {
 };
 
 export async function getPlayerData(espnId: string, teamCode: string | null): Promise<PlayerData | null> {
-  const bioBase = await espnAthleteBio(espnId);
-  const roster = teamCode ? await espnTeamRoster(teamCode).catch(() => []) : [];
+  const [bioBase, roster] = await Promise.all([
+    espnAthleteBio(espnId),
+    teamCode ? espnTeamRoster(teamCode).catch(() => [] as EspnRosterPlayer[]) : Promise.resolve([] as EspnRosterPlayer[]),
+  ]);
   const rosterEntry = roster.find((r) => r.espnId === espnId) ?? null;
   if (!bioBase && !rosterEntry) return null;
 
   const name = bioBase?.name ?? rosterEntry?.name ?? "Unknown";
-  const foot = await playingFoot(name);
+  // Kick these off now and await later so they overlap the match-log fan-out.
+  const footP = playingFoot(name);
+  const marketsP = getPlayerMarkets(name).catch(() => [] as PlayerMarket[]);
 
   const bio: PlayerBio = {
     espnId,
@@ -478,7 +527,7 @@ export async function getPlayerData(espnId: string, teamCode: string | null): Pr
     club: bioBase?.club ?? null,
     position: bioBase?.position ?? rosterEntry?.positionAbbr ?? null,
     jersey: rosterEntry?.jersey ?? bioBase?.jersey ?? null,
-    foot,
+    foot: await footP,
   };
 
   // tournament log from the team's played matches
@@ -489,12 +538,13 @@ export async function getPlayerData(espnId: string, teamCode: string | null): Pr
 
   if (teamCode) {
     const matches = (await getTeamMatches(teamCode)).data.filter((m) => m.status === "FINISHED");
-    for (const m of matches) {
-      const extras = await extrasForMatch(m);
+    // Fan out the per-match ESPN lookups (was 2*N serial round-trips).
+    const extrasList = await mapLimit(matches, 6, (m) => extrasForMatch(m).catch(() => null));
+    matches.forEach((m, i) => {
       const side = m.homeTeam?.code === teamCode ? "home" : "away";
-      const lineup = extras?.lineups?.[side];
+      const lineup = extrasList[i]?.lineups?.[side];
       const entry = lineup?.players.find((p) => p.espnId === espnId);
-      if (!entry) continue;
+      if (!entry) return;
 
       const opp = side === "home" ? m.awayTeam : m.homeTeam;
       const gf = side === "home" ? m.score.home : m.score.away;
@@ -518,10 +568,10 @@ export async function getPlayerData(espnId: string, teamCode: string | null): Pr
         if (entry.starter) starts++;
         if (entry.minutes !== null) minutesTotal = (minutesTotal ?? 0) + entry.minutes;
       }
-    }
+    });
   }
 
-  const markets = await getPlayerMarkets(name).catch(() => [] as PlayerMarket[]);
+  const markets = await marketsP;
   const apps = totals.appearances;
 
   return {
@@ -545,6 +595,44 @@ export async function getWcTotalsData() {
     return await getWcTotals();
   } catch (err) {
     logOnce("pm:totals", err);
+    return null;
+  }
+}
+
+export async function getFavoritesData() {
+  try {
+    return await getFavorites();
+  } catch (err) {
+    logOnce("pm:favorites", err);
+    return [];
+  }
+}
+
+export async function getTopBetsData() {
+  try {
+    return await getTopAndWeirdBets();
+  } catch (err) {
+    logOnce("pm:topbets", err);
+    return { top: [], weird: [] };
+  }
+}
+
+export async function getMatchBetsData(matchId: string) {
+  let match: Match | undefined;
+  try {
+    match = (await getAllMatches()).data.find((m) => m.id === matchId);
+  } catch {
+    /* fall through */
+  }
+  if (!match) {
+    const res = await getMatchById(matchId);
+    match = res?.data;
+  }
+  if (!match) return null;
+  try {
+    return await getMatchBets(match);
+  } catch (err) {
+    logOnce("pm:matchbets", err);
     return null;
   }
 }

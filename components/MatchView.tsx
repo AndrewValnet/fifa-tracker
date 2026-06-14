@@ -5,12 +5,13 @@
 // enrichment (stats, confirmed lineups, attendance) at 45s while live, and
 // renders pre/live/post states.
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { AudiencePanel } from "@/components/AudiencePanel";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { EventTimeline } from "@/components/EventTimeline";
 import { Flag } from "@/components/Flag";
 import { FormationDiagram, pickPredictedXI, type FormationPlayer } from "@/components/FormationDiagram";
+import { BetsPanel } from "@/components/BetsPanel";
 import { GoalBanner } from "@/components/GoalBanner";
 import { HeadToHead } from "@/components/HeadToHead";
 import { LineupSection } from "@/components/LineupSection";
@@ -27,7 +28,6 @@ import { StatComparison } from "@/components/StatComparison";
 import { TeamColorProvider } from "@/components/TeamColorProvider";
 import { VenueCard } from "@/components/VenueCard";
 import { WhereToWatch } from "@/components/WhereToWatch";
-import { WinProbGraph } from "@/components/WinProbGraph";
 import { useLiveMatch } from "@/hooks/useLiveMatch";
 import { useMatchExtras } from "@/hooks/useMatchExtras";
 import { fmtNumber, stageLabel, statusKind } from "@/lib/format";
@@ -35,6 +35,14 @@ import { matchPlayerByName, type EspnRosterPlayer } from "@/lib/espn";
 import { headToHead } from "@/lib/h2h";
 import { getAccentColor } from "@/lib/team-meta";
 import type { Match, Scorer, Sourced, Stadium, TeamDetail, TeamSeasonStats } from "@/lib/types";
+
+// Lazy-load the heavy, below-the-fold client leaves so they don't ship in the
+// initial match-page bundle (ssr:false is allowed inside this client component).
+const AudiencePanel = dynamic(() => import("@/components/AudiencePanel").then((m) => m.AudiencePanel), { ssr: false });
+const WinProbGraph = dynamic(() => import("@/components/WinProbGraph").then((m) => m.WinProbGraph), {
+  ssr: false,
+  loading: () => <div className="skeleton h-56 w-full rounded-xl" aria-hidden />,
+});
 
 function TeamHeader({
   match,
@@ -309,6 +317,8 @@ export function MatchView({
               <Card title="Polymarket Odds">
                 <OddsPanel match={match} />
               </Card>
+
+              <BetsPanel matchId={match.id} />
 
               <Card title="Where to Watch">
                 <WhereToWatch />

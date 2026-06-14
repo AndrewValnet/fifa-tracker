@@ -8,6 +8,9 @@ import { cached, fetchWithTimeout } from "@/lib/cache";
 import { dateStringInTz, addDays } from "@/lib/time";
 import { resolveTeamCode, slugCodeVariants } from "@/lib/team-meta";
 import type {
+  BetBuckets,
+  BetRow,
+  Favorite,
   Match,
   OddsData,
   OddsHistoryPoint,
@@ -242,6 +245,7 @@ export async function getMatchMarket(match: Match): Promise<OddsData | null> {
 }
 
 const WINNER_SLUGS = [
+  "world-cup-winner", // the real live slug (id 30615) — resolve it deterministically
   "2026-fifa-world-cup-winner",
   "fifa-world-cup-winner-2026",
   "world-cup-2026-winner",
@@ -523,5 +527,144 @@ export async function getPlayerMarkets(playerName: string): Promise<PlayerMarket
       if (out.length >= 3) break;
     }
     return out;
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Favorites + "top / weirdest bets"
+// ---------------------------------------------------------------------------
+
+/** Teams ranked by their outright "win the World Cup" implied probability. */
+export async function getFavorites(): Promise<Favorite[]> {
+  return cached("pm:favorites", 300_000, async () => {
+    const ev = await winnerEvent();
+    if (!ev?.markets?.length) return [];
+    const out: Favorite[] = [];
+    for (const m of ev.markets) {
+      const name = (m.groupItemTitle || m.question || "")
+        .replace(/^will\s+/i, "")
+        .replace(/\s+win.*$/i, "")
+        .trim();
+      const code = resolveTeamCode(null, name);
+      const price = yesPrice(m);
+      if (!code || price === null) continue; // skip eliminated (null price) / unresolved
+      out.push({ code, name: name || code, price, volume: num(m.volume) });
+    }
+    return out.sort((a, b) => b.price - a.price);
+  });
+}
+
+// A market is "weird" if its label hits a novelty keyword or it's a longshot.
+const WEIRD_RE =
+  /golden (boot|ball|glove)|silver|bronze|hat.?trick|red card|sent off|own goal|penalt|shoot.?out|\bcry\b|trump|\bvar\b|weather|suspended|unbeaten|winless|last.?placed?|worst|record|extra.?time|clean sheet|free.?kick|exact|both teams|\bo\/u\b|over \d|under \d|half.?time|halftime|continent|never won|streaker|corner|booking|to advance|to qualify|to reach/i;
+
+function betWeird(label: string, price: number | null): { weird: boolean; kw: boolean } {
+  const kw = WEIRD_RE.test(label);
+  const longshot = price !== null && price > 0 && price < 0.05;
+  return { weird: kw || longshot, kw };
+}
+
+interface ScoredBet extends BetRow {
+  weird: boolean;
+  kw: boolean;
+  lop: number;
+}
+
+function splitBets(rows: ScoredBet[]): BetBuckets {
+  const strip = (r: ScoredBet): BetRow => ({ label: r.label, volume: r.volume, price: r.price, url: r.url });
+  const top = rows
+    .filter((r) => !r.weird && (r.volume ?? 0) > 0)
+    .sort((a, b) => (b.volume ?? 0) - (a.volume ?? 0))
+    .slice(0, 6)
+    .map(strip);
+  const weird = rows
+    .filter((r) => r.weird)
+    .sort((a, b) => Number(b.kw) - Number(a.kw) || b.lop - a.lop || (b.volume ?? 0) - (a.volume ?? 0))
+    .slice(0, 6)
+    .map(strip);
+  return { top, weird };
+}
+
+async function collectOpenWcEvents(): Promise<GammaEvent[]> {
+  return cached("pm:open-events", 15 * 60_000, async () => {
+    const all = new Map<string, GammaEvent>();
+    await collectEvents(`series_id=${MATCH_SERIES_ID}&closed=false`, all);
+    for (const tag of FUTURES_TAGS) await collectEvents(`tag_slug=${tag}&closed=false`, all);
+    return [...all.values()];
+  });
+}
+
+/** Tournament-wide biggest-money + novelty markets currently open. */
+export async function getTopAndWeirdBets(): Promise<BetBuckets> {
+  return cached("pm:top-weird", 15 * 60_000, async () => {
+    const events = await collectOpenWcEvents();
+    const rows: ScoredBet[] = [];
+    for (const ev of events) {
+      for (const m of ev.markets ?? []) {
+        if (m.closed) continue;
+        const price = yesPrice(m);
+        const git = m.groupItemTitle?.trim();
+        const label = (git ? `${ev.title.trim()} — ${git}` : m.question || ev.title).trim();
+        if (!label) continue;
+        const { weird, kw } = betWeird(label, price);
+        rows.push({
+          label,
+          volume: num(m.volume),
+          price,
+          url: `https://polymarket.com/event/${ev.slug}`,
+          weird,
+          kw,
+          lop: price !== null ? Math.abs(0.5 - price) : 0,
+        });
+      }
+    }
+    return splitBets(rows);
+  });
+}
+
+/** Per-match biggest + weirdest markets (moneyline event + props/exact/half-time). */
+export async function getMatchBets(match: Match): Promise<BetBuckets | null> {
+  const home = match.homeTeam;
+  const away = match.awayTeam;
+  if (!home?.code || !away?.code) return null;
+  return cached(`pm:bets:${match.id}`, 55_000, async () => {
+    let base: GammaEvent | null = null;
+    for (const slug of buildSlugCandidates(home.code!, away.code!, match.utcDate)) {
+      base = await eventBySlug(slug);
+      if (base) break;
+    }
+    if (!base) return null;
+    const companions = await Promise.all(
+      [`${base.slug}-more-markets`, `${base.slug}-exact-score`, `${base.slug}-halftime-result`].map((s) =>
+        eventBySlug(s).catch(() => null),
+      ),
+    );
+    const events: { ev: GammaEvent; prop: boolean }[] = [
+      { ev: base, prop: false },
+      ...companions.filter((e): e is GammaEvent => !!e).map((ev) => ({ ev, prop: true })),
+    ];
+
+    const rows: ScoredBet[] = [];
+    for (const { ev, prop } of events) {
+      for (const m of ev.markets ?? []) {
+        if (m.closed) continue;
+        const price = yesPrice(m);
+        const label = (m.groupItemTitle || m.question || "").trim();
+        if (!label) continue;
+        // companion events ARE the props/novelty; base event = moneyline + draw
+        const { weird, kw } = prop ? { weird: true, kw: true } : betWeird(label, price);
+        rows.push({
+          label,
+          volume: num(m.volume),
+          price,
+          url: `https://polymarket.com/event/${ev.slug}`,
+          weird,
+          kw,
+          lop: price !== null ? Math.abs(0.5 - price) : 0,
+        });
+      }
+    }
+    const buckets = splitBets(rows);
+    return buckets.top.length || buckets.weird.length ? buckets : null;
   });
 }
