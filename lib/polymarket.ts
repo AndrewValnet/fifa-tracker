@@ -558,6 +558,14 @@ export async function getFavorites(): Promise<Favorite[]> {
 const WEIRD_RE =
   /golden (boot|ball|glove)|silver|bronze|hat.?trick|red card|sent off|own goal|penalt|shoot.?out|\bcry\b|trump|\bvar\b|weather|suspended|unbeaten|winless|last.?placed?|worst|record|extra.?time|clean sheet|free.?kick|exact|both teams|\bo\/u\b|over \d|under \d|half.?time|halftime|continent|never won|streaker|corner|booking|to advance|to qualify|to reach/i;
 
+// Per-match labels often repeat "Home vs. Away - ..." — drop that prefix since
+// the panel is already scoped to the match.
+function shortenMatchLabel(s: string): string {
+  let out = s.replace(/^[^-–—]*\bvs\.?\b[^-–—]*[-–—]\s*/i, "").trim(); // "Home vs Away - X" -> "X"
+  out = out.replace(/\s*\([^)]*\bvs\.?\b[^)]*\)\s*$/i, "").trim(); // "Draw (Home vs Away)" -> "Draw"
+  return out || s;
+}
+
 function betWeird(label: string, price: number | null): { weird: boolean; kw: boolean } {
   const kw = WEIRD_RE.test(label);
   const longshot = price !== null && price > 0 && price < 0.05;
@@ -649,7 +657,7 @@ export async function getMatchBets(match: Match): Promise<BetBuckets | null> {
       for (const m of ev.markets ?? []) {
         if (m.closed) continue;
         const price = yesPrice(m);
-        const label = (m.groupItemTitle || m.question || "").trim();
+        const label = shortenMatchLabel((m.groupItemTitle || m.question || "").trim());
         if (!label) continue;
         // companion events ARE the props/novelty; base event = moneyline + draw
         const { weird, kw } = prop ? { weird: true, kw: true } : betWeird(label, price);
