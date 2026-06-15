@@ -433,3 +433,8 @@ export function getTeamHistory(code: string): WcTeamHistory | null {
 export function missedYears(h: WcTeamHistory): number[] {
   return WC_YEARS.filter((y) => !h.qualifiedYears.includes(y));
 }
+
+/** Returns all teams making their WC debut in 2026 (no prior WC appearances). */
+export function getDebutNations(): WcTeamHistory[] {
+  return HISTORY.filter((h) => h.debut === null);
+}

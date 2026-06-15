@@ -3,6 +3,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Flag } from "@/components/Flag";
 import { SectionHeader } from "@/components/SectionHeader";
+import { HatTricksTracker } from "@/components/HatTricksTracker";
+import { OwnGoalsFeed } from "@/components/OwnGoalsFeed";
+import { FastestGoals } from "@/components/FastestGoals";
+import { PenaltyTracker } from "@/components/PenaltyTracker";
 import { getInsights } from "@/lib/insights";
 import { fmtNumber, fmtPct, fmtUsdCompact } from "@/lib/format";
 
@@ -295,6 +299,27 @@ async function InsightsBody() {
           </ul>
         </Card>
       ) : null}
+
+      {/* ---- Match Events ---- */}
+      <h2 className="mt-10 font-display text-xl font-semibold uppercase tracking-wider text-dim">⚡ Match Events</h2>
+      <div className="mt-3 grid gap-4 lg:grid-cols-2">
+        <section className="rounded-xl border border-edge bg-panel/80 p-4">
+          <SectionHeader title="Hat-Tricks" />
+          <HatTricksTracker />
+        </section>
+        <section className="rounded-xl border border-edge bg-panel/80 p-4">
+          <SectionHeader title="Fastest Goals" right="scored in the first 5 minutes" />
+          <FastestGoals />
+        </section>
+        <section className="rounded-xl border border-edge bg-panel/80 p-4">
+          <SectionHeader title="Own Goals" />
+          <OwnGoalsFeed />
+        </section>
+        <section className="rounded-xl border border-edge bg-panel/80 p-4">
+          <SectionHeader title="Penalty Shootouts" />
+          <PenaltyTracker />
+        </section>
+      </div>
 
       <p className="mt-8 text-[10px] leading-snug text-dim">
         Money figures from Polymarket public market data (volume / open interest). Match stats, attendance and fouls from

@@ -1,9 +1,13 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { AssistsLeaderboard } from "@/components/AssistsLeaderboard";
+import { CleanSheetsBoard } from "@/components/CleanSheetsBoard";
+import { DebutWatch } from "@/components/DebutWatch";
+import { EliminationWatch } from "@/components/EliminationWatch";
 import { GroupScenarios } from "@/components/GroupScenarios";
 import { GroupStandingsTable } from "@/components/GroupStandingsTable";
 import { KnockoutBracket } from "@/components/KnockoutBracket";
+import { MonteCarloMatrix } from "@/components/MonteCarloMatrix";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SourceTag } from "@/components/SourceTag";
 import { SuspensionTracker } from "@/components/SuspensionTracker";
@@ -113,6 +117,32 @@ export default function StandingsPage() {
         <SectionHeader title="Card Watch" right="yellow card accumulation · FIFA rules" />
         <div className="rounded-xl border border-edge bg-panel px-4 py-4">
           <SuspensionTracker />
+        </div>
+      </section>
+
+      <section className="mt-12 max-w-xl" aria-label="Clean sheets">
+        <SectionHeader title="Clean Sheet Leaders" right="goalkeepers shutting teams out" />
+        <div className="rounded-xl border border-edge bg-panel px-4 py-2">
+          <CleanSheetsBoard />
+        </div>
+      </section>
+
+      <section className="mt-12" aria-label="Qualification probability matrix">
+        <SectionHeader title="Qualification Probability" right="8,000 Monte Carlo simulations" />
+        <MonteCarloMatrix />
+      </section>
+
+      <section className="mt-12 max-w-xl" aria-label="Elimination watch">
+        <SectionHeader title="Elimination Watch" right="teams at risk of going home" />
+        <div className="rounded-xl border border-edge bg-panel px-4 py-2">
+          <EliminationWatch />
+        </div>
+      </section>
+
+      <section className="mt-12 max-w-2xl" aria-label="Debut nations">
+        <SectionHeader title="WC Debuts in 2026" right="nations appearing at their first World Cup" />
+        <div className="rounded-xl border border-edge bg-panel px-4 py-4">
+          <DebutWatch />
         </div>
       </section>
     </div>
