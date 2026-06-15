@@ -9,6 +9,18 @@ interface H2HRecord {
   bWins: number;
   lastMeeting: string;
   note: string;
+  meetings?: H2HMeeting[];
+}
+
+export interface H2HMeeting {
+  date: string;
+  homeCode: string;
+  awayCode: string;
+  homeScore: number;
+  awayScore: number;
+  competition: string;
+  venue: string;
+  location: string;
 }
 
 const DATA = h2hData as unknown as Record<string, H2HRecord>;
@@ -20,6 +32,7 @@ export interface H2HView {
   awayWins: number;
   lastMeeting: string;
   note: string;
+  meetings: H2HMeeting[];
 }
 
 export function headToHead(homeCode: string | null | undefined, awayCode: string | null | undefined): H2HView | null {
@@ -35,5 +48,6 @@ export function headToHead(homeCode: string | null | undefined, awayCode: string
     draws: rec.draws,
     lastMeeting: rec.lastMeeting,
     note: rec.note,
+    meetings: rec.meetings ?? [],
   };
 }
