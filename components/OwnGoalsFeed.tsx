@@ -33,7 +33,7 @@ export function OwnGoalsFeed() {
 
   return (
     <ul>
-      {ogs.map((og, i) => (
+      {ogs.map((og) => (
         <li
           key={`${og.matchId}-${og.player}-${og.minute}`}
           className="flex items-center gap-3 border-t border-edge/50 py-2 text-sm first:border-t-0"

@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import useSWR from "swr";
 import { Flag } from "@/components/Flag";
 import { jsonFetcher } from "@/hooks/fetcher";

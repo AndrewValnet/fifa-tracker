@@ -4,7 +4,7 @@ import Link from "next/link";
 import useSWR from "swr";
 import { Flag } from "@/components/Flag";
 import { jsonFetcher } from "@/hooks/fetcher";
-import type { GroupQualProb, TeamQualProb } from "@/lib/monte-carlo";
+import type { GroupQualProb } from "@/lib/monte-carlo";
 
 interface EliminatedTeam {
   code: string | null;
@@ -50,11 +50,6 @@ export function EliminationWatch() {
     return <p className="py-4 text-center text-sm text-dim">No teams near elimination yet.</p>;
   }
 
-  const statusLabel: Record<EliminatedTeam["status"], string> = {
-    eliminated: "Eliminated",
-    critical: "Critical",
-    danger: "In danger",
-  };
   const statusColor: Record<EliminatedTeam["status"], string> = {
     eliminated: "text-live bg-live/10",
     critical: "text-[#f97316] bg-orange-500/10",

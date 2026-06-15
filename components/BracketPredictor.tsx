@@ -6,11 +6,6 @@ import { Flag } from "@/components/Flag";
 // 32 slots: R32 → R16 → QF → SF → Final + 3rd place
 type Bracket = Record<string, string>;  // slotId → team code/name
 
-interface Team {
-  code: string | null;
-  name: string;
-}
-
 const STORAGE_KEY = "wc26-bracket-v1";
 
 // Creates a slot hierarchy for a 32-team single-elimination bracket
