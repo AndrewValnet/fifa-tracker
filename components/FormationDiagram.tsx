@@ -1,8 +1,10 @@
-// Pure-SVG formation diagram (PRD §7.2a) — no chart library.
-// Player nodes are keyboard-focusable with accessible labels (PRD §8.5),
-// can show ESPN headshots, and can deep-link to player pages.
+"use client";
 
-import { useId } from "react";
+// Pure-SVG formation diagram (PRD section 7.2a), no chart library.
+// Player nodes are keyboard-focusable with accessible labels, can show
+// headshots, and can deep-link to player pages.
+
+import { useEffect, useId, useState } from "react";
 import { contrastText } from "@/lib/team-meta";
 import type { SquadPlayer } from "@/lib/types";
 
@@ -10,7 +12,7 @@ export interface FormationPlayer {
   name: string;
   shirtNumber?: number | null;
   positionDetail?: string | null;
-  /** headshot URL (falls back to a numbered disc) */
+  /** headshot URL, with a name-based fallback before the numbered disc */
   image?: string | null;
   /** player-page link */
   href?: string | null;
@@ -31,10 +33,19 @@ function shortName(name: string): string {
   if (name.length <= 12) return name;
   const parts = name.split(/\s+/);
   const last = parts[parts.length - 1];
-  return last.length <= 14 ? last : `${last.slice(0, 12)}…`;
+  return last.length <= 14 ? last : `${last.slice(0, 12)}...`;
 }
 
-/** Pick a predicted XI from a squad for a given formation (PRD §5.1 free-tier workaround). */
+function initials(name: string): string {
+  return name
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((p) => p[0]?.toUpperCase() ?? "")
+    .join("");
+}
+
+/** Pick a predicted XI from a squad for a given formation. */
 export function pickPredictedXI(squad: SquadPlayer[], formation = "4-3-3"): (SquadPlayer & { slotIndex: number })[] {
   const rows = parseFormation(formation);
   const buckets: Record<string, SquadPlayer[]> = { GK: [], DEF: [], MID: [], FWD: [], OTHER: [] };
@@ -72,6 +83,141 @@ export function pickPredictedXI(squad: SquadPlayer[], formation = "4-3-3"): (Squ
   return xi.slice(0, 11).map((p, i) => ({ ...p, slotIndex: i }));
 }
 
+function FormationNode({
+  player,
+  slot,
+  color,
+  fg,
+  clipId,
+}: {
+  player: FormationPlayer;
+  slot: { x: number; y: number };
+  color: string;
+  fg: string;
+  clipId: string;
+}) {
+  const [src, setSrc] = useState<string | null>(player.image ?? null);
+  const [triedFallback, setTriedFallback] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    setSrc(player.image ?? null);
+    setTriedFallback(false);
+    setFailed(false);
+
+    if (player.image || !player.name) {
+      return () => {
+        cancelled = true;
+      };
+    }
+
+    async function loadFallback() {
+      setTriedFallback(true);
+      try {
+        const res = await fetch(`/api/player-image?name=${encodeURIComponent(player.name)}`);
+        const json = (await res.json()) as { url?: string | null };
+        if (!cancelled && json?.url) {
+          setSrc(json.url);
+          return;
+        }
+      } catch {
+        // Fall through to the numbered disc.
+      }
+      if (!cancelled) setFailed(true);
+    }
+
+    void loadFallback();
+    return () => {
+      cancelled = true;
+    };
+  }, [player.image, player.name]);
+
+  async function tryFallback() {
+    if (triedFallback) {
+      setSrc(null);
+      setFailed(true);
+      return;
+    }
+
+    setTriedFallback(true);
+    try {
+      const res = await fetch(`/api/player-image?name=${encodeURIComponent(player.name)}`);
+      const json = (await res.json()) as { url?: string | null };
+      if (json?.url) {
+        setSrc(json.url);
+        return;
+      }
+    } catch {
+      // Fall through to the numbered disc.
+    }
+    setSrc(null);
+    setFailed(true);
+  }
+
+  const hasImage = Boolean(src && !failed);
+  const aria = `${player.name}${player.positionDetail ? `, ${player.positionDetail}` : ""}${player.shirtNumber ? `, number ${player.shirtNumber}` : ""}`;
+  const discText = player.shirtNumber ?? (initials(player.name) || "*");
+  const node = (
+    <g
+      className="formation-node"
+      tabIndex={player.href ? undefined : 0}
+      role="img"
+      aria-label={aria}
+      transform={`translate(${slot.x}, ${slot.y})`}
+    >
+      <title>{aria}</title>
+      <circle r="21" fill={hasImage ? "#1C2540" : color} stroke={color} strokeWidth={hasImage ? 2.5 : 0} />
+      {!hasImage ? <circle r="21" fill={color} stroke="rgba(255,255,255,0.55)" strokeWidth="1.5" /> : null}
+      {hasImage ? (
+        <image
+          href={src!}
+          x="-20"
+          y="-20"
+          width="40"
+          height="40"
+          clipPath={`url(#${clipId})`}
+          preserveAspectRatio="xMidYMid slice"
+          onError={() => void tryFallback()}
+        />
+      ) : null}
+      {hasImage && player.shirtNumber ? (
+        <g transform="translate(15, 14)">
+          <circle r="9" fill={color} />
+          <text textAnchor="middle" y="3.5" fontSize="10.5" fontWeight="700" fill={fg} fontFamily="var(--font-roboto-mono), monospace">
+            {player.shirtNumber}
+          </text>
+        </g>
+      ) : null}
+      {!hasImage ? (
+        <text y="5.5" textAnchor="middle" fontSize="15" fontWeight="700" fill={fg} fontFamily="var(--font-roboto-mono), monospace">
+          {discText}
+        </text>
+      ) : null}
+      <text
+        y="38"
+        textAnchor="middle"
+        fontSize="12.5"
+        fill="#F0F4FF"
+        stroke="#0A0E1A"
+        strokeWidth="3"
+        paintOrder="stroke"
+        fontFamily="var(--font-inter), sans-serif"
+      >
+        {shortName(player.name)}
+      </text>
+    </g>
+  );
+
+  return player.href ? (
+    <a href={player.href} aria-label={`${aria} - open player page`}>
+      {node}
+    </a>
+  ) : (
+    node
+  );
+}
+
 export function FormationDiagram({
   formation = "4-3-3",
   players,
@@ -106,7 +252,7 @@ export function FormationDiagram({
         viewBox="0 0 400 620"
         className="w-full rounded-xl border border-edge"
         role="group"
-        aria-label={`${label ?? "Lineup"} — ${formation} formation`}
+        aria-label={`${label ?? "Lineup"} - ${formation} formation`}
       >
         <defs>
           <clipPath id={`face-${uid}`}>
@@ -136,76 +282,16 @@ export function FormationDiagram({
           <path d="M 388 598 A 10 10 0 0 0 378 608" />
         </g>
 
-        {lineup.map((p, i) => {
-          const slot = slots[i];
-          const aria = `${p.name}${p.positionDetail ? `, ${p.positionDetail}` : ""}${p.shirtNumber ? `, number ${p.shirtNumber}` : ""}`;
-          const node = (
-            <g
-              key={`${p.name}-${i}`}
-              className="formation-node"
-              tabIndex={p.href ? undefined : 0}
-              role="img"
-              aria-label={aria}
-              transform={`translate(${slot.x}, ${slot.y})`}
-            >
-              <title>{aria}</title>
-              <circle r="21" fill={p.image ? "#1C2540" : color} stroke={color} strokeWidth={p.image ? 2.5 : 0} />
-              {!p.image ? (
-                <circle r="21" fill={color} stroke="rgba(255,255,255,0.55)" strokeWidth="1.5" />
-              ) : null}
-              {p.image ? (
-                <image
-                  href={p.image}
-                  x="-20"
-                  y="-20"
-                  width="40"
-                  height="40"
-                  clipPath={`url(#face-${uid})`}
-                  preserveAspectRatio="xMidYMid slice"
-                />
-              ) : null}
-              {p.image && p.shirtNumber ? (
-                <g transform="translate(15, 14)">
-                  <circle r="9" fill={color} />
-                  <text textAnchor="middle" y="3.5" fontSize="10.5" fontWeight="700" fill={fg} fontFamily="var(--font-roboto-mono), monospace">
-                    {p.shirtNumber}
-                  </text>
-                </g>
-              ) : null}
-              {!p.image ? (
-                <text
-                  y="5.5"
-                  textAnchor="middle"
-                  fontSize="15"
-                  fontWeight="700"
-                  fill={fg}
-                  fontFamily="var(--font-roboto-mono), monospace"
-                >
-                  {p.shirtNumber ?? "•"}
-                </text>
-              ) : null}
-              <text
-                y="38"
-                textAnchor="middle"
-                fontSize="12.5"
-                fill="#F0F4FF"
-                stroke="#0A0E1A"
-                strokeWidth="3"
-                paintOrder="stroke"
-                fontFamily="var(--font-inter), sans-serif"
-              >
-                {shortName(p.name)}
-              </text>
-            </g>
-          );
-          return p.href ? (
-            <a key={`${p.name}-${i}`} href={p.href} aria-label={`${aria} — open player page`}>
-              {node}
-            </a>
-          ) : (
-            node
-          );
-        })}
+        {lineup.map((p, i) => (
+          <FormationNode
+            key={`${p.name}-${i}`}
+            player={p}
+            slot={slots[i]}
+            color={color}
+            fg={fg}
+            clipId={`face-${uid}`}
+          />
+        ))}
       </svg>
       {label ? (
         <figcaption className="mt-2 flex items-center justify-between text-xs text-dim">

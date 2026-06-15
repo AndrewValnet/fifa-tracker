@@ -12,6 +12,56 @@
   "ESP-POR": { "played": 41, "aWins": 17, "draws": 18, "bWins": 6, "lastMeeting": "2025 Nations League final — POR 2-2 ESP (5-3 pens)", "note": "Iberian neighbours: Spain leads on paper, Portugal grabbed the trophy in Munich 2025." },
   "NED-POR": { "played": 15, "aWins": 2, "draws": 5, "bWins": 8, "lastMeeting": "2019 Nations League final — POR 1-0 NED (Guedes)", "note": "The 2006 'Battle of Nuremberg' set a World Cup record: four reds and 16 yellows." },
   "BEL-FRA": { "played": 74, "aWins": 30, "draws": 19, "bWins": 24, "lastMeeting": "2018 WC semi-final — FRA 1-0 BEL (Umtiti)", "note": "One of football's oldest fixtures (since 1904); Belgium leads, France won the one everyone remembers." },
+  "BEL-EGY": {
+    "played": 4,
+    "aWins": 1,
+    "draws": 0,
+    "bWins": 3,
+    "lastMeeting": "2022 friendly - EGY 2-1 BEL (Jaber Al-Ahmad International Stadium, Kuwait City)",
+    "note": "All four previous senior meetings were friendlies; Belgium and Egypt had never met at a World Cup before 2026.",
+    "meetings": [
+      {
+        "date": "2022-11-18",
+        "homeCode": "BEL",
+        "awayCode": "EGY",
+        "homeScore": 1,
+        "awayScore": 2,
+        "competition": "International Friendly",
+        "venue": "Jaber Al-Ahmad International Stadium",
+        "location": "Kuwait City, Kuwait"
+      },
+      {
+        "date": "2018-06-06",
+        "homeCode": "BEL",
+        "awayCode": "EGY",
+        "homeScore": 3,
+        "awayScore": 0,
+        "competition": "International Friendly",
+        "venue": "Stade Roi Baudouin",
+        "location": "Brussels, Belgium"
+      },
+      {
+        "date": "2005-02-09",
+        "homeCode": "EGY",
+        "awayCode": "BEL",
+        "homeScore": 4,
+        "awayScore": 0,
+        "competition": "International Friendly",
+        "venue": "Cairo Military Academy Stadium",
+        "location": "Cairo, Egypt"
+      },
+      {
+        "date": "1999-03-30",
+        "homeCode": "BEL",
+        "awayCode": "EGY",
+        "homeScore": 0,
+        "awayScore": 1,
+        "competition": "International Friendly",
+        "venue": "Stade Maurice Dufrasne",
+        "location": "Liege, Belgium"
+      }
+    ]
+  },
   "ARG-URU": { "played": 197, "aWins": 92, "draws": 46, "bWins": 59, "lastMeeting": "2024 WC qualifier — URU 2-0 ARG (Nov 2023)", "note": "The Clásico del Río de la Plata — among the most-played international fixtures on Earth (counts vary 196-214)." },
   "MEX-USA": { "played": 79, "aWins": 38, "draws": 17, "bWins": 24, "lastMeeting": "2025 Gold Cup final — MEX 2-1 USA", "note": "Dos a Cero is the USMNT war cry, but Mexico's record 10th Gold Cup reasserted El Tri's throne." },
   "ESP-MAR": { "played": 4, "aWins": 1, "draws": 3, "bWins": 0, "lastMeeting": "2022 WC R16 — MAR 0-0 ESP (3-0 pens)", "note": "Bono's shootout heroics sent Morocco past their former colonial power to a historic semi-final." },
