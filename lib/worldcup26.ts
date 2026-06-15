@@ -38,7 +38,7 @@ const GAMES_KEY = "wc26:/get/games";
 // worldcup26.ir is slow/unreachable from some hosts (e.g. Vercel's US edge),
 // so it must NEVER block a page. Short timeout + circuit breaker: after a
 // failure, skip it entirely for 60s and let football-data carry the request.
-const WC26_TIMEOUT_MS = 3000;
+const WC26_TIMEOUT_MS = 2000;
 let wc26DownUntil = 0;
 
 async function fetchGames(): Promise<{ games: Wc26Game[] }> {

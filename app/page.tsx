@@ -4,8 +4,8 @@
 
 import { Suspense } from "react";
 import Link from "next/link";
-import { BetsLists } from "@/components/BetsLists";
-import { FavoritesRanking } from "@/components/FavoritesRanking";
+import { BetsBuzzPanel } from "@/components/BetsBuzzPanel";
+import { FavoritesPanel } from "@/components/FavoritesPanel";
 import { FollowedStrip } from "@/components/FollowedStrip";
 import { HeroSection } from "@/components/HeroSection";
 import { NewsFeed } from "@/components/NewsFeed";
@@ -16,14 +16,7 @@ import { StandingsAccordion } from "@/components/StandingsAccordion";
 import { TodayStrip } from "@/components/TodayStrip";
 import { TopScorers } from "@/components/TopScorers";
 import { TotalsBanner } from "@/components/TotalsBanner";
-import {
-  getAllMatches,
-  getFavoritesData,
-  getLiveMatches,
-  getScorers,
-  getStandings,
-  getTopBetsData,
-} from "@/lib/data";
+import { getAllMatches, getLiveMatches, getScorers, getStandings } from "@/lib/data";
 import { statusKind } from "@/lib/format";
 
 async function HeroLoader() {
@@ -50,16 +43,6 @@ async function StandingsLoader() {
       <StandingsAccordion standings={standings.data} />
     </>
   );
-}
-
-async function FavoritesLoader() {
-  const favorites = await getFavoritesData();
-  return <FavoritesRanking favorites={favorites} />;
-}
-
-async function BetsLoader() {
-  const { top, weird } = await getTopBetsData();
-  return <BetsLists top={top} weird={weird} />;
 }
 
 async function ScorersLoader() {
@@ -99,18 +82,14 @@ export default function HomePage() {
       <section aria-label="Title race" className="mx-auto max-w-shell px-4 pt-10">
         <SectionHeader title="Title Race" right="Polymarket — odds to win it all" />
         <div className="rounded-xl border border-edge bg-panel p-4">
-          <Suspense fallback={<div className="skeleton h-72 w-full" aria-hidden />}>
-            <FavoritesLoader />
-          </Suspense>
+          <FavoritesPanel />
         </div>
       </section>
 
       <section aria-label="Betting buzz" className="mx-auto max-w-shell px-4 pt-8">
         <SectionHeader title="Betting Buzz" right="biggest &amp; weirdest markets · Polymarket" />
         <div className="rounded-xl border border-edge bg-panel p-4">
-          <Suspense fallback={<div className="skeleton h-40 w-full" aria-hidden />}>
-            <BetsLoader />
-          </Suspense>
+          <BetsBuzzPanel />
         </div>
       </section>
 
