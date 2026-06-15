@@ -35,18 +35,31 @@ interface Wc26Game {
 // the last good payload on error.
 const GAMES_KEY = "wc26:/get/games";
 
+// worldcup26.ir is slow/unreachable from some hosts (e.g. Vercel's US edge),
+// so it must NEVER block a page. Short timeout + circuit breaker: after a
+// failure, skip it entirely for 60s and let football-data carry the request.
+const WC26_TIMEOUT_MS = 3000;
+let wc26DownUntil = 0;
+
 async function fetchGames(): Promise<{ games: Wc26Game[] }> {
   const hit = cacheGet<{ games: Wc26Game[] }>(GAMES_KEY);
   if (hit) return hit;
+  if (Date.now() < wc26DownUntil) {
+    const stale = cacheGetStale<{ games: Wc26Game[] }>(GAMES_KEY);
+    if (stale) return stale;
+    throw new Error("worldcup26.ir circuit open");
+  }
   try {
-    const res = await fetchWithTimeout(`${BASE}/get/games`, undefined, 9000);
+    const res = await fetchWithTimeout(`${BASE}/get/games`, undefined, WC26_TIMEOUT_MS);
     if (!res.ok) throw new Error(`worldcup26.ir /get/games -> HTTP ${res.status}`);
     const payload = (await res.json()) as { games: Wc26Game[] };
     if (!payload?.games?.length) throw new Error("worldcup26.ir returned no games");
     const hasLive = payload.games.some((g) => g.time_elapsed === "live" || /^\d+$/.test(g.time_elapsed));
     cacheSet(GAMES_KEY, payload, hasLive ? 7_000 : 120_000);
+    wc26DownUntil = 0;
     return payload;
   } catch (err) {
+    wc26DownUntil = Date.now() + 60_000; // skip wc26 for 60s after a failure
     const stale = cacheGetStale<{ games: Wc26Game[] }>(GAMES_KEY);
     if (stale) return stale;
     throw err;

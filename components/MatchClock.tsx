@@ -7,7 +7,16 @@ import { useEffect, useState } from "react";
 import { liveClock, statusKind } from "@/lib/format";
 import type { Match } from "@/lib/types";
 
-export function MatchClock({ match, className = "" }: { match: Match; className?: string }) {
+export function MatchClock({
+  match,
+  accurate,
+  className = "",
+}: {
+  match: Match;
+  /** Exact broadcast minute (e.g. "41", "90+6") from ESPN — shown verbatim, no "est". */
+  accurate?: string | null;
+  className?: string;
+}) {
   const [now, setNow] = useState<number | null>(null);
 
   const live = statusKind(match.status) === "live";
@@ -20,6 +29,17 @@ export function MatchClock({ match, className = "" }: { match: Match; className?
   }, [live]);
 
   if (!live) return null;
+
+  // Prefer the exact broadcast minute when available (accurate, no estimate tag).
+  if (accurate) {
+    const display = /^\d/.test(accurate) ? `${accurate}’` : accurate;
+    return (
+      <span className={`font-mono text-pitch ${className}`} title="Live match minute (ESPN)">
+        {display}
+      </span>
+    );
+  }
+
   const text = now === null ? "" : liveClock(match, now);
   const estimated = typeof match.minute !== "number" || match.minute <= 0;
 

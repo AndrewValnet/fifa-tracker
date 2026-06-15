@@ -8,7 +8,7 @@ import { MatchClock } from "@/components/MatchClock";
 import { statusKind } from "@/lib/format";
 import type { Match } from "@/lib/types";
 
-export function Scoreboard({ match }: { match: Match }) {
+export function Scoreboard({ match, accurateClock }: { match: Match; accurateClock?: string | null }) {
   const kind = statusKind(match.status);
   const home = match.score.home;
   const away = match.score.away;
@@ -28,7 +28,7 @@ export function Scoreboard({ match }: { match: Match }) {
       {kind === "live" ? (
         <div className="flex items-center gap-3">
           <LiveBadge />
-          <MatchClock match={match} className="text-lg font-semibold" />
+          <MatchClock match={match} accurate={accurateClock} className="text-lg font-semibold" />
         </div>
       ) : kind === "finished" ? (
         <span className="rounded-full border border-edge bg-panel2 px-3 py-1 font-mono text-xs font-bold tracking-widest text-dim">

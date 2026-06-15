@@ -118,44 +118,22 @@ export const getAllMatches = cache(async (): Promise<Sourced<Match[]>> => {
 });
 
 export async function getLiveMatches(): Promise<Sourced<Match[]>> {
-  // worldcup26.ir first: it's keyless and near-real-time, while football-data's
-  // free tier lags on live scores. When it's reachable it's authoritative for
-  // "what's live right now" — and it dodges football-data's 9 req/min budget.
+  // football-data first: it's reliable and CDN-cached. worldcup26.ir is only the
+  // keyless fallback (it can be slow/unreachable from Vercel; the wc26 client has
+  // a short timeout + circuit breaker so it never blocks the page).
+  try {
+    const live = await fdGetMatches("LIVE");
+    return sourced(await overlayWc26Events(live), "football-data");
+  } catch (err) {
+    if (!(err instanceof FootballDataDisabled)) logOnce("fd:live", err);
+  }
   try {
     const all = await wc26GetMatches();
     return sourced(all.filter(isLive), "worldcup26");
   } catch (err) {
     logOnce("wc26:live", err);
   }
-  // Fallback to football-data if the keyless source is down.
-  try {
-    const live = await fdGetMatches("LIVE");
-    if (live.length) return sourced(await overlayWc26Events(live), "football-data");
-  } catch (err) {
-    if (!(err instanceof FootballDataDisabled)) logOnce("fd:live", err);
-  }
   return sourced(demoMatches().filter(isLive), "demo");
-}
-
-/** Overlay near-real-time worldcup26 score/minute/status onto a (possibly lagging)
- *  football-data live match. Returns null when no fresher data is available. */
-async function wc26LiveOverlay(m: Match): Promise<Match | null> {
-  try {
-    const entry = findScheduleEntryByTeams(m.homeTeam?.code, m.awayTeam?.code, m.utcDate);
-    if (!entry) return null;
-    const w = await wc26GetMatch(entry.id);
-    if (!w) return null;
-    return {
-      ...m,
-      status: w.status,
-      minute: w.minute ?? m.minute,
-      score: w.score,
-      events: w.events.length ? w.events : m.events,
-      lastUpdated: w.lastUpdated ?? m.lastUpdated,
-    };
-  } catch {
-    return null;
-  }
 }
 
 export async function getMatchById(id: string): Promise<Sourced<Match> | null> {
@@ -164,11 +142,6 @@ export async function getMatchById(id: string): Promise<Sourced<Match> | null> {
   if (prefix === "fd") {
     try {
       const [enriched] = await overlayWc26Events([await fdGetMatch(rawId)]);
-      // While live, football-data's free feed lags — prefer the fresher keyless score.
-      if (isLive(enriched)) {
-        const fresh = await wc26LiveOverlay(enriched);
-        if (fresh) return sourced(fresh, "worldcup26");
-      }
       return sourced(enriched, "football-data");
     } catch (err) {
       // cached() already served stale data if any existed; nothing else maps

@@ -271,6 +271,8 @@ export interface MatchExtras {
   addedTime: { firstHalf: number | null; secondHalf: number | null };
   /** True while a drinks/cooling break is in progress (live). */
   coolingBreakActive: boolean;
+  /** Accurate broadcast match minute while live (e.g. "41", "90+6"); null otherwise. */
+  liveClock: string | null;
   updated: string;
 }
 

@@ -159,7 +159,7 @@ interface RawSummary {
   videos?: { headline?: string; links?: { web?: { href?: string } } }[];
   header?: {
     competitions?: {
-      status?: { type?: { state?: string } };
+      status?: { type?: { state?: string; shortDetail?: string }; displayClock?: string };
       competitors?: { homeAway?: string; team?: { id?: string } }[];
     }[];
   };
@@ -372,6 +372,11 @@ export async function espnMatchExtras(eventId: string, live: boolean): Promise<M
     }
   }
 
+  // Accurate broadcast match minute (e.g. "41" / "90+6") — only while live.
+  const status = data.header?.competitions?.[0]?.status;
+  const liveClock =
+    state === "in" ? espnMinute(status?.displayClock, undefined) || status?.type?.shortDetail || null : null;
+
   return {
     eventId,
     state,
@@ -384,6 +389,7 @@ export async function espnMatchExtras(eventId: string, live: boolean): Promise<M
     timeline,
     addedTime,
     coolingBreakActive,
+    liveClock,
     updated: new Date().toISOString(),
   };
 }
