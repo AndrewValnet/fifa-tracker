@@ -165,6 +165,7 @@ export function MatchView({
   const confirmedLineups = extras?.lineups.home?.players.length && extras?.lineups.away?.players.length;
   const homeXI = confirmedLineups ? null : predictedFor(homeDetail, homeRoster, match.homeTeam?.code ?? null);
   const awayXI = confirmedLineups ? null : predictedFor(awayDetail, awayRoster, match.awayTeam?.code ?? null);
+  const hasHeadToHead = Boolean(headToHead(match.homeTeam?.code, match.awayTeam?.code));
 
   return (
     <TeamColorProvider homeCode={match.homeTeam?.code} awayCode={match.awayTeam?.code}>
@@ -343,17 +344,6 @@ export function MatchView({
                 <AudiencePanel match={match} />
               </Card>
 
-              {headToHead(match.homeTeam?.code, match.awayTeam?.code) ? (
-                <Card title="Head to Head">
-                  <HeadToHead
-                    homeCode={match.homeTeam?.code}
-                    awayCode={match.awayTeam?.code}
-                    homeName={match.homeTeam?.name ?? "Home"}
-                    awayName={match.awayTeam?.name ?? "Away"}
-                  />
-                </Card>
-              ) : null}
-
               <Card title="Polymarket Odds">
                 <OddsPanel match={match} />
               </Card>
@@ -398,6 +388,19 @@ export function MatchView({
               ) : null}
             </aside>
           </div>
+
+          {hasHeadToHead ? (
+            <div id="past-matches" className="mt-6">
+              <Card title="Past Matches / Head to Head">
+                <HeadToHead
+                  homeCode={match.homeTeam?.code}
+                  awayCode={match.awayTeam?.code}
+                  homeName={match.homeTeam?.name ?? "Home"}
+                  awayName={match.awayTeam?.name ?? "Away"}
+                />
+              </Card>
+            </div>
+          ) : null}
         </div>
       </div>
     </TeamColorProvider>
