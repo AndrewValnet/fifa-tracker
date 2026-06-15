@@ -27,8 +27,14 @@ export function NewsCard({ article }: { article: NewsArticle }) {
           className="h-36 w-full object-cover opacity-90 transition-opacity group-hover:opacity-100"
         />
       ) : (
-        <div aria-hidden className="pitch-bg flex h-20 items-center justify-center text-2xl opacity-80">
-          📰
+        <div
+          aria-hidden
+          className="flex h-24 items-center justify-center gap-2 overflow-hidden"
+          style={{ background: "linear-gradient(135deg, var(--color-pitch) 0%, color-mix(in srgb, var(--color-pitch) 60%, #0a0e1a) 100%)" }}
+        >
+          <span className="text-3xl opacity-70">⚽</span>
+          <span className="font-display text-sm font-bold uppercase tracking-[0.2em] text-white/60">WC 2026</span>
+          <span className="text-3xl opacity-70">🏆</span>
         </div>
       )}
       <div className="flex flex-1 flex-col gap-1.5 p-4">
