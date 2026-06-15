@@ -1,11 +1,30 @@
 "use client";
 
-// Live match clock (PRD §7.2). Ticks every second while in play; clearly an
+// Live match clock (PRD 7.2). Ticks every second while in play; clearly an
 // estimate when the provider does not report an official minute.
 
 import { useEffect, useState } from "react";
 import { liveClock, statusKind } from "@/lib/format";
 import type { Match } from "@/lib/types";
+
+function clockMinuteValue(minute: string | null | undefined): number {
+  if (!minute) return 0;
+  const m = String(minute).match(/^(\d+)(?:\+(\d+))?/);
+  if (!m) return 0;
+  return Number(m[1]) + (m[2] ? Number(m[2]) : 0);
+}
+
+function scoreChangedAfterHalftime(match: Match): boolean {
+  const htHome = match.score.halfTimeHome;
+  const htAway = match.score.halfTimeAway;
+  return (
+    htHome !== null &&
+    htHome !== undefined &&
+    htAway !== null &&
+    htAway !== undefined &&
+    (match.score.home !== htHome || match.score.away !== htAway)
+  );
+}
 
 export function MatchClock({
   match,
@@ -13,7 +32,7 @@ export function MatchClock({
   className = "",
 }: {
   match: Match;
-  /** Exact broadcast minute (e.g. "41", "90+6") from ESPN — shown verbatim, no "est". */
+  /** Exact broadcast minute (e.g. "41", "90+6") from ESPN - shown verbatim, no "est". */
   accurate?: string | null;
   className?: string;
 }) {
@@ -30,9 +49,17 @@ export function MatchClock({
 
   if (!live) return null;
 
-  // Prefer the exact broadcast minute when available (accurate, no estimate tag).
-  if (accurate) {
-    const display = /^\d/.test(accurate) ? `${accurate}’` : accurate;
+  // Prefer the exact broadcast minute when available, unless the event stream
+  // already proves ESPN's clock is stale.
+  const latestEventMinute = Math.max(0, ...match.events.map((e) => clockMinuteValue(e.minute)));
+  const accurateMinute = clockMinuteValue(accurate);
+  const accurateIsStale =
+    Boolean(accurate) &&
+    ((latestEventMinute > 0 && accurateMinute > 0 && accurateMinute + 1 < latestEventMinute) ||
+      (scoreChangedAfterHalftime(match) && (!accurateMinute || accurateMinute <= 60)));
+
+  if (accurate && !accurateIsStale) {
+    const display = /^\d/.test(accurate) ? `${accurate}'` : accurate;
     return (
       <span className={`font-mono text-pitch ${className}`} title="Live match minute (ESPN)">
         {display}

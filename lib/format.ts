@@ -81,12 +81,20 @@ export function fmtKickoff(iso: string, style: "time" | "datetime" | "date" | "w
  * assuming a 15-minute half-time break.
  */
 export function liveClock(m: Match, now: number = Date.now()): string {
-  const reportedMinute =
-    typeof m.minute === "number" && m.minute > 0
-      ? m.minute > 90
-        ? `90+${m.minute - 90}'`
-        : `${m.minute}'`
-      : null;
+  const latestEventMinute = Math.max(0, ...m.events.map((e) => clockMinuteValue(e.minute)));
+  const reportedMinuteValue = typeof m.minute === "number" && m.minute > 0 ? m.minute : 0;
+  const reportedMinute = reportedMinuteValue ? formatClockMinute(reportedMinuteValue) : null;
+  const estimated = estimateClockFromKickoff(m, now);
+  const estimatedValue = clockMinuteValue(estimated);
+  const scoreMovedAfterHt = scoreChangedAfterHalftime(m);
+  const timelineProvesSecondHalf = latestEventMinute > 60 || scoreMovedAfterHt;
+  const providerMinuteIsStale =
+    (latestEventMinute > 0 && reportedMinuteValue > 0 && reportedMinuteValue + 1 < latestEventMinute) ||
+    (scoreMovedAfterHt && reportedMinuteValue > 0 && reportedMinuteValue <= 60);
+
+  if (timelineProvesSecondHalf && (providerMinuteIsStale || m.status === "PAUSED")) {
+    return reconciledTimelineClock(estimated, estimatedValue, latestEventMinute);
+  }
 
   if (m.status === "PAUSED") {
     const halftimeScoreKnown = m.score.halfTimeHome !== null && m.score.halfTimeHome !== undefined;
@@ -94,8 +102,45 @@ export function liveClock(m: Match, now: number = Date.now()): string {
     return "HT";
   }
   if (m.status !== "IN_PLAY") return "";
+  if (providerMinuteIsStale) {
+    return reconciledTimelineClock(estimated, estimatedValue, latestEventMinute);
+  }
   if (reportedMinute) return reportedMinute;
 
+  return estimated;
+}
+
+function scoreChangedAfterHalftime(m: Match): boolean {
+  const htHome = m.score.halfTimeHome;
+  const htAway = m.score.halfTimeAway;
+  return (
+    htHome !== null &&
+    htHome !== undefined &&
+    htAway !== null &&
+    htAway !== undefined &&
+    (m.score.home !== htHome || m.score.away !== htAway)
+  );
+}
+
+function clockMinuteValue(minute: string | null | undefined): number {
+  if (!minute) return 0;
+  const m = String(minute).match(/^(\d+)(?:\+(\d+))?/);
+  if (!m) return 0;
+  return Number(m[1]) + (m[2] ? Number(m[2]) : 0);
+}
+
+function formatClockMinute(minute: number): string {
+  if (minute > 90) return `90+${minute - 90}'`;
+  return `${minute}'`;
+}
+
+function reconciledTimelineClock(estimated: string, estimatedValue: number, latestEventMinute: number): string {
+  if (estimatedValue > 0 && estimatedValue >= latestEventMinute) return estimated;
+  if (latestEventMinute > 0) return formatClockMinute(Math.floor(latestEventMinute));
+  return estimated !== "HT" ? estimated : "46'";
+}
+
+function estimateClockFromKickoff(m: Match, now: number): string {
   const elapsed = Math.floor((now - new Date(m.utcDate).getTime()) / 60_000) + 1;
   if (elapsed < 1) return "1'";
   if (elapsed <= 45) return `${elapsed}'`;
