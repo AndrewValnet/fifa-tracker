@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Oswald, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import { BottomNav } from "@/components/BottomNav";
+import { GoalAlerts } from "@/components/GoalAlerts";
 import { ResourceHints } from "@/components/ResourceHints";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import { Sidebar } from "@/components/Sidebar";
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             </main>
           </div>
           <BottomNav />
+          <GoalAlerts />
         </SWRProvider>
         <ResourceHints />
         <ServiceWorkerRegister />
