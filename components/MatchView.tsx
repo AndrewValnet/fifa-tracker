@@ -27,6 +27,7 @@ import { SquadSection } from "@/components/SquadSection";
 import { StatComparison } from "@/components/StatComparison";
 import { TeamColorProvider } from "@/components/TeamColorProvider";
 import { VenueCard } from "@/components/VenueCard";
+import { WeatherWidget } from "@/components/WeatherWidget";
 import { WhereToWatch } from "@/components/WhereToWatch";
 import { useLiveMatch } from "@/hooks/useLiveMatch";
 import { useMatchExtras } from "@/hooks/useMatchExtras";
@@ -205,6 +206,9 @@ export function MatchView({
                     👤 Referee: {referee.name}
                     {referee.nationality ? ` (${referee.nationality})` : ""}
                   </p>
+                ) : null}
+                {kind === "upcoming" && match.stadiumId ? (
+                  <WeatherWidget stadiumId={match.stadiumId} utcDate={match.utcDate} />
                 ) : null}
                 {extras?.attendance ? <p>🎟️ Attendance: {fmtNumber(extras.attendance)}</p> : null}
                 {ticket?.averagePrice ? (

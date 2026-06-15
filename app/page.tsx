@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { BetsBuzzPanel } from "@/components/BetsBuzzPanel";
 import { FavoritesPanel } from "@/components/FavoritesPanel";
+import { MustWatchPanel } from "@/components/MustWatchPanel";
 import { FollowedStrip } from "@/components/FollowedStrip";
 import { HeroSection } from "@/components/HeroSection";
 import { NewsFeed } from "@/components/NewsFeed";
@@ -78,6 +79,11 @@ export default function HomePage() {
       <TotalsBanner />
       <FollowedStrip />
       <TodayStrip />
+
+      <section aria-label="Must watch" className="mx-auto max-w-shell px-4 pt-8">
+        <SectionHeader title="Must Watch" right="ranked by odds closeness · Polymarket" />
+        <MustWatchPanel />
+      </section>
 
       <section aria-label="Title race" className="mx-auto max-w-shell px-4 pt-10">
         <SectionHeader title="Title Race" right="Polymarket — odds to win it all" />

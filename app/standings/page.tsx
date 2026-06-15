@@ -1,10 +1,12 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { AssistsLeaderboard } from "@/components/AssistsLeaderboard";
 import { GroupScenarios } from "@/components/GroupScenarios";
 import { GroupStandingsTable } from "@/components/GroupStandingsTable";
 import { KnockoutBracket } from "@/components/KnockoutBracket";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SourceTag } from "@/components/SourceTag";
+import { SuspensionTracker } from "@/components/SuspensionTracker";
 import { TopScorers } from "@/components/TopScorers";
 import { getAllMatches, getScorers, getStandings } from "@/lib/data";
 import { getQualificationScenarios } from "@/lib/qualification";
@@ -98,6 +100,20 @@ export default function StandingsPage() {
         <Suspense fallback={<div className="skeleton h-64 w-full" aria-hidden />}>
           <Scorers />
         </Suspense>
+      </section>
+
+      <section className="mt-12 max-w-xl" aria-label="Top assists">
+        <SectionHeader title="Top Assists" right="most assists this tournament" />
+        <div className="rounded-xl border border-edge bg-panel px-4 py-2">
+          <AssistsLeaderboard />
+        </div>
+      </section>
+
+      <section className="mt-12 max-w-xl" aria-label="Suspension tracker">
+        <SectionHeader title="Card Watch" right="yellow card accumulation · FIFA rules" />
+        <div className="rounded-xl border border-edge bg-panel px-4 py-4">
+          <SuspensionTracker />
+        </div>
       </section>
     </div>
   );
