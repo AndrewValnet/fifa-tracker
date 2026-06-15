@@ -88,27 +88,50 @@ function Card({ title, right, children }: { title: string; right?: React.ReactNo
   );
 }
 
+function espnPositionBucket(abbr: string | null): "GK" | "DEF" | "MID" | "FWD" | null {
+  const a = (abbr ?? "").toUpperCase();
+  if (a === "GK") return "GK";
+  if (/^(CB|LB|RB|LWB|RWB|SW|DF|WB|D)$/.test(a)) return "DEF";
+  if (/^(CM|CAM|CDM|LM|RM|MF|AM|DM|M)$/.test(a)) return "MID";
+  if (/^(CF|ST|LW|RW|SS|FW|ATT|F|W)$/.test(a)) return "FWD";
+  return null;
+}
+
 function predictedFor(
   detail: TeamDetail | null,
   roster: EspnRosterPlayer[],
   teamCode: string | null,
 ): FormationPlayer[] | null {
-  const squad = detail?.squad.length
-    ? pickPredictedXI(detail.squad)
-    : null;
-  if (squad) {
-    return squad.map((p) => {
-      const espn = roster.length ? matchPlayerByName(p.name, roster) : null;
-      return {
+  const fromFd = !!detail?.squad.length;
+  // Fall back to ESPN roster when football-data has no squad
+  const sourceSquad = fromFd
+    ? detail!.squad
+    : roster.map((p) => ({
+        id: p.espnId,
         name: p.name,
-        shirtNumber: p.shirtNumber ?? espn?.jersey ?? null,
-        positionDetail: p.positionDetail,
-        image: espn?.headshot ?? null,
-        href: espn ? `/players/${espn.espnId}${teamCode ? `?team=${teamCode}` : ""}` : null,
-      };
-    });
-  }
-  return null;
+        position: espnPositionBucket(p.positionAbbr),
+        positionDetail: p.positionAbbr,
+        shirtNumber: p.jersey,
+        nationality: null,
+        dateOfBirth: null,
+      }));
+
+  if (!sourceSquad.length) return null;
+  const xi = pickPredictedXI(sourceSquad);
+  if (!xi.length) return null;
+
+  return xi.map((p) => {
+    const espn = fromFd
+      ? (roster.length ? matchPlayerByName(p.name, roster) : null)
+      : roster.find((r) => r.espnId === p.id) ?? null;
+    return {
+      name: p.name,
+      shirtNumber: p.shirtNumber ?? espn?.jersey ?? null,
+      positionDetail: p.positionDetail,
+      image: espn?.headshot ?? null,
+      href: espn ? `/players/${espn.espnId}${teamCode ? `?team=${teamCode}` : ""}` : null,
+    };
+  });
 }
 
 export function MatchView({
