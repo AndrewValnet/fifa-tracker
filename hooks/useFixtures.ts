@@ -17,6 +17,7 @@ function unwrap<T>(data: Sourced<T> | undefined) {
 export function useLiveMatches(initial?: Sourced<Match[]>) {
   const { data, error, isLoading } = useSWR<Sourced<Match[]>>("/api/live-matches", jsonFetcher, {
     fallbackData: initial,
+    revalidateOnMount: initial ? false : undefined,
     // Poll fast (7s) only while a match is actually live; idle otherwise.
     refreshInterval: (latest) => ((latest?.data?.length ?? 0) > 0 ? 7_000 : 30_000),
     revalidateOnFocus: true,
@@ -27,6 +28,7 @@ export function useLiveMatches(initial?: Sourced<Match[]>) {
 export function useTodayMatches(initial?: Sourced<Match[]>) {
   const { data, error, isLoading } = useSWR<Sourced<Match[]>>("/api/today", jsonFetcher, {
     fallbackData: initial,
+    revalidateOnMount: initial ? false : undefined,
     refreshInterval: 60_000,
     revalidateOnFocus: true,
   });
@@ -36,6 +38,7 @@ export function useTodayMatches(initial?: Sourced<Match[]>) {
 export function useUpcomingMatches(initial?: Sourced<Match[]>) {
   const { data, error, isLoading } = useSWR<Sourced<Match[]>>("/api/upcoming", jsonFetcher, {
     fallbackData: initial,
+    revalidateOnMount: initial ? false : undefined,
     refreshInterval: 5 * 60_000,
     revalidateOnFocus: false,
   });
@@ -45,6 +48,7 @@ export function useUpcomingMatches(initial?: Sourced<Match[]>) {
 export function useAllMatches(initial?: Sourced<Match[]>) {
   const { data, error, isLoading } = useSWR<Sourced<Match[]>>("/api/matches", jsonFetcher, {
     fallbackData: initial,
+    revalidateOnMount: initial ? false : undefined,
     refreshInterval: 5 * 60_000,
     revalidateOnFocus: false,
   });
@@ -54,6 +58,7 @@ export function useAllMatches(initial?: Sourced<Match[]>) {
 export function useStandings(initial?: Sourced<GroupStanding[]>) {
   const { data, error, isLoading } = useSWR<Sourced<GroupStanding[]>>("/api/standings", jsonFetcher, {
     fallbackData: initial,
+    revalidateOnMount: initial ? false : undefined,
     refreshInterval: 5 * 60_000,
     revalidateOnFocus: false,
   });
@@ -63,6 +68,7 @@ export function useStandings(initial?: Sourced<GroupStanding[]>) {
 export function useScorers(initial?: Sourced<Scorer[]>, limit = 12) {
   const { data, error, isLoading } = useSWR<Sourced<Scorer[]>>(`/api/scorers?limit=${limit}`, jsonFetcher, {
     fallbackData: initial,
+    revalidateOnMount: initial ? false : undefined,
     refreshInterval: 5 * 60_000,
     revalidateOnFocus: false,
   });

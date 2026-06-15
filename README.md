@@ -30,6 +30,7 @@ players                   : ESPN rosters + athlete bios (keyless) · preferred f
 player photos             : ESPN headshots → Wikidata P18 / Wikimedia Commons → Wikipedia thumbnail → initials (all keyless)
 odds & betting money      : Polymarket Gamma API (keyless) → tournament-winner market → hidden
 audience estimate         : transparent model (lib/audience.ts) — match stage + team reach + kickoff time, anchored to FIFA 2022 (labeled "est.")
+shared response cache     : Upstash Redis (optional) — keeps API responses warm across serverless cold starts
 on-site viewer counts     : Upstash Redis (optional) — real concurrent + cumulative visitors to this dashboard
 pick'em / reactions       : Upstash Redis (optional) — score predictions + leaderboard, live match reactions
 push notifications        : Web Push + VAPID (optional) — goal alerts + kickoff reminders; sent by /api/cron/alerts
@@ -73,7 +74,7 @@ Installable **PWA** (manifest + service worker), dynamic **OG share images** for
 npx vercel --prod    # or push to a Git repo and import in Vercel/Netlify
 ```
 
-Set the two env vars in your hosting dashboard. No database, no auth — everything is fetched server-side and cached in memory.
+Set the API env vars in your hosting dashboard. You do not need a full database for read-heavy public data; add optional Upstash Redis if you want shared response caching, pick'em, reactions, presence, or push subscriptions.
 
 ## Security posture
 
