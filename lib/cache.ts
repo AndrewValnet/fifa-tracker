@@ -15,6 +15,7 @@ const REDIS_REST_URL = process.env.UPSTASH_REDIS_REST_URL?.trim();
 const REDIS_REST_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN?.trim();
 const REMOTE_CACHE_PREFIX = "wc26:cache:";
 const MAX_REMOTE_STALE_MS = 24 * 3600_000;
+const MAX_REMOTE_PAYLOAD_BYTES = 750_000;
 
 export function cacheGet<T>(key: string): T | undefined {
   const e = store.get(key);
@@ -158,7 +159,9 @@ async function remoteCacheSet<T>(key: string, value: T, ttlMs: number): Promise<
   if (!remoteCacheEnabled()) return;
 
   const entry: RemoteEntry = { value, expires: Date.now() + ttlMs };
-  await redisPipeline([["SET", remoteCacheKey(key), JSON.stringify(entry), "PX", remoteTtlMs(ttlMs)]]);
+  const payload = JSON.stringify(entry);
+  if (new TextEncoder().encode(payload).length > MAX_REMOTE_PAYLOAD_BYTES) return;
+  await redisPipeline([["SET", remoteCacheKey(key), payload, "PX", remoteTtlMs(ttlMs)]]);
 }
 
 /** fetch() with a hard timeout. */

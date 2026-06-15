@@ -3,13 +3,13 @@
 import type { Match, MatchStatus, Stage } from "@/lib/types";
 
 export function fmtPct(p: number | null | undefined, digits = 0): string {
-  if (p === null || p === undefined || !Number.isFinite(p)) return "—";
+  if (p === null || p === undefined || !Number.isFinite(p)) return "-";
   return `${(p * 100).toFixed(digits)}%`;
 }
 
 /** "$13.8M", "$825K", "$950" */
 export function fmtUsdCompact(v: number | null | undefined): string {
-  if (v === null || v === undefined || !Number.isFinite(v)) return "—";
+  if (v === null || v === undefined || !Number.isFinite(v)) return "-";
   if (v >= 1_000_000_000) return `$${(v / 1_000_000_000).toFixed(1)}B`;
   if (v >= 1_000_000) return `$${(v / 1_000_000).toFixed(1)}M`;
   if (v >= 1_000) return `$${Math.round(v / 1_000)}K`;
@@ -17,7 +17,7 @@ export function fmtUsdCompact(v: number | null | undefined): string {
 }
 
 export function fmtNumber(v: number | null | undefined): string {
-  if (v === null || v === undefined || !Number.isFinite(v)) return "—";
+  if (v === null || v === undefined || !Number.isFinite(v)) return "-";
   return v.toLocaleString("en-US");
 }
 
@@ -54,7 +54,7 @@ export function timeAgo(iso: string): string {
   return `${d}d ago`;
 }
 
-/** Local-timezone kickoff formats (client only — see <LocalTime/>). */
+/** Local-timezone kickoff formats (client only - see <LocalTime/>). */
 export function fmtKickoff(iso: string, style: "time" | "datetime" | "date" | "weekday" = "datetime"): string {
   const d = new Date(iso);
   switch (style) {
@@ -78,23 +78,33 @@ export function fmtKickoff(iso: string, style: "time" | "datetime" | "date" | "w
 /**
  * Approximate live clock for a match.
  * Prefers the provider-reported minute; otherwise derives from kickoff time
- * (assuming a 15-minute half-time break). Clearly an estimate on free tiers.
+ * assuming a 15-minute half-time break.
  */
 export function liveClock(m: Match, now: number = Date.now()): string {
-  if (m.status === "PAUSED") return "HT";
-  if (m.status !== "IN_PLAY") return "";
-  if (typeof m.minute === "number" && m.minute > 0) {
-    return m.minute > 90 ? `90+${m.minute - 90}’` : `${m.minute}’`;
+  const reportedMinute =
+    typeof m.minute === "number" && m.minute > 0
+      ? m.minute > 90
+        ? `90+${m.minute - 90}'`
+        : `${m.minute}'`
+      : null;
+
+  if (m.status === "PAUSED") {
+    const halftimeScoreKnown = m.score.halfTimeHome !== null && m.score.halfTimeHome !== undefined;
+    if (reportedMinute && (!halftimeScoreKnown || m.minute! < 45 || m.minute! > 60)) return reportedMinute;
+    return "HT";
   }
+  if (m.status !== "IN_PLAY") return "";
+  if (reportedMinute) return reportedMinute;
+
   const elapsed = Math.floor((now - new Date(m.utcDate).getTime()) / 60_000) + 1;
-  if (elapsed < 1) return "1’";
-  if (elapsed <= 45) return `${elapsed}’`;
-  if (elapsed <= 49) return `45+${elapsed - 45}’`;
+  if (elapsed < 1) return "1'";
+  if (elapsed <= 45) return `${elapsed}'`;
+  if (elapsed <= 49) return `45+${elapsed - 45}'`;
   if (elapsed <= 60) return "HT";
   const second = elapsed - 15;
-  if (second <= 90) return `${second}’`;
-  if (second <= 99) return `90+${second - 90}’`;
-  return "90+’";
+  if (second <= 90) return `${second}'`;
+  if (second <= 99) return `90+${second - 90}'`;
+  return "90+'";
 }
 
 export function matchSlugTitle(m: Match): string {
