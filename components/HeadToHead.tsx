@@ -1,5 +1,5 @@
-// All-time head-to-head bar for the two sides. Server component; renders
-// nothing when the pairing is not in the curated dataset.
+// All-time head-to-head bar for the two sides. Shows a clear empty state when
+// the pairing is not in the curated dataset yet.
 
 import { headToHead } from "@/lib/h2h";
 import { teamName } from "@/lib/team-meta";
@@ -26,8 +26,22 @@ export function HeadToHead({
   homeName: string;
   awayName: string;
 }) {
+  if (!homeCode || !awayCode) {
+    return (
+      <div className="rounded-lg border border-dashed border-edge px-4 py-6 text-center text-sm text-dim">
+        Previous meetings will appear once both countries are confirmed.
+      </div>
+    );
+  }
+
   const h = headToHead(homeCode, awayCode);
-  if (!h || !h.played) return null;
+  if (!h || !h.played) {
+    return (
+      <div className="rounded-lg border border-dashed border-edge px-4 py-6 text-center text-sm text-dim">
+        No verified previous meetings added yet for {homeName} vs {awayName}.
+      </div>
+    );
+  }
   const total = h.homeWins + h.draws + h.awayWins || 1;
   const pct = (n: number) => `${(n / total) * 100}%`;
 

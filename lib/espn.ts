@@ -23,6 +23,14 @@ import type {
 const SITE = "https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world";
 const WEB = "https://site.web.api.espn.com/apis/common/v3/sports/soccer/fifa.world";
 const EN = "lang=en&region=us";
+const TTL = {
+  SCOREBOARD: 45_000,
+  SUMMARY_HOT: 45_000,
+  SUMMARY_STATIC: 12 * 3600_000,
+  TEAM_INDEX: 24 * 3600_000,
+  ROSTER: 24 * 3600_000,
+  ATHLETE: 24 * 3600_000,
+};
 
 async function espnGet<T>(url: string, ttlMs: number): Promise<T> {
   return cached(`espn:${url}`, ttlMs, async () => {
@@ -51,7 +59,7 @@ export async function espnTeams(): Promise<EspnTeam[]> {
   interface Raw {
     sports?: { leagues?: { teams?: { team: { id: string; abbreviation?: string; displayName: string; logos?: { href: string }[] } }[] }[] }[];
   }
-  const data = await espnGet<Raw>(`${SITE}/teams?limit=60&${EN}`, 24 * 3600_000);
+  const data = await espnGet<Raw>(`${SITE}/teams?limit=60&${EN}`, TTL.TEAM_INDEX);
   const teams = data.sports?.[0]?.leagues?.[0]?.teams ?? [];
   return teams.map(({ team }) => ({
     id: team.id,
@@ -87,7 +95,7 @@ async function scoreboard(yyyymmdd: string): Promise<ScoreboardEventLite[]> {
       }[];
     }[];
   }
-  const data = await espnGet<Raw>(`${SITE}/scoreboard?dates=${yyyymmdd}&${EN}`, 60_000);
+  const data = await espnGet<Raw>(`${SITE}/scoreboard?dates=${yyyymmdd}&${EN}`, TTL.SCOREBOARD);
   return (data.events ?? []).map((e) => {
     const comps = e.competitions?.[0]?.competitors ?? [];
     const home = comps.find((c) => c.homeAway === "home")?.team;
@@ -284,7 +292,7 @@ function espnAddedMinutes(displayValue: string | undefined): number | null {
 const DRINKS_RE = /drinks|cooling|water|hydrat/i;
 
 export async function espnMatchExtras(eventId: string, live: boolean): Promise<MatchExtras> {
-  const data = await espnGet<RawSummary>(`${SITE}/summary?event=${eventId}&${EN}`, live ? 30_000 : 6 * 3600_000);
+  const data = await espnGet<RawSummary>(`${SITE}/summary?event=${eventId}&${EN}`, live ? TTL.SUMMARY_HOT : TTL.SUMMARY_STATIC);
 
   const state = (data.header?.competitions?.[0]?.status?.type?.state as MatchExtras["state"]) ?? "pre";
 
@@ -425,7 +433,7 @@ export async function espnTeamRoster(code: string): Promise<EspnRosterPlayer[]> 
       position?: { abbreviation?: string };
     }[];
   }
-  const data = await espnGet<Raw>(`${SITE}/teams/${teamId}/roster?${EN}`, 24 * 3600_000);
+  const data = await espnGet<Raw>(`${SITE}/teams/${teamId}/roster?${EN}`, TTL.ROSTER);
   return (data.athletes ?? []).map((a) => ({
     espnId: a.id,
     name: a.displayName,
@@ -517,7 +525,7 @@ export async function espnAthleteBio(espnId: string): Promise<Omit<PlayerBio, "f
     };
   }
   try {
-    const data = await espnGet<Raw>(`${WEB}/athletes/${espnId}?region=us&lang=en`, 24 * 3600_000);
+    const data = await espnGet<Raw>(`${WEB}/athletes/${espnId}?region=us&lang=en`, TTL.ATHLETE);
     const a = data.athlete;
     if (!a) return null;
     return {

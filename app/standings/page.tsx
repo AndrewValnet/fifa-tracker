@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   description: "World Cup 2026 group tables, qualification picture, top scorers and the knockout bracket.",
 };
 
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
 async function GroupTables() {
   const standings = await getStandings();
   return (

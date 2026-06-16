@@ -26,6 +26,15 @@ import type {
 } from "@/lib/types";
 
 const BASE = "https://api.football-data.org/v4";
+const TTL = {
+  LIVE_MATCHES: 25_000,
+  MATCH_LIST: 120_000,
+  STANDINGS: 5 * 60_000,
+  SCORERS: 5 * 60_000,
+  TEAM_DETAILS: 24 * 3600_000,
+  FINISHED_MATCH: 12 * 3600_000,
+  UPCOMING_MATCH: 60 * 60_000,
+};
 
 export class FootballDataDisabled extends Error {
   constructor() {
@@ -229,7 +238,14 @@ export function normalizeFdMatch(m: FdMatch): Match {
 
 export async function fdGetMatches(status?: "LIVE" | "SCHEDULED" | "FINISHED"): Promise<Match[]> {
   const qs = status ? `?status=${status}` : "";
-  const ttl = status === "LIVE" ? 25_000 : 120_000;
+  const ttl =
+    status === "LIVE"
+      ? TTL.LIVE_MATCHES
+      : status === "FINISHED"
+        ? TTL.FINISHED_MATCH
+        : status === "SCHEDULED"
+          ? TTL.UPCOMING_MATCH
+          : TTL.MATCH_LIST;
   const data = await fdFetch<{ matches: FdMatch[] }>(`/competitions/WC/matches${qs}`, ttl);
   return sortMatches((data.matches ?? []).map(normalizeFdMatch));
 }
@@ -243,7 +259,7 @@ export async function fdGetMatch(id: string | number): Promise<Match> {
   // fixtures more than 2h from kickoff don't need 25s freshness.
   const farFromKickoff = new Date(match.utcDate).getTime() - Date.now() > 2 * 3600_000;
   if (match.status === "FINISHED" || farFromKickoff) {
-    cacheSet(`fd:${path}`, data, 10 * 60_000);
+    cacheSet(`fd:${path}`, data, match.status === "FINISHED" ? TTL.FINISHED_MATCH : TTL.UPCOMING_MATCH);
   }
   return match;
 }
@@ -268,7 +284,7 @@ export async function fdGetStandings(): Promise<GroupStanding[]> {
         form?: string | null;
       }[];
     }[];
-  }>(`/competitions/WC/standings`, 300_000);
+  }>(`/competitions/WC/standings`, TTL.STANDINGS);
 
   return (data.standings ?? [])
     .filter((s) => s.type === "TOTAL" && s.group)
@@ -305,7 +321,7 @@ export async function fdGetScorers(limit = 15): Promise<Scorer[]> {
       assists?: number | null;
       penalties?: number | null;
     }[];
-  }>(`/competitions/WC/scorers?limit=30`, 300_000);
+  }>(`/competitions/WC/scorers?limit=30`, TTL.SCORERS);
   return (data.scorers ?? []).slice(0, limit).map((s) => ({
     player: s.player?.name ?? "Unknown",
     team: teamRef(s.team),
@@ -361,11 +377,11 @@ function normalizeTeamDetail(t: FdTeamFull): TeamDetail {
 }
 
 export async function fdGetTeams(): Promise<TeamDetail[]> {
-  const data = await fdFetch<{ teams: FdTeamFull[] }>(`/competitions/WC/teams`, 6 * 3600_000);
+  const data = await fdFetch<{ teams: FdTeamFull[] }>(`/competitions/WC/teams`, TTL.TEAM_DETAILS);
   return (data.teams ?? []).map(normalizeTeamDetail);
 }
 
 export async function fdGetTeam(id: string | number): Promise<TeamDetail> {
-  const data = await fdFetch<FdTeamFull>(`/teams/${id}`, 6 * 3600_000);
+  const data = await fdFetch<FdTeamFull>(`/teams/${id}`, TTL.TEAM_DETAILS);
   return normalizeTeamDetail(data);
 }
