@@ -33,7 +33,6 @@ import { useLiveMatch } from "@/hooks/useLiveMatch";
 import { useMatchExtras } from "@/hooks/useMatchExtras";
 import { fmtNumber, stageLabel, statusKind } from "@/lib/format";
 import { matchPlayerByName, type EspnRosterPlayer } from "@/lib/espn";
-import { headToHead } from "@/lib/h2h";
 import { getAccentColor } from "@/lib/team-meta";
 import type { Match, Scorer, Sourced, Stadium, TeamDetail, TeamSeasonStats } from "@/lib/types";
 
@@ -80,9 +79,19 @@ function TeamHeader({
   );
 }
 
-function Card({ title, right, children }: { title: string; right?: React.ReactNode; children: React.ReactNode }) {
+function Card({
+  id,
+  title,
+  right,
+  children,
+}: {
+  id?: string;
+  title: string;
+  right?: React.ReactNode;
+  children: React.ReactNode;
+}) {
   return (
-    <section className="rounded-xl border border-edge bg-panel/80 p-4 md:p-5">
+    <section id={id} className="scroll-mt-24 rounded-xl border border-edge bg-panel/80 p-4 md:p-5">
       <SectionHeader title={title} right={right} />
       {children}
     </section>
@@ -165,7 +174,14 @@ export function MatchView({
   const confirmedLineups = extras?.lineups.home?.players.length && extras?.lineups.away?.players.length;
   const homeXI = confirmedLineups ? null : predictedFor(homeDetail, homeRoster, match.homeTeam?.code ?? null);
   const awayXI = confirmedLineups ? null : predictedFor(awayDetail, awayRoster, match.awayTeam?.code ?? null);
-  const hasHeadToHead = Boolean(headToHead(match.homeTeam?.code, match.awayTeam?.code));
+  const statsSectionId = extras?.stats ? "match-stats" : homeStats && awayStats ? "tournament-form" : null;
+  const sectionLinks = [
+    { href: "#events", label: "Events", show: kind !== "upcoming" },
+    { href: "#lineups", label: confirmedLineups ? "Lineups" : "Predicted XI", show: Boolean(confirmedLineups || homeXI || awayXI) },
+    { href: "#squads", label: "Squads", show: Boolean(homeDetail || awayDetail) },
+    { href: statsSectionId ? `#${statsSectionId}` : "#match-stats", label: "Stats", show: Boolean(statsSectionId) },
+    { href: "#past-matches", label: "Past Matches", show: true },
+  ].filter((link) => link.show);
 
   return (
     <TeamColorProvider homeCode={match.homeTeam?.code} awayCode={match.awayTeam?.code}>
@@ -248,11 +264,25 @@ export function MatchView({
 
           <ReactionsBar matchId={match.id} />
 
+          {sectionLinks.length ? (
+            <nav aria-label="Match sections" className="mt-6 flex flex-wrap justify-center gap-2">
+              {sectionLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="rounded-full border border-edge bg-panel/80 px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-dim transition hover:border-pitch/60 hover:text-ink"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </nav>
+          ) : null}
+
           {/* content grid */}
           <div className="mt-10 grid gap-6 lg:grid-cols-3">
             <div className="flex flex-col gap-6 lg:col-span-2">
               {kind !== "upcoming" ? (
-                <Card title="Match Events" right={<span>tap a scorer for clips</span>}>
+                <Card id="events" title="Match Events" right={<span>tap a scorer for clips</span>}>
                   <EventTimeline events={extras?.timeline?.length ? extras.timeline : match.events} match={match} />
                   {extras && (extras.addedTime.firstHalf !== null || extras.addedTime.secondHalf !== null) ? (
                     <p className="mt-3 border-t border-edge/50 pt-2 text-[11px] text-dim">
@@ -295,11 +325,11 @@ export function MatchView({
               {kind !== "upcoming" ? <WinProbGraph match={match} /> : null}
 
               {confirmedLineups ? (
-                <Card title={kind === "upcoming" ? "Starting Lineups" : "Lineups"} right="confirmed · via ESPN">
+                <Card id="lineups" title={kind === "upcoming" ? "Starting Lineups" : "Lineups"} right="confirmed · via ESPN">
                   <LineupSection match={match} home={extras!.lineups.home!} away={extras!.lineups.away!} />
                 </Card>
               ) : homeXI || awayXI ? (
-                <Card title="Predicted XI" right="squad-based projection — confirmed lineups appear ~1h before kickoff">
+                <Card id="lineups" title="Predicted XI" right="squad-based projection — confirmed lineups appear ~1h before kickoff">
                   <div className="grid gap-4 sm:grid-cols-2">
                     {homeXI ? (
                       <FormationDiagram
@@ -322,7 +352,7 @@ export function MatchView({
               ) : null}
 
               {homeDetail || awayDetail ? (
-                <Card title="Squads">
+                <Card id="squads" title="Squads">
                   <div className="grid gap-6 md:grid-cols-2">
                     {homeDetail ? (
                       <SquadSection team={homeDetail} scorers={scorers} rosterIndex={homeRoster} />
@@ -355,7 +385,7 @@ export function MatchView({
               </Card>
 
               {extras?.stats ? (
-                <Card title="Match Stats">
+                <Card id="match-stats" title="Match Stats">
                   <MatchStatsPanel
                     home={extras.stats.home}
                     away={extras.stats.away}
@@ -366,7 +396,7 @@ export function MatchView({
               ) : null}
 
               {homeStats && awayStats ? (
-                <Card title="Tournament Form">
+                <Card id={extras?.stats ? undefined : "tournament-form"} title="Tournament Form">
                   <StatComparison
                     home={homeStats}
                     away={awayStats}
@@ -389,18 +419,16 @@ export function MatchView({
             </aside>
           </div>
 
-          {hasHeadToHead ? (
-            <div id="past-matches" className="mt-6">
-              <Card title="Past Matches / Head to Head">
-                <HeadToHead
-                  homeCode={match.homeTeam?.code}
-                  awayCode={match.awayTeam?.code}
-                  homeName={match.homeTeam?.name ?? "Home"}
-                  awayName={match.awayTeam?.name ?? "Away"}
-                />
-              </Card>
-            </div>
-          ) : null}
+          <div className="mt-6">
+            <Card id="past-matches" title="Past Matches / Head to Head">
+              <HeadToHead
+                homeCode={match.homeTeam?.code}
+                awayCode={match.awayTeam?.code}
+                homeName={match.homeTeam?.name ?? "Home"}
+                awayName={match.awayTeam?.name ?? "Away"}
+              />
+            </Card>
+          </div>
         </div>
       </div>
     </TeamColorProvider>

@@ -20,6 +20,9 @@ import { TotalsBanner } from "@/components/TotalsBanner";
 import { getAllMatches, getLiveMatches, getScorers, getStandings } from "@/lib/data";
 import { statusKind } from "@/lib/format";
 
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
 async function HeroLoader() {
   const [live, all] = await Promise.all([getLiveMatches(), getAllMatches()]);
   const upcoming = { ...all, data: all.data.filter((m) => statusKind(m.status) === "upcoming") };
