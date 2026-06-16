@@ -3,7 +3,7 @@
   "buildCommand": "npm run build",
   "installCommand": "npm install",
   "crons": [
-    { "path": "/api/cron/prewarm", "schedule": "*/5 * * * *" },
-    { "path": "/api/cron/alerts", "schedule": "*/5 * * * *" }
+    { "path": "/api/cron/prewarm", "schedule": "0 12 * * *" },
+    { "path": "/api/cron/alerts", "schedule": "5 12 * * *" }
   ]
 }
