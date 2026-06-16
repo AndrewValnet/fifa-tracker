@@ -14,6 +14,7 @@ const store: Map<string, Entry> = ((globalThis as Record<string, unknown>).__wc2
 const REDIS_REST_URL = process.env.UPSTASH_REDIS_REST_URL?.trim();
 const REDIS_REST_TOKEN = process.env.UPSTASH_REDIS_REST_TOKEN?.trim();
 const REMOTE_CACHE_PREFIX = "wc26:cache:";
+const REMOTE_USAGE_PREFIX = "wc26:usage:";
 const MAX_REMOTE_STALE_MS = 24 * 3600_000;
 const MAX_REMOTE_PAYLOAD_BYTES = 750_000;
 
@@ -113,6 +114,9 @@ function bumpCache(key: string, field: keyof CacheNamespaceStats): void {
   const ns = cacheNamespace(key);
   const bucket = (stats.cache[ns] ??= emptyCacheStats());
   bucket[field] += 1;
+  if (field === "remoteWriteSkips" || field === "staleFallbacks" || field === "refreshErrors") {
+    remoteUsageIncr(`cache:${ns}:${field}`);
+  }
 }
 
 function upstreamProvider(url: string): string {
@@ -137,13 +141,56 @@ function bumpUpstream(provider: string, field: keyof UpstreamStats): void {
   const stats = currentUsageStats();
   const bucket = (stats.upstream[provider] ??= emptyUpstreamStats());
   bucket[field] += 1;
+  if (provider !== "upstash-redis") {
+    remoteUsageIncr(`upstream:${provider}:${field}`);
+  }
 }
 
-export function usageSnapshot() {
+function remoteUsageKey(date = dayKey()): string {
+  return `${REMOTE_USAGE_PREFIX}${date}`;
+}
+
+function remoteUsageIncr(field: string): void {
+  if (!remoteCacheEnabled()) return;
+  const key = remoteUsageKey();
+  void redisPipeline([
+    ["HINCRBY", key, field, 1],
+    ["EXPIRE", key, 3 * 24 * 3600],
+  ]).catch(() => undefined);
+}
+
+function normalizeRedisHash(raw: unknown): Record<string, number> {
+  const out: Record<string, number> = {};
+  if (Array.isArray(raw)) {
+    for (let i = 0; i < raw.length; i += 2) {
+      const field = raw[i];
+      if (typeof field !== "string") continue;
+      const value = Number(raw[i + 1]);
+      out[field] = Number.isFinite(value) ? value : 0;
+    }
+    return out;
+  }
+  if (raw && typeof raw === "object") {
+    for (const [field, value] of Object.entries(raw as Record<string, unknown>)) {
+      const n = Number(value);
+      out[field] = Number.isFinite(n) ? n : 0;
+    }
+  }
+  return out;
+}
+
+async function remoteUsageSnapshot(): Promise<Record<string, number> | null> {
+  if (!remoteCacheEnabled()) return null;
+  const out = await redisPipeline([["HGETALL", remoteUsageKey()]]);
+  return normalizeRedisHash(out?.[0]);
+}
+
+export async function usageSnapshot() {
   const now = Date.now();
   while (fdCalls.length && now - fdCalls[0] > 60_000) fdCalls.shift();
   return {
     ...JSON.parse(JSON.stringify(currentUsageStats())),
+    remoteDaily: await remoteUsageSnapshot(),
     cacheStoreSize: store.size,
     inFlight: inFlight.size,
     remoteCacheEnabled: remoteCacheEnabled(),
