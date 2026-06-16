@@ -1,11 +1,24 @@
 import { NextResponse } from "next/server";
+import { accountsEnabled } from "@/lib/accounts";
 import { getLeaderboard, predictionsEnabled } from "@/lib/predictions";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 export async function GET() {
-  if (!predictionsEnabled()) return NextResponse.json({ enabled: false, rows: [] });
+  if (!accountsEnabled() || !predictionsEnabled()) {
+    return NextResponse.json({ enabled: false, rows: [], summary: null });
+  }
   const rows = await getLeaderboard();
-  return NextResponse.json({ enabled: true, rows: rows.slice(0, 100) }, { headers: { "Cache-Control": "no-store" } });
+  const totalPicks = rows.reduce((sum, row) => sum + row.picked, 0);
+  const summary = {
+    players: rows.length,
+    totalPicks,
+    averagePicks: rows.length ? totalPicks / rows.length : 0,
+    leader: rows[0] ?? null,
+  };
+  return NextResponse.json(
+    { enabled: true, rows: rows.slice(0, 100), summary },
+    { headers: { "Cache-Control": "no-store" } },
+  );
 }

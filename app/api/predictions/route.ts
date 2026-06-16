@@ -1,33 +1,43 @@
 import { NextResponse } from "next/server";
+import { accountsEnabled, currentUser } from "@/lib/accounts";
 import { getAllMatches } from "@/lib/data";
 import { getPlayer, predictionsEnabled, savePredictions, scorePredictions } from "@/lib/predictions";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-export async function GET(req: Request) {
-  const sid = new URL(req.url).searchParams.get("sessionId") ?? "";
-  if (!predictionsEnabled() || !sid) {
-    return NextResponse.json({ enabled: predictionsEnabled(), picks: {}, name: null, champion: null, score: null });
+export async function GET() {
+  const user = await currentUser();
+  if (!accountsEnabled() || !predictionsEnabled()) {
+    return NextResponse.json({ enabled: false, user: null, picks: {}, champion: null, score: null });
   }
-  const player = (await getPlayer(sid)) ?? { picks: {}, name: null, champion: null };
+  if (!user) {
+    return NextResponse.json({ enabled: true, user: null, picks: {}, champion: null, score: null });
+  }
+
+  const player = (await getPlayer(user.id)) ?? { picks: {}, champion: null };
   const matches = (await getAllMatches()).data;
-  const score = scorePredictions(player, matches, null);
+  const score = scorePredictions(player, matches);
   return NextResponse.json(
-    { enabled: true, ...player, score },
+    { enabled: true, user, ...player, score },
     { headers: { "Cache-Control": "no-store" } },
   );
 }
 
 export async function POST(req: Request) {
-  if (!predictionsEnabled()) return NextResponse.json({ enabled: false, ok: false }, { status: 200 });
-  let body: { sessionId?: string; name?: string; champion?: string; picks?: Record<string, string> } = {};
+  if (!accountsEnabled() || !predictionsEnabled()) return NextResponse.json({ enabled: false, ok: false });
+  const user = await currentUser();
+  if (!user) return NextResponse.json({ enabled: true, ok: false, error: "Sign in to save predictions." }, { status: 401 });
+
+  let body: { champion?: string | null; picks?: Record<string, unknown> } = {};
   try {
     body = await req.json();
   } catch {
     /* ignore */
   }
-  if (!body.sessionId) return NextResponse.json({ enabled: true, ok: false }, { status: 400 });
-  const ok = await savePredictions(body.sessionId, body);
-  return NextResponse.json({ enabled: true, ok }, { headers: { "Cache-Control": "no-store" } });
+  const result = await savePredictions(user.id, body);
+  return NextResponse.json(
+    { enabled: true, ...result },
+    { status: result.ok ? 200 : 400, headers: { "Cache-Control": "no-store" } },
+  );
 }

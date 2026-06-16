@@ -25,6 +25,7 @@ import {
 } from "@/components/LoadingSkeletons";
 import { LocalTime } from "@/components/LocalTime";
 import { MatchNotificationSettings } from "@/components/MatchNotificationSettings";
+import { MatchPredictionWidget } from "@/components/MatchPredictionWidget";
 import { MatchStatsPanel } from "@/components/MatchStatsPanel";
 import { ReactionsBar } from "@/components/ReactionsBar";
 import { Scoreboard } from "@/components/Scoreboard";
@@ -212,6 +213,7 @@ export function MatchView({
   const awayXI = confirmedLineups ? null : predictedFor(awayDetail, awayRoster, match.awayTeam?.code ?? null);
   const matchFetchedAt = fetchedAt ?? initial.fetchedAt;
   const sectionLinks = [
+    { href: "#your-pick", label: "Your Pick", show: true },
     { href: "#events", label: "Events", show: kind !== "upcoming" },
     { href: "#lineups", label: confirmedLineups ? "Lineups" : "Predicted XI", show: true },
     { href: "#squads", label: "Squads", show: Boolean(homeDetail || awayDetail) },
@@ -309,6 +311,12 @@ export function MatchView({
             homeCode={match.homeTeam?.code}
             awayCode={match.awayTeam?.code}
           />
+
+          <div className="mt-6">
+            <Card id="your-pick" title="Office Prediction">
+              <MatchPredictionWidget match={match} />
+            </Card>
+          </div>
 
           {sectionLinks.length ? (
             <nav
