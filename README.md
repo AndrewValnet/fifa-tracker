@@ -46,6 +46,14 @@ maps                      : OpenStreetMap embeds (keyless)
 
 Every payload carries its provenance; fallback sources are labeled in the UI (small tags, or the amber banner in full offline mode). Caching respects free-tier limits: live 25–30s, schedule 2–5m, news 10m, teams 6h, plus a client-side 8-req/min guard for football-data.org.
 
+### Head-to-head maintenance
+
+Previous country meetings live in `data/h2h.json`. Add or update one without hand-editing JSON:
+
+```bash
+npm run h2h:add -- --date 2022-11-18 --home BEL --away EGY --score 1-2 --competition "International Friendly" --venue "Jaber Al-Ahmad International Stadium" --location "Kuwait City"
+```
+
 ## Pages
 
 - `/` — war room: live hero (or next-match countdown), tournament-wide betting totals (traded / at stake / settled pools), **"Your Teams" strip (followed teams, pinned fixtures) + goal-alert opt-in**, today's matches with odds bars, news grid with tag filters, group standings accordion, Golden Boot

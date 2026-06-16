@@ -2,6 +2,7 @@
 
 // Per-match headlines (PRD §7.2): 3–5 articles filtered by the two teams.
 
+import { EmptyState } from "@/components/EmptyState";
 import { NewsCard } from "@/components/NewsCard";
 import { useNews } from "@/hooks/useNews";
 
@@ -18,7 +19,12 @@ export function MatchNews({ home, away }: { home: string | null; away: string | 
     );
   }
   if (!articles.length) {
-    return <p className="py-4 text-center text-sm text-dim">No recent headlines for this matchup.</p>;
+    return (
+      <EmptyState
+        title="No recent headlines for this matchup yet."
+        description="Fresh articles will appear once GNews has team-specific coverage."
+      />
+    );
   }
   return (
     <div className="grid gap-3">

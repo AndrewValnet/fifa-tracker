@@ -10,6 +10,7 @@ function unwrap<T>(data: Sourced<T> | undefined) {
   return {
     data: data?.data,
     source: data?.source,
+    fetchedAt: data?.fetchedAt,
     demo: data?.demo ?? false,
   };
 }

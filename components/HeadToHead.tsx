@@ -1,6 +1,7 @@
 // All-time head-to-head bar for the two sides. Shows a clear empty state when
 // the pairing is not in the curated dataset yet.
 
+import { EmptyState } from "@/components/EmptyState";
 import { headToHead } from "@/lib/h2h";
 import { teamName } from "@/lib/team-meta";
 
@@ -28,18 +29,20 @@ export function HeadToHead({
 }) {
   if (!homeCode || !awayCode) {
     return (
-      <div className="rounded-lg border border-dashed border-edge px-4 py-6 text-center text-sm text-dim">
-        Previous meetings will appear once both countries are confirmed.
-      </div>
+      <EmptyState
+        title="Previous meetings will appear once both countries are confirmed."
+        description="Knockout placeholders do not have a matchup history until the teams are known."
+      />
     );
   }
 
   const h = headToHead(homeCode, awayCode);
   if (!h || !h.played) {
     return (
-      <div className="rounded-lg border border-dashed border-edge px-4 py-6 text-center text-sm text-dim">
-        No verified previous meetings added yet for {homeName} vs {awayName}.
-      </div>
+      <EmptyState
+        title={`No verified previous meetings added yet for ${homeName} vs ${awayName}.`}
+        description="Add curated meetings with npm run h2h:add when you want this matchup history to appear here."
+      />
     );
   }
   const total = h.homeWins + h.draws + h.awayWins || 1;

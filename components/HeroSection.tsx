@@ -6,6 +6,7 @@
 import Link from "next/link";
 import { ClipLink } from "@/components/ClipLink";
 import { CountdownTimer } from "@/components/CountdownTimer";
+import { DataFreshness } from "@/components/DataFreshness";
 import { Flag } from "@/components/Flag";
 import { GoalBanner } from "@/components/GoalBanner";
 import { LiveBadge } from "@/components/LiveBadge";
@@ -123,20 +124,30 @@ export function HeroSection({
   initialLive?: Sourced<Match[]>;
   initialUpcoming?: Sourced<Match[]>;
 }) {
-  const { matches: live } = useLiveMatches(initialLive);
-  const { matches: upcoming } = useUpcomingMatches(initialUpcoming);
+  const liveState = useLiveMatches(initialLive);
+  const upcomingState = useUpcomingMatches(initialUpcoming);
+  const { matches: live } = liveState;
+  const { matches: upcoming } = upcomingState;
 
   const featured = live[0] ?? upcoming[0] ?? null;
   const others = live.slice(1);
+  const activeState = live.length ? liveState : upcomingState;
 
   return (
     <section aria-label="Featured match" className="pitch-bg border-b border-edge">
       <div className="mx-auto max-w-shell px-4 pb-8 pt-6 md:pt-10">
-        <div className="mb-6 flex items-end justify-between">
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
           <h1 className="font-display text-2xl font-bold uppercase tracking-wide md:text-3xl">
             World Cup <span className="text-pitch">2026</span> War Room
           </h1>
-          {live.length ? <LiveBadge /> : null}
+          <div className="flex flex-col items-end gap-1 text-right">
+            {live.length ? <LiveBadge /> : null}
+            <DataFreshness
+              source={activeState.source}
+              fetchedAt={activeState.fetchedAt}
+              prefix={live.length ? "Live source" : "Schedule source"}
+            />
+          </div>
         </div>
 
         {featured ? (

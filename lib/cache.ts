@@ -18,7 +18,7 @@ const REMOTE_USAGE_PREFIX = "wc26:usage:";
 const MAX_REMOTE_STALE_MS = 24 * 3600_000;
 const MAX_REMOTE_PAYLOAD_BYTES = 750_000;
 
-interface CacheNamespaceStats {
+export interface CacheNamespaceStats {
   memoryHits: number;
   memoryMisses: number;
   inFlightHits: number;
@@ -32,14 +32,14 @@ interface CacheNamespaceStats {
   refreshErrors: number;
 }
 
-interface UpstreamStats {
+export interface UpstreamStats {
   attempts: number;
   ok: number;
   httpErrors: number;
   networkErrors: number;
 }
 
-interface UsageStats {
+export interface UsageStats {
   day: string;
   startedAt: string;
   cache: Record<string, CacheNamespaceStats>;
@@ -114,9 +114,27 @@ function bumpCache(key: string, field: keyof CacheNamespaceStats): void {
   const ns = cacheNamespace(key);
   const bucket = (stats.cache[ns] ??= emptyCacheStats());
   bucket[field] += 1;
-  if (field === "remoteWriteSkips" || field === "staleFallbacks" || field === "refreshErrors") {
+  if (
+    field === "remoteHits" ||
+    field === "remoteStaleHits" ||
+    field === "remoteMisses" ||
+    field === "remoteWrites" ||
+    field === "remoteWriteSkips" ||
+    field === "staleFallbacks" ||
+    field === "refreshErrors"
+  ) {
     remoteUsageIncr(`cache:${ns}:${field}`);
   }
+}
+
+export interface UsageSnapshot extends UsageStats {
+  remoteDaily: Record<string, number> | null;
+  cacheStoreSize: number;
+  inFlight: number;
+  remoteCacheEnabled: boolean;
+  footballDataTokensLastMinute: number;
+  footballDataTokenBudgetPerMinute: number;
+  maxRemotePayloadBytes: number;
 }
 
 function upstreamProvider(url: string): string {
@@ -185,11 +203,12 @@ async function remoteUsageSnapshot(): Promise<Record<string, number> | null> {
   return normalizeRedisHash(out?.[0]);
 }
 
-export async function usageSnapshot() {
+export async function usageSnapshot(): Promise<UsageSnapshot> {
   const now = Date.now();
   while (fdCalls.length && now - fdCalls[0] > 60_000) fdCalls.shift();
+  const stats = JSON.parse(JSON.stringify(currentUsageStats())) as UsageStats;
   return {
-    ...JSON.parse(JSON.stringify(currentUsageStats())),
+    ...stats,
     remoteDaily: await remoteUsageSnapshot(),
     cacheStoreSize: store.size,
     inFlight: inFlight.size,

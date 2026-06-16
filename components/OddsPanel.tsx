@@ -3,6 +3,7 @@
 // Polymarket prediction-market panel (PRD §7.2): outcome probability bars,
 // traded volume, win-probability trend sparkline, and the required disclaimer.
 
+import { EmptyState } from "@/components/EmptyState";
 import { OddsBar } from "@/components/OddsBar";
 import { useMatchOdds } from "@/hooks/useMatchOdds";
 import { fmtUsdCompact } from "@/lib/format";
@@ -85,17 +86,20 @@ export function OddsPanel({ match }: { match: Match }) {
 
   if (!odds) {
     return (
-      <div className="rounded-lg border border-dashed border-edge px-4 py-6 text-center text-sm text-dim">
-        No Polymarket market found for this fixture.{" "}
-        <a
-          href="https://polymarket.com/sports"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-pitch underline-offset-2 hover:underline"
-        >
-          Browse Polymarket sports ↗
-        </a>
-      </div>
+      <EmptyState
+        title="No Polymarket market found for this fixture yet."
+        description="Odds will appear here once a matching Polymarket event is available."
+        action={
+          <a
+            href="https://polymarket.com/sports"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-pitch underline-offset-2 hover:underline"
+          >
+            Browse Polymarket sports
+          </a>
+        }
+      />
     );
   }
 

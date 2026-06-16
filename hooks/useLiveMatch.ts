@@ -25,5 +25,5 @@ export function useLiveMatch(id: string, initial?: Sourced<Match>) {
       return 0; // finished — stop polling
     },
   });
-  return { match: data?.data, source: data?.source, demo: data?.demo ?? false, error, isLoading };
+  return { match: data?.data, source: data?.source, fetchedAt: data?.fetchedAt, demo: data?.demo ?? false, error, isLoading };
 }

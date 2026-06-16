@@ -8,6 +8,8 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { CountdownTimer } from "@/components/CountdownTimer";
+import { DataFreshness } from "@/components/DataFreshness";
+import { EmptyState } from "@/components/EmptyState";
 import { EventTimeline } from "@/components/EventTimeline";
 import { Flag } from "@/components/Flag";
 import { FormationDiagram, pickPredictedXI, type FormationPlayer } from "@/components/FormationDiagram";
@@ -165,7 +167,7 @@ export function MatchView({
   homeRoster: EspnRosterPlayer[];
   awayRoster: EspnRosterPlayer[];
 }) {
-  const { match: polled, source } = useLiveMatch(initial.data.id, initial);
+  const { match: polled, source, fetchedAt } = useLiveMatch(initial.data.id, initial);
   const match = polled ?? initial.data;
   const kind = statusKind(match.status);
   const { extras, ticket } = useMatchExtras(match.id, kind === "live", kind === "finished");
@@ -174,12 +176,12 @@ export function MatchView({
   const confirmedLineups = extras?.lineups.home?.players.length && extras?.lineups.away?.players.length;
   const homeXI = confirmedLineups ? null : predictedFor(homeDetail, homeRoster, match.homeTeam?.code ?? null);
   const awayXI = confirmedLineups ? null : predictedFor(awayDetail, awayRoster, match.awayTeam?.code ?? null);
-  const statsSectionId = extras?.stats ? "match-stats" : homeStats && awayStats ? "tournament-form" : null;
+  const matchFetchedAt = fetchedAt ?? initial.fetchedAt;
   const sectionLinks = [
     { href: "#events", label: "Events", show: kind !== "upcoming" },
-    { href: "#lineups", label: confirmedLineups ? "Lineups" : "Predicted XI", show: Boolean(confirmedLineups || homeXI || awayXI) },
+    { href: "#lineups", label: confirmedLineups ? "Lineups" : "Predicted XI", show: true },
     { href: "#squads", label: "Squads", show: Boolean(homeDetail || awayDetail) },
-    { href: statsSectionId ? `#${statsSectionId}` : "#match-stats", label: "Stats", show: Boolean(statsSectionId) },
+    { href: "#match-stats", label: "Stats", show: true },
     { href: "#past-matches", label: "Past Matches", show: true },
   ].filter((link) => link.show);
 
@@ -199,6 +201,11 @@ export function MatchView({
                 {match.matchday && match.stage === "GROUP_STAGE" ? ` · MD${match.matchday}` : ""}
               </span>
               <SourceTag source={source ?? initial.source} />
+              <DataFreshness
+                source={source ?? initial.source}
+                fetchedAt={matchFetchedAt}
+                prefix={kind === "live" ? "Live source" : "Match source"}
+              />
             </span>
           </div>
 
@@ -265,16 +272,21 @@ export function MatchView({
           <ReactionsBar matchId={match.id} />
 
           {sectionLinks.length ? (
-            <nav aria-label="Match sections" className="mt-6 flex flex-wrap justify-center gap-2">
-              {sectionLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="rounded-full border border-edge bg-panel/80 px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-dim transition hover:border-pitch/60 hover:text-ink"
-                >
-                  {link.label}
-                </a>
-              ))}
+            <nav
+              aria-label="Match sections"
+              className="sticky top-0 z-30 -mx-4 mt-6 border-y border-edge bg-navy/95 px-4 py-2 backdrop-blur md:static md:mx-0 md:border-0 md:bg-transparent md:px-0 md:py-0"
+            >
+              <div className="flex snap-x gap-2 overflow-x-auto pb-0.5 md:flex-wrap md:justify-center md:overflow-visible">
+                {sectionLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="shrink-0 snap-start whitespace-nowrap rounded-full border border-edge bg-panel/80 px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-dim transition hover:border-pitch/60 hover:text-ink"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
             </nav>
           ) : null}
 
@@ -349,7 +361,14 @@ export function MatchView({
                     ) : null}
                   </div>
                 </Card>
-              ) : null}
+              ) : (
+                <Card id="lineups" title="Lineups">
+                  <EmptyState
+                    title="Lineups are not published yet."
+                    description="Lineups usually appear about 1 hour before kickoff. We will keep checking ESPN and the team feeds."
+                  />
+                </Card>
+              )}
 
               {homeDetail || awayDetail ? (
                 <Card id="squads" title="Squads">
@@ -384,19 +403,34 @@ export function MatchView({
                 <WhereToWatch />
               </Card>
 
-              {extras?.stats ? (
-                <Card id="match-stats" title="Match Stats">
+              <Card
+                id="match-stats"
+                title="Match Stats"
+                right={
+                  extras?.updated ? (
+                    <DataFreshness sourceName="ESPN" fetchedAt={extras.updated} prefix="Stats from" separator="" />
+                  ) : (
+                    "ESPN"
+                  )
+                }
+              >
+                {extras?.stats ? (
                   <MatchStatsPanel
                     home={extras.stats.home}
                     away={extras.stats.away}
                     homeName={match.homeTeam?.code ?? "Home"}
                     awayName={match.awayTeam?.code ?? "Away"}
                   />
-                </Card>
-              ) : null}
+                ) : (
+                  <EmptyState
+                    title="Stats are not published yet."
+                    description="Stats appear once ESPN publishes match data. This section will update automatically when they arrive."
+                  />
+                )}
+              </Card>
 
               {homeStats && awayStats ? (
-                <Card id={extras?.stats ? undefined : "tournament-form"} title="Tournament Form">
+                <Card id="tournament-form" title="Tournament Form">
                   <StatComparison
                     home={homeStats}
                     away={awayStats}
