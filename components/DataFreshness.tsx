@@ -38,6 +38,10 @@ export function DataFreshness({
 
   const label = sourceName ?? (source ? SOURCE_LABELS[source] : null);
   if (!label && !fetchedAt && !cached) return null;
+  const updated = fetchedAt ? timeAgo(fetchedAt) : null;
+  const cachedTitle = updated
+    ? `Serving cached data to stay within API limits. Last live check ${updated}.`
+    : "Serving cached data to stay within API limits.";
 
   return (
     <span className={`inline-flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] leading-tight text-dim ${className}`}>
@@ -48,9 +52,13 @@ export function DataFreshness({
           <span className="font-semibold text-ink">{label}</span>
         </span>
       ) : null}
-      {fetchedAt ? <span>Updated {timeAgo(fetchedAt)}</span> : null}
+      {updated ? <span>Updated {updated}</span> : null}
       {cached ? (
-        <span className="rounded-full border border-edge bg-panel2 px-2 py-0.5 font-mono uppercase tracking-wider">
+        <span
+          className="rounded-full border border-edge bg-panel2 px-2 py-0.5 font-mono uppercase tracking-wider"
+          title={cachedTitle}
+          aria-label={cachedTitle}
+        >
           Cached
         </span>
       ) : null}

@@ -1,6 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import {
+  fetchFallbackPlayerImage,
+  knownPlayerImageMiss,
+  rememberPlayerImageMiss,
+} from "@/components/player-image-cache";
 
 /**
  * ESPN headshot with a keyless name-based fallback (Wikidata/Wikipedia via
@@ -27,10 +32,10 @@ export function PlayerHeadshot({
 
   // Reset when the player (src) changes within a reused component instance.
   useEffect(() => {
-    setResolvedSrc(src);
+    setResolvedSrc(src && !knownPlayerImageMiss("src", src) ? src : null);
     setTriedFallback(false);
     setFailed(false);
-  }, [src]);
+  }, [src, name]);
 
   async function tryFallback() {
     if (triedFallback) {
@@ -43,10 +48,9 @@ export function PlayerHeadshot({
       return;
     }
     try {
-      const res = await fetch(`/api/player-image?name=${encodeURIComponent(name)}`);
-      const json = (await res.json()) as { url?: string | null };
-      if (json?.url) {
-        setResolvedSrc(json.url);
+      const url = await fetchFallbackPlayerImage(name);
+      if (url) {
+        setResolvedSrc(url);
         return;
       }
     } catch {
@@ -58,7 +62,7 @@ export function PlayerHeadshot({
   // No ESPN photo at all (unmatched player) → try the name-based fallback
   // before settling on initials.
   useEffect(() => {
-    if (!src && name && !triedFallback) void tryFallback();
+    if ((!src || knownPlayerImageMiss("src", src)) && name && !triedFallback) void tryFallback();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [src, name]);
 
@@ -96,7 +100,10 @@ export function PlayerHeadshot({
       width={size}
       height={size}
       loading="lazy"
-      onError={() => void tryFallback()}
+      onError={() => {
+        rememberPlayerImageMiss("src", resolvedSrc);
+        void tryFallback();
+      }}
       className={`inline-block shrink-0 rounded-full bg-panel2 object-cover ring-1 ring-black/30 ${className}`}
       style={{ width: size, height: size }}
     />

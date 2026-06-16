@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type webpush from "web-push";
-import { pushEnabled, removeSubscription, saveSubscription, vapidPublicKey } from "@/lib/push";
+import { pushEnabled, removeSubscription, saveSubscription, vapidPublicKey, type MatchAlertSettings } from "@/lib/push";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -16,6 +16,8 @@ export async function POST(req: Request) {
   let body: {
     subscription?: webpush.PushSubscription;
     teams?: string[];
+    matchId?: string;
+    matchAlerts?: MatchAlertSettings;
     unsubscribe?: boolean;
     endpoint?: string;
   } = {};
@@ -29,6 +31,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true }, { headers: { "Cache-Control": "no-store" } });
   }
   if (!body.subscription?.endpoint) return NextResponse.json({ ok: false }, { status: 400 });
-  const ok = await saveSubscription(body.subscription, Array.isArray(body.teams) ? body.teams : []);
+  const ok = await saveSubscription(body.subscription, {
+    teams: Array.isArray(body.teams) ? body.teams : undefined,
+    matchId: typeof body.matchId === "string" ? body.matchId : undefined,
+    matchAlerts: body.matchAlerts && typeof body.matchAlerts === "object" ? body.matchAlerts : undefined,
+  });
   return NextResponse.json({ ok }, { headers: { "Cache-Control": "no-store" } });
 }

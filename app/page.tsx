@@ -17,6 +17,7 @@ import { StandingsAccordion } from "@/components/StandingsAccordion";
 import { TodayStrip } from "@/components/TodayStrip";
 import { TopScorers } from "@/components/TopScorers";
 import { TotalsBanner } from "@/components/TotalsBanner";
+import { slimSourcedMatches } from "@/lib/cache-policy";
 import { getAllMatches, getLiveMatches, getScorers, getStandings } from "@/lib/data";
 import { statusKind } from "@/lib/format";
 
@@ -26,7 +27,7 @@ export const runtime = "nodejs";
 async function HeroLoader() {
   const [live, all] = await Promise.all([getLiveMatches(), getAllMatches()]);
   const upcoming = { ...all, data: all.data.filter((m) => statusKind(m.status) === "upcoming") };
-  return <HeroSection initialLive={live} initialUpcoming={upcoming} />;
+  return <HeroSection initialLive={slimSourcedMatches(live, { keepEvents: true })} initialUpcoming={slimSourcedMatches(upcoming)} />;
 }
 
 async function StandingsLoader() {

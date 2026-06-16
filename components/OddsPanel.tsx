@@ -4,6 +4,7 @@
 // traded volume, win-probability trend sparkline, and the required disclaimer.
 
 import { EmptyState } from "@/components/EmptyState";
+import { OddsPanelSkeleton } from "@/components/LoadingSkeletons";
 import { OddsBar } from "@/components/OddsBar";
 import { useMatchOdds } from "@/hooks/useMatchOdds";
 import { fmtUsdCompact } from "@/lib/format";
@@ -75,13 +76,7 @@ export function OddsPanel({ match }: { match: Match }) {
   const awayLabel = match.awayTeam?.name ?? "Away";
 
   if (isLoading && !odds) {
-    return (
-      <div className="flex flex-col gap-3" aria-busy>
-        <div className="skeleton h-3 w-full" />
-        <div className="skeleton h-3 w-2/3" />
-        <div className="skeleton h-20 w-full" />
-      </div>
-    );
+    return <OddsPanelSkeleton />;
   }
 
   if (!odds) {

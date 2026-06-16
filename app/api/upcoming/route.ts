@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { CACHE_CONTROL, slimSourcedMatches } from "@/lib/cache-policy";
 import { getAllMatches } from "@/lib/data";
 import { statusKind } from "@/lib/format";
 
@@ -9,7 +10,7 @@ export async function GET() {
   const all = await getAllMatches();
   const upcoming = all.data.filter((m) => statusKind(m.status) === "upcoming");
   return NextResponse.json(
-    { ...all, data: upcoming },
-    { headers: { "Cache-Control": "public, s-maxage=30, stale-while-revalidate=120" } },
+    slimSourcedMatches({ ...all, data: upcoming }),
+    { headers: { "Cache-Control": CACHE_CONTROL.upcomingList } },
   );
 }

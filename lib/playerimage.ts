@@ -7,7 +7,7 @@
 // Heavily cached on the existing in-memory store (no new deps): long TTL on a
 // hit, short TTL on a miss so newly-uploaded Commons photos appear within a day.
 
-import { cacheGet, cacheSet, fetchWithTimeout } from "@/lib/cache";
+import { cachedWithTtl, fetchWithTimeout } from "@/lib/cache";
 
 // Wikimedia's User-Agent policy requires contact info; without it requests fall
 // to the lowest, heavily-throttled tier. (Caching keeps real volume to a trickle.)
@@ -78,15 +78,13 @@ async function fromWikipedia(name: string): Promise<PlayerImage | null> {
 /** Best free photo for a player by name, or null. Cached (hit 30d / miss 12h). */
 export async function resolvePlayerImage(name: string): Promise<PlayerImage | null> {
   const key = `playerimg:${normalize(name)}`;
-  const hit = cacheGet<PlayerImage | null>(key);
-  if (hit !== undefined) return hit; // includes a cached null (a known miss)
-
-  let result: PlayerImage | null = null;
-  try {
-    result = (await fromWikidata(name)) ?? (await fromWikipedia(name));
-  } catch {
-    result = null;
-  }
-  cacheSet(key, result, result ? HIT_TTL : MISS_TTL);
-  return result;
+  return cachedWithTtl<PlayerImage | null>(key, async () => {
+    let result: PlayerImage | null = null;
+    try {
+      result = (await fromWikidata(name)) ?? (await fromWikipedia(name));
+    } catch {
+      result = null;
+    }
+    return { value: result, ttlMs: result ? HIT_TTL : MISS_TTL };
+  });
 }

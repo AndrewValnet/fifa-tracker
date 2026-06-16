@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { CACHE_CONTROL } from "@/lib/cache-policy";
 import { resolvePlayerImage } from "@/lib/playerimage";
 
 export const dynamic = "force-dynamic";
@@ -11,6 +12,6 @@ export async function GET(req: Request) {
   if (!name) return NextResponse.json({ url: null, source: null }, { status: 400 });
   const img = await resolvePlayerImage(name);
   return NextResponse.json(img ?? { url: null, source: null }, {
-    headers: { "Cache-Control": "public, max-age=86400, s-maxage=2592000" },
+    headers: { "Cache-Control": img ? CACHE_CONTROL.playerImageHit : CACHE_CONTROL.playerImageMiss },
   });
 }

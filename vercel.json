@@ -1,5 +1,9 @@
 {
   "framework": "nextjs",
   "buildCommand": "npm run build",
-  "installCommand": "npm install"
+  "installCommand": "npm install",
+  "crons": [
+    { "path": "/api/cron/prewarm", "schedule": "*/5 * * * *" },
+    { "path": "/api/cron/alerts", "schedule": "*/5 * * * *" }
+  ]
 }

@@ -32,7 +32,12 @@ async function GroupTables() {
       </div>
       <div className="grid gap-5 md:grid-cols-2">
         {standings.data.map((g) => (
-          <section key={g.group} className="rounded-xl border border-edge bg-panel p-4" aria-label={`Group ${g.group}`}>
+          <section
+            key={g.group}
+            id={`group-${g.group}`}
+            className="scroll-mt-24 rounded-xl border border-edge bg-panel p-4"
+            aria-label={`Group ${g.group}`}
+          >
             <h2 className="mb-2 font-display text-lg font-semibold tracking-wide">
               GROUP <span className="text-gold">{g.group}</span>
             </h2>

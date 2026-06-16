@@ -5,6 +5,11 @@
 // headshots, and can deep-link to player pages.
 
 import { useEffect, useId, useState } from "react";
+import {
+  fetchFallbackPlayerImage,
+  knownPlayerImageMiss,
+  rememberPlayerImageMiss,
+} from "@/components/player-image-cache";
 import { contrastText } from "@/lib/team-meta";
 import type { SquadPlayer } from "@/lib/types";
 
@@ -102,11 +107,11 @@ function FormationNode({
 
   useEffect(() => {
     let cancelled = false;
-    setSrc(player.image ?? null);
+    setSrc(player.image && !knownPlayerImageMiss("src", player.image) ? player.image : null);
     setTriedFallback(false);
     setFailed(false);
 
-    if (player.image || !player.name) {
+    if ((player.image && !knownPlayerImageMiss("src", player.image)) || !player.name) {
       return () => {
         cancelled = true;
       };
@@ -115,10 +120,9 @@ function FormationNode({
     async function loadFallback() {
       setTriedFallback(true);
       try {
-        const res = await fetch(`/api/player-image?name=${encodeURIComponent(player.name)}`);
-        const json = (await res.json()) as { url?: string | null };
-        if (!cancelled && json?.url) {
-          setSrc(json.url);
+        const url = await fetchFallbackPlayerImage(player.name);
+        if (!cancelled && url) {
+          setSrc(url);
           return;
         }
       } catch {
@@ -142,10 +146,9 @@ function FormationNode({
 
     setTriedFallback(true);
     try {
-      const res = await fetch(`/api/player-image?name=${encodeURIComponent(player.name)}`);
-      const json = (await res.json()) as { url?: string | null };
-      if (json?.url) {
-        setSrc(json.url);
+      const url = await fetchFallbackPlayerImage(player.name);
+      if (url) {
+        setSrc(url);
         return;
       }
     } catch {
@@ -178,7 +181,10 @@ function FormationNode({
           height="40"
           clipPath={`url(#${clipId})`}
           preserveAspectRatio="xMidYMid slice"
-          onError={() => void tryFallback()}
+          onError={() => {
+            rememberPlayerImageMiss("src", src);
+            void tryFallback();
+          }}
         />
       ) : null}
       {hasImage && player.shirtNumber ? (

@@ -69,7 +69,8 @@ export function HeadToHead({
       {h.lastMeeting ? <p className="text-[11px] text-dim">Last: {h.lastMeeting}</p> : null}
       {h.note ? <p className="text-[11px] italic text-dim">{h.note}</p> : null}
       {h.meetings.length ? (
-        <div className="mt-2 overflow-x-auto rounded-lg border border-edge/70">
+        <div className="mt-2 max-w-full overflow-hidden rounded-lg border border-edge/70">
+          <div className="overflow-x-auto">
           <table className="min-w-[520px] w-full text-left text-[11px]">
             <thead className="bg-panel2 text-[10px] uppercase tracking-wider text-dim">
               <tr>
@@ -103,6 +104,7 @@ export function HeadToHead({
               })}
             </tbody>
           </table>
+          </div>
         </div>
       ) : null}
       <p className="text-[10px] text-dim">All-time, all competitions - approximate; source counts can vary.</p>

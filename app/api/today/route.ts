@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { CACHE_CONTROL, slimSourcedMatches } from "@/lib/cache-policy";
 import { getAllMatches } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
@@ -18,7 +19,7 @@ export async function GET() {
     return t >= from && t <= to;
   });
   return NextResponse.json(
-    { ...all, data: windowed },
-    { headers: { "Cache-Control": "public, s-maxage=30, stale-while-revalidate=120" } },
+    slimSourcedMatches({ ...all, data: windowed }),
+    { headers: { "Cache-Control": CACHE_CONTROL.todayList } },
   );
 }

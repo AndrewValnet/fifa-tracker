@@ -15,17 +15,21 @@ import { Flag } from "@/components/Flag";
 import { FormationDiagram, pickPredictedXI, type FormationPlayer } from "@/components/FormationDiagram";
 import { BetsPanel } from "@/components/BetsPanel";
 import { GoalBanner } from "@/components/GoalBanner";
-import { HeadToHead } from "@/components/HeadToHead";
-import { LineupSection } from "@/components/LineupSection";
+import {
+  HeadToHeadSkeleton,
+  LineupsSkeleton,
+  NewsListSkeleton,
+  OddsPanelSkeleton,
+  SquadSideSkeleton,
+  StatsSkeleton,
+} from "@/components/LoadingSkeletons";
 import { LocalTime } from "@/components/LocalTime";
-import { MatchNews } from "@/components/MatchNews";
+import { MatchNotificationSettings } from "@/components/MatchNotificationSettings";
 import { MatchStatsPanel } from "@/components/MatchStatsPanel";
-import { OddsPanel } from "@/components/OddsPanel";
 import { ReactionsBar } from "@/components/ReactionsBar";
 import { Scoreboard } from "@/components/Scoreboard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SourceTag } from "@/components/SourceTag";
-import { SquadSection } from "@/components/SquadSection";
 import { StatComparison } from "@/components/StatComparison";
 import { TeamColorProvider } from "@/components/TeamColorProvider";
 import { VenueCard } from "@/components/VenueCard";
@@ -41,6 +45,26 @@ import type { Match, Scorer, Sourced, Stadium, TeamDetail, TeamSeasonStats } fro
 // Lazy-load the heavy, below-the-fold client leaves so they don't ship in the
 // initial match-page bundle (ssr:false is allowed inside this client component).
 const AudiencePanel = dynamic(() => import("@/components/AudiencePanel").then((m) => m.AudiencePanel), { ssr: false });
+const HeadToHead = dynamic(() => import("@/components/HeadToHead").then((m) => m.HeadToHead), {
+  ssr: false,
+  loading: () => <HeadToHeadSkeleton />,
+});
+const LineupSection = dynamic(() => import("@/components/LineupSection").then((m) => m.LineupSection), {
+  ssr: false,
+  loading: () => <LineupsSkeleton />,
+});
+const MatchNews = dynamic(() => import("@/components/MatchNews").then((m) => m.MatchNews), {
+  ssr: false,
+  loading: () => <NewsListSkeleton />,
+});
+const OddsPanel = dynamic(() => import("@/components/OddsPanel").then((m) => m.OddsPanel), {
+  ssr: false,
+  loading: () => <OddsPanelSkeleton />,
+});
+const SquadSection = dynamic(() => import("@/components/SquadSection").then((m) => m.SquadSection), {
+  ssr: false,
+  loading: () => <SquadSideSkeleton />,
+});
 const WinProbGraph = dynamic(() => import("@/components/WinProbGraph").then((m) => m.WinProbGraph), {
   ssr: false,
   loading: () => <div className="skeleton h-56 w-full rounded-xl" aria-hidden />,
@@ -93,7 +117,7 @@ function Card({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-24 rounded-xl border border-edge bg-panel/80 p-4 md:p-5">
+    <section id={id} className="min-w-0 scroll-mt-24 rounded-xl border border-edge bg-panel/80 p-4 md:p-5">
       <SectionHeader title={title} right={right} />
       {children}
     </section>
@@ -170,7 +194,17 @@ export function MatchView({
   const { match: polled, source, fetchedAt } = useLiveMatch(initial.data.id, initial);
   const match = polled ?? initial.data;
   const kind = statusKind(match.status);
-  const { extras, ticket } = useMatchExtras(match.id, kind === "live", kind === "finished");
+  const kickoffMs = new Date(match.utcDate).getTime();
+  const extrasEnabled =
+    kind === "live" ||
+    kind === "finished" ||
+    (Date.now() > kickoffMs - 2 * 3600_000 && Date.now() < kickoffMs + 3 * 3600_000);
+  const { extras, ticket, isLoading: extrasLoading } = useMatchExtras(
+    match.id,
+    kind === "live",
+    kind === "finished",
+    extrasEnabled,
+  );
 
   const referee = match.referees.find((r) => /referee/i.test(r.role)) ?? match.referees[0];
   const confirmedLineups = extras?.lineups.home?.players.length && extras?.lineups.away?.players.length;
@@ -270,6 +304,11 @@ export function MatchView({
           </header>
 
           <ReactionsBar matchId={match.id} />
+          <MatchNotificationSettings
+            matchId={match.id}
+            homeCode={match.homeTeam?.code}
+            awayCode={match.awayTeam?.code}
+          />
 
           {sectionLinks.length ? (
             <nav
@@ -291,8 +330,8 @@ export function MatchView({
           ) : null}
 
           {/* content grid */}
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
-            <div className="flex flex-col gap-6 lg:col-span-2">
+          <div className="mt-10 grid min-w-0 gap-6 lg:grid-cols-3">
+            <div className="min-w-0 flex flex-col gap-6 lg:col-span-2">
               {kind !== "upcoming" ? (
                 <Card id="events" title="Match Events" right={<span>tap a scorer for clips</span>}>
                   <EventTimeline events={extras?.timeline?.length ? extras.timeline : match.events} match={match} />
@@ -388,7 +427,7 @@ export function MatchView({
               ) : null}
             </div>
 
-            <aside className="flex flex-col gap-6">
+            <aside className="min-w-0 flex flex-col gap-6">
               <Card title="Audience" right={kind === "live" ? "live" : undefined}>
                 <AudiencePanel match={match} />
               </Card>
@@ -414,7 +453,9 @@ export function MatchView({
                   )
                 }
               >
-                {extras?.stats ? (
+                {extrasLoading && !extras ? (
+                  <StatsSkeleton />
+                ) : extras?.stats ? (
                   <MatchStatsPanel
                     home={extras.stats.home}
                     away={extras.stats.away}
@@ -453,7 +494,7 @@ export function MatchView({
             </aside>
           </div>
 
-          <div className="mt-6">
+          <div className="mt-6 min-w-0">
             <Card id="past-matches" title="Past Matches / Head to Head">
               <HeadToHead
                 homeCode={match.homeTeam?.code}

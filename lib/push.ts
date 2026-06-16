@@ -27,7 +27,14 @@ export function vapidPublicKey(): string | null {
   return PUB ?? null;
 }
 
-type StoredSub = { sub: webpush.PushSubscription; teams: string[] };
+export type MatchAlertKind = "kickoff" | "goal" | "halftime" | "fulltime" | "lineup";
+export type MatchAlertSettings = Partial<Record<MatchAlertKind, boolean>>;
+
+type StoredSub = {
+  sub: webpush.PushSubscription;
+  teams: string[];
+  matchAlerts?: Record<string, MatchAlertSettings>;
+};
 
 function endpointId(endpoint: string): string {
   let h = 0;
@@ -35,10 +42,37 @@ function endpointId(endpoint: string): string {
   return `s${Math.abs(h)}`;
 }
 
-export async function saveSubscription(sub: webpush.PushSubscription, teams: string[]): Promise<boolean> {
+function parseOne(raw: unknown): StoredSub | null {
+  if (typeof raw !== "string") return null;
+  try {
+    const rec = JSON.parse(raw) as StoredSub;
+    return rec?.sub?.endpoint ? rec : null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveSubscription(
+  sub: webpush.PushSubscription,
+  input: string[] | { teams?: string[]; matchId?: string; matchAlerts?: MatchAlertSettings },
+): Promise<boolean> {
   if (!pushEnabled() || !sub?.endpoint) return false;
-  const rec: StoredSub = { sub, teams: teams.slice(0, 60) };
-  return (await redisPipe([["HSET", HASH, endpointId(sub.endpoint), JSON.stringify(rec)]])) != null;
+  const id = endpointId(sub.endpoint);
+  const existing = parseOne((await redisPipe([["HGET", HASH, id]]))?.[0]);
+  const patch = Array.isArray(input) ? { teams: input } : input;
+  const rec: StoredSub = {
+    sub,
+    teams: (patch.teams ?? existing?.teams ?? []).slice(0, 60),
+    matchAlerts: existing?.matchAlerts ?? {},
+  };
+  if (patch.matchId && patch.matchAlerts) {
+    rec.matchAlerts![patch.matchId] = {
+      ...(rec.matchAlerts?.[patch.matchId] ?? {}),
+      ...patch.matchAlerts,
+    };
+  }
+  if (rec.matchAlerts && !Object.keys(rec.matchAlerts).length) delete rec.matchAlerts;
+  return (await redisPipe([["HSET", HASH, id, JSON.stringify(rec)]])) != null;
 }
 
 export async function removeSubscription(endpoint: string): Promise<void> {
@@ -71,18 +105,37 @@ export interface PushPayload {
   tag?: string;
 }
 
-/** Send to subscribers following ANY of `teams` (subs with no teams = all matches). */
-export async function sendToFollowers(teams: string[], payload: PushPayload): Promise<number> {
+function wantsAlert(
+  rec: StoredSub,
+  teams: string[],
+  kind: MatchAlertKind,
+  matchId?: string,
+): boolean {
+  const explicit = matchId ? rec.matchAlerts?.[matchId]?.[kind] : undefined;
+  if (explicit !== undefined) return explicit;
+
+  // Legacy/team-follow behavior: people who enabled the old button still get
+  // the two original alerts, but richer alerts require explicit match opt-in.
+  if (kind !== "goal" && kind !== "kickoff") return false;
+  const want = new Set(teams);
+  return !rec.teams.length || rec.teams.some((t) => want.has(t));
+}
+
+/** Send to subscribers following ANY of `teams` or opted into this match alert. */
+export async function sendToFollowers(
+  teams: string[],
+  payload: PushPayload,
+  options: { kind?: MatchAlertKind; matchId?: string } = {},
+): Promise<number> {
   if (!ensureConfigured()) return 0;
   const res = await redisPipe([["HGETALL", HASH]]);
   const subs = parseAll(res?.[0]);
-  const want = new Set(teams);
+  const kind = options.kind ?? "goal";
   const stale: (string | number)[][] = [];
   let sent = 0;
   await Promise.all(
     subs.map(async (rec) => {
-      const targeted = !rec.teams.length || rec.teams.some((t) => want.has(t));
-      if (!targeted) return;
+      if (!wantsAlert(rec, teams, kind, options.matchId)) return;
       try {
         await webpush.sendNotification(rec.sub, JSON.stringify(payload));
         sent++;

@@ -13,8 +13,8 @@ interface Payload {
   ticket: TicketInfo | null;
 }
 
-export function useMatchExtras(matchId: string, live: boolean, finished: boolean) {
-  const { data, error, isLoading } = useSWR<Payload>(`/api/match-extras/${matchId}`, jsonFetcher, {
+export function useMatchExtras(matchId: string, live: boolean, finished: boolean, enabled = true) {
+  const { data, error, isLoading } = useSWR<Payload>(enabled ? `/api/match-extras/${matchId}` : null, jsonFetcher, {
     refreshInterval: live ? 20_000 : finished ? 0 : 5 * 60_000,
     revalidateOnFocus: live,
     keepPreviousData: true,

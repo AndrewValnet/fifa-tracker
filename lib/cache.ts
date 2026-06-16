@@ -17,6 +17,8 @@ const REMOTE_CACHE_PREFIX = "wc26:cache:";
 const REMOTE_USAGE_PREFIX = "wc26:usage:";
 const MAX_REMOTE_STALE_MS = 24 * 3600_000;
 const MAX_REMOTE_PAYLOAD_BYTES = 750_000;
+const REMOTE_COMPRESSION_MIN_BYTES = 32_000;
+const encoder = new TextEncoder();
 
 export interface CacheNamespaceStats {
   memoryHits: number;
@@ -249,6 +251,13 @@ export function cacheSet<T>(key: string, value: T, ttlMs: number): void {
 const inFlight = new Map<string, Promise<unknown>>();
 
 export async function cached<T>(key: string, ttlMs: number, fn: () => Promise<T>): Promise<T> {
+  return cachedWithTtl(key, async () => ({ value: await fn(), ttlMs }));
+}
+
+export async function cachedWithTtl<T>(
+  key: string,
+  fn: () => Promise<{ value: T; ttlMs: number }>,
+): Promise<T> {
   const hit = cacheGet<T>(key);
   if (hit !== undefined) {
     bumpCache(key, "memoryHits");
@@ -273,7 +282,7 @@ export async function cached<T>(key: string, ttlMs: number, fn: () => Promise<T>
     else bumpCache(key, "remoteMisses");
 
     try {
-      const value = await fn();
+      const { value, ttlMs } = await fn();
       cacheSet(key, value, ttlMs);
       await remoteCacheSet(key, value, ttlMs);
       return value;
@@ -299,8 +308,10 @@ export async function cached<T>(key: string, ttlMs: number, fn: () => Promise<T>
 }
 
 interface RemoteEntry {
-  value: unknown;
+  value?: unknown;
   expires: number;
+  encoding?: "gzip-base64";
+  payload?: string;
 }
 
 interface RemoteHit<T> {
@@ -325,6 +336,58 @@ function hashKey(input: string): string {
 function remoteCacheKey(key: string): string {
   const safe = key.replace(/[^a-zA-Z0-9:_-]/g, "_").slice(0, 120);
   return `${REMOTE_CACHE_PREFIX}${safe}:${hashKey(key)}`;
+}
+
+function byteLength(payload: string): number {
+  return encoder.encode(payload).length;
+}
+
+function nodeZlib():
+  | {
+      gzipSync(input: Uint8Array): Uint8Array;
+      gunzipSync(input: Uint8Array): Uint8Array;
+    }
+  | null {
+  try {
+    if (process.env.NEXT_RUNTIME === "edge") return null;
+    const req = (0, eval)("require") as (id: string) => {
+      gzipSync(input: Uint8Array): Uint8Array;
+      gunzipSync(input: Uint8Array): Uint8Array;
+    };
+    return req("node:zlib");
+  } catch {
+    return null;
+  }
+}
+
+function nodeBuffer():
+  | {
+      from(input: string, encoding: "base64"): Uint8Array;
+      from(input: string | Uint8Array, encoding?: BufferEncoding): { toString(encoding: "base64" | "utf8"): string };
+    }
+  | null {
+  try {
+    if (process.env.NEXT_RUNTIME === "edge") return null;
+    return (0, eval)("Buffer") as ReturnType<typeof nodeBuffer>;
+  } catch {
+    return null;
+  }
+}
+
+function compressPayload(payload: string): string | null {
+  const zlib = nodeZlib();
+  const BufferCtor = nodeBuffer();
+  if (!zlib || !BufferCtor) return null;
+  const compressed = zlib.gzipSync(encoder.encode(payload));
+  return BufferCtor.from(compressed).toString("base64");
+}
+
+function decompressPayload(payload: string): string | null {
+  const zlib = nodeZlib();
+  const BufferCtor = nodeBuffer();
+  if (!zlib || !BufferCtor) return null;
+  const compressed = BufferCtor.from(payload, "base64");
+  return BufferCtor.from(zlib.gunzipSync(compressed)).toString("utf8");
 }
 
 function remoteTtlMs(ttlMs: number): number {
@@ -367,7 +430,13 @@ async function remoteCacheGet<T>(key: string): Promise<RemoteHit<T> | null> {
   if (typeof raw !== "string") return null;
 
   try {
-    const entry = JSON.parse(raw) as RemoteEntry;
+    let entry = JSON.parse(raw) as RemoteEntry;
+    if (entry?.encoding === "gzip-base64") {
+      if (typeof entry.payload !== "string") return null;
+      const decompressed = decompressPayload(entry.payload);
+      if (!decompressed) return null;
+      entry = JSON.parse(decompressed) as RemoteEntry;
+    }
     if (!entry || typeof entry.expires !== "number" || !("value" in entry)) return null;
     return {
       value: entry.value as T,
@@ -383,8 +452,19 @@ async function remoteCacheSet<T>(key: string, value: T, ttlMs: number): Promise<
   if (!remoteCacheEnabled()) return;
 
   const entry: RemoteEntry = { value, expires: Date.now() + ttlMs };
-  const payload = JSON.stringify(entry);
-  if (new TextEncoder().encode(payload).length > MAX_REMOTE_PAYLOAD_BYTES) {
+  let payload = JSON.stringify(entry);
+  const rawBytes = byteLength(payload);
+  if (rawBytes >= REMOTE_COMPRESSION_MIN_BYTES) {
+    const compressed = compressPayload(payload);
+    if (compressed && byteLength(compressed) < rawBytes) {
+      payload = JSON.stringify({
+        encoding: "gzip-base64",
+        expires: entry.expires,
+        payload: compressed,
+      } satisfies RemoteEntry);
+    }
+  }
+  if (byteLength(payload) > MAX_REMOTE_PAYLOAD_BYTES) {
     bumpCache(key, "remoteWriteSkips");
     return;
   }

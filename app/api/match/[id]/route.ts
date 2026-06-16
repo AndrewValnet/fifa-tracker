@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { CACHE_CONTROL } from "@/lib/cache-policy";
 import { getMatchById } from "@/lib/data";
 import { statusKind } from "@/lib/format";
 
@@ -13,10 +14,10 @@ export async function GET(_req: Request, { params }: { params: { id: string } })
   const kind = statusKind(result.data.status);
   const cacheControl =
     kind === "live"
-      ? "public, s-maxage=6, stale-while-revalidate=15"
+      ? CACHE_CONTROL.liveMatch
       : kind === "finished"
-        ? "public, s-maxage=3600, stale-while-revalidate=86400"
-        : "public, s-maxage=60, stale-while-revalidate=300";
+        ? CACHE_CONTROL.finishedMatch
+        : CACHE_CONTROL.upcomingMatch;
   return NextResponse.json(result, {
     headers: { "Cache-Control": cacheControl },
   });

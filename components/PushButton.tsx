@@ -50,6 +50,28 @@ export function PushButton() {
     };
   }, []);
 
+  useEffect(() => {
+    if (state !== "on") return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const reg = await navigator.serviceWorker.ready;
+        const sub = await reg.pushManager.getSubscription();
+        if (!sub || cancelled) return;
+        await fetch("/api/push/subscribe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ subscription: sub.toJSON(), teams: followed }),
+        });
+      } catch {
+        /* keep the UI on; the next explicit save will resync */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [followed, state]);
+
   const enable = async () => {
     if (!vapid) return;
     try {
