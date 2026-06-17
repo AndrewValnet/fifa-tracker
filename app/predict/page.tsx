@@ -17,20 +17,23 @@ export default function PredictPage() {
         &larr; War Room
       </Link>
 
-      <div className="mt-4 grid gap-4 md:grid-cols-[1fr_auto] md:items-end">
+      <div className="mt-4 overflow-hidden rounded-xl border border-edge bg-[radial-gradient(circle_at_top_left,rgba(255,211,79,0.16),transparent_34%),linear-gradient(135deg,rgba(11,18,32,0.98),rgba(58,9,28,0.72))] p-5 md:p-7">
+        <div className="grid gap-6 md:grid-cols-[1fr_300px] md:items-end">
         <div>
           <p className="text-xs uppercase tracking-[0.28em] text-gold">World Cup office pool</p>
-          <h1 className="mt-2 font-display text-3xl font-bold uppercase tracking-wide md:text-5xl">
-            Predict &amp; <span className="text-gold">Pick&apos;em</span>
+          <h1 className="mt-2 max-w-4xl font-display text-4xl font-bold uppercase leading-tight tracking-wide md:text-6xl">
+            Predict. Talk. Climb the table.
           </h1>
           <p className="mt-2 max-w-3xl text-sm leading-relaxed text-dim">
             Coworkers can create accounts, predict every scoreline, pick a champion, and follow a live leaderboard.
             Picks lock at kickoff, so the table stays fair once matches start.
           </p>
         </div>
-        <div className="rounded-xl border border-edge bg-panel px-4 py-3 text-xs text-dim">
-          <p className="font-display text-xl font-bold text-ink">6 / 4 / 3</p>
-          <p>exact score / goal diff / result</p>
+        <div className="rounded-xl border border-white/10 bg-black/20 px-4 py-4 text-xs text-dim">
+          <p className="font-display text-4xl font-bold text-gold">6 / 4 / 3</p>
+          <p className="mt-1">exact score / goal diff / result</p>
+          <p className="mt-3 border-t border-white/10 pt-3">Champion pick adds 25 points at the end.</p>
+        </div>
         </div>
       </div>
 
