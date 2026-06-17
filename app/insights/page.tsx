@@ -14,6 +14,7 @@ import { GoalkeeperRatings } from "@/components/GoalkeeperRatings";
 import { PenaltyShootoutHistory } from "@/components/PenaltyShootoutHistory";
 import { fmtNumber, fmtPct, fmtUsdCompact } from "@/lib/format";
 import { GoalMinuteHeatmap } from "@/components/GoalMinuteHeatmap";
+import { SetPieceBreakdown } from "@/components/SetPieceBreakdown";
 
 export const dynamic = "force-dynamic";
 
@@ -349,6 +350,14 @@ async function InsightsBody() {
           <GoalHeatmapSection />
         </Suspense>
       </div>
+
+      {/* ---- Goal Sources ---- */}
+      <section className="mt-12" aria-label="Set piece breakdown">
+        <SectionHeader title="Goal Sources" right="open play vs set pieces vs penalties" />
+        <div className="rounded-xl border border-edge bg-panel p-4">
+          <SetPieceBreakdown />
+        </div>
+      </section>
 
       {/* ---- Penalty Shootout Records ---- */}
       <h2 className="mt-10 font-display text-xl font-semibold uppercase tracking-wider text-dim">🥅 Penalty Shootout Records</h2>

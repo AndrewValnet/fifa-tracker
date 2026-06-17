@@ -10,6 +10,7 @@ import { demoMatch, demoMatches, offlineNews } from "@/lib/demo-data";
 import { statusKind } from "@/lib/format";
 import {
   espnAthleteBio,
+  espnLiveScoreMap,
   espnMatchExtras,
   espnTeamRoster,
   findEspnEventId,
@@ -123,7 +124,17 @@ export async function getLiveMatches(): Promise<Sourced<Match[]>> {
   // a short timeout + circuit breaker so it never blocks the page).
   try {
     const live = await fdGetMatches("LIVE");
-    return sourced(await overlayWc26Events(live), "football-data");
+    const withEvents = await overlayWc26Events(live);
+    // ESPN scoreboard updates faster than football-data (~8 s vs ~10 s cache).
+    // Overlay ESPN scores to ensure the ticker stays accurate during live matches.
+    const espnScores = await espnLiveScoreMap().catch(() => new Map());
+    const corrected = withEvents.map((m) => {
+      if (!m.homeTeam?.code || !m.awayTeam?.code) return m;
+      const espn = espnScores.get(`${m.homeTeam.code}:${m.awayTeam.code}`);
+      if (!espn) return m;
+      return { ...m, score: { ...m.score, home: espn.homeScore, away: espn.awayScore } };
+    });
+    return sourced(corrected, "football-data");
   } catch (err) {
     if (!(err instanceof FootballDataDisabled)) logOnce("fd:live", err);
   }

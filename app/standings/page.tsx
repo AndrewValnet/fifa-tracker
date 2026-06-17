@@ -11,6 +11,7 @@ import { GiantKillingWall } from "@/components/GiantKillingWall";
 import { TravelDistanceChart } from "@/components/TravelDistanceChart";
 import { GoldenBootRaceChart } from "@/components/GoldenBootRaceChart";
 import { GroupScenarios } from "@/components/GroupScenarios";
+import { GroupStageHeatMap } from "@/components/GroupStageHeatMap";
 import { GroupStandingsTable } from "@/components/GroupStandingsTable";
 import { KnockoutBracket } from "@/components/KnockoutBracket";
 import { MonteCarloMatrix } from "@/components/MonteCarloMatrix";
@@ -96,6 +97,20 @@ function FifaRankings() {
   return <FifaRankingsTable />;
 }
 
+async function QualificationSnapshot() {
+  const standings = await getStandings();
+  const mapped = standings.data.map((g) => ({
+    group: g.group,
+    teams: g.rows.map((r) => ({
+      name: r.team.name,
+      code: r.team.code ?? "",
+      pts: r.points,
+      played: r.played,
+    })),
+  }));
+  return <GroupStageHeatMap standings={mapped} />;
+}
+
 async function TravelStats() {
   const all = await getAllMatches();
   return <TravelDistanceChart matches={all.data} stadiums={STADIUMS} />;
@@ -129,6 +144,13 @@ export default function StandingsPage() {
         <SectionHeader title="FIFA World Rankings" right="June 2026" />
         <Suspense fallback={<div className="skeleton h-64 w-full" aria-hidden />}>
           <FifaRankings />
+        </Suspense>
+      </section>
+
+      <section className="mb-12" aria-label="Qualification Snapshot">
+        <SectionHeader title="Qualification Snapshot" right="group stage overview" />
+        <Suspense fallback={<div className="skeleton h-64 w-full" aria-hidden />}>
+          <QualificationSnapshot />
         </Suspense>
       </section>
 

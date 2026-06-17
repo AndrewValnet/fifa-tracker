@@ -11,7 +11,7 @@ import type { Match, Sourced } from "@/lib/types";
 
 export function LiveScoresTicker() {
   const { data: liveData } = useSWR<Sourced<Match[]>>("/api/live-matches", jsonFetcher, {
-    refreshInterval: 30_000,
+    refreshInterval: 10_000,
     revalidateOnFocus: true,
   });
 

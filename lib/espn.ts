@@ -25,6 +25,7 @@ const WEB = "https://site.web.api.espn.com/apis/common/v3/sports/soccer/fifa.wor
 const EN = "lang=en&region=us";
 const TTL = {
   SCOREBOARD: 45_000,
+  SCOREBOARD_LIVE: 8_000,
   SUMMARY_HOT: 45_000,
   SUMMARY_STATIC: 12 * 3600_000,
   TEAM_INDEX: 24 * 3600_000,
@@ -83,30 +84,67 @@ interface ScoreboardEventLite {
   homeCode: string | null;
   awayCode: string | null;
   state: "pre" | "in" | "post";
+  homeScore: number | null;
+  awayScore: number | null;
+  clock?: string;
 }
 
-async function scoreboard(yyyymmdd: string): Promise<ScoreboardEventLite[]> {
+async function scoreboard(yyyymmdd: string, live = false): Promise<ScoreboardEventLite[]> {
   interface Raw {
     events?: {
       id: string;
-      status?: { type?: { state?: string } };
+      status?: { type?: { state?: string }; displayClock?: string };
       competitions?: {
-        competitors?: { homeAway?: string; team?: { id: string; abbreviation?: string; displayName?: string } }[];
+        competitors?: {
+          homeAway?: string;
+          score?: string;
+          team?: { id: string; abbreviation?: string; displayName?: string };
+        }[];
       }[];
     }[];
   }
-  const data = await espnGet<Raw>(`${SITE}/scoreboard?dates=${yyyymmdd}&${EN}`, TTL.SCOREBOARD);
+  const ttl = live ? TTL.SCOREBOARD_LIVE : TTL.SCOREBOARD;
+  const data = await espnGet<Raw>(`${SITE}/scoreboard?dates=${yyyymmdd}&${EN}`, ttl);
   return (data.events ?? []).map((e) => {
     const comps = e.competitions?.[0]?.competitors ?? [];
-    const home = comps.find((c) => c.homeAway === "home")?.team;
-    const away = comps.find((c) => c.homeAway === "away")?.team;
+    const home = comps.find((c) => c.homeAway === "home");
+    const away = comps.find((c) => c.homeAway === "away");
     return {
       eventId: e.id,
-      homeCode: home ? resolveTeamCode(home.abbreviation ?? null, home.displayName) : null,
-      awayCode: away ? resolveTeamCode(away.abbreviation ?? null, away.displayName) : null,
+      homeCode: home?.team ? resolveTeamCode(home.team.abbreviation ?? null, home.team.displayName) : null,
+      awayCode: away?.team ? resolveTeamCode(away.team.abbreviation ?? null, away.team.displayName) : null,
       state: (e.status?.type?.state as "pre" | "in" | "post") ?? "pre",
+      homeScore: home?.score != null ? parseInt(home.score, 10) : null,
+      awayScore: away?.score != null ? parseInt(away.score, 10) : null,
+      clock: e.status?.displayClock,
     };
   });
+}
+
+/** Map of "HOME:AWAY" → live score from ESPN, refreshed every 8 s. */
+export type EspnLiveScoreMap = Map<string, { homeScore: number; awayScore: number; clock?: string }>;
+
+export async function espnLiveScoreMap(): Promise<EspnLiveScoreMap> {
+  const result: EspnLiveScoreMap = new Map();
+  // Check today and yesterday in ET to handle near-midnight fixtures.
+  const now = new Date();
+  const toDateStr = (d: Date) => dateStringInTz(d, "America/New_York").replace(/-/g, "");
+  const yesterday = new Date(now.getTime() - 24 * 3600_000);
+  await Promise.all([now, yesterday].map(async (d) => {
+    try {
+      const events = await scoreboard(toDateStr(d), true);
+      for (const e of events) {
+        if (e.state === "in" && e.homeCode && e.awayCode && e.homeScore !== null && e.awayScore !== null) {
+          result.set(`${e.homeCode}:${e.awayCode}`, {
+            homeScore: e.homeScore,
+            awayScore: e.awayScore,
+            clock: e.clock,
+          });
+        }
+      }
+    } catch { /* ignore per-date failures */ }
+  }));
+  return result;
 }
 
 /** ESPN buckets fixtures by US/Eastern date. */

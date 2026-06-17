@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import nextDynamic from "next/dynamic";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Flag } from "@/components/Flag";
 import { FollowButton } from "@/components/FollowButton";
+import { FormGuide } from "@/components/FormGuide";
 import { MatchCard } from "@/components/MatchCard";
 import { NewsCard } from "@/components/NewsCard";
 import { OddsBar } from "@/components/OddsBar";
@@ -21,6 +23,15 @@ import { getAccentColor } from "@/lib/team-meta";
 import { getTeamHistory } from "@/lib/wc-history";
 
 export const dynamic = "force-dynamic";
+
+const FavoriteButton = nextDynamic(
+  () => import("@/components/FavoriteButton").then((m) => m.FavoriteButton),
+  { ssr: false },
+);
+const RoadToGlory = nextDynamic(
+  () => import("@/components/RoadToGlory").then((m) => m.RoadToGlory),
+  { ssr: false },
+);
 
 export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   const team = await getTeamDetail(params.id);
@@ -166,6 +177,7 @@ export default async function TeamPage({ params }: { params: { id: string } }) {
             {code ? (
               <div className="mt-3 flex flex-wrap items-center gap-2">
                 <FollowButton code={code} />
+                <FavoriteButton teamCode={code} teamName={team.name} size="md" />
                 <a
                   href={`/api/calendar?team=${code}`}
                   className="inline-flex items-center gap-1.5 rounded-full border border-edge px-3 py-1 text-xs text-dim hover:text-ink"
@@ -180,9 +192,12 @@ export default async function TeamPage({ params }: { params: { id: string } }) {
         {/* ── Current-tournament stat tiles ── */}
         {tournamentTiles.length ? (
           <section className="mt-8" aria-label="Tournament stats">
-            <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-dim">
-              WC 2026 — tournament stats
-            </p>
+            <div className="mb-2 flex flex-wrap items-center gap-3">
+              <p className="text-[10px] font-semibold uppercase tracking-widest text-dim">
+                WC 2026 — tournament stats
+              </p>
+              {code ? <FormGuide code={code} matches={matches?.data ?? []} /> : null}
+            </div>
             <dl className="grid grid-cols-4 gap-2 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-11">
               {tournamentTiles.map(([label, v, sub]) => (
                 <StatTile key={label} label={label} value={v} sub={sub} />
@@ -270,6 +285,16 @@ export default async function TeamPage({ params }: { params: { id: string } }) {
             <SectionHeader title="Road to the Final" right="🏟️ MetLife · Jul 19" />
             <div className="rounded-xl border border-edge bg-panel p-4">
               <RouteToFinal group={team.group} outrightPrice={hub?.finance?.outright?.price ?? null} />
+            </div>
+          </section>
+        ) : null}
+
+        {/* ── Road to Glory ── */}
+        {code ? (
+          <section className="mt-10" aria-label="Road to glory">
+            <SectionHeader title="Road to Glory" right="tournament journey" />
+            <div className="rounded-xl border border-edge bg-panel p-4">
+              <RoadToGlory teamCode={code} teamName={team.name} matches={matches?.data ?? []} />
             </div>
           </section>
         ) : null}

@@ -27,7 +27,7 @@ import type {
 
 const BASE = "https://api.football-data.org/v4";
 const TTL = {
-  LIVE_MATCHES: 25_000,
+  LIVE_MATCHES: 10_000,
   MATCH_LIST: 120_000,
   STANDINGS: 5 * 60_000,
   SCORERS: 5 * 60_000,
