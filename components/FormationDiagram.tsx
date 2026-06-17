@@ -54,26 +54,32 @@ function initials(name: string): string {
 export function pickPredictedXI(squad: SquadPlayer[], formation = "4-3-3"): (SquadPlayer & { slotIndex: number })[] {
   const rows = parseFormation(formation);
   const buckets: Record<string, SquadPlayer[]> = { GK: [], DEF: [], MID: [], FWD: [], OTHER: [] };
-  for (const p of squad) buckets[p.position && buckets[p.position] ? p.position : "OTHER"].push(p);
+  for (const p of squad) buckets[positionBucket(p)].push(p);
 
   const used = new Set<string>();
-  const take = (bucket: string, n: number): SquadPlayer[] => {
+  const take = (bucketOrder: string[], n: number): SquadPlayer[] => {
     const out: SquadPlayer[] = [];
-    for (const p of buckets[bucket] ?? []) {
-      if (out.length >= n) break;
-      if (!used.has(p.id)) {
-        out.push(p);
-        used.add(p.id);
+    for (const bucket of bucketOrder) {
+      for (const p of buckets[bucket] ?? []) {
+        if (out.length >= n) break;
+        if (!used.has(p.id)) {
+          out.push(p);
+          used.add(p.id);
+        }
       }
     }
     return out;
   };
 
-  const xi: SquadPlayer[] = [...take("GK", 1)];
-  const lineOrder = ["DEF", "MID", "FWD"];
+  const xi: SquadPlayer[] = [...take(["GK", "OTHER"], 1)];
+  const lineOrder = [
+    ["DEF", "MID", "OTHER"],
+    ["MID", "DEF", "FWD", "OTHER"],
+    ["FWD", "MID", "OTHER"],
+  ];
   rows.forEach((count, i) => {
-    const bucket = lineOrder[Math.min(i, lineOrder.length - 1)];
-    xi.push(...take(bucket, count));
+    const bucketOrder = lineOrder[Math.min(i, lineOrder.length - 1)];
+    xi.push(...take(bucketOrder, count));
   });
 
   if (xi.length < 11) {
@@ -86,6 +92,21 @@ export function pickPredictedXI(squad: SquadPlayer[], formation = "4-3-3"): (Squ
     }
   }
   return xi.slice(0, 11).map((p, i) => ({ ...p, slotIndex: i }));
+}
+
+function positionBucket(player: SquadPlayer): "GK" | "DEF" | "MID" | "FWD" | "OTHER" {
+  const raw = `${player.positionDetail ?? ""} ${player.position ?? ""}`.toUpperCase();
+  if (/\b(GK|GOALKEEPER|KEEPER)\b/.test(raw)) return "GK";
+  if (/\b(CB|LCB|RCB|LB|RB|LWB|RWB|SW|DEFENDER|DEFENCE|DEFENSE|CENTRE-BACK|CENTER-BACK|FULL-BACK|FULLBACK|DF)\b/.test(raw)) {
+    return "DEF";
+  }
+  if (/\b(CDM|DM|CM|CAM|AM|LM|RM|MIDFIELDER|MIDFIELD|MEZZALA|PIVOT|MF)\b/.test(raw)) return "MID";
+  if (/\b(ST|CF|FW|FWD|LW|RW|SS|FORWARD|STRIKER|WINGER|ATTACKER|ATT)\b/.test(raw)) return "FWD";
+  if (player.position === "DEF") return "DEF";
+  if (player.position === "MID") return "MID";
+  if (player.position === "FWD") return "FWD";
+  if (player.position === "GK") return "GK";
+  return "OTHER";
 }
 
 function FormationNode({

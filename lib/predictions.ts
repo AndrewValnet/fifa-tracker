@@ -54,6 +54,29 @@ export interface PlayerScore {
   championHit: boolean;
 }
 
+export interface PublicMatchPrediction {
+  userId: string;
+  name: string;
+  pick: MatchPick;
+  points: number;
+  exact: boolean;
+  correctResult: boolean;
+}
+
+export interface PublicProfile {
+  userId: string;
+  name: string;
+  champion: string | null;
+  score: ReturnType<typeof scorePredictions>;
+  picks: {
+    match: Match;
+    pick: MatchPick;
+    points: number;
+    exact: boolean;
+    correctResult: boolean;
+  }[];
+}
+
 export interface PoolSummary {
   players: number;
   totalPicks: number;
@@ -71,6 +94,12 @@ interface PickRow {
 
 interface LeaderPickRow extends PickRow {
   user_id: string;
+  name: string;
+  champion_code: string | null;
+}
+
+interface PublicUserRow {
+  id: string;
   name: string;
   champion_code: string | null;
 }
@@ -397,6 +426,125 @@ export async function getLeaderboard(): Promise<PlayerScore[]> {
   }
 
   return rows.sort((a, b) => b.points - a.points || b.exact - a.exact || b.correct - a.correct || b.picked - a.picked);
+}
+
+export async function getMatchPredictions(matchId: string): Promise<PublicMatchPrediction[]> {
+  const id = sanitizeKey(matchId);
+  if (!id || !predictionsEnabled()) return [];
+  const matches = await getAllMatches().then((x) => x.data);
+  const match = matches.find((m) => m.id === id);
+  if (!match) return [];
+
+  if (poolDbEnabled()) {
+    const res = await poolQuery<LeaderPickRow>(
+      `select
+         u.id as user_id,
+         u.name,
+         u.champion_code,
+         p.match_id,
+         p.outcome,
+         p.home_goals,
+         p.away_goals,
+         p.updated_at
+       from pool_picks p
+       join pool_users u on u.id = p.user_id
+       where p.match_id = $1
+       order by p.updated_at asc`,
+      [id],
+    );
+    return res.rows.map((row) => {
+      const pick: MatchPick = {
+        outcome: row.outcome,
+        home: row.home_goals,
+        away: row.away_goals,
+        updatedAt: new Date(row.updated_at).toISOString(),
+      };
+      const score = scoreOne(pick, match);
+      return {
+        userId: row.user_id,
+        name: row.name,
+        pick,
+        points: score.points,
+        exact: score.exact,
+        correctResult: score.correctResult,
+      };
+    });
+  }
+
+  if (!redisEnabled()) return [];
+  const players = ((await redis("SMEMBERS", "pool:users")) as string[] | null) ?? [];
+  const out: PublicMatchPrediction[] = [];
+  for (const userId of players.slice(0, MAX_PLAYERS)) {
+    const user = await getUserById(userId);
+    const player = await getPlayer(userId);
+    const pick = player?.picks[id];
+    if (!user || !pick) continue;
+    const score = scoreOne(pick, match);
+    out.push({ userId, name: user.name, pick, points: score.points, exact: score.exact, correctResult: score.correctResult });
+  }
+  return out;
+}
+
+export async function getPublicProfile(userId: string): Promise<PublicProfile | null> {
+  const uid = sanitizeKey(userId);
+  if (!uid || !predictionsEnabled()) return null;
+  const matches = await getAllMatches().then((x) => x.data);
+  const byId = new Map(matches.map((match) => [match.id, match]));
+
+  if (poolDbEnabled()) {
+    const [userRows, pickRows] = await Promise.all([
+      poolQuery<PublicUserRow>("select id, name, champion_code from pool_users where id = $1 limit 1", [uid]),
+      poolQuery<PickRow>("select * from pool_picks where user_id = $1 order by updated_at desc", [uid]),
+    ]);
+    const user = userRows.rows[0];
+    if (!user) return null;
+    const picks: Record<string, MatchPick> = {};
+    for (const row of pickRows.rows) {
+      picks[row.match_id] = {
+        outcome: row.outcome,
+        home: row.home_goals,
+        away: row.away_goals,
+        updatedAt: new Date(row.updated_at).toISOString(),
+      };
+    }
+    const player: PlayerPredictions = { picks, champion: user.champion_code };
+    const score = scorePredictions(player, matches);
+    return {
+      userId: user.id,
+      name: user.name,
+      champion: user.champion_code,
+      score,
+      picks: Object.entries(picks)
+        .map(([matchId, pick]) => {
+          const match = byId.get(matchId);
+          if (!match) return null;
+          const one = score.byMatch[matchId] ?? scoreOne(pick, match);
+          return { match, pick, points: one.points, exact: one.exact, correctResult: one.correctResult };
+        })
+        .filter((row): row is PublicProfile["picks"][number] => Boolean(row))
+        .sort((a, b) => +new Date(a.match.utcDate) - +new Date(b.match.utcDate)),
+    };
+  }
+
+  const user = await getUserById(uid);
+  const player = await getPlayer(uid);
+  if (!user || !player) return null;
+  const score = scorePredictions(player, matches);
+  return {
+    userId: uid,
+    name: user.name,
+    champion: player.champion,
+    score,
+    picks: Object.entries(player.picks)
+      .map(([matchId, pick]) => {
+        const match = byId.get(matchId);
+        if (!match) return null;
+        const one = score.byMatch[matchId] ?? scoreOne(pick, match);
+        return { match, pick, points: one.points, exact: one.exact, correctResult: one.correctResult };
+      })
+      .filter((row): row is PublicProfile["picks"][number] => Boolean(row))
+      .sort((a, b) => +new Date(a.match.utcDate) - +new Date(b.match.utcDate)),
+  };
 }
 
 export async function getPoolSummary(): Promise<PoolSummary> {

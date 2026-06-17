@@ -38,6 +38,10 @@ function emailKey(email: string): string {
   return `pool:email:${sanitizeKey(normalizeEmail(email))}`;
 }
 
+function nameKey(name: string): string {
+  return `pool:name:${sanitizeKey(cleanName(name).toLowerCase())}`;
+}
+
 function sessionKey(token: string): string {
   return `pool:session:${sanitizeKey(token)}`;
 }
@@ -179,6 +183,8 @@ export async function registerUser(input: {
 
   if (poolDbEnabled()) {
     try {
+      const existingName = await poolQuery<{ id: string }>("select id from pool_users where lower(name) = lower($1) limit 1", [name]);
+      if (existingName.rows.length) return { ok: false, error: "That username is already taken." };
       const res = await poolQuery<UserRow>(
         `insert into pool_users (id, email, name, password_hash, created_at)
          values ($1, $2, $3, $4, $5)
@@ -190,7 +196,7 @@ export async function registerUser(input: {
       return { ok: true, user: rowToUser(res.rows[0]), token };
     } catch (error) {
       if (String((error as { code?: string }).code) === "23505") {
-        return { ok: false, error: "An account already exists for that email." };
+        return { ok: false, error: "That email or username is already taken." };
       }
       return { ok: false, error: "Could not create account. Try again." };
     }
@@ -198,8 +204,15 @@ export async function registerUser(input: {
 
   const existing = await redis("GET", emailKey(email));
   if (existing) return { ok: false, error: "An account already exists for that email." };
+  const existingName = await redis("GET", nameKey(name));
+  if (existingName) return { ok: false, error: "That username is already taken." };
   const setEmail = await redis("SET", emailKey(email), id, "NX");
   if (setEmail !== "OK") return { ok: false, error: "An account already exists for that email." };
+  const setName = await redis("SET", nameKey(name), id, "NX");
+  if (setName !== "OK") {
+    await redis("DEL", emailKey(email));
+    return { ok: false, error: "That username is already taken." };
+  }
   const ok = await redisPipe([
     ["HSET", userKey(id), "email", email, "name", name, "createdAt", createdAt, "passwordHash", passwordHash],
     ["SADD", "pool:users", id],

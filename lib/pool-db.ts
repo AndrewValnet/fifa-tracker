@@ -78,6 +78,7 @@ export async function ensurePoolSchema(): Promise<void> {
 
         create index if not exists pool_sessions_user_id_idx on pool_sessions(user_id);
         create index if not exists pool_sessions_expires_at_idx on pool_sessions(expires_at);
+        create unique index if not exists pool_users_name_lower_key on pool_users (lower(name));
 
         create table if not exists pool_picks (
           user_id text not null references pool_users(id) on delete cascade,

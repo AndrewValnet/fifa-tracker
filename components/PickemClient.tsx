@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import useSWR from "swr";
 import { EmptyState } from "@/components/EmptyState";
 import { Flag } from "@/components/Flag";
@@ -12,7 +13,7 @@ import type { Match, Sourced } from "@/lib/types";
 
 type Mode = "signin" | "register";
 type Outcome = "HOME" | "DRAW" | "AWAY";
-type View = "open" | "mine" | "leaderboard" | "rules";
+type View = "open" | "mine" | "community" | "leaderboard" | "rules";
 
 interface PoolUser {
   id: string;
@@ -67,6 +68,20 @@ interface LeaderboardPayload {
     averagePicks: number;
     leader: LeaderRow | null;
   } | null;
+}
+
+interface PublicMatchPrediction {
+  userId: string;
+  name: string;
+  pick: MatchPick;
+  points: number;
+  exact: boolean;
+  correctResult: boolean;
+}
+
+interface MatchPredictionsPayload {
+  enabled: boolean;
+  rows: PublicMatchPrediction[];
 }
 
 const SORTED_TEAMS = [...TEAMS].sort((a, b) => a.name.localeCompare(b.name));
@@ -195,7 +210,7 @@ function AuthPanel({ onDone }: { onDone: () => void }) {
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Display name"
+                placeholder="Unique username"
                 className="rounded-lg border border-edge bg-panel px-3 py-3 text-sm outline-none transition focus:border-pitch focus:ring-2 focus:ring-pitch/20"
               />
             ) : null}
@@ -231,7 +246,7 @@ function AuthPanel({ onDone }: { onDone: () => void }) {
               {busy ? "Working..." : mode === "register" ? "Join pool" : "Sign in"}
             </button>
             <p className="text-center text-[11px] leading-relaxed text-dim">
-              Accounts store only your name, email, encrypted password, champion pick, and match predictions.
+              Accounts store only your username, email, encrypted password, champion pick, and match predictions.
             </p>
           </div>
         </div>
@@ -397,7 +412,12 @@ function Leaderboard({ rows, userId }: { rows: LeaderRow[]; userId?: string }) {
             <p className="text-[11px] uppercase tracking-[0.22em] text-dim">{rankLabel(index)}</p>
             <div className="mt-2 flex items-end justify-between gap-3">
               <div className="min-w-0">
-                <h3 className="truncate font-display text-2xl font-bold uppercase tracking-wide">{row.name}</h3>
+                <Link
+                  href={`/predict/${row.userId}`}
+                  className="block truncate font-display text-2xl font-bold uppercase tracking-wide hover:text-pitch"
+                >
+                  {row.name}
+                </Link>
                 <p className="mt-1 text-xs text-dim">
                   {row.picked} picks / {row.exact} exact / {row.correct} correct
                 </p>
@@ -419,8 +439,10 @@ function Leaderboard({ rows, userId }: { rows: LeaderRow[]; userId?: string }) {
             }`}
           >
             <span className="font-mono text-dim">#{index + 1}</span>
-            <span className="min-w-0">
-              <span className="block truncate font-semibold">{row.name}</span>
+              <span className="min-w-0">
+              <Link href={`/predict/${row.userId}`} className="block truncate font-semibold hover:text-pitch">
+                {row.name}
+              </Link>
               <span className="text-[11px] text-dim">
                 {row.picked} picks · {row.correct} correct · {row.exact} exact
                 {row.champion ? ` · champion ${row.champion}` : ""}
@@ -435,6 +457,88 @@ function Leaderboard({ rows, userId }: { rows: LeaderRow[]; userId?: string }) {
   );
 }
 
+function MatchPredictionBoard({
+  matches,
+  selectedMatchId,
+  onSelect,
+}: {
+  matches: Match[];
+  selectedMatchId: string;
+  onSelect: (id: string) => void;
+}) {
+  const selected = matches.find((match) => match.id === selectedMatchId) ?? matches[0];
+  const { data, isLoading } = useSWR<MatchPredictionsPayload>(
+    selected ? `/api/pool/match/${selected.id}/predictions` : null,
+    jsonFetcher,
+    { refreshInterval: 30_000 },
+  );
+
+  if (!matches.length) {
+    return <EmptyState title="No matches are ready for pool picks yet." description="Once fixtures are available, everyone's picks will appear here." />;
+  }
+
+  return (
+    <section className="grid gap-4">
+      <div className="rounded-xl border border-edge bg-panel p-4">
+        <label className="flex flex-col gap-1 text-xs text-dim">
+          View everyone&apos;s picks for
+          <select
+            value={selected?.id ?? ""}
+            onChange={(e) => onSelect(e.target.value)}
+            className="rounded-lg border border-edge bg-panel2 px-3 py-3 text-sm text-ink outline-none transition focus:border-pitch focus:ring-2 focus:ring-pitch/20"
+          >
+            {matches.map((match) => (
+              <option key={match.id} value={match.id}>
+                {(match.homeTeam?.code ?? match.homeLabel ?? "Home")} vs {(match.awayTeam?.code ?? match.awayLabel ?? "Away")} -{" "}
+                {match.group ? `Group ${match.group}` : match.stage.replace(/_/g, " ")}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
+      {isLoading || !data ? (
+        <div className="skeleton h-48 rounded-xl" aria-hidden />
+      ) : data.rows.length ? (
+        <div className="grid gap-3 lg:grid-cols-2">
+          {data.rows.map((row) => (
+            <article key={row.userId} className="rounded-xl border border-edge bg-panel p-3">
+              <div className="flex items-start justify-between gap-3">
+                <Link href={`/predict/${row.userId}`} className="min-w-0 truncate font-semibold hover:text-pitch">
+                  {row.name}
+                </Link>
+                <span className="rounded-full border border-gold/40 bg-gold/10 px-2 py-0.5 font-mono text-xs text-gold">
+                  {row.points} pts
+                </span>
+              </div>
+              <div className="mt-3 flex items-center justify-between gap-3">
+                <span className="text-xs text-dim">{selected?.homeTeam?.code ?? "Home"}</span>
+                <span className="rounded-lg border border-edge bg-navy px-4 py-2 font-mono text-xl font-bold">
+                  {row.pick.home}-{row.pick.away}
+                </span>
+                <span className="text-xs text-dim">{selected?.awayTeam?.code ?? "Away"}</span>
+              </div>
+              <p className="mt-2 text-xs text-dim">
+                {row.pick.outcome === "DRAW"
+                  ? "Draw"
+                  : row.pick.outcome === "HOME"
+                    ? `${selected?.homeTeam?.code ?? "Home"} win`
+                    : `${selected?.awayTeam?.code ?? "Away"} win`}
+                {row.exact ? " / exact score" : row.correctResult ? " / correct result" : ""}
+              </p>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <EmptyState
+          title="No one has picked this match yet."
+          description="Once coworkers save a scoreline for this fixture, their predictions will show up here."
+        />
+      )}
+    </section>
+  );
+}
+
 export function PickemClient() {
   const { data: matchData } = useSWR<Sourced<Match[]>>("/api/matches", jsonFetcher);
   const { data: predData, mutate: mutatePreds } = useSWR<PredictionsPayload>("/api/predictions", jsonFetcher);
@@ -444,6 +548,7 @@ export function PickemClient() {
   const [drafts, setDrafts] = useState<Record<string, MatchPick>>({});
   const [champion, setChampion] = useState("");
   const [view, setView] = useState<View>("open");
+  const [selectedMatchId, setSelectedMatchId] = useState("");
   const [status, setStatus] = useState<"idle" | "saving" | "saved" | "error">("idle");
   const [notice, setNotice] = useState<string | null>(null);
 
@@ -500,6 +605,13 @@ export function PickemClient() {
         .sort((a, b) => +new Date(a.utcDate) - +new Date(b.utcDate)),
     [matches],
   );
+  const pickableMatches = useMemo(
+    () =>
+      matches
+        .filter((match) => match.homeTeam?.code && match.awayTeam?.code)
+        .sort((a, b) => +new Date(a.utcDate) - +new Date(b.utcDate)),
+    [matches],
+  );
   const myMatches = useMemo(
     () =>
       matches
@@ -507,6 +619,10 @@ export function PickemClient() {
         .sort((a, b) => +new Date(a.utcDate) - +new Date(b.utcDate)),
     [matches, drafts],
   );
+
+  useEffect(() => {
+    if (!selectedMatchId && pickableMatches[0]) setSelectedMatchId(pickableMatches[0].id);
+  }, [pickableMatches, selectedMatchId]);
 
   if (predData?.enabled === false) {
     return (
@@ -604,6 +720,7 @@ export function PickemClient() {
         {[
           ["open", `Open picks (${openMatches.length})`],
           ["mine", `My picks (${myMatches.length})`],
+          ["community", "Pool picks"],
           ["leaderboard", "Leaderboard"],
           ["rules", "Rules"],
         ].map(([key, label]) => (
@@ -622,6 +739,12 @@ export function PickemClient() {
 
       {view === "leaderboard" ? (
         <Leaderboard rows={board} userId={user.id} />
+      ) : view === "community" ? (
+        <MatchPredictionBoard
+          matches={pickableMatches}
+          selectedMatchId={selectedMatchId}
+          onSelect={setSelectedMatchId}
+        />
       ) : view === "rules" ? (
         <section className="rounded-xl border border-edge bg-panel p-4 text-sm text-dim">
           <h2 className="font-display text-xl font-bold uppercase text-ink">Scoring Rules</h2>
