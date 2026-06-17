@@ -5,6 +5,9 @@ import { AssistsLeaderboard } from "@/components/AssistsLeaderboard";
 import { CleanSheetsBoard } from "@/components/CleanSheetsBoard";
 import { DebutWatch } from "@/components/DebutWatch";
 import { EliminationWatch } from "@/components/EliminationWatch";
+import { FifaRankingsTable } from "@/components/FifaRankingsTable";
+import { GiantKillingWall } from "@/components/GiantKillingWall";
+import { TravelDistanceChart } from "@/components/TravelDistanceChart";
 import { GoldenBootRaceChart } from "@/components/GoldenBootRaceChart";
 import { GroupScenarios } from "@/components/GroupScenarios";
 import { GroupStandingsTable } from "@/components/GroupStandingsTable";
@@ -16,6 +19,7 @@ import { SuspensionTracker } from "@/components/SuspensionTracker";
 import { TopScorers } from "@/components/TopScorers";
 import { getAllMatches, getScorers, getStandings } from "@/lib/data";
 import { getQualificationScenarios } from "@/lib/qualification";
+import { STADIUMS } from "@/lib/schedule";
 
 const GroupStageSimulator = nextDynamic(
   () => import("@/components/GroupStageSimulator").then((m) => m.GroupStageSimulator),
@@ -87,6 +91,20 @@ async function SimulatorSection() {
   return <GroupStageSimulator groups={standings.data} matches={all.data} />;
 }
 
+function FifaRankings() {
+  return <FifaRankingsTable />;
+}
+
+async function TravelStats() {
+  const all = await getAllMatches();
+  return <TravelDistanceChart matches={all.data} stadiums={STADIUMS} />;
+}
+
+async function UpsetWatch() {
+  const all = await getAllMatches();
+  return <GiantKillingWall matches={all.data} />;
+}
+
 export default function StandingsPage() {
   return (
     <div className="mx-auto max-w-shell px-4 py-8">
@@ -106,6 +124,13 @@ export default function StandingsPage() {
         </li>
       </ul>
 
+      <section className="mb-12" aria-label="FIFA World Rankings">
+        <SectionHeader title="FIFA World Rankings" right="June 2026" />
+        <Suspense fallback={<div className="skeleton h-64 w-full" aria-hidden />}>
+          <FifaRankings />
+        </Suspense>
+      </section>
+
       <Suspense fallback={<div className="grid gap-5 md:grid-cols-2">{[0, 1, 2, 3].map((i) => <div key={i} className="skeleton h-48" aria-hidden />)}</div>}>
         <GroupTables />
       </Suspense>
@@ -114,6 +139,13 @@ export default function StandingsPage() {
         <SectionHeader title="Who's Going Through?" right="points-based projection · GD can still decide ties" />
         <Suspense fallback={<div className="skeleton h-64 w-full" aria-hidden />}>
           <Scenarios />
+        </Suspense>
+      </section>
+
+      <section className="mt-12" aria-label="Travel distance">
+        <SectionHeader title="Travel Distance" right="total km traveled per team" />
+        <Suspense fallback={<div className="skeleton h-64 w-full" aria-hidden />}>
+          <TravelStats />
         </Suspense>
       </section>
 
@@ -185,6 +217,13 @@ export default function StandingsPage() {
         <div className="rounded-xl border border-edge bg-panel px-4 py-4">
           <DebutWatch />
         </div>
+      </section>
+
+      <section className="mt-12" aria-label="Upset watch">
+        <SectionHeader title="Upset Watch" right="biggest shocks of the tournament" />
+        <Suspense fallback={<div className="skeleton h-64 w-full" aria-hidden />}>
+          <UpsetWatch />
+        </Suspense>
       </section>
     </div>
   );

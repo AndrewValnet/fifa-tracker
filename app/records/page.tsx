@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { AllTimeRecords } from "@/components/AllTimeRecords";
+import { PenaltyShootoutHistory } from "@/components/PenaltyShootoutHistory";
+import { SquadMarketValues } from "@/components/SquadMarketValues";
 import { TvSchedule } from "@/components/TvSchedule";
 import { DebutWatch } from "@/components/DebutWatch";
 import { WcTrophyCabinet } from "@/components/WcTrophyCabinet";
@@ -31,6 +34,22 @@ export default function RecordsPage() {
         <SectionHeader title="All-Time Records" right="1930 – 2022 · 22 tournaments" />
         <div className="rounded-xl border border-edge bg-panel px-4 py-5">
           <AllTimeRecords />
+        </div>
+      </section>
+
+      {/* Squad Market Values */}
+      <section className="mb-12" aria-label="Squad market values">
+        <SectionHeader title="Squad Market Values" right="estimated transfer values" />
+        <Suspense fallback={<div className="rounded-xl border border-edge bg-panel px-4 py-5 h-40 animate-pulse" />}>
+          <SquadMarketValues />
+        </Suspense>
+      </section>
+
+      {/* Penalty Shootout Records */}
+      <section className="mb-12" aria-label="Penalty shootout records">
+        <SectionHeader title="Penalty Shootout Records" right="all-time WC history" />
+        <div className="rounded-xl border border-edge bg-panel px-4 py-5">
+          <PenaltyShootoutHistory />
         </div>
       </section>
 

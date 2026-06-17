@@ -28,6 +28,7 @@ import {
 import { LocalTime } from "@/components/LocalTime";
 import { MatchNotificationSettings } from "@/components/MatchNotificationSettings";
 import { MatchPredictionWidget } from "@/components/MatchPredictionWidget";
+import { MatchDominanceChart } from "@/components/MatchDominanceChart";
 import { MatchStatsPanel } from "@/components/MatchStatsPanel";
 import { ReactionsBar } from "@/components/ReactionsBar";
 import { Scoreboard } from "@/components/Scoreboard";
@@ -73,6 +74,7 @@ const WinProbGraph = dynamic(() => import("@/components/WinProbGraph").then((m) 
   loading: () => <div className="skeleton h-56 w-full rounded-xl" aria-hidden />,
 });
 const MatchBanterBoard = dynamic(() => import("@/components/MatchBanterBoard").then((m) => m.MatchBanterBoard), { ssr: false });
+const MatchMomentumGraph = dynamic(() => import("@/components/MatchMomentumGraph").then((m) => m.MatchMomentumGraph), { ssr: false });
 
 function TeamHeader({
   match,
@@ -387,6 +389,20 @@ export function MatchView({
                 </Card>
               ) : null}
 
+              {(kind === "live" || kind === "finished") ? (
+                <section aria-label="Match momentum">
+                  <SectionHeader title="Match Momentum" />
+                  <MatchMomentumGraph
+                    events={match.events ?? []}
+                    homeCode={match.homeTeam?.code ?? null}
+                    awayCode={match.awayTeam?.code ?? null}
+                    homeScore={match.score?.home ?? null}
+                    awayScore={match.score?.away ?? null}
+                    isLive={statusKind(match.status) === "live"}
+                  />
+                </section>
+              ) : null}
+
               {kind !== "upcoming" ? <WinProbGraph match={match} /> : null}
 
               {confirmedLineups ? (
@@ -483,6 +499,19 @@ export function MatchView({
                   />
                 )}
               </Card>
+
+              {extras?.stats ? (
+                <Card title="Possession &amp; Shots">
+                  <MatchDominanceChart
+                    homeStats={extras.stats.home}
+                    awayStats={extras.stats.away}
+                    homeScore={match.score?.home ?? null}
+                    awayScore={match.score?.away ?? null}
+                    homeCode={match.homeTeam?.code ?? null}
+                    awayCode={match.awayTeam?.code ?? null}
+                  />
+                </Card>
+              ) : null}
 
               {homeStats && awayStats ? (
                 <Card id="tournament-form" title="Tournament Form">

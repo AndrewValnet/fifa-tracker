@@ -8,7 +8,10 @@ import { OwnGoalsFeed } from "@/components/OwnGoalsFeed";
 import { FastestGoals } from "@/components/FastestGoals";
 import { PenaltyTracker } from "@/components/PenaltyTracker";
 import { getInsights } from "@/lib/insights";
-import { getAllMatches } from "@/lib/data";
+import { getAllMatches, getScorers, getStandings } from "@/lib/data";
+import { UnderdogStats } from "@/components/UnderdogStats";
+import { GoalkeeperRatings } from "@/components/GoalkeeperRatings";
+import { PenaltyShootoutHistory } from "@/components/PenaltyShootoutHistory";
 import { fmtNumber, fmtPct, fmtUsdCompact } from "@/lib/format";
 import { GoalMinuteHeatmap } from "@/components/GoalMinuteHeatmap";
 
@@ -277,6 +280,22 @@ async function InsightsBody() {
         </Card>
       </div>
 
+      {/* ---- Fan Stats ---- */}
+      <h2 className="mt-10 font-display text-xl font-semibold uppercase tracking-wider text-dim">📊 Fan Stats</h2>
+      <div className="mt-3">
+        <Suspense fallback={<div className="skeleton h-48 rounded-xl" />}>
+          <UnderdogSection />
+        </Suspense>
+      </div>
+
+      {/* ---- Golden Glove Race ---- */}
+      <h2 className="mt-10 font-display text-xl font-semibold uppercase tracking-wider text-dim">🧤 Golden Glove Race</h2>
+      <div className="mt-3">
+        <Suspense fallback={<div className="skeleton h-48 rounded-xl" />}>
+          <GoalkeeperSection />
+        </Suspense>
+      </div>
+
       {/* ---- Cheeky estimates ---- */}
       <h2 className="mt-10 font-display text-xl font-semibold uppercase tracking-wider text-dim">
         🌶️ Cheeky Estimates{" "}
@@ -331,12 +350,41 @@ async function InsightsBody() {
         </Suspense>
       </div>
 
+      {/* ---- Penalty Shootout Records ---- */}
+      <h2 className="mt-10 font-display text-xl font-semibold uppercase tracking-wider text-dim">🥅 Penalty Shootout Records</h2>
+      <div className="mt-3">
+        <section className="rounded-xl border border-edge bg-panel/80 p-4">
+          <SectionHeader title="Penalty Shootout Records" right="all-time WC shootout history" />
+          <PenaltyShootoutHistory />
+        </section>
+      </div>
+
       <p className="mt-8 text-[10px] leading-snug text-dim">
         Money figures from Polymarket public market data (volume / open interest). Match stats, attendance and fouls from
         ESPN&apos;s public feed. Estimates labeled <span className="uppercase">est.</span> are transparent models, not official
         figures — see each card&apos;s note. Cached ~10 minutes.
       </p>
     </>
+  );
+}
+
+async function UnderdogSection() {
+  const [scorers, standings] = await Promise.all([getScorers(), getStandings()]);
+  return (
+    <section className="rounded-xl border border-edge bg-panel/80 p-4">
+      <SectionHeader title="Fan Stats" right="adjusted for population & expectations" />
+      <UnderdogStats scorers={scorers.data} standings={standings.data} />
+    </section>
+  );
+}
+
+async function GoalkeeperSection() {
+  const allMatches = await getAllMatches();
+  return (
+    <section className="rounded-xl border border-edge bg-panel/80 p-4">
+      <SectionHeader title="Golden Glove Race" right="saves, clean sheets, goals conceded" />
+      <GoalkeeperRatings matches={allMatches.data} />
+    </section>
   );
 }
 

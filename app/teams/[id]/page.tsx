@@ -9,12 +9,14 @@ import { OddsBar } from "@/components/OddsBar";
 import { RouteToFinal } from "@/components/RouteToFinal";
 import { SectionHeader } from "@/components/SectionHeader";
 import { SourceTag } from "@/components/SourceTag";
+import { SquadAgePyramid } from "@/components/SquadAgePyramid";
 import { SquadSection } from "@/components/SquadSection";
 import { TeamColorProvider } from "@/components/TeamColorProvider";
 import { TeamFinancePanel } from "@/components/TeamFinancePanel";
 import { WcHistoryPanel } from "@/components/WcHistoryPanel";
 import { getScorers, getStandings, getTeamDetail, getTeamHub, getTeamMatches, getTeamStats } from "@/lib/data";
 import { fmtPct, statusKind } from "@/lib/format";
+import { SQUAD_VALUES } from "@/data/squad-market-values";
 import { getAccentColor } from "@/lib/team-meta";
 import { getTeamHistory } from "@/lib/wc-history";
 
@@ -108,6 +110,16 @@ export default async function TeamPage({ params }: { params: { id: string } }) {
   const topScorer = teamScorers[0];
   const topAssist = [...teamScorers].sort((a, b) => (b.assists ?? 0) - (a.assists ?? 0)).find((s) => (s.assists ?? 0) > 0);
 
+  // Squad market value
+  const squadValue = code ? SQUAD_VALUES.find((v) => v.code === code) : null;
+
+  // Squad age pyramid players
+  const agePyramidPlayers = (hub?.roster ?? []).map((p) => ({
+    name: p.name,
+    age: p.age ?? null,
+    positionAbbr: p.positionAbbr ?? null,
+  }));
+
   return (
     <div
       className="min-h-dvh"
@@ -180,7 +192,7 @@ export default async function TeamPage({ params }: { params: { id: string } }) {
         ) : null}
 
         {/* ── Scorers / top performers from this team ── */}
-        {(topScorer || topAssist) ? (
+        {(topScorer || topAssist || squadValue) ? (
           <section className="mt-6 flex flex-wrap gap-3" aria-label="Top performers">
             {topScorer && topScorer.goals > 0 ? (
               <div className="rounded-xl border border-edge bg-panel px-4 py-3">
@@ -198,6 +210,13 @@ export default async function TeamPage({ params }: { params: { id: string } }) {
                   {topAssist.player}
                   <span className="ml-2 font-mono text-pitch">{topAssist.assists} 🅰️</span>
                 </p>
+              </div>
+            ) : null}
+            {squadValue ? (
+              <div className="rounded-xl border border-edge bg-panel p-4">
+                <p className="text-[10px] uppercase tracking-widest text-dim">Squad Value</p>
+                <p className="font-display text-2xl font-bold text-gold">€{squadValue.totalValueM}M</p>
+                <p className="text-xs text-dim">Most valuable: {squadValue.mostValuablePlayer}</p>
               </div>
             ) : null}
           </section>
@@ -281,6 +300,14 @@ export default async function TeamPage({ params }: { params: { id: string } }) {
             </div>
           </section>
         </div>
+
+        {/* ── Squad Age Pyramid ── */}
+        {agePyramidPlayers.length > 0 ? (
+          <section className="mt-10" aria-label="Squad age profile">
+            <SectionHeader title="Squad Profile" right="age distribution" />
+            <SquadAgePyramid players={agePyramidPlayers} teamCode={code ?? ""} />
+          </section>
+        ) : null}
 
         {/* ── Group table for context ── */}
         {groupTable ? (
