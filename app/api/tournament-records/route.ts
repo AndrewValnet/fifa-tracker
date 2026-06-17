@@ -1,8 +1,7 @@
 // Derived tournament records from live match events:
 // hat-tricks, own goals, fastest goals, clean sheets.
 import { NextResponse } from "next/server";
-import { getAllMatches } from "@/lib/data";
-import { statusKind } from "@/lib/format";
+import { getFinishedMatchesWithEvents } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -70,8 +69,7 @@ function parseMin(raw: string | null): number {
 }
 
 export async function GET() {
-  const all = await getAllMatches();
-  const finished = all.data.filter((m) => statusKind(m.status) === "finished");
+  const finished = await getFinishedMatchesWithEvents();
 
   const hatTricks: HatTrick[] = [];
   const ownGoals: OwnGoal[] = [];

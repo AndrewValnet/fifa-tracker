@@ -189,6 +189,7 @@ function teamStatsFrom(stats: RawStat[] | undefined): TeamMatchStats {
     possession: get("possessionPct"),
     shots: get("totalShots"),
     shotsOnTarget: get("shotsOnTarget"),
+    blockedShots: get("blockedShots"),
     passes: get("totalPasses"),
     accuratePasses: get("accuratePasses"),
     corners: get("wonCorners"),

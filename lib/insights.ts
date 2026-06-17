@@ -251,12 +251,13 @@ export async function getInsights(): Promise<InsightsData> {
       .sort((a, b) => b.ratio - a.ratio)
       .slice(0, 10);
 
-    // clutch index — late goals across ALL played matches (events only, cheap)
+    // clutch index — late goals from ESPN timeline (worldcup26 events unreliable)
     const goalAgg = new Map<string, { goals: number; late: number }>();
-    for (const m of finished) {
-      for (const ev of m.events) {
+    for (const g of gathered) {
+      const evs = g.extras?.timeline?.length ? g.extras.timeline : g.match.events;
+      for (const ev of evs) {
         if (ev.type !== "GOAL") continue;
-        const code = (ev.side === "HOME" ? m.homeTeam : m.awayTeam)?.code;
+        const code = (ev.side === "HOME" ? g.match.homeTeam : g.match.awayTeam)?.code;
         if (!code) continue;
         let e = goalAgg.get(code);
         if (!e) {

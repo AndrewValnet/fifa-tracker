@@ -616,6 +616,34 @@ export function scheduleSize(): number {
   return SCHEDULE.length;
 }
 
+/**
+ * Finished matches with events populated from ESPN timeline where native
+ * events are absent. worldcup26.ir is unreachable from some hosts; ESPN is
+ * the reliable fallback for goal/card events on finished matches.
+ */
+export const getFinishedMatchesWithEvents = cache(async (): Promise<Match[]> => {
+  return cached("finished-with-events", 5 * 60_000, async () => {
+    const all = await getAllMatches();
+    const finished = all.data.filter((m) => statusKind(m.status) === "finished");
+
+    const noEvents = finished.filter((m) => !m.events.length);
+    if (!noEvents.length) return finished;
+
+    const espnMap = new Map<string, MatchExtras>();
+    await mapLimit(noEvents, 6, async (m) => {
+      const ex = await extrasForMatch(m).catch(() => null);
+      if (ex?.timeline?.length) espnMap.set(m.id, ex);
+    });
+
+    return finished.map((m) => {
+      if (m.events.length) return m;
+      const ex = espnMap.get(m.id);
+      if (!ex?.timeline?.length) return m;
+      return { ...m, events: ex.timeline };
+    });
+  });
+});
+
 // Avoid log spam: remember the last message per channel for 5 minutes.
 const lastLog = new Map<string, number>();
 function logOnce(channel: string, err: unknown): void {

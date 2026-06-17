@@ -211,6 +211,7 @@ export interface TeamMatchStats {
   possession: number | null; // percent 0..100
   shots: number | null;
   shotsOnTarget: number | null;
+  blockedShots: number | null;
   passes: number | null;
   accuratePasses: number | null;
   corners: number | null;
