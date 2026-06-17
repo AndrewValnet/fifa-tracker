@@ -126,13 +126,19 @@ export async function getLiveMatches(): Promise<Sourced<Match[]>> {
     const live = await fdGetMatches("LIVE");
     const withEvents = await overlayWc26Events(live);
     // ESPN scoreboard updates faster than football-data (~8 s vs ~10 s cache).
-    // Overlay ESPN scores to ensure the ticker stays accurate during live matches.
+    // Overlay ESPN scores and clock to ensure the ticker stays accurate during live matches.
     const espnScores = await espnLiveScoreMap().catch(() => new Map());
     const corrected = withEvents.map((m) => {
       if (!m.homeTeam?.code || !m.awayTeam?.code) return m;
       const espn = espnScores.get(`${m.homeTeam.code}:${m.awayTeam.code}`);
       if (!espn) return m;
-      return { ...m, score: { ...m.score, home: espn.homeScore, away: espn.awayScore } };
+      // Parse "56:00" → 56  (ESPN elapsed clock format)
+      const espnMinute = espn.clock ? parseInt(espn.clock, 10) || null : null;
+      return {
+        ...m,
+        score: { ...m.score, home: espn.homeScore, away: espn.awayScore },
+        minute: espnMinute ?? m.minute,
+      };
     });
     return sourced(corrected, "football-data");
   } catch (err) {
