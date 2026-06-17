@@ -53,14 +53,39 @@ body {
 /* Stadium-at-night hero backdrop: subtle pitch stripes + floodlight glow */
 .pitch-bg {
   background-image:
-    radial-gradient(1200px 500px at 50% -200px, rgba(0, 212, 94, 0.16), transparent 65%),
+    radial-gradient(1200px 500px at 50% -200px, rgba(0, 212, 94, 0.18), transparent 65%),
     repeating-linear-gradient(
       90deg,
-      rgba(0, 212, 94, 0.035) 0px,
-      rgba(0, 212, 94, 0.035) 56px,
-      rgba(0, 212, 94, 0.012) 56px,
-      rgba(0, 212, 94, 0.012) 112px
+      rgba(0, 212, 94, 0.04) 0px,
+      rgba(0, 212, 94, 0.04) 56px,
+      rgba(0, 212, 94, 0.014) 56px,
+      rgba(0, 212, 94, 0.014) 112px
     );
+}
+
+/* Horizontal grass stripes like a real stadium pitch */
+.pitch-horizontal {
+  background-image:
+    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(0, 212, 94, 0.12), transparent 70%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 212, 94, 0.04) 0px,
+      rgba(0, 212, 94, 0.04) 48px,
+      rgba(0, 212, 94, 0.012) 48px,
+      rgba(0, 212, 94, 0.012) 96px
+    );
+}
+
+/* Football hexagon panel watermark (pure CSS, no image) */
+.football-hex {
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0, 212, 94, 0.1), transparent 70%),
+    radial-gradient(circle 1px at 0 0, rgba(255,255,255,0.06) 1px, transparent 0),
+    radial-gradient(circle 1px at 20px 0, rgba(255,255,255,0.03) 1px, transparent 0),
+    radial-gradient(circle 1px at 40px 0, rgba(255,255,255,0.06) 1px, transparent 0),
+    radial-gradient(circle 1px at 10px 17px, rgba(255,255,255,0.06) 1px, transparent 0),
+    radial-gradient(circle 1px at 30px 17px, rgba(255,255,255,0.06) 1px, transparent 0);
+  background-size: 40px 34px;
 }
 
 .team-gradient {
@@ -174,6 +199,58 @@ body {
 .formation-node:focus circle {
   stroke: var(--gold);
   stroke-width: 3.5;
+}
+
+/* Score stepper button hover */
+.score-stepper {
+  transition: background 0.12s, transform 0.1s;
+}
+.score-stepper:hover:not(:disabled) {
+  background: rgba(0, 212, 94, 0.18);
+  transform: scale(1.12);
+}
+.score-stepper:active:not(:disabled) {
+  transform: scale(0.92);
+}
+
+/* Net-shake: plays when a match pick is saved */
+@keyframes net-shake {
+  0%   { transform: scaleY(1) scaleX(1); }
+  15%  { transform: scaleY(1.05) scaleX(1.03) translateY(-3px); }
+  35%  { transform: scaleY(0.97) scaleX(1.01); }
+  55%  { transform: scaleY(1.02) scaleX(1.02); }
+  100% { transform: scaleY(1) scaleX(1); }
+}
+.animate-net-shake {
+  animation: net-shake 0.55s ease-out;
+}
+
+/* Slide-up entrance for list items */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out both;
+}
+
+/* Gold crown pulse for leaderboard leader */
+@keyframes crown-glow {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.6)); }
+  50%       { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.9)); }
+}
+.animate-crown-glow {
+  animation: crown-glow 2.2s ease-in-out infinite;
+}
+
+/* Prediction card highlight when saved */
+@keyframes pick-flash {
+  0%   { box-shadow: 0 0 0 0 rgba(0, 212, 94, 0.5); }
+  60%  { box-shadow: 0 0 0 6px rgba(0, 212, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 212, 94, 0); }
+}
+.animate-pick-flash {
+  animation: pick-flash 0.7s ease-out;
 }
 
 /* Accessibility: kill all motion on request (PRD §8.5) */

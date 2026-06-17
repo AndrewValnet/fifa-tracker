@@ -66,8 +66,11 @@ export async function ensurePoolSchema(): Promise<void> {
           name text not null,
           password_hash text not null,
           champion_code text,
+          golden_ball_code text,
           created_at timestamptz not null default now()
         );
+
+        alter table pool_users add column if not exists golden_ball_code text;
 
         create table if not exists pool_sessions (
           token text primary key,
