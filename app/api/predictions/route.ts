@@ -12,10 +12,10 @@ export async function GET() {
     return NextResponse.json({ enabled: false, user: null, picks: {}, champion: null, score: null });
   }
   if (!user) {
-    return NextResponse.json({ enabled: true, user: null, picks: {}, champion: null, score: null });
+    return NextResponse.json({ enabled: true, user: null, picks: {}, champion: null, goldenBall: null, score: null });
   }
 
-  const player = (await getPlayer(user.id)) ?? { picks: {}, champion: null };
+  const player = (await getPlayer(user.id)) ?? { picks: {}, champion: null, goldenBall: null };
   const matches = (await getAllMatches()).data;
   const score = scorePredictions(player, matches);
   return NextResponse.json(
@@ -29,7 +29,7 @@ export async function POST(req: Request) {
   const user = await currentUser();
   if (!user) return NextResponse.json({ enabled: true, ok: false, error: "Sign in to save predictions." }, { status: 401 });
 
-  let body: { champion?: string | null; picks?: Record<string, unknown> } = {};
+  let body: { champion?: string | null; goldenBall?: string | null; picks?: Record<string, unknown> } = {};
   try {
     body = await req.json();
   } catch {

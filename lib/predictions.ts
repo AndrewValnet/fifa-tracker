@@ -7,11 +7,13 @@
 //   3 correct result
 //   1 correct team goals OR opponent goals
 //   +25 champion bonus
+//   +15 ballon d'or / golden ball bonus (set via WC26_GOLDEN_BALL env var)
 
 import { getAllMatches } from "@/lib/data";
 import { getUserById } from "@/lib/accounts";
 import { poolDbEnabled, poolQuery } from "@/lib/pool-db";
 import { redis, redisEnabled, redisPipe, sanitizeKey } from "@/lib/redis";
+import { goldenBallWinner, GOLDEN_BALL_BONUS } from "@/data/ballon-dor-candidates";
 import type { Match } from "@/lib/types";
 
 export const CHAMPION_BONUS = 25;
@@ -33,6 +35,7 @@ export interface MatchPick {
 export interface PlayerPredictions {
   picks: Record<string, MatchPick>;
   champion: string | null;
+  goldenBall: string | null;
 }
 
 export interface PickScore {
@@ -52,6 +55,8 @@ export interface PlayerScore {
   picked: number;
   champion: string | null;
   championHit: boolean;
+  goldenBall: string | null;
+  goldenBallHit: boolean;
 }
 
 export interface PublicMatchPrediction {
@@ -67,6 +72,7 @@ export interface PublicProfile {
   userId: string;
   name: string;
   champion: string | null;
+  goldenBall: string | null;
   score: ReturnType<typeof scorePredictions>;
   picks: {
     match: Match;
@@ -96,12 +102,14 @@ interface LeaderPickRow extends PickRow {
   user_id: string;
   name: string;
   champion_code: string | null;
+  golden_ball_code: string | null;
 }
 
 interface PublicUserRow {
   id: string;
   name: string;
   champion_code: string | null;
+  golden_ball_code: string | null;
 }
 
 function picksKey(userId: string): string {
@@ -110,6 +118,10 @@ function picksKey(userId: string): string {
 
 function championKey(userId: string): string {
   return `pool:champion:${sanitizeKey(userId)}`;
+}
+
+function goldenBallKey(userId: string): string {
+  return `pool:goldenball:${sanitizeKey(userId)}`;
 }
 
 export function predictionsEnabled(): boolean {
@@ -164,124 +176,11 @@ export function normalizePick(input: unknown): MatchPick | null {
   if (home < 0 || home > 30 || away < 0 || away > 30) return null;
   const implied = outcomeFor(home, away);
   const outcome = raw.outcome === "HOME" || raw.outcome === "DRAW" || raw.outcome === "AWAY" ? raw.outcome : implied;
-  return {
-    outcome,
-    home,
-    away,
-    updatedAt: new Date().toISOString(),
-  };
+  return { outcome, home, away, updatedAt: new Date().toISOString() };
 }
 
 export function isLocked(match: Match, now = Date.now()): boolean {
   return match.status !== "SCHEDULED" && match.status !== "TIMED" ? true : new Date(match.utcDate).getTime() <= now;
-}
-
-export async function savePredictions(
-  userId: string,
-  data: { champion?: string | null; picks?: Record<string, unknown> },
-): Promise<{ ok: boolean; saved: number; skippedLocked: string[] }> {
-  if (!predictionsEnabled()) return { ok: false, saved: 0, skippedLocked: [] };
-  const uid = sanitizeKey(userId);
-  if (!uid) return { ok: false, saved: 0, skippedLocked: [] };
-
-  const matches = (await getAllMatches()).data;
-  const byId = new Map(matches.map((match) => [match.id, match]));
-  const skippedLocked: string[] = [];
-  let saved = 0;
-
-  if (poolDbEnabled()) {
-    if (data.champion !== undefined) {
-      const champion = sanitizeKey(data.champion ?? "").slice(0, 8) || null;
-      await poolQuery("update pool_users set champion_code = $1 where id = $2", [champion, uid]);
-    }
-
-    if (data.picks) {
-      for (const [matchId, raw] of Object.entries(data.picks)) {
-        const id = sanitizeKey(matchId);
-        const match = byId.get(id);
-        const pick = normalizePick(raw);
-        if (!id || !match || !pick) continue;
-        if (isLocked(match)) {
-          skippedLocked.push(id);
-          continue;
-        }
-        await poolQuery(
-          `insert into pool_picks (user_id, match_id, outcome, home_goals, away_goals, updated_at)
-           values ($1, $2, $3, $4, $5, $6)
-           on conflict (user_id, match_id)
-           do update set
-             outcome = excluded.outcome,
-             home_goals = excluded.home_goals,
-             away_goals = excluded.away_goals,
-             updated_at = excluded.updated_at`,
-          [uid, id, pick.outcome, pick.home, pick.away, pick.updatedAt],
-        );
-        saved++;
-      }
-    }
-
-    return { ok: true, saved, skippedLocked };
-  }
-
-  const cmds: (string | number)[][] = [["SADD", "pool:users", uid]];
-
-  if (data.champion !== undefined) {
-    const champion = sanitizeKey(data.champion ?? "").slice(0, 8);
-    if (champion) cmds.push(["SET", championKey(uid), champion]);
-    else cmds.push(["DEL", championKey(uid)]);
-  }
-
-  if (data.picks) {
-    const hset: (string | number)[] = ["HSET", picksKey(uid)];
-    for (const [matchId, raw] of Object.entries(data.picks)) {
-      const id = sanitizeKey(matchId);
-      const match = byId.get(id);
-      const pick = normalizePick(raw);
-      if (!id || !match || !pick) continue;
-      if (isLocked(match)) {
-        skippedLocked.push(id);
-        continue;
-      }
-      hset.push(id, JSON.stringify(pick));
-      saved++;
-    }
-    if (hset.length > 1) cmds.push(hset);
-  }
-
-  if (cmds.length === 1 && !saved) return { ok: true, saved, skippedLocked };
-  const ok = (await redisPipe(cmds)) != null;
-  return { ok, saved, skippedLocked };
-}
-
-export async function getPlayer(userId: string): Promise<PlayerPredictions | null> {
-  const uid = sanitizeKey(userId);
-  if (!uid) return null;
-  if (poolDbEnabled()) {
-    const [pickRows, userRows] = await Promise.all([
-      poolQuery<PickRow>("select * from pool_picks where user_id = $1", [uid]),
-      poolQuery<{ champion_code: string | null }>("select champion_code from pool_users where id = $1 limit 1", [uid]),
-    ]);
-    const picks: Record<string, MatchPick> = {};
-    for (const row of pickRows.rows) {
-      picks[row.match_id] = {
-        outcome: row.outcome,
-        home: row.home_goals,
-        away: row.away_goals,
-        updatedAt: new Date(row.updated_at).toISOString(),
-      };
-    }
-    return {
-      picks,
-      champion: userRows.rows[0]?.champion_code ?? null,
-    };
-  }
-  if (!redisEnabled()) return null;
-  const res = await redisPipe([["HGETALL", picksKey(uid)], ["GET", championKey(uid)]]);
-  if (!res) return null;
-  return {
-    picks: parsePicks(res[0]),
-    champion: (res[1] as string) ?? null,
-  };
 }
 
 function scoreOne(pick: MatchPick | undefined, match: Match): PickScore {
@@ -323,7 +222,16 @@ export function scorePredictions(
   player: PlayerPredictions,
   matches: Match[],
   winner = championWinner(matches),
-): { points: number; exact: number; correct: number; picked: number; championHit: boolean; byMatch: Record<string, PickScore> } {
+  gbWinner = goldenBallWinner(),
+): {
+  points: number;
+  exact: number;
+  correct: number;
+  picked: number;
+  championHit: boolean;
+  goldenBallHit: boolean;
+  byMatch: Record<string, PickScore>;
+} {
   let points = 0;
   let exact = 0;
   let correct = 0;
@@ -341,13 +249,148 @@ export function scorePredictions(
 
   const championHit = !!winner && player.champion === winner;
   if (championHit) points += CHAMPION_BONUS;
-  return { points, exact, correct, picked: Object.keys(player.picks).length, championHit, byMatch };
+
+  const goldenBallHit = !!gbWinner && player.goldenBall === gbWinner;
+  if (goldenBallHit) points += GOLDEN_BALL_BONUS;
+
+  return { points, exact, correct, picked: Object.keys(player.picks).length, championHit, goldenBallHit, byMatch };
+}
+
+export async function savePredictions(
+  userId: string,
+  data: { champion?: string | null; goldenBall?: string | null; picks?: Record<string, unknown> },
+): Promise<{ ok: boolean; saved: number; skippedLocked: string[] }> {
+  if (!predictionsEnabled()) return { ok: false, saved: 0, skippedLocked: [] };
+  const uid = sanitizeKey(userId);
+  if (!uid) return { ok: false, saved: 0, skippedLocked: [] };
+
+  const matches = (await getAllMatches()).data;
+  const byId = new Map(matches.map((match) => [match.id, match]));
+  const skippedLocked: string[] = [];
+  let saved = 0;
+
+  if (poolDbEnabled()) {
+    if (data.champion !== undefined || data.goldenBall !== undefined) {
+      const champion = data.champion !== undefined ? sanitizeKey(data.champion ?? "").slice(0, 8) || null : undefined;
+      const goldenBall = data.goldenBall !== undefined ? sanitizeKey(data.goldenBall ?? "").slice(0, 32) || null : undefined;
+      if (champion !== undefined && goldenBall !== undefined) {
+        await poolQuery("update pool_users set champion_code = $1, golden_ball_code = $2 where id = $3", [champion, goldenBall, uid]);
+      } else if (champion !== undefined) {
+        await poolQuery("update pool_users set champion_code = $1 where id = $2", [champion, uid]);
+      } else if (goldenBall !== undefined) {
+        await poolQuery("update pool_users set golden_ball_code = $1 where id = $2", [goldenBall, uid]);
+      }
+    }
+
+    if (data.picks) {
+      for (const [matchId, raw] of Object.entries(data.picks)) {
+        const id = sanitizeKey(matchId);
+        const match = byId.get(id);
+        const pick = normalizePick(raw);
+        if (!id || !match || !pick) continue;
+        if (isLocked(match)) {
+          skippedLocked.push(id);
+          continue;
+        }
+        await poolQuery(
+          `insert into pool_picks (user_id, match_id, outcome, home_goals, away_goals, updated_at)
+           values ($1, $2, $3, $4, $5, $6)
+           on conflict (user_id, match_id)
+           do update set
+             outcome = excluded.outcome,
+             home_goals = excluded.home_goals,
+             away_goals = excluded.away_goals,
+             updated_at = excluded.updated_at`,
+          [uid, id, pick.outcome, pick.home, pick.away, pick.updatedAt],
+        );
+        saved++;
+      }
+    }
+
+    return { ok: true, saved, skippedLocked };
+  }
+
+  const cmds: (string | number)[][] = [["SADD", "pool:users", uid]];
+
+  if (data.champion !== undefined) {
+    const champion = sanitizeKey(data.champion ?? "").slice(0, 8);
+    if (champion) cmds.push(["SET", championKey(uid), champion]);
+    else cmds.push(["DEL", championKey(uid)]);
+  }
+
+  if (data.goldenBall !== undefined) {
+    const gb = sanitizeKey(data.goldenBall ?? "").slice(0, 32);
+    if (gb) cmds.push(["SET", goldenBallKey(uid), gb]);
+    else cmds.push(["DEL", goldenBallKey(uid)]);
+  }
+
+  if (data.picks) {
+    const hset: (string | number)[] = ["HSET", picksKey(uid)];
+    for (const [matchId, raw] of Object.entries(data.picks)) {
+      const id = sanitizeKey(matchId);
+      const match = byId.get(id);
+      const pick = normalizePick(raw);
+      if (!id || !match || !pick) continue;
+      if (isLocked(match)) {
+        skippedLocked.push(id);
+        continue;
+      }
+      hset.push(id, JSON.stringify(pick));
+      saved++;
+    }
+    if (hset.length > 1) cmds.push(hset);
+  }
+
+  if (cmds.length === 1 && !saved) return { ok: true, saved, skippedLocked };
+  const ok = (await redisPipe(cmds)) != null;
+  return { ok, saved, skippedLocked };
+}
+
+export async function getPlayer(userId: string): Promise<PlayerPredictions | null> {
+  const uid = sanitizeKey(userId);
+  if (!uid) return null;
+  if (poolDbEnabled()) {
+    const [pickRows, userRows] = await Promise.all([
+      poolQuery<PickRow>("select * from pool_picks where user_id = $1", [uid]),
+      poolQuery<{ champion_code: string | null; golden_ball_code: string | null }>(
+        "select champion_code, golden_ball_code from pool_users where id = $1 limit 1",
+        [uid],
+      ),
+    ]);
+    const picks: Record<string, MatchPick> = {};
+    for (const row of pickRows.rows) {
+      picks[row.match_id] = {
+        outcome: row.outcome,
+        home: row.home_goals,
+        away: row.away_goals,
+        updatedAt: new Date(row.updated_at).toISOString(),
+      };
+    }
+    return {
+      picks,
+      champion: userRows.rows[0]?.champion_code ?? null,
+      goldenBall: userRows.rows[0]?.golden_ball_code ?? null,
+    };
+  }
+  if (!redisEnabled()) return null;
+  const res = await redisPipe([
+    ["HGETALL", picksKey(uid)],
+    ["GET", championKey(uid)],
+    ["GET", goldenBallKey(uid)],
+  ]);
+  if (!res) return null;
+  return {
+    picks: parsePicks(res[0]),
+    champion: (res[1] as string) ?? null,
+    goldenBall: (res[2] as string) ?? null,
+  };
 }
 
 export async function getLeaderboard(): Promise<PlayerScore[]> {
   if (!predictionsEnabled()) return [];
   const matches = await getAllMatches().then((x) => x.data);
   const winner = championWinner(matches);
+  const gbWinner = goldenBallWinner();
   const rows: PlayerScore[] = [];
 
   if (poolDbEnabled()) {
@@ -356,6 +399,7 @@ export async function getLeaderboard(): Promise<PlayerScore[]> {
          u.id as user_id,
          u.name,
          u.champion_code,
+         u.golden_ball_code,
          p.match_id,
          p.outcome,
          p.home_goals,
@@ -367,9 +411,17 @@ export async function getLeaderboard(): Promise<PlayerScore[]> {
        limit $1`,
       [MAX_PLAYERS * 120],
     );
-    const grouped = new Map<string, { name: string; champion: string | null; picks: Record<string, MatchPick> }>();
+    const grouped = new Map<
+      string,
+      { name: string; champion: string | null; goldenBall: string | null; picks: Record<string, MatchPick> }
+    >();
     for (const row of res.rows) {
-      const current = grouped.get(row.user_id) ?? { name: row.name, champion: row.champion_code, picks: {} };
+      const current = grouped.get(row.user_id) ?? {
+        name: row.name,
+        champion: row.champion_code,
+        goldenBall: row.golden_ball_code,
+        picks: {},
+      };
       if (row.match_id) {
         current.picks[row.match_id] = {
           outcome: row.outcome,
@@ -381,7 +433,12 @@ export async function getLeaderboard(): Promise<PlayerScore[]> {
       grouped.set(row.user_id, current);
     }
     for (const [userId, player] of grouped) {
-      const score = scorePredictions({ picks: player.picks, champion: player.champion }, matches, winner);
+      const score = scorePredictions(
+        { picks: player.picks, champion: player.champion, goldenBall: player.goldenBall },
+        matches,
+        winner,
+        gbWinner,
+      );
       rows.push({
         userId,
         name: player.name,
@@ -391,6 +448,8 @@ export async function getLeaderboard(): Promise<PlayerScore[]> {
         picked: score.picked,
         champion: player.champion,
         championHit: score.championHit,
+        goldenBall: player.goldenBall,
+        goldenBallHit: score.goldenBallHit,
       });
     }
     return rows.sort((a, b) => b.points - a.points || b.exact - a.exact || b.correct - a.correct || b.picked - a.picked);
@@ -400,7 +459,9 @@ export async function getLeaderboard(): Promise<PlayerScore[]> {
   if (!players.length) return [];
   const ids = players.slice(0, MAX_PLAYERS);
   const cmds: (string | number)[][] = [];
-  for (const uid of ids) cmds.push(["HGETALL", picksKey(uid)], ["GET", championKey(uid)]);
+  for (const uid of ids) {
+    cmds.push(["HGETALL", picksKey(uid)], ["GET", championKey(uid)], ["GET", goldenBallKey(uid)]);
+  }
 
   const res = await redisPipe(cmds);
   if (!res) return [];
@@ -409,10 +470,11 @@ export async function getLeaderboard(): Promise<PlayerScore[]> {
     const user = await getUserById(ids[i]);
     if (!user) continue;
     const player: PlayerPredictions = {
-      picks: parsePicks(res[i * 2]),
-      champion: (res[i * 2 + 1] as string) ?? null,
+      picks: parsePicks(res[i * 3]),
+      champion: (res[i * 3 + 1] as string) ?? null,
+      goldenBall: (res[i * 3 + 2] as string) ?? null,
     };
-    const score = scorePredictions(player, matches, winner);
+    const score = scorePredictions(player, matches, winner, gbWinner);
     rows.push({
       userId: ids[i],
       name: user.name,
@@ -422,6 +484,8 @@ export async function getLeaderboard(): Promise<PlayerScore[]> {
       picked: score.picked,
       champion: player.champion,
       championHit: score.championHit,
+      goldenBall: player.goldenBall,
+      goldenBallHit: score.goldenBallHit,
     });
   }
 
@@ -441,6 +505,7 @@ export async function getMatchPredictions(matchId: string): Promise<PublicMatchP
          u.id as user_id,
          u.name,
          u.champion_code,
+         u.golden_ball_code,
          p.match_id,
          p.outcome,
          p.home_goals,
@@ -493,7 +558,10 @@ export async function getPublicProfile(userId: string): Promise<PublicProfile | 
 
   if (poolDbEnabled()) {
     const [userRows, pickRows] = await Promise.all([
-      poolQuery<PublicUserRow>("select id, name, champion_code from pool_users where id = $1 limit 1", [uid]),
+      poolQuery<PublicUserRow>(
+        "select id, name, champion_code, golden_ball_code from pool_users where id = $1 limit 1",
+        [uid],
+      ),
       poolQuery<PickRow>("select * from pool_picks where user_id = $1 order by updated_at desc", [uid]),
     ]);
     const user = userRows.rows[0];
@@ -507,12 +575,13 @@ export async function getPublicProfile(userId: string): Promise<PublicProfile | 
         updatedAt: new Date(row.updated_at).toISOString(),
       };
     }
-    const player: PlayerPredictions = { picks, champion: user.champion_code };
+    const player: PlayerPredictions = { picks, champion: user.champion_code, goldenBall: user.golden_ball_code };
     const score = scorePredictions(player, matches);
     return {
       userId: user.id,
       name: user.name,
       champion: user.champion_code,
+      goldenBall: user.golden_ball_code,
       score,
       picks: Object.entries(picks)
         .map(([matchId, pick]) => {
@@ -534,6 +603,7 @@ export async function getPublicProfile(userId: string): Promise<PublicProfile | 
     userId: uid,
     name: user.name,
     champion: player.champion,
+    goldenBall: player.goldenBall,
     score,
     picks: Object.entries(player.picks)
       .map(([matchId, pick]) => {
