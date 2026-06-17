@@ -393,7 +393,7 @@ export function MatchView({
                 <section aria-label="Match momentum">
                   <SectionHeader title="Match Momentum" />
                   <MatchMomentumGraph
-                    events={match.events ?? []}
+                    events={extras?.timeline?.length ? extras.timeline : (match.events ?? [])}
                     homeCode={match.homeTeam?.code ?? null}
                     awayCode={match.awayTeam?.code ?? null}
                     homeScore={match.score?.home ?? null}
@@ -455,6 +455,21 @@ export function MatchView({
                   </div>
                 </Card>
               ) : null}
+
+              <Card id="past-matches" title="Past Matches / Head to Head">
+                <HeadToHead
+                  homeCode={match.homeTeam?.code}
+                  awayCode={match.awayTeam?.code}
+                  homeName={match.homeTeam?.name ?? "Home"}
+                  awayName={match.awayTeam?.name ?? "Away"}
+                />
+              </Card>
+
+              <Suspense fallback={null}>
+                <section aria-label="Match chat">
+                  <MatchBanterBoard matchId={match.id} />
+                </section>
+              </Suspense>
             </div>
 
             <aside className="min-w-0 flex flex-col gap-6">
@@ -537,24 +552,6 @@ export function MatchView({
             </aside>
           </div>
 
-          <div className="mt-6 min-w-0">
-            <Card id="past-matches" title="Past Matches / Head to Head">
-              <HeadToHead
-                homeCode={match.homeTeam?.code}
-                awayCode={match.awayTeam?.code}
-                homeName={match.homeTeam?.name ?? "Home"}
-                awayName={match.awayTeam?.name ?? "Away"}
-              />
-            </Card>
-          </div>
-
-          <div className="mt-6 min-w-0">
-            <Suspense fallback={null}>
-              <section aria-label="Match chat">
-                <MatchBanterBoard matchId={match.id} />
-              </section>
-            </Suspense>
-          </div>
         </div>
       </div>
     </TeamColorProvider>

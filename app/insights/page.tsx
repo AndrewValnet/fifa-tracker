@@ -8,7 +8,7 @@ import { OwnGoalsFeed } from "@/components/OwnGoalsFeed";
 import { FastestGoals } from "@/components/FastestGoals";
 import { PenaltyTracker } from "@/components/PenaltyTracker";
 import { getInsights } from "@/lib/insights";
-import { getAllMatches, getScorers, getStandings } from "@/lib/data";
+import { getAllMatches, getFinishedMatchesWithEvents, getScorers, getStandings } from "@/lib/data";
 import { UnderdogStats } from "@/components/UnderdogStats";
 import { GoalkeeperRatings } from "@/components/GoalkeeperRatings";
 import { PenaltyShootoutHistory } from "@/components/PenaltyShootoutHistory";
@@ -389,10 +389,8 @@ async function GoalkeeperSection() {
 }
 
 async function GoalHeatmapSection() {
-  const allMatches = await getAllMatches();
-  const events = allMatches.data
-    .filter((m) => m.status === "FINISHED")
-    .flatMap((m) => m.events ?? []);
+  const finished = await getFinishedMatchesWithEvents();
+  const events = finished.flatMap((m) => m.events ?? []);
   return (
     <section className="rounded-xl border border-edge bg-panel p-4">
       <SectionHeader title="Goal Minute Heatmap" right="when goals are scored" />
