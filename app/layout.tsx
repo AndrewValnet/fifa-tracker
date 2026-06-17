@@ -3,6 +3,7 @@ import { Inter, Oswald, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import { BottomNav } from "@/components/BottomNav";
 import { GoalAlerts } from "@/components/GoalAlerts";
+import { LiveScoresTicker } from "@/components/LiveScoresTicker";
 import { ResourceHints } from "@/components/ResourceHints";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import { Sidebar } from "@/components/Sidebar";
@@ -49,9 +50,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <SWRProvider>
           <div className="flex min-h-dvh">
             <Sidebar />
-            <main id="main" className="min-w-0 flex-1 pb-20 lg:pb-8">
-              {children}
-            </main>
+            <div className="flex min-w-0 flex-1 flex-col">
+              <LiveScoresTicker />
+              <main id="main" className="min-w-0 flex-1 pb-20 lg:pb-8">
+                {children}
+              </main>
+            </div>
           </div>
           <BottomNav />
           <GoalAlerts />

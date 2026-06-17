@@ -75,6 +75,8 @@ const WinProbGraph = dynamic(() => import("@/components/WinProbGraph").then((m) 
 });
 const MatchBanterBoard = dynamic(() => import("@/components/MatchBanterBoard").then((m) => m.MatchBanterBoard), { ssr: false });
 const MatchMomentumGraph = dynamic(() => import("@/components/MatchMomentumGraph").then((m) => m.MatchMomentumGraph), { ssr: false });
+const ShotQualityChart = dynamic(() => import("@/components/ShotQualityChart").then((m) => m.ShotQualityChart), { ssr: false });
+const MatchRatingWidget = dynamic(() => import("@/components/MatchRatingWidget").then((m) => m.MatchRatingWidget), { ssr: false });
 
 function TeamHeader({
   match,
@@ -465,6 +467,12 @@ export function MatchView({
                 />
               </Card>
 
+              {kind === "finished" ? (
+                <Card title="Rate This Match">
+                  <MatchRatingWidget matchId={match.id} status={match.status} />
+                </Card>
+              ) : null}
+
               <Suspense fallback={null}>
                 <section aria-label="Match chat">
                   <MatchBanterBoard matchId={match.id} />
@@ -524,6 +532,17 @@ export function MatchView({
                     awayScore={match.score?.away ?? null}
                     homeCode={match.homeTeam?.code ?? null}
                     awayCode={match.awayTeam?.code ?? null}
+                  />
+                </Card>
+              ) : null}
+
+              {extras?.stats ? (
+                <Card title="Shot Quality">
+                  <ShotQualityChart
+                    homeCode={match.homeTeam?.code ?? null}
+                    awayCode={match.awayTeam?.code ?? null}
+                    homeStats={extras.stats.home}
+                    awayStats={extras.stats.away}
                   />
                 </Card>
               ) : null}

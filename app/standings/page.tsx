@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import type { Metadata } from "next";
 import nextDynamic from "next/dynamic";
 import { AssistsLeaderboard } from "@/components/AssistsLeaderboard";
+import { InjuryTrackerPanel } from "@/components/InjuryTrackerPanel";
 import { CleanSheetsBoard } from "@/components/CleanSheetsBoard";
 import { DebutWatch } from "@/components/DebutWatch";
 import { EliminationWatch } from "@/components/EliminationWatch";
@@ -224,6 +225,11 @@ export default function StandingsPage() {
         <Suspense fallback={<div className="skeleton h-64 w-full" aria-hidden />}>
           <UpsetWatch />
         </Suspense>
+      </section>
+
+      <section className="mt-12" aria-label="Injury tracker">
+        <SectionHeader title="Injury &amp; Fitness Tracker" right="known absences and doubts" />
+        <InjuryTrackerPanel />
       </section>
     </div>
   );
