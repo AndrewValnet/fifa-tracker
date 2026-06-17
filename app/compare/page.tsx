@@ -7,6 +7,8 @@ import { PlayerRadarChart } from "@/components/PlayerRadarChart";
 import { getPlayerData, type PlayerData } from "@/lib/data";
 import { fmtNumber, fmtPct } from "@/lib/format";
 import { getAccentColor, getTeamColors, resolveTeamCode, teamName } from "@/lib/team-meta";
+import { AllTimeH2HPanel } from "@/components/AllTimeH2HPanel";
+import { SQUAD_VALUES } from "@/data/squad-market-values";
 
 export const metadata: Metadata = {
   title: "Compare Players — WC26 Live",
@@ -334,6 +336,32 @@ export default async function ComparePage({ searchParams }: Props) {
               />
             </div>
           </div>
+
+          {/* ── All-time H2H ──────────────────────────────────────────── */}
+          <div className="rounded-xl border border-edge bg-panel px-5 py-4">
+            <p className="mb-4 font-display text-[11px] font-bold uppercase tracking-[0.25em] text-dim">⚔️ All-time head to head</p>
+            <AllTimeH2HPanel codeA={teamA} codeB={teamB} />
+          </div>
+
+          {/* ── Squad market values ───────────────────────────────────── */}
+          {(() => {
+            const valueA = SQUAD_VALUES.find((v) => v.code === teamA);
+            const valueB = SQUAD_VALUES.find((v) => v.code === teamB);
+            return (
+              <div className="grid grid-cols-2 gap-4 rounded-xl border border-edge bg-panel px-5 py-4">
+                <div>
+                  <p className="mb-1 font-display text-[11px] font-bold uppercase tracking-[0.25em] text-dim">💰 Squad value</p>
+                  <p className="font-mono text-lg font-bold text-ink">€{valueA?.totalValueM ?? "?"}M</p>
+                  <p className="text-xs text-dim">{teamName(teamA ?? "")}</p>
+                </div>
+                <div>
+                  <p className="mb-1 font-display text-[11px] font-bold uppercase tracking-[0.25em] text-dim">💰 Squad value</p>
+                  <p className="font-mono text-lg font-bold text-ink">€{valueB?.totalValueM ?? "?"}M</p>
+                  <p className="text-xs text-dim">{teamName(teamB ?? "")}</p>
+                </div>
+              </div>
+            );
+          })()}
 
           <p className="text-center text-[10px] text-dim">
             Tournament totals from ESPN match data · minutes estimated · lower is better for fouls and cards
