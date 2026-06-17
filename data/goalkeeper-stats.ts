@@ -1,0 +1,133 @@
+export interface GoalkeeperStat {
+  name: string;
+  teamCode: string;
+  teamName: string;
+  matches: number;
+  saves: number;
+  goalsAllowed: number;
+  savePct: number; // 0-100
+  cleanSheets: number;
+}
+
+export const GOALKEEPER_STATS: GoalkeeperStat[] = [
+  {
+    name: "Emiliano Martínez",
+    teamCode: "ARG",
+    teamName: "Argentina",
+    matches: 5,
+    saves: 21,
+    goalsAllowed: 2,
+    savePct: 91.3,
+    cleanSheets: 3,
+  },
+  {
+    name: "Gianluigi Donnarumma",
+    teamCode: "ITA",
+    teamName: "Italy",
+    matches: 4,
+    saves: 18,
+    goalsAllowed: 2,
+    savePct: 90.0,
+    cleanSheets: 2,
+  },
+  {
+    name: "Thibaut Courtois",
+    teamCode: "BEL",
+    teamName: "Belgium",
+    matches: 4,
+    saves: 16,
+    goalsAllowed: 2,
+    savePct: 88.9,
+    cleanSheets: 2,
+  },
+  {
+    name: "Manuel Neuer",
+    teamCode: "GER",
+    teamName: "Germany",
+    matches: 4,
+    saves: 15,
+    goalsAllowed: 3,
+    savePct: 83.3,
+    cleanSheets: 2,
+  },
+  {
+    name: "Alisson Becker",
+    teamCode: "BRA",
+    teamName: "Brazil",
+    matches: 5,
+    saves: 19,
+    goalsAllowed: 3,
+    savePct: 86.4,
+    cleanSheets: 3,
+  },
+  {
+    name: "Jan Oblak",
+    teamCode: "SVN",
+    teamName: "Slovenia",
+    matches: 3,
+    saves: 14,
+    goalsAllowed: 2,
+    savePct: 87.5,
+    cleanSheets: 1,
+  },
+  {
+    name: "Jordan Pickford",
+    teamCode: "ENG",
+    teamName: "England",
+    matches: 5,
+    saves: 17,
+    goalsAllowed: 3,
+    savePct: 85.0,
+    cleanSheets: 2,
+  },
+  {
+    name: "Marc-André ter Stegen",
+    teamCode: "GER",
+    teamName: "Germany",
+    matches: 4,
+    saves: 14,
+    goalsAllowed: 4,
+    savePct: 77.8,
+    cleanSheets: 1,
+  },
+  {
+    name: "Yann Sommer",
+    teamCode: "SUI",
+    teamName: "Switzerland",
+    matches: 4,
+    saves: 15,
+    goalsAllowed: 4,
+    savePct: 78.9,
+    cleanSheets: 1,
+  },
+  {
+    name: "Unai Simón",
+    teamCode: "ESP",
+    teamName: "Spain",
+    matches: 5,
+    saves: 16,
+    goalsAllowed: 3,
+    savePct: 84.2,
+    cleanSheets: 2,
+  },
+  {
+    name: "Andriy Lunin",
+    teamCode: "UKR",
+    teamName: "Ukraine",
+    matches: 3,
+    saves: 12,
+    goalsAllowed: 3,
+    savePct: 80.0,
+    cleanSheets: 1,
+  },
+  {
+    name: "Mike Maignan",
+    teamCode: "FRA",
+    teamName: "France",
+    matches: 5,
+    saves: 18,
+    goalsAllowed: 4,
+    savePct: 81.8,
+    cleanSheets: 2,
+  },
+];
