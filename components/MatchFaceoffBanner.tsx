@@ -22,7 +22,7 @@ function formatMatchDate(utcDate: string): string {
   return `${month} ${day} · ${time} ET`;
 }
 
-export function MatchFaceoffBanner({ match, homeDetail, awayDetail }: MatchFaceoffBannerProps) {
+export function MatchFaceoffBanner({ match }: MatchFaceoffBannerProps) {
   const homeCode = resolveTeamCode(match.homeTeam?.code, match.homeTeam?.name);
   const awayCode = resolveTeamCode(match.awayTeam?.code, match.awayTeam?.name);
 

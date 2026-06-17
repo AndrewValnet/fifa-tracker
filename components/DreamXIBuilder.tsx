@@ -160,18 +160,6 @@ function buildSlots(formation: Formation): Slot[] {
   return slots;
 }
 
-// ---------------------------------------------------------------------------
-// Helper: player initials
-// ---------------------------------------------------------------------------
-
-function initials(name: string): string {
-  const parts = name.split(/\s+/).filter(Boolean);
-  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-  return parts
-    .slice(0, 2)
-    .map((p) => p[0]?.toUpperCase() ?? "")
-    .join("");
-}
 
 // ---------------------------------------------------------------------------
 // Rating badge color

@@ -6,10 +6,7 @@ export const runtime = "edge";
 
 const size = { width: 1200, height: 630 };
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { matchId: string } },
-) {
+export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
 
   const home = searchParams.get("home") ?? "???";

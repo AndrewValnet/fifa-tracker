@@ -74,8 +74,6 @@ export function GoldenBootRaceChart({ scorers, limit = 10 }: GoldenBootRaceChart
           const rank = idx + 1;
           const code = scorer.team.code ?? undefined;
           const { primary } = getTeamColors(code);
-          const combined = scorer.goals + (scorer.assists ?? 0);
-
           return (
             <li key={`${scorer.player}-${scorer.team.id}`} className="group flex items-center gap-3">
               {/* Rank */}
