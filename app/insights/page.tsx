@@ -8,7 +8,9 @@ import { OwnGoalsFeed } from "@/components/OwnGoalsFeed";
 import { FastestGoals } from "@/components/FastestGoals";
 import { PenaltyTracker } from "@/components/PenaltyTracker";
 import { getInsights } from "@/lib/insights";
+import { getAllMatches } from "@/lib/data";
 import { fmtNumber, fmtPct, fmtUsdCompact } from "@/lib/format";
+import { GoalMinuteHeatmap } from "@/components/GoalMinuteHeatmap";
 
 export const dynamic = "force-dynamic";
 
@@ -321,12 +323,33 @@ async function InsightsBody() {
         </section>
       </div>
 
+      {/* ---- Goal Minute Heatmap ---- */}
+      <h2 className="mt-10 font-display text-xl font-semibold uppercase tracking-wider text-dim">🕐 Timing</h2>
+      <div className="mt-3">
+        <Suspense fallback={<div className="skeleton h-40 rounded-xl" />}>
+          <GoalHeatmapSection />
+        </Suspense>
+      </div>
+
       <p className="mt-8 text-[10px] leading-snug text-dim">
         Money figures from Polymarket public market data (volume / open interest). Match stats, attendance and fouls from
         ESPN&apos;s public feed. Estimates labeled <span className="uppercase">est.</span> are transparent models, not official
         figures — see each card&apos;s note. Cached ~10 minutes.
       </p>
     </>
+  );
+}
+
+async function GoalHeatmapSection() {
+  const allMatches = await getAllMatches();
+  const events = allMatches.data
+    .filter((m) => m.status === "FINISHED")
+    .flatMap((m) => m.events ?? []);
+  return (
+    <section className="rounded-xl border border-edge bg-panel p-4">
+      <SectionHeader title="Goal Minute Heatmap" right="when goals are scored" />
+      <GoalMinuteHeatmap events={events} />
+    </section>
   );
 }
 

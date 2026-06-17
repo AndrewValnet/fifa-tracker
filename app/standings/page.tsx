@@ -1,9 +1,11 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import nextDynamic from "next/dynamic";
 import { AssistsLeaderboard } from "@/components/AssistsLeaderboard";
 import { CleanSheetsBoard } from "@/components/CleanSheetsBoard";
 import { DebutWatch } from "@/components/DebutWatch";
 import { EliminationWatch } from "@/components/EliminationWatch";
+import { GoldenBootRaceChart } from "@/components/GoldenBootRaceChart";
 import { GroupScenarios } from "@/components/GroupScenarios";
 import { GroupStandingsTable } from "@/components/GroupStandingsTable";
 import { KnockoutBracket } from "@/components/KnockoutBracket";
@@ -14,6 +16,11 @@ import { SuspensionTracker } from "@/components/SuspensionTracker";
 import { TopScorers } from "@/components/TopScorers";
 import { getAllMatches, getScorers, getStandings } from "@/lib/data";
 import { getQualificationScenarios } from "@/lib/qualification";
+
+const GroupStageSimulator = nextDynamic(
+  () => import("@/components/GroupStageSimulator").then((m) => m.GroupStageSimulator),
+  { ssr: false },
+);
 
 export const metadata: Metadata = {
   title: "Standings & Bracket",
@@ -70,6 +77,16 @@ async function Scorers() {
   );
 }
 
+async function GoldenBootRace() {
+  const { data: scorers } = await getScorers(10);
+  return <GoldenBootRaceChart scorers={scorers} />;
+}
+
+async function SimulatorSection() {
+  const [standings, all] = await Promise.all([getStandings(), getAllMatches()]);
+  return <GroupStageSimulator groups={standings.data} matches={all.data} />;
+}
+
 export default function StandingsPage() {
   return (
     <div className="mx-auto max-w-shell px-4 py-8">
@@ -114,6 +131,13 @@ export default function StandingsPage() {
         </Suspense>
       </section>
 
+      <section className="mt-12" aria-label="Golden Boot Race chart">
+        <SectionHeader title="Golden Boot Race" />
+        <Suspense fallback={<div className="skeleton h-64 rounded-xl" />}>
+          <GoldenBootRace />
+        </Suspense>
+      </section>
+
       <section className="mt-12 max-w-xl" aria-label="Top assists">
         <SectionHeader title="Top Assists" right="most assists this tournament" />
         <div className="rounded-xl border border-edge bg-panel px-4 py-2">
@@ -144,6 +168,15 @@ export default function StandingsPage() {
         <SectionHeader title="Elimination Watch" right="teams at risk of going home" />
         <div className="rounded-xl border border-edge bg-panel px-4 py-2">
           <EliminationWatch />
+        </div>
+      </section>
+
+      <section className="mb-12" aria-label="Group stage simulator">
+        <SectionHeader title="What-If Simulator" right="hypothetical group results" />
+        <div className="rounded-xl border border-edge bg-panel p-4">
+          <Suspense fallback={<div className="skeleton h-64 rounded-xl" />}>
+            <SimulatorSection />
+          </Suspense>
         </div>
       </section>
 

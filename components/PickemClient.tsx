@@ -718,6 +718,41 @@ function MatchPredictionBoard({
 }
 
 // ─────────────────────────────────────────────
+// Invite Link
+// ─────────────────────────────────────────────
+function InviteLink() {
+  const [copied, setCopied] = useState(false)
+  const url = typeof window !== "undefined"
+    ? window.location.origin + "/predict"
+    : "/predict"
+
+  function copy() {
+    navigator.clipboard.writeText(url).catch(() => {})
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
+
+  return (
+    <div className="rounded-lg border border-edge bg-panel2 p-3">
+      <p className="text-[11px] font-semibold uppercase tracking-wider text-dim mb-1.5">
+        📨 Invite coworkers
+      </p>
+      <div className="flex items-center gap-2">
+        <code className="flex-1 truncate rounded border border-edge bg-navy px-2 py-1 text-[11px] font-mono text-dim">
+          {url}
+        </code>
+        <button
+          onClick={copy}
+          className="shrink-0 rounded-full bg-pitch px-3 py-1 text-[11px] font-semibold text-navy transition hover:brightness-110"
+        >
+          {copied ? "✓ Copied!" : "Copy link"}
+        </button>
+      </div>
+    </div>
+  )
+}
+
+// ─────────────────────────────────────────────
 // Main PickemClient
 // ─────────────────────────────────────────────
 export function PickemClient() {
@@ -875,6 +910,8 @@ export function PickemClient() {
                 </p>
               </div>
             </div>
+
+            {user && <InviteLink />}
           </div>
 
           {/* Right: bonus picks panel */}

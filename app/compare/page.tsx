@@ -3,10 +3,11 @@ import Link from "next/link";
 import { CompareClient } from "@/components/CompareClientLazy";
 import { Flag } from "@/components/Flag";
 import { PlayerHeadshot } from "@/components/PlayerHeadshot";
+import { PlayerRadarChart } from "@/components/PlayerRadarChart";
 import { SectionHeader } from "@/components/SectionHeader";
 import { getPlayerData, type PlayerData } from "@/lib/data";
 import { fmtNumber, fmtPct } from "@/lib/format";
-import { getTeamColors, resolveTeamCode, teamName } from "@/lib/team-meta";
+import { getAccentColor, getTeamColors, resolveTeamCode, teamName } from "@/lib/team-meta";
 
 export const metadata: Metadata = {
   title: "Compare Players — WC26 Live",
@@ -123,6 +124,35 @@ export default async function ComparePage({ searchParams }: Props) {
               Tournament totals from ESPN match data; minutes estimated. Higher value highlighted (lower is better for
               fouls and cards).
             </p>
+          </div>
+          <div className="mt-8">
+            <SectionHeader title="Radar Comparison" />
+            <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-around">
+              <PlayerRadarChart
+                label={da.bio?.name ?? undefined}
+                color={getAccentColor(teamA)}
+                stats={[
+                  { label: "Goals", value: da.totals.goals ?? 0, max: 10 },
+                  { label: "Assists", value: da.totals.assists ?? 0, max: 8 },
+                  { label: "Shots", value: da.totals.shots ?? 0, max: 20 },
+                  { label: "On Target", value: da.totals.shotsOnTarget ?? 0, max: 15 },
+                  { label: "Fouls Drawn", value: da.totals.foulsDrawn ?? 0, max: 10 },
+                  { label: "Appearances", value: da.totals.appearances ?? 0, max: 7 },
+                ]}
+              />
+              <PlayerRadarChart
+                label={db.bio?.name ?? undefined}
+                color={getAccentColor(teamB)}
+                stats={[
+                  { label: "Goals", value: db.totals.goals ?? 0, max: 10 },
+                  { label: "Assists", value: db.totals.assists ?? 0, max: 8 },
+                  { label: "Shots", value: db.totals.shots ?? 0, max: 20 },
+                  { label: "On Target", value: db.totals.shotsOnTarget ?? 0, max: 15 },
+                  { label: "Fouls Drawn", value: db.totals.foulsDrawn ?? 0, max: 10 },
+                  { label: "Appearances", value: db.totals.appearances ?? 0, max: 7 },
+                ]}
+              />
+            </div>
           </div>
         </section>
       ) : ready ? (
