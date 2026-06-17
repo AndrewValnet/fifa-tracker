@@ -3,6 +3,7 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { AllTimeRecords } from "@/components/AllTimeRecords";
 import { TvSchedule } from "@/components/TvSchedule";
 import { DebutWatch } from "@/components/DebutWatch";
+import { WcTrophyCabinet } from "@/components/WcTrophyCabinet";
 
 export const metadata: Metadata = {
   title: "Records & History | WC 2026",
@@ -18,6 +19,12 @@ export default function RecordsPage() {
       <p className="mb-10 text-sm text-dim">
         All-time World Cup records 1930–2022, WC 2026 debut nations, and where to watch.
       </p>
+
+      {/* Trophy Cabinet */}
+      <section className="mb-12" aria-label="World Cup trophy cabinet">
+        <SectionHeader title="Trophy Cabinet" right="1930 – 2022 · 22 tournaments" />
+        <WcTrophyCabinet />
+      </section>
 
       {/* All-time Records */}
       <section className="mb-12" aria-label="All-time records">

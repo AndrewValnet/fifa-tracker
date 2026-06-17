@@ -9,6 +9,7 @@ export const NAV_ITEMS: NavItem[] = [
   { href: "/upcoming", label: "Matches", icon: "📅" },
   { href: "/standings", label: "Standings", icon: "🏆" },
   { href: "/predict", label: "Predict", icon: "🎯" },
+  { href: "/dream-xi", label: "Dream XI", icon: "⭐" },
   { href: "/insights", label: "Insights", icon: "🔥" },
   { href: "/teams", label: "Teams", icon: "👕" },
   { href: "/stadiums", label: "Stadiums", icon: "🏟️" },

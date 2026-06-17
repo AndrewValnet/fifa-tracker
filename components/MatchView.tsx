@@ -7,7 +7,9 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { Suspense } from "react";
 import { CountdownTimer } from "@/components/CountdownTimer";
+import { MatchFaceoffBanner } from "@/components/MatchFaceoffBanner";
 import { DataFreshness } from "@/components/DataFreshness";
 import { EmptyState } from "@/components/EmptyState";
 import { EventTimeline } from "@/components/EventTimeline";
@@ -70,6 +72,7 @@ const WinProbGraph = dynamic(() => import("@/components/WinProbGraph").then((m) 
   ssr: false,
   loading: () => <div className="skeleton h-56 w-full rounded-xl" aria-hidden />,
 });
+const MatchBanterBoard = dynamic(() => import("@/components/MatchBanterBoard").then((m) => m.MatchBanterBoard), { ssr: false });
 
 function TeamHeader({
   match,
@@ -287,6 +290,9 @@ export function MatchView({
                 ) : null}
               </div>
 
+              {kind === "upcoming" ? (
+                <MatchFaceoffBanner match={match} homeDetail={homeDetail} awayDetail={awayDetail} />
+              ) : null}
               {kind === "upcoming" ? (
                 <>
                   <CountdownTimer targetIso={match.utcDate} />
@@ -511,6 +517,14 @@ export function MatchView({
                 awayName={match.awayTeam?.name ?? "Away"}
               />
             </Card>
+          </div>
+
+          <div className="mt-6 min-w-0">
+            <Suspense fallback={null}>
+              <section aria-label="Match chat">
+                <MatchBanterBoard matchId={match.id} />
+              </section>
+            </Suspense>
           </div>
         </div>
       </div>

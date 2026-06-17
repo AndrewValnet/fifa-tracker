@@ -5,6 +5,8 @@ import { ClipLink } from "@/components/ClipLink";
 import { Flag } from "@/components/Flag";
 import { LocalTime } from "@/components/LocalTime";
 import { PlayerHeadshot } from "@/components/PlayerHeadshot";
+import { PlayerRadarChart } from "@/components/PlayerRadarChart";
+import { PlayerTradingCard } from "@/components/PlayerTradingCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { getPlayerData } from "@/lib/data";
 import { fmtPct, fmtUsdCompact } from "@/lib/format";
@@ -95,6 +97,24 @@ export default async function PlayerPage({ params, searchParams }: Props) {
           </div>
         </header>
 
+        {/* trading card */}
+        <div className="mt-6 flex justify-center sm:justify-start">
+          <PlayerTradingCard
+            player={{
+              name: bio.name,
+              position: bio.position ?? "MID",
+              teamCode: teamCode ?? "INT",
+              teamName: team ?? "International",
+              rating: Math.min(95, 70 + totals.goals * 2 + (totals.assists ?? 0)),
+              stats: [
+                { label: "Goals", value: totals.goals },
+                { label: "Assists", value: totals.assists },
+                { label: "Apps", value: apps },
+              ],
+            }}
+          />
+        </div>
+
         {/* bio facts */}
         <dl className="mt-6 grid max-w-2xl grid-cols-[auto_1fr] gap-x-6 gap-y-1.5 rounded-xl border border-edge bg-panel p-4 text-sm sm:grid-cols-[auto_1fr_auto_1fr]">
           <BioRow label="Age" value={bio.age !== null ? `${bio.age}${bio.dateOfBirth ? ` (${bio.dateOfBirth})` : ""}` : null} />
@@ -131,6 +151,20 @@ export default async function PlayerPage({ params, searchParams }: Props) {
             <div className="mt-2 grid grid-cols-2 gap-2 sm:max-w-md">
               {conversion !== null ? <Tile label="Shot conversion" value={fmtPct(conversion)} accent /> : null}
               {minsPerGoal !== null ? <Tile label="Minutes per goal" value={minsPerGoal} accent /> : null}
+            </div>
+          )}
+          {apps > 0 && (
+            <div className="mt-4 rounded-xl border border-edge bg-panel p-4">
+              <p className="mb-3 text-xs font-medium uppercase tracking-wider text-dim">Performance Radar</p>
+              <PlayerRadarChart
+                stats={[
+                  { label: "Goals", value: totals.goals, max: 10 },
+                  { label: "Assists", value: totals.assists, max: 8 },
+                  { label: "Shots", value: totals.shots, max: 40 },
+                  { label: "Apps", value: apps, max: 7 },
+                  { label: "Rating", value: Math.min(10, 7 + totals.goals * 0.2 + totals.assists * 0.1), max: 10 },
+                ]}
+              />
             </div>
           )}
           <p className="mt-2 text-[10px] text-dim">
