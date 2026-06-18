@@ -422,13 +422,15 @@ export function DreamXIBuilder() {
 
   // Filter players for picker
   const selectedSlotObj = slots.find((s) => s.id === selectedSlot);
+  const requiredPosition = selectedSlotObj?.position ?? null;
   const filteredPlayers = PLAYERS.filter((p) => {
     const q = search.toLowerCase();
     const matchesSearch =
       !q ||
       p.name.toLowerCase().includes(q) ||
       p.teamCode.toLowerCase().includes(q);
-    return matchesSearch;
+    const matchesPosition = !requiredPosition || p.position === requiredPosition;
+    return matchesSearch && matchesPosition;
   }).sort((a, b) => b.rating - a.rating);
 
   const filledCount = slots.filter((s) => picks[s.id]).length;
@@ -618,6 +620,9 @@ export function DreamXIBuilder() {
             </p>
           ) : (
             <>
+              <div className="mb-3 rounded-lg border border-edge bg-panel2/60 px-3 py-2 text-xs text-dim">
+                Showing {selectedSlotObj?.position ?? "all"} players for this slot.
+              </div>
               {/* Search */}
               <div className="relative mb-3">
                 <input
@@ -625,7 +630,7 @@ export function DreamXIBuilder() {
                   type="search"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search by name or team..."
+                  placeholder={`Search ${selectedSlotObj?.position ?? "players"} by name or team...`}
                   className="w-full rounded-lg border border-edge bg-panel2 px-3 py-2 text-sm text-ink placeholder:text-dim/60 focus:border-pitch/60 focus:outline-none focus:ring-1 focus:ring-pitch/30"
                 />
               </div>
@@ -633,7 +638,9 @@ export function DreamXIBuilder() {
               {/* Results */}
               <div className="max-h-96 overflow-y-auto space-y-0.5 -mx-1 px-1">
                 {filteredPlayers.length === 0 ? (
-                  <p className="py-6 text-center text-xs text-dim">No players found.</p>
+                  <p className="py-6 text-center text-xs text-dim">
+                    No {selectedSlotObj?.position ?? "matching"} players found.
+                  </p>
                 ) : (
                   filteredPlayers.map((p) => (
                     <PlayerResultRow
