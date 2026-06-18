@@ -53,7 +53,15 @@ function HeroOdds({ match }: { match: Match }) {
   );
 }
 
-function FeaturedMatch({ match, live }: { match: Match; live: boolean }) {
+function FeaturedMatch({
+  match,
+  live,
+  featuredLiveClock,
+}: {
+  match: Match;
+  live: boolean;
+  featuredLiveClock?: string | null;
+}) {
   const stadium = getStadium(match.stadiumId);
   const recentGoals = match.events.filter((e) => e.type === "GOAL").slice(-3).reverse();
 
@@ -78,7 +86,7 @@ function FeaturedMatch({ match, live }: { match: Match; live: boolean }) {
 
           <div className="flex min-w-[150px] flex-col items-center gap-2 md:min-w-[260px]">
             {live ? (
-              <Scoreboard match={match} />
+              <Scoreboard match={match} accurateClock={featuredLiveClock ?? null} />
             ) : (
               <>
                 <p className="font-mono text-xs uppercase tracking-widest text-dim">
@@ -128,9 +136,11 @@ function FeaturedMatch({ match, live }: { match: Match; live: boolean }) {
 export function HeroSection({
   initialLive,
   initialUpcoming,
+  featuredLiveClock,
 }: {
   initialLive?: Sourced<Match[]>;
   initialUpcoming?: Sourced<Match[]>;
+  featuredLiveClock?: string | null;
 }) {
   const liveState = useLiveMatches(initialLive);
   const upcomingState = useUpcomingMatches(initialUpcoming);
@@ -159,7 +169,7 @@ export function HeroSection({
         </div>
 
         {featured ? (
-          <FeaturedMatch match={featured} live={live.length > 0} />
+          <FeaturedMatch match={featured} live={live.length > 0} featuredLiveClock={featuredLiveClock} />
         ) : (
           <p className="surface-card rounded-2xl px-4 py-10 text-center text-dim">
             The tournament schedule is loading…

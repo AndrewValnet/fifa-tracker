@@ -1,5 +1,6 @@
 import { Flag } from "@/components/Flag";
-import { getTeamColors, resolveTeamCode, contrastText } from "@/lib/team-meta";
+import { MatchClock } from "@/components/MatchClock";
+import { contrastText, getTeamColors, resolveTeamCode } from "@/lib/team-meta";
 import { stageLabel, statusKind } from "@/lib/format";
 import type { Match, TeamDetail } from "@/lib/types";
 
@@ -7,6 +8,7 @@ interface MatchFaceoffBannerProps {
   match: Match;
   homeDetail: TeamDetail | null;
   awayDetail: TeamDetail | null;
+  liveClock?: string | null;
 }
 
 function formatMatchDate(utcDate: string): string {
@@ -22,7 +24,7 @@ function formatMatchDate(utcDate: string): string {
   return `${month} ${day} · ${time} ET`;
 }
 
-export function MatchFaceoffBanner({ match }: MatchFaceoffBannerProps) {
+export function MatchFaceoffBanner({ match, liveClock }: MatchFaceoffBannerProps) {
   const homeCode = resolveTeamCode(match.homeTeam?.code, match.homeTeam?.name);
   const awayCode = resolveTeamCode(match.awayTeam?.code, match.awayTeam?.name);
 
@@ -51,10 +53,9 @@ export function MatchFaceoffBanner({ match }: MatchFaceoffBannerProps) {
   const awayName = match.awayTeam?.name ?? match.awayLabel ?? "TBD";
 
   return (
-    <div className="relative w-full rounded-xl overflow-hidden" style={gradientStyle}>
-      {/* Diagonal skew overlay for split effect */}
+    <div className="relative w-full overflow-hidden rounded-xl" style={gradientStyle}>
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="pointer-events-none absolute inset-0"
         style={{
           background: `linear-gradient(
             105deg,
@@ -68,120 +69,85 @@ export function MatchFaceoffBanner({ match }: MatchFaceoffBannerProps) {
         }}
       />
 
-      {/* Main content grid */}
       <div className="relative z-10 grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-6 py-8 md:py-10">
-
-        {/* Home team — left side */}
-        <div
-          className="flex flex-col items-center gap-3 text-center"
-          style={{ color: homeTextColor }}
-        >
+        <div className="flex flex-col items-center gap-3 text-center" style={{ color: homeTextColor }}>
           <Flag code={homeCode} name={homeName} width={64} className="shadow-xl" />
           <div>
-            <p className="font-display text-2xl md:text-3xl font-bold uppercase tracking-widest leading-tight">
+            <p className="font-display text-2xl font-bold uppercase leading-tight tracking-widest md:text-3xl">
               {match.homeTeam?.code ?? homeCode ?? homeName}
             </p>
-            <p className="font-mono text-xs md:text-sm mt-1 opacity-80 uppercase tracking-wider">
-              {homeName}
-            </p>
+            <p className="mt-1 font-mono text-xs uppercase tracking-wider opacity-80 md:text-sm">{homeName}</p>
           </div>
         </div>
 
-        {/* Center — status, score, stage */}
-        <div className="flex flex-col items-center gap-2 min-w-[140px] md:min-w-[200px]">
-          {/* Stage / group label */}
-          <span className="font-mono text-xs uppercase tracking-widest text-white/70 bg-black/30 rounded-full px-3 py-0.5">
+        <div className="flex min-w-[140px] flex-col items-center gap-2 md:min-w-[200px]">
+          <span className="rounded-full border border-white/10 bg-black/30 px-3 py-0.5 font-mono text-xs uppercase tracking-widest text-white/70 shadow-inner shadow-black/20">
             {stageLbl}
           </span>
 
-          {/* Score or time */}
           {isFinished && hasScore ? (
             <div className="flex items-center gap-3">
-              <span className="font-display text-5xl md:text-6xl font-black text-white drop-shadow-lg">
-                {homeScore}
-              </span>
-              <span className="font-display text-3xl text-white/60 font-bold">–</span>
-              <span className="font-display text-5xl md:text-6xl font-black text-white drop-shadow-lg">
-                {awayScore}
-              </span>
+              <span className="font-display text-5xl font-black text-white drop-shadow-lg md:text-6xl">{homeScore}</span>
+              <span className="font-display text-3xl font-bold text-white/60">–</span>
+              <span className="font-display text-5xl font-black text-white drop-shadow-lg md:text-6xl">{awayScore}</span>
             </div>
           ) : isLive && hasScore ? (
             <div className="flex flex-col items-center gap-1">
               <div className="flex items-center gap-3">
-                <span className="font-display text-5xl md:text-6xl font-black text-white drop-shadow-lg">
-                  {homeScore}
-                </span>
-                <span className="font-display text-3xl text-white/60 font-bold">–</span>
-                <span className="font-display text-5xl md:text-6xl font-black text-white drop-shadow-lg">
-                  {awayScore}
-                </span>
+                <span className="font-display text-5xl font-black text-white drop-shadow-lg md:text-6xl">{homeScore}</span>
+                <span className="font-display text-3xl font-bold text-white/60">–</span>
+                <span className="font-display text-5xl font-black text-white drop-shadow-lg md:text-6xl">{awayScore}</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="relative flex h-2.5 w-2.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#ff3b30] opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#ff3b30]" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#ff3b30] opacity-75" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#ff3b30]" />
                 </span>
-                <span className="font-mono text-xs text-[#ff3b30] uppercase font-bold tracking-widest">
+                <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#ff3b30]">
                   {match.status === "PAUSED" ? "HT" : "Live"}
-                  {match.minute ? ` · ${match.minute}'` : ""}
+                  <span className="ml-1">
+                    <MatchClock
+                      match={match}
+                      accurate={liveClock ?? (match.minute ? String(match.minute) : null)}
+                      className="text-xs font-bold"
+                    />
+                  </span>
                 </span>
               </div>
             </div>
           ) : isUpcoming ? (
             <div className="flex flex-col items-center gap-1">
-              <span className="font-display text-2xl md:text-3xl text-white font-bold tracking-wide">
-                VS
-              </span>
-              <span className="font-mono text-xs md:text-sm text-white/80 text-center">
-                {formatMatchDate(match.utcDate)}
-              </span>
+              <span className="font-display text-2xl font-bold tracking-wide text-white md:text-3xl">VS</span>
+              <span className="font-mono text-center text-xs text-white/80 md:text-sm">{formatMatchDate(match.utcDate)}</span>
             </div>
           ) : (
             <div className="flex items-center gap-3">
               {hasScore ? (
                 <>
-                  <span className="font-display text-5xl md:text-6xl font-black text-white drop-shadow-lg">
-                    {homeScore}
-                  </span>
-                  <span className="font-display text-3xl text-white/60 font-bold">–</span>
-                  <span className="font-display text-5xl md:text-6xl font-black text-white drop-shadow-lg">
-                    {awayScore}
-                  </span>
+                  <span className="font-display text-5xl font-black text-white drop-shadow-lg md:text-6xl">{homeScore}</span>
+                  <span className="font-display text-3xl font-bold text-white/60">–</span>
+                  <span className="font-display text-5xl font-black text-white drop-shadow-lg md:text-6xl">{awayScore}</span>
                 </>
               ) : (
-                <span className="font-display text-2xl text-white font-bold tracking-wide">VS</span>
+                <span className="font-display text-2xl font-bold tracking-wide text-white">VS</span>
               )}
             </div>
           )}
 
-          {/* Finished label */}
-          {isFinished && (
-            <span className="font-mono text-xs uppercase tracking-widest text-white/60">
-              Full Time
-            </span>
-          )}
+          {isFinished ? <span className="font-mono text-xs uppercase tracking-widest text-white/60">Full Time</span> : null}
 
-          {/* Venue */}
-          {match.venue && (
-            <span className="font-mono text-xs text-white/50 text-center max-w-[160px] leading-snug">
-              {match.venue}
-            </span>
-          )}
+          {match.venue ? (
+            <span className="max-w-[160px] text-center font-mono text-xs leading-snug text-white/50">{match.venue}</span>
+          ) : null}
         </div>
 
-        {/* Away team — right side */}
-        <div
-          className="flex flex-col items-center gap-3 text-center"
-          style={{ color: awayTextColor }}
-        >
+        <div className="flex flex-col items-center gap-3 text-center" style={{ color: awayTextColor }}>
           <Flag code={awayCode} name={awayName} width={64} className="shadow-xl" />
           <div>
-            <p className="font-display text-2xl md:text-3xl font-bold uppercase tracking-widest leading-tight">
+            <p className="font-display text-2xl font-bold uppercase leading-tight tracking-widest md:text-3xl">
               {match.awayTeam?.code ?? awayCode ?? awayName}
             </p>
-            <p className="font-mono text-xs md:text-sm mt-1 opacity-80 uppercase tracking-wider">
-              {awayName}
-            </p>
+            <p className="mt-1 font-mono text-xs uppercase tracking-wider opacity-80 md:text-sm">{awayName}</p>
           </div>
         </div>
       </div>

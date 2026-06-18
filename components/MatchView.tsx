@@ -300,7 +300,12 @@ export function MatchView({
               </div>
 
               {kind === "upcoming" ? (
-                <MatchFaceoffBanner match={match} homeDetail={homeDetail} awayDetail={awayDetail} />
+                <MatchFaceoffBanner
+                  match={match}
+                  homeDetail={homeDetail}
+                  awayDetail={awayDetail}
+                  liveClock={extras?.liveClock ?? null}
+                />
               ) : null}
               {kind === "upcoming" ? (
                 <>
