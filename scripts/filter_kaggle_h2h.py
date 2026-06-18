@@ -40,9 +40,51 @@ class Meeting:
     location: str
 
 
-def load_current_team_codes() -> set[str]:
+def normalize_name(name: str) -> str:
+    return (
+        name.lower()
+        .replace("&", "and")
+        .replace(".", "")
+        .replace("-", " ")
+        .replace("'", "")
+        .replace("cote d ivoire", "ivory coast")
+        .replace("czechia", "czech republic")
+        .replace("south korea", "korea republic")
+        .replace("bosnia and herzegovina", "bosnia and herzegovina")
+        .strip()
+    )
+
+
+def load_team_map() -> dict[str, str]:
     teams = json.loads(TEAMS_PATH.read_text(encoding="utf-8"))
-    return {team["code"] for team in teams}
+    out: dict[str, str] = {}
+    for team in teams:
+        code = team["code"]
+        name = team["name"]
+        out[normalize_name(name)] = code
+
+    # common dataset aliases
+    out.update(
+        {
+            "united states": "USA",
+            "united states of america": "USA",
+            "ivory coast": "CIV",
+            "cote d'ivoire": "CIV",
+            "cote d ivoire": "CIV",
+            "czech republic": "CZE",
+            "czechia": "CZE",
+            "bosnia and herzegovina": "BIH",
+            "cape verde": "CPV",
+            "curacao": "CUW",
+            "south korea": "KOR",
+            "korea republic": "KOR",
+            "iran": "IRN",
+            "saudi arabia": "KSA",
+            "the netherlands": "NED",
+            "netherlands": "NED",
+        }
+    )
+    return out
 
 
 def normalize_tournament(name: str) -> str:
@@ -87,7 +129,7 @@ def main() -> None:
             "kagglehub is not installed. Run: pip install kagglehub"
         ) from exc
 
-    current = load_current_team_codes()
+    team_map = load_team_map()
     dataset_path = Path(kagglehub.dataset_download("martj42/international-football-results-from-1872-to-2017"))
     csv_path = dataset_path / "results.csv"
     if not csv_path.exists():
@@ -98,9 +140,11 @@ def main() -> None:
     with csv_path.open("r", encoding="utf-8", newline="") as f:
         reader = csv.DictReader(f)
         for row in reader:
-            home = row.get("home_team", "").strip()
-            away = row.get("away_team", "").strip()
-            if home not in current or away not in current:
+            home_name = row.get("home_team", "").strip()
+            away_name = row.get("away_team", "").strip()
+            home = team_map.get(normalize_name(home_name))
+            away = team_map.get(normalize_name(away_name))
+            if not home or not away:
                 continue
 
             try:
