@@ -460,6 +460,24 @@ export interface PlayerData {
   markets: PlayerMarket[];
 }
 
+export type PlayerPositionGroup = "GK" | "DEF" | "MID" | "FWD" | "OTHER";
+
+export interface PlayerDirectoryRow {
+  espnId: string;
+  name: string;
+  teamCode: string;
+  teamName: string;
+  group: string;
+  jersey: number | null;
+  positionAbbr: string | null;
+  positionGroup: PlayerPositionGroup;
+  age: number | null;
+  height: string | null;
+  citizenship: string | null;
+  birthPlace: string | null;
+  headshot: string;
+}
+
 const EMPTY_PLAYER_STATS: PlayerMatchStats = {
   appearances: 0,
   goals: 0,
@@ -473,6 +491,107 @@ const EMPTY_PLAYER_STATS: PlayerMatchStats = {
   red: 0,
   ownGoals: 0,
 };
+
+const POSITION_GROUP_ORDER: Record<PlayerPositionGroup, number> = {
+  GK: 0,
+  DEF: 1,
+  MID: 2,
+  FWD: 3,
+  OTHER: 4,
+};
+
+function playerPositionGroup(positionAbbr: string | null): PlayerPositionGroup {
+  const pos = positionAbbr?.toUpperCase() ?? "";
+  if (["G", "GK", "GOALKEEPER"].includes(pos)) return "GK";
+  if (
+    [
+      "D",
+      "DEF",
+      "CB",
+      "LCB",
+      "RCB",
+      "LB",
+      "RB",
+      "LWB",
+      "RWB",
+      "WB",
+      "SW",
+      "DF",
+    ].includes(pos)
+  ) {
+    return "DEF";
+  }
+  if (
+    [
+      "M",
+      "MID",
+      "CM",
+      "CDM",
+      "DM",
+      "CAM",
+      "AM",
+      "LM",
+      "RM",
+      "LW",
+      "RW",
+      "MF",
+    ].includes(pos)
+  ) {
+    return "MID";
+  }
+  if (["F", "FWD", "FW", "ST", "CF", "LF", "RF", "SS"].includes(pos)) return "FWD";
+  return "OTHER";
+}
+
+export const getPlayerDirectory = cache(async (): Promise<PlayerDirectoryRow[]> => {
+  return cached("players:directory:v1", 24 * 3600_000, async () => {
+    const byTeam = await mapLimit(TEAMS, 6, async (team) => {
+      const roster = await espnTeamRoster(team.code).catch((err) => {
+        logOnce(`espn:roster:${team.code}`, err);
+        return [] as EspnRosterPlayer[];
+      });
+      return roster.map((player): PlayerDirectoryRow => ({
+        espnId: player.espnId,
+        name: player.name,
+        teamCode: team.code,
+        teamName: team.name,
+        group: team.group,
+        jersey: player.jersey,
+        positionAbbr: player.positionAbbr,
+        positionGroup: playerPositionGroup(player.positionAbbr),
+        age: player.age,
+        height: player.height,
+        citizenship: player.citizenship,
+        birthPlace: player.birthPlace,
+        headshot: player.headshot,
+      }));
+    });
+
+    const seen = new Set<string>();
+    const players = byTeam
+      .flat()
+      .filter((player) => {
+        const key = `${player.teamCode}:${player.espnId}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      })
+      .sort((a, b) => {
+        const group = a.group.localeCompare(b.group);
+        if (group) return group;
+        const team = a.teamName.localeCompare(b.teamName);
+        if (team) return team;
+        const position = POSITION_GROUP_ORDER[a.positionGroup] - POSITION_GROUP_ORDER[b.positionGroup];
+        if (position) return position;
+        const jerseyA = a.jersey ?? 999;
+        const jerseyB = b.jersey ?? 999;
+        if (jerseyA !== jerseyB) return jerseyA - jerseyB;
+        return a.name.localeCompare(b.name);
+      });
+
+    return players;
+  });
+});
 
 export async function getPlayerData(espnId: string, teamCode: string | null): Promise<PlayerData | null> {
   const [bioBase, roster] = await Promise.all([
