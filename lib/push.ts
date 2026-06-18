@@ -27,6 +27,16 @@ export function vapidPublicKey(): string | null {
   return PUB ?? null;
 }
 
+export function pushDiagnostics() {
+  return {
+    vapidPublicKeySet: Boolean(PUB),
+    vapidPrivateKeySet: Boolean(PRIV),
+    subject: SUBJECT,
+    redisEnabled: redisEnabled(),
+    enabled: pushEnabled(),
+  };
+}
+
 export type MatchAlertKind = "kickoff" | "goal" | "halftime" | "fulltime" | "lineup";
 export type MatchAlertSettings = Partial<Record<MatchAlertKind, boolean>>;
 
@@ -147,4 +157,11 @@ export async function sendToFollowers(
   );
   if (stale.length) await redisPipe(stale);
   return sent;
+}
+
+export async function pushSubscriptionCount(): Promise<number | null> {
+  if (!redisEnabled()) return null;
+  const res = await redisPipe([["HLEN", HASH]]);
+  const value = res?.[0];
+  return typeof value === "number" ? value : Number(value) || null;
 }

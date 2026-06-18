@@ -84,6 +84,15 @@ npx vercel --prod    # or push to a Git repo and import in Vercel/Netlify
 
 Set the API env vars in your hosting dashboard. You do not need a full database for read-heavy public data; add optional Upstash Redis if you want shared response caching, pick'em, reactions, presence, or push subscriptions.
 
+### Push alerts checklist
+
+To make push alerts actually fire:
+
+1. Set `VAPID_PUBLIC_KEY`, `VAPID_PRIVATE_KEY`, and `VAPID_SUBJECT`.
+2. Set `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN`.
+3. Make sure `/api/cron/alerts` is called every minute.
+4. Open `/admin/push` to confirm the backend is healthy.
+
 ## Security posture
 
 `npm audit` reports advisories against Next 14 (all fixed only in Next 15/16) and a dev-only `glob` issue inside `eslint-config-next`. This app does not use the affected surfaces — no `next/image` optimizer, no middleware/rewrites, no CSP nonces, no `beforeInteractive` scripts, no WebSockets — and it is a single-user personal dashboard, so the practical exposure is minimal. The PRD pins Next.js 14; if you ever expose this publicly at scale, upgrade to the latest Next major (`npx @next/codemod@latest upgrade`) and re-run `npm audit`.
