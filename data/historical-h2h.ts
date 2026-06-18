@@ -1,4 +1,4 @@
-export interface H2HRecord {
+﻿export interface H2HRecord {
   teamA: string;    // FIFA code
   teamB: string;    // FIFA code
   played: number;
@@ -11,10 +11,22 @@ export interface H2HRecord {
   lastResultA: number;   // score
   lastResultB: number;
   mostMemorable: string; // one-line description of famous match
+  meetings?: H2HMeeting[];
+}
+
+export interface H2HMeeting {
+  date: string;
+  homeCode: string;
+  awayCode: string;
+  homeScore: number;
+  awayScore: number;
+  competition: string;
+  venue: string;
+  location: string;
 }
 
 export const historicalH2H: H2HRecord[] = [
-  // ARG vs BRA — "Superclásico de las Américas"
+  // ARG vs BRA â€” "SuperclÃ¡sico de las AmÃ©ricas"
   {
     teamA: "ARG",
     teamB: "BRA",
@@ -24,10 +36,10 @@ export const historicalH2H: H2HRecord[] = [
     draws: 25,
     goalsA: 162,
     goalsB: 175,
-    lastMeeting: "Copa América Final 2021",
+    lastMeeting: "Copa AmÃ©rica Final 2021",
     lastResultA: 0,
     lastResultB: 1,
-    mostMemorable: "Brazil won Copa América 2021 final 1–0 with Neymar's tee-up for Di María's chip",
+    mostMemorable: "Brazil won Copa AmÃ©rica 2021 final 1â€“0 with Neymar's tee-up for Di MarÃ­a's chip",
   },
 
   // ARG vs GER
@@ -43,7 +55,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "World Cup Final 2014",
     lastResultA: 0,
     lastResultB: 1,
-    mostMemorable: "Germany beat Argentina 1–0 AET in the 2014 World Cup Final — Götze's extra-time winner sealed Germany's fourth title",
+    mostMemorable: "Germany beat Argentina 1â€“0 AET in the 2014 World Cup Final â€” GÃ¶tze's extra-time winner sealed Germany's fourth title",
   },
 
   // ARG vs FRA
@@ -59,7 +71,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "World Cup Final 2022",
     lastResultA: 3,
     lastResultB: 3,
-    mostMemorable: "Argentina won the 2022 World Cup Final on penalties after Mbappé's hat-trick forced extra time at 3–3",
+    mostMemorable: "Argentina won the 2022 World Cup Final on penalties after MbappÃ©'s hat-trick forced extra time at 3â€“3",
   },
 
   // ARG vs NED
@@ -75,7 +87,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "World Cup Semi-Final 2022",
     lastResultA: 2,
     lastResultB: 2,
-    mostMemorable: "Argentina edged Netherlands 4–3 on penalties in the 2022 World Cup quarter-final after a 2–2 draw",
+    mostMemorable: "Argentina edged Netherlands 4â€“3 on penalties in the 2022 World Cup quarter-final after a 2â€“2 draw",
   },
 
   // ARG vs ENG
@@ -91,7 +103,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "World Cup Quarter-Final 1998",
     lastResultA: 2,
     lastResultB: 2,
-    mostMemorable: "Maradona's 'Hand of God' goal and Goal of the Century in the 1986 World Cup quarter-final stunned England 2–1",
+    mostMemorable: "Maradona's 'Hand of God' goal and Goal of the Century in the 1986 World Cup quarter-final stunned England 2â€“1",
   },
 
   // BRA vs GER
@@ -107,7 +119,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "World Cup Semi-Final 2014",
     lastResultA: 1,
     lastResultB: 7,
-    mostMemorable: "Germany's 7–1 demolition of Brazil in the 2014 World Cup semi-final — the 'Mineirazo' — shocked the world",
+    mostMemorable: "Germany's 7â€“1 demolition of Brazil in the 2014 World Cup semi-final â€” the 'Mineirazo' â€” shocked the world",
   },
 
   // BRA vs FRA
@@ -123,7 +135,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "World Cup Quarter-Final 2006",
     lastResultA: 0,
     lastResultB: 1,
-    mostMemorable: "Zinedine Zidane orchestrated France's 3–0 win over Brazil in the 1998 World Cup final on home soil",
+    mostMemorable: "Zinedine Zidane orchestrated France's 3â€“0 win over Brazil in the 1998 World Cup final on home soil",
   },
 
   // BRA vs NED
@@ -139,7 +151,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "World Cup Third-Place Play-off 2014",
     lastResultA: 0,
     lastResultB: 3,
-    mostMemorable: "Netherlands beat Brazil 3–0 in the 2014 World Cup third-place match after Brazil's historic semi-final humiliation",
+    mostMemorable: "Netherlands beat Brazil 3â€“0 in the 2014 World Cup third-place match after Brazil's historic semi-final humiliation",
   },
 
   // ENG vs GER
@@ -155,7 +167,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "Euro 2020 Round of 16",
     lastResultA: 2,
     lastResultB: 0,
-    mostMemorable: "England beat West Germany 4–2 AET in the 1966 World Cup Final at Wembley to win their only world title",
+    mostMemorable: "England beat West Germany 4â€“2 AET in the 1966 World Cup Final at Wembley to win their only world title",
   },
 
   // ENG vs FRA
@@ -171,10 +183,38 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "World Cup Quarter-Final 2022",
     lastResultA: 1,
     lastResultB: 2,
-    mostMemorable: "France ended England's 2022 World Cup run 2–1 with Giroud's header and Mbappé's composure breaking Harry Kane's penalty record",
+    mostMemorable: "France ended England's 2022 World Cup run 2â€“1 with Giroud's header and MbappÃ©'s composure breaking Harry Kane's penalty record",
   },
-
-  // ENG vs ARG — duplicate of ARG vs ENG stored with ENG as teamA for direct lookup
+  // ENG vs CRO
+  {
+    teamA: "ENG",
+    teamB: "CRO",
+    played: 12,
+    winsA: 7,
+    winsB: 3,
+    draws: 2,
+    goalsA: 22,
+    goalsB: 13,
+    lastMeeting: "World Cup 2026 Group Stage",
+    lastResultA: 4,
+    lastResultB: 2,
+    mostMemorable: "Croatia stunned England 2–1 in the 2018 World Cup semi-final, but England had the last word with a 4–2 win in 2026.",
+    meetings: [
+      { date: "1996-04-24", homeCode: "ENG", awayCode: "CRO", homeScore: 0, awayScore: 0, competition: "International Friendly", venue: "Unknown", location: "Unknown" },
+      { date: "2003-08-20", homeCode: "ENG", awayCode: "CRO", homeScore: 3, awayScore: 1, competition: "International Friendly", venue: "Unknown", location: "Unknown" },
+      { date: "2004-06-21", homeCode: "CRO", awayCode: "ENG", homeScore: 2, awayScore: 4, competition: "UEFA European Championship", venue: "Unknown", location: "Unknown" },
+      { date: "2006-10-11", homeCode: "CRO", awayCode: "ENG", homeScore: 2, awayScore: 0, competition: "UEFA European Championship", venue: "Unknown", location: "Unknown" },
+      { date: "2007-11-21", homeCode: "ENG", awayCode: "CRO", homeScore: 2, awayScore: 3, competition: "UEFA European Championship", venue: "Unknown", location: "Unknown" },
+      { date: "2008-09-10", homeCode: "CRO", awayCode: "ENG", homeScore: 1, awayScore: 4, competition: "FIFA World Cup", venue: "Unknown", location: "Unknown" },
+      { date: "2009-09-09", homeCode: "ENG", awayCode: "CRO", homeScore: 5, awayScore: 1, competition: "FIFA World Cup", venue: "Unknown", location: "Unknown" },
+      { date: "2018-07-11", homeCode: "CRO", awayCode: "ENG", homeScore: 2, awayScore: 1, competition: "FIFA World Cup", venue: "Unknown", location: "Unknown" },
+      { date: "2018-10-12", homeCode: "CRO", awayCode: "ENG", homeScore: 0, awayScore: 0, competition: "UEFA Nations League", venue: "Unknown", location: "Unknown" },
+      { date: "2018-11-18", homeCode: "ENG", awayCode: "CRO", homeScore: 2, awayScore: 1, competition: "UEFA Nations League", venue: "Unknown", location: "Unknown" },
+      { date: "2021-06-13", homeCode: "ENG", awayCode: "CRO", homeScore: 1, awayScore: 0, competition: "UEFA European Championship", venue: "Unknown", location: "Unknown" },
+      { date: "2026-06-17", homeCode: "ENG", awayCode: "CRO", homeScore: 4, awayScore: 2, competition: "FIFA World Cup", venue: "Unknown", location: "Unknown" },
+    ],
+  },
+  // ENG vs ARG â€” duplicate of ARG vs ENG stored with ENG as teamA for direct lookup
   // (handled by lookup logic in the component)
 
   // GER vs FRA
@@ -190,7 +230,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "Euro 2020 Group Stage",
     lastResultA: 1,
     lastResultB: 0,
-    mostMemorable: "West Germany beat France 3–3 AET (5–4 pens) in the legendary 1982 World Cup semi-final in Seville",
+    mostMemorable: "West Germany beat France 3â€“3 AET (5â€“4 pens) in the legendary 1982 World Cup semi-final in Seville",
   },
 
   // GER vs ESP
@@ -206,7 +246,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "Euro 2024 Quarter-Final",
     lastResultA: 1,
     lastResultB: 2,
-    mostMemorable: "Spain beat Germany 1–0 in the 2010 World Cup semi-final with Puyol's header to advance to their first final",
+    mostMemorable: "Spain beat Germany 1â€“0 in the 2010 World Cup semi-final with Puyol's header to advance to their first final",
   },
 
   // GER vs ITA
@@ -222,7 +262,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "UEFA Nations League 2022",
     lastResultA: 3,
     lastResultB: 1,
-    mostMemorable: "Italy beat West Germany 4–3 AET in the 'Game of the Century' — 1970 World Cup semi-final in Mexico City",
+    mostMemorable: "Italy beat West Germany 4â€“3 AET in the 'Game of the Century' â€” 1970 World Cup semi-final in Mexico City",
   },
 
   // ESP vs FRA
@@ -238,7 +278,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "Euro 2024 Semi-Final",
     lastResultA: 2,
     lastResultB: 1,
-    mostMemorable: "Spain eliminated France 2–1 in the Euro 2024 semi-final with Yamal's stunning long-range equaliser",
+    mostMemorable: "Spain eliminated France 2â€“1 in the Euro 2024 semi-final with Yamal's stunning long-range equaliser",
   },
 
   // ESP vs BRA
@@ -254,7 +294,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "Confederations Cup Final 2013",
     lastResultA: 0,
     lastResultB: 3,
-    mostMemorable: "Brazil thrashed world champions Spain 3–0 in the 2013 Confederations Cup final with Neymar and Fred goals",
+    mostMemorable: "Brazil thrashed world champions Spain 3â€“0 in the 2013 Confederations Cup final with Neymar and Fred goals",
   },
 
   // ESP vs ARG
@@ -270,10 +310,10 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "Friendly 2023",
     lastResultA: 3,
     lastResultB: 1,
-    mostMemorable: "Spain beat Argentina 2–1 in the 2008 Artemio Franchi Trophy, Cesc Fàbregas scoring the winner as a substitute",
+    mostMemorable: "Spain beat Argentina 2â€“1 in the 2008 Artemio Franchi Trophy, Cesc FÃ bregas scoring the winner as a substitute",
   },
 
-  // USA vs MEX — "El Tri vs USMNT"
+  // USA vs MEX â€” "El Tri vs USMNT"
   {
     teamA: "USA",
     teamB: "MEX",
@@ -286,7 +326,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "CONCACAF Nations League Final 2024",
     lastResultA: 2,
     lastResultB: 0,
-    mostMemorable: "USA beat Mexico 2–0 in the 2002 World Cup round of 16 — the first time they had beaten Mexico at a World Cup",
+    mostMemorable: "USA beat Mexico 2â€“0 in the 2002 World Cup round of 16 â€” the first time they had beaten Mexico at a World Cup",
   },
 
   // USA vs ENG
@@ -302,7 +342,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "World Cup Group Stage 2022",
     lastResultA: 0,
     lastResultB: 0,
-    mostMemorable: "USA shocked England 1–0 in the 1950 World Cup group stage — one of the biggest upsets in football history",
+    mostMemorable: "USA shocked England 1â€“0 in the 1950 World Cup group stage â€” one of the biggest upsets in football history",
   },
 
   // USA vs GER
@@ -318,7 +358,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "World Cup Group Stage 2014",
     lastResultA: 0,
     lastResultB: 1,
-    mostMemorable: "USA and Germany's 2014 World Cup group match ended 1–0 to Germany but both teams advanced — a tense tactical affair",
+    mostMemorable: "USA and Germany's 2014 World Cup group match ended 1â€“0 to Germany but both teams advanced â€” a tense tactical affair",
   },
 
   // FRA vs POR
@@ -334,10 +374,10 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "Nations League 2022",
     lastResultA: 0,
     lastResultB: 1,
-    mostMemorable: "France beat Portugal 1–0 in the Euro 2000 semi-final with Zinedine Zidane's golden goal penalty",
+    mostMemorable: "France beat Portugal 1â€“0 in the Euro 2000 semi-final with Zinedine Zidane's golden goal penalty",
   },
 
-  // ITA vs GER — duplicate key handled by component; primary stored under GER vs ITA
+  // ITA vs GER â€” duplicate key handled by component; primary stored under GER vs ITA
 
   // ITA vs ARG
   {
@@ -352,10 +392,10 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "World Cup Final 1990",
     lastResultA: 1,
     lastResultB: 1,
-    mostMemorable: "Argentina beat Italy on penalties in the 1990 World Cup semi-final in Naples — Maradona's spiritual home",
+    mostMemorable: "Argentina beat Italy on penalties in the 1990 World Cup semi-final in Naples â€” Maradona's spiritual home",
   },
 
-  // NED vs GER — "De Klassieker"
+  // NED vs GER â€” "De Klassieker"
   {
     teamA: "NED",
     teamB: "GER",
@@ -368,7 +408,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "Nations League 2022",
     lastResultA: 1,
     lastResultB: 1,
-    mostMemorable: "Netherlands beat West Germany 2–1 in the 1988 European Championship semi-final, with van Basten's header",
+    mostMemorable: "Netherlands beat West Germany 2â€“1 in the 1988 European Championship semi-final, with van Basten's header",
   },
 
   // NED vs FRA
@@ -384,10 +424,10 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "Euro 2024 Semi-Final",
     lastResultA: 1,
     lastResultB: 2,
-    mostMemorable: "France eliminated Netherlands 2–1 in the Euro 2024 semi-final with a Kylian Mbappé own-goal and Dumfries strike",
+    mostMemorable: "France eliminated Netherlands 2â€“1 in the Euro 2024 semi-final with a Kylian MbappÃ© own-goal and Dumfries strike",
   },
 
-  // POR vs ESP — "Iberian Derby"
+  // POR vs ESP â€” "Iberian Derby"
   {
     teamA: "POR",
     teamB: "ESP",
@@ -400,7 +440,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "World Cup Group Stage 2022",
     lastResultA: 0,
     lastResultB: 0,
-    mostMemorable: "Portugal and Spain drew 3–3 in the 2018 World Cup group stage — Cristiano Ronaldo's hat-trick matched Diego Costa's brace",
+    mostMemorable: "Portugal and Spain drew 3â€“3 in the 2018 World Cup group stage â€” Cristiano Ronaldo's hat-trick matched Diego Costa's brace",
   },
 
   // URU vs ARG
@@ -413,10 +453,10 @@ export const historicalH2H: H2HRecord[] = [
     draws: 21,
     goalsA: 313,
     goalsB: 341,
-    lastMeeting: "Copa América Group Stage 2024",
+    lastMeeting: "Copa AmÃ©rica Group Stage 2024",
     lastResultA: 0,
     lastResultB: 0,
-    mostMemorable: "Uruguay beat Argentina 4–2 in the first-ever World Cup Final in 1930 in Montevideo",
+    mostMemorable: "Uruguay beat Argentina 4â€“2 in the first-ever World Cup Final in 1930 in Montevideo",
   },
 
   // MEX vs ARG
@@ -432,7 +472,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "World Cup Group Stage 2022",
     lastResultA: 0,
     lastResultB: 2,
-    mostMemorable: "Argentina beat Mexico 2–0 in the 1986 World Cup semi-final, Maradona setting up Jorge Valdano for the second",
+    mostMemorable: "Argentina beat Mexico 2â€“0 in the 1986 World Cup semi-final, Maradona setting up Jorge Valdano for the second",
   },
 
   // CRO vs BRA
@@ -448,7 +488,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "World Cup Quarter-Final 2022",
     lastResultA: 1,
     lastResultB: 1,
-    mostMemorable: "Croatia eliminated Brazil on penalties in the 2022 World Cup quarter-final after a 1–1 draw, ending Neymar's last World Cup",
+    mostMemorable: "Croatia eliminated Brazil on penalties in the 2022 World Cup quarter-final after a 1â€“1 draw, ending Neymar's last World Cup",
   },
 
   // SEN vs COL
@@ -464,7 +504,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "Friendly 2022",
     lastResultA: 0,
     lastResultB: 2,
-    mostMemorable: "Senegal beat Colombia 2–0 in 2022 to establish themselves as Africa's strongest side ahead of the World Cup",
+    mostMemorable: "Senegal beat Colombia 2â€“0 in 2022 to establish themselves as Africa's strongest side ahead of the World Cup",
   },
 
   // JPN vs ESP
@@ -480,7 +520,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "World Cup Group Stage 2022",
     lastResultA: 2,
     lastResultB: 1,
-    mostMemorable: "Japan shocked Spain 2–1 in 2022 World Cup group stage — both Japan and Spain advanced but Spain were upended",
+    mostMemorable: "Japan shocked Spain 2â€“1 in 2022 World Cup group stage â€” both Japan and Spain advanced but Spain were upended",
   },
 
   // MAR vs POR
@@ -496,7 +536,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "World Cup Quarter-Final 2022",
     lastResultA: 1,
     lastResultB: 0,
-    mostMemorable: "Morocco beat Portugal 1–0 in the 2022 World Cup quarter-final — Africa's greatest-ever World Cup result",
+    mostMemorable: "Morocco beat Portugal 1â€“0 in the 2022 World Cup quarter-final â€” Africa's greatest-ever World Cup result",
   },
 
   // AUS vs ARG
@@ -512,7 +552,7 @@ export const historicalH2H: H2HRecord[] = [
     lastMeeting: "World Cup Round of 16 2022",
     lastResultA: 1,
     lastResultB: 2,
-    mostMemorable: "Argentina edged Australia 2–1 in the 2022 World Cup round of 16, with Messi scoring and Alvarez sealing victory",
+    mostMemorable: "Argentina edged Australia 2â€“1 in the 2022 World Cup round of 16, with Messi scoring and Alvarez sealing victory",
   },
 
   // ECU vs URU
@@ -525,10 +565,10 @@ export const historicalH2H: H2HRecord[] = [
     draws: 10,
     goalsA: 40,
     goalsB: 54,
-    lastMeeting: "Copa América Group Stage 2024",
+    lastMeeting: "Copa AmÃ©rica Group Stage 2024",
     lastResultA: 0,
     lastResultB: 1,
-    mostMemorable: "Ecuador beat Uruguay 1–0 in the Copa América 2021 group stage with Moisés Caicedo's headed goal",
+    mostMemorable: "Ecuador beat Uruguay 1â€“0 in the Copa AmÃ©rica 2021 group stage with MoisÃ©s Caicedo's headed goal",
   },
 ];
 
@@ -562,3 +602,5 @@ export function findH2H(codeA: string, codeB: string): H2HRecord | null {
 
   return null;
 }
+
+
