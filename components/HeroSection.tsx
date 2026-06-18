@@ -14,6 +14,7 @@ import { LocalTime } from "@/components/LocalTime";
 import { OddsBar } from "@/components/OddsBar";
 import { Scoreboard } from "@/components/Scoreboard";
 import { TeamColorProvider } from "@/components/TeamColorProvider";
+import { useMatchExtras } from "@/hooks/useMatchExtras";
 import { useLiveMatches, useUpcomingMatches } from "@/hooks/useFixtures";
 import { useMatchOdds } from "@/hooks/useMatchOdds";
 import { stageLabel } from "@/lib/format";
@@ -57,10 +58,12 @@ function FeaturedMatch({
   match,
   live,
   featuredLiveClock,
+  liveExtrasClock,
 }: {
   match: Match;
   live: boolean;
   featuredLiveClock?: string | null;
+  liveExtrasClock?: string | null;
 }) {
   const stadium = getStadium(match.stadiumId);
   const recentGoals = match.events.filter((e) => e.type === "GOAL").slice(-3).reverse();
@@ -85,8 +88,8 @@ function FeaturedMatch({
           <HeroTeam match={match} side="home" />
 
           <div className="flex min-w-[150px] flex-col items-center gap-2 md:min-w-[260px]">
-            {live ? (
-              <Scoreboard match={match} accurateClock={featuredLiveClock ?? null} />
+            {live || liveExtrasClock ? (
+              <Scoreboard match={match} accurateClock={liveExtrasClock ?? featuredLiveClock ?? null} />
             ) : (
               <>
                 <p className="font-mono text-xs uppercase tracking-widest text-dim">
@@ -136,11 +139,9 @@ function FeaturedMatch({
 export function HeroSection({
   initialLive,
   initialUpcoming,
-  featuredLiveClock,
 }: {
   initialLive?: Sourced<Match[]>;
   initialUpcoming?: Sourced<Match[]>;
-  featuredLiveClock?: string | null;
 }) {
   const liveState = useLiveMatches(initialLive);
   const upcomingState = useUpcomingMatches(initialUpcoming);
@@ -150,6 +151,10 @@ export function HeroSection({
   const featured = live[0] ?? upcoming[0] ?? null;
   const others = live.slice(1);
   const activeState = live.length ? liveState : upcomingState;
+  const kickoffMs = featured ? new Date(featured.utcDate).getTime() : null;
+  const shouldTreatAsLive = Boolean(featured && kickoffMs && Date.now() >= kickoffMs - 60_000);
+  const featuredExtras = useMatchExtras(featured?.id ?? "", shouldTreatAsLive, false, Boolean(featured && shouldTreatAsLive));
+  const liveExtrasClock = featuredExtras.extras?.liveClock ?? null;
 
   return (
     <section aria-label="Featured match" className="pitch-bg relative overflow-hidden border-b border-white/10">
@@ -169,7 +174,11 @@ export function HeroSection({
         </div>
 
         {featured ? (
-          <FeaturedMatch match={featured} live={live.length > 0} featuredLiveClock={featuredLiveClock} />
+          <FeaturedMatch
+            match={featured}
+            live={live.length > 0}
+            liveExtrasClock={liveExtrasClock}
+          />
         ) : (
           <p className="surface-card rounded-2xl px-4 py-10 text-center text-dim">
             The tournament schedule is loading…

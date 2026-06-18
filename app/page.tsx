@@ -18,7 +18,7 @@ import { TodayStrip } from "@/components/TodayStrip";
 import { TopScorers } from "@/components/TopScorers";
 import { TotalsBanner } from "@/components/TotalsBanner";
 import { PlayerHeadshot } from "@/components/PlayerHeadshot";
-import { getMatchExtras, getPlayerData, getTeamRosterIndex } from "@/lib/data";
+import { getPlayerData, getTeamRosterIndex } from "@/lib/data";
 import { usageSnapshot } from "@/lib/cache";
 import { slimSourcedMatches } from "@/lib/cache-policy";
 import { getAllMatches, getLiveMatches, getScorers, getStandings } from "@/lib/data";
@@ -31,15 +31,7 @@ export const runtime = "nodejs";
 async function HeroLoader() {
   const [live, all] = await Promise.all([getLiveMatches(), getAllMatches()]);
   const upcoming = { ...all, data: all.data.filter((m) => statusKind(m.status) === "upcoming") };
-  const featuredLiveClock =
-    live.data[0]?.id ? (await getMatchExtras(live.data[0].id).catch(() => null))?.extras?.liveClock ?? null : null;
-  return (
-    <HeroSection
-      initialLive={slimSourcedMatches(live, { keepEvents: true })}
-      initialUpcoming={slimSourcedMatches(upcoming)}
-      featuredLiveClock={featuredLiveClock}
-    />
-  );
+  return <HeroSection initialLive={slimSourcedMatches(live, { keepEvents: true })} initialUpcoming={slimSourcedMatches(upcoming)} />;
 }
 
 async function StandingsLoader() {
