@@ -1,0 +1,10154 @@
+{
+  "MEX-RSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-KOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-CZE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-CAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-BIH": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-QAT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-SUI": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-BRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-MAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-HAI": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-SCO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-USA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-PAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-AUS": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-TUR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-GER": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-CUW": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-CIV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MEX-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-KOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-CZE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-CAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-BIH": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-QAT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-SUI": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-BRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-MAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-HAI": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-SCO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-USA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-PAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-AUS": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-TUR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-GER": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-CUW": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-CIV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "RSA-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-CZE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-CAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-BIH": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-QAT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-SUI": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-BRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-MAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-HAI": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-SCO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-USA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-PAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-AUS": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-TUR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-GER": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-CUW": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-CIV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KOR-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-CAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-BIH": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-QAT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-SUI": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-BRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-MAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-HAI": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-SCO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-USA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-PAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-AUS": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-TUR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-GER": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-CUW": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-CIV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CZE-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-BIH": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-QAT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-SUI": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-BRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-MAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-HAI": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-SCO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-USA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-PAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-AUS": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-TUR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-GER": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-CUW": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-CIV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CAN-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-QAT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-SUI": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-BRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-MAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-HAI": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-SCO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-USA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-PAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-AUS": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-TUR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-GER": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-CUW": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-CIV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BIH-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-SUI": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-BRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-MAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-HAI": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-SCO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-USA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-PAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-AUS": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-TUR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-GER": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-CUW": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-CIV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "QAT-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-BRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-MAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-HAI": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-SCO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-USA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-PAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-AUS": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-TUR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-GER": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-CUW": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-CIV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SUI-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-MAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-HAI": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-SCO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-USA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-PAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-AUS": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-TUR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-GER": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-CUW": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-CIV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BRA-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-HAI": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-SCO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-USA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-PAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-AUS": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-TUR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-GER": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-CUW": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-CIV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "MAR-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-SCO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-USA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-PAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-AUS": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-TUR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-GER": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-CUW": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-CIV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "HAI-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-USA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-PAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-AUS": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-TUR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-GER": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-CUW": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-CIV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SCO-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-PAR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-AUS": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-TUR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-GER": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-CUW": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-CIV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "USA-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-AUS": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-TUR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-GER": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-CUW": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-CIV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "PAR-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-TUR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-GER": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-CUW": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-CIV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUS-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-GER": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-CUW": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-CIV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUR-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-CUW": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-CIV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GER-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-CIV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CUW-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-ECU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CIV-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-NED": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ECU-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-JPN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NED-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-SWE": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JPN-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-TUN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SWE-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-BEL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "TUN-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-EGY": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "BEL-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-IRN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "EGY-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-NZL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRN-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-ESP": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NZL-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-CPV": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ESP-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CPV-KSA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CPV-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CPV-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CPV-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CPV-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CPV-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CPV-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CPV-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CPV-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CPV-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CPV-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CPV-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CPV-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CPV-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CPV-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CPV-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CPV-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CPV-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KSA-URU": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KSA-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KSA-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KSA-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KSA-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KSA-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KSA-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KSA-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KSA-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KSA-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KSA-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KSA-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KSA-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KSA-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KSA-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KSA-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "KSA-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "URU-FRA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "URU-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "URU-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "URU-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "URU-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "URU-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "URU-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "URU-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "URU-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "URU-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "URU-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "URU-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "URU-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "URU-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "URU-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "URU-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "FRA-SEN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "FRA-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "FRA-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "FRA-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "FRA-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "FRA-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "FRA-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "FRA-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "FRA-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "FRA-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "FRA-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "FRA-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "FRA-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "FRA-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "FRA-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SEN-IRQ": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SEN-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SEN-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SEN-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SEN-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SEN-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SEN-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SEN-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SEN-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SEN-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SEN-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SEN-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SEN-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "SEN-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRQ-NOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRQ-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRQ-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRQ-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRQ-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRQ-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRQ-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRQ-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRQ-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRQ-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRQ-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRQ-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "IRQ-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NOR-ARG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NOR-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NOR-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NOR-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NOR-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NOR-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NOR-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NOR-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NOR-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NOR-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NOR-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "NOR-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ARG-ALG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ARG-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ARG-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ARG-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ARG-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ARG-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ARG-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ARG-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ARG-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ARG-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ARG-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ALG-AUT": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ALG-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ALG-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ALG-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ALG-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ALG-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ALG-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ALG-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ALG-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ALG-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUT-JOR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUT-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUT-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUT-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUT-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUT-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUT-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUT-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "AUT-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JOR-POR": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JOR-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JOR-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JOR-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JOR-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JOR-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JOR-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "JOR-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "POR-COD": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "POR-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "POR-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "POR-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "POR-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "POR-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "POR-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "COD-UZB": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "COD-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "COD-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "COD-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "COD-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "COD-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "UZB-COL": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "UZB-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "UZB-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "UZB-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "UZB-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "COL-ENG": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "COL-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "COL-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "COL-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ENG-CRO": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ENG-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "ENG-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CRO-GHA": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "CRO-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  },
+  "GHA-PAN": {
+    "played": 0,
+    "aWins": 0,
+    "draws": 0,
+    "bWins": 0,
+    "lastMeeting": "",
+    "note": "",
+    "meetings": []
+  }
+}

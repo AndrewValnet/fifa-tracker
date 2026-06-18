@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "h2h:add": "node scripts/add-h2h-meeting.mjs"
+    "h2h:add": "node scripts/add-h2h-meeting.mjs",
+    "h2h:bulk": "node scripts/import-h2h-bulk.mjs",
+    "h2h:template": "node scripts/build-h2h-template.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
