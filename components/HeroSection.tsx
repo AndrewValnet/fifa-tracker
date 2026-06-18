@@ -15,6 +15,7 @@ import { OddsBar } from "@/components/OddsBar";
 import { Scoreboard } from "@/components/Scoreboard";
 import { TeamColorProvider } from "@/components/TeamColorProvider";
 import { useLiveMatch } from "@/hooks/useLiveMatch";
+import { useMatchExtras } from "@/hooks/useMatchExtras";
 import { useLiveMatches, useUpcomingMatches } from "@/hooks/useFixtures";
 import { useMatchOdds } from "@/hooks/useMatchOdds";
 import { stageLabel, statusKind } from "@/lib/format";
@@ -57,9 +58,11 @@ function HeroOdds({ match }: { match: Match }) {
 function FeaturedMatch({
   match,
   live,
+  liveClock,
 }: {
   match: Match;
   live: boolean;
+  liveClock?: string | null;
 }) {
   const stadium = getStadium(match.stadiumId);
   const recentGoals = match.events.filter((e) => e.type === "GOAL").slice(-3).reverse();
@@ -85,7 +88,7 @@ function FeaturedMatch({
 
           <div className="flex min-w-[150px] flex-col items-center gap-2 md:min-w-[260px]">
             {live ? (
-              <Scoreboard match={match} />
+              <Scoreboard match={match} accurateClock={liveClock ?? null} />
             ) : (
               <>
                 <p className="font-mono text-xs uppercase tracking-widest text-dim">
@@ -160,6 +163,12 @@ export function HeroSection({
   );
   const featuredMatch = featuredLive.match ?? featured;
   const featuredIsLive = featuredMatch ? statusKind(featuredMatch.status) === "live" : false;
+  const featuredExtras = useMatchExtras(
+    featuredMatch?.id ?? "",
+    featuredIsLive,
+    featuredMatch ? statusKind(featuredMatch.status) === "finished" : false,
+    Boolean(featuredMatch && featuredIsLive),
+  );
 
   return (
     <section aria-label="Featured match" className="pitch-bg relative overflow-hidden border-b border-white/10">
@@ -179,7 +188,11 @@ export function HeroSection({
         </div>
 
         {featured ? (
-          <FeaturedMatch match={featuredMatch ?? featured} live={featuredIsLive} />
+          <FeaturedMatch
+            match={featuredMatch ?? featured}
+            live={featuredIsLive}
+            liveClock={featuredExtras.extras?.liveClock ?? null}
+          />
         ) : (
           <p className="surface-card rounded-2xl px-4 py-10 text-center text-dim">
             The tournament schedule is loading…
