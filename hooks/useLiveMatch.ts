@@ -10,7 +10,7 @@ import type { Match, Sourced } from "@/lib/types";
 export function useLiveMatch(id: string, initial?: Sourced<Match>) {
   const { data, error, isLoading } = useSWR<Sourced<Match>>(`/api/match/${id}`, jsonFetcher, {
     fallbackData: initial,
-    revalidateOnMount: initial ? false : undefined,
+    revalidateOnMount: true,
     revalidateOnFocus: true,
     refreshInterval: (latest) => {
       const status = latest?.data?.status;
