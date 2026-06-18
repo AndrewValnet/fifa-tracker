@@ -125,7 +125,7 @@ function Card({
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="min-w-0 scroll-mt-24 rounded-xl border border-edge bg-panel/80 p-4 md:p-5">
+    <section id={id} className="surface-card min-w-0 scroll-mt-24 rounded-2xl p-4 md:p-5">
       <SectionHeader title={title} right={right} />
       {children}
     </section>
@@ -239,7 +239,7 @@ export function MatchView({
               ← War Room
             </Link>
             <span className="flex items-center gap-2">
-              <span className="rounded-full border border-edge bg-panel px-3 py-1 font-mono uppercase tracking-wider">
+              <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1 font-mono uppercase tracking-wider shadow-inner shadow-black/20">
                 {stageLabel(match.stage, match.group)}
                 {match.matchday && match.stage === "GROUP_STAGE" ? ` · MD${match.matchday}` : ""}
               </span>
@@ -253,7 +253,12 @@ export function MatchView({
           </div>
 
           {/* header: teams + scoreboard */}
-          <header className="grid grid-cols-1 items-center gap-6 md:grid-cols-[1fr_auto_1fr] md:gap-10">
+          <header className="premium-border surface-glass relative overflow-hidden rounded-[2rem] px-4 py-7 md:px-8">
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-x-8 top-0 h-1 rounded-b-full bg-gradient-to-r from-[var(--home-color)] via-sky to-[var(--away-color)]"
+            />
+            <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-[1fr_auto_1fr] md:gap-10">
             <TeamHeader match={match} side="home" detail={homeDetail} />
 
             <div className="order-first flex min-w-[220px] flex-col items-center gap-3 md:order-none md:min-w-[280px]">
@@ -313,6 +318,7 @@ export function MatchView({
             </div>
 
             <TeamHeader match={match} side="away" detail={awayDetail} />
+            </div>
           </header>
 
           <ReactionsBar matchId={match.id} />
@@ -331,14 +337,14 @@ export function MatchView({
           {sectionLinks.length ? (
             <nav
               aria-label="Match sections"
-              className="sticky top-0 z-30 -mx-4 mt-6 border-y border-edge bg-navy/95 px-4 py-2 backdrop-blur md:static md:mx-0 md:border-0 md:bg-transparent md:px-0 md:py-0"
+              className="surface-glass sticky top-0 z-30 -mx-4 mt-6 rounded-none border-x-0 px-4 py-2 md:static md:mx-0 md:rounded-2xl md:border md:p-2"
             >
               <div className="flex snap-x gap-2 overflow-x-auto pb-0.5 md:flex-wrap md:justify-center md:overflow-visible">
                 {sectionLinks.map((link) => (
                   <a
                     key={link.href}
                     href={link.href}
-                    className="shrink-0 snap-start whitespace-nowrap rounded-full border border-edge bg-panel/80 px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-dim transition hover:border-pitch/60 hover:text-ink"
+                    className="shrink-0 snap-start whitespace-nowrap rounded-full border border-white/10 bg-white/5 px-3 py-1.5 font-mono text-[11px] uppercase tracking-wider text-dim transition hover:border-pitch/60 hover:bg-pitch/10 hover:text-ink"
                   >
                     {link.label}
                   </a>

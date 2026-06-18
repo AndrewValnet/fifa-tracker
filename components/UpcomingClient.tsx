@@ -26,7 +26,7 @@ const GROUPS = "ABCDEFGHIJKL".split("");
 const COUNTRIES = ["United States", "Canada", "Mexico"];
 
 const selectCls =
-  "rounded-lg border border-edge bg-panel px-2.5 py-1.5 text-xs text-ink focus:border-pitch focus:outline-none";
+  "rounded-xl border border-white/10 bg-black/20 px-2.5 py-1.5 text-xs text-ink outline-none transition focus:border-pitch focus:ring-2 focus:ring-pitch/20";
 
 export function UpcomingClient({ initial }: { initial?: Sourced<Match[]> }) {
   const { matches, source } = useAllMatches(initial);
@@ -72,7 +72,7 @@ export function UpcomingClient({ initial }: { initial?: Sourced<Match[]> }) {
   return (
     <div>
       <div className="mb-4 flex flex-wrap items-center gap-2">
-        <div role="tablist" aria-label="Match status" className="flex rounded-lg border border-edge bg-panel p-0.5">
+        <div role="tablist" aria-label="Match status" className="surface-glass flex rounded-full p-1">
           {STATUS_TABS.map((t) => (
             <button
               key={t.key}
@@ -80,8 +80,8 @@ export function UpcomingClient({ initial }: { initial?: Sourced<Match[]> }) {
               aria-selected={tab === t.key}
               onClick={() => setTab(t.key)}
               className={clsx(
-                "rounded-md px-3 py-1.5 text-xs transition-colors",
-                tab === t.key ? "bg-panel2 font-semibold text-ink" : "text-dim hover:text-ink",
+                "rounded-full px-3 py-1.5 text-xs transition",
+                tab === t.key ? "bg-pitch font-semibold text-navy shadow-lg shadow-pitch/20" : "text-dim hover:text-ink",
               )}
             >
               {t.label}
@@ -157,7 +157,7 @@ export function UpcomingClient({ initial }: { initial?: Sourced<Match[]> }) {
           ))}
         </div>
       ) : (
-        <p className="rounded-lg border border-dashed border-edge px-4 py-10 text-center text-sm text-dim">
+        <p className="surface-card rounded-2xl px-4 py-10 text-center text-sm text-dim">
           Nothing matches those filters.
         </p>
       )}

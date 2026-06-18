@@ -14,6 +14,8 @@ const config: Config = {
         pitch: "var(--pitch)",
         live: "var(--live)",
         gold: "var(--gold)",
+        sky: "var(--sky)",
+        violet: "var(--violet)",
       },
       fontFamily: {
         display: ["var(--font-oswald)", "Arial Narrow", "sans-serif"],

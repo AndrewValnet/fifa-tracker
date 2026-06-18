@@ -45,10 +45,10 @@ export function NewsFeed() {
             aria-selected={tag === t}
             onClick={() => setTag(t)}
             className={clsx(
-              "rounded-full border px-3 py-1 text-xs transition-colors",
+              "rounded-full border px-3 py-1 text-xs transition",
               tag === t
-                ? "border-pitch/60 bg-pitch/15 font-semibold text-pitch"
-                : "border-edge text-dim hover:border-pitch/40 hover:text-ink",
+                ? "border-pitch/60 bg-pitch/15 font-semibold text-pitch shadow-lg shadow-pitch/5"
+                : "border-white/10 bg-white/5 text-dim hover:border-pitch/40 hover:text-ink",
             )}
           >
             {t}
@@ -69,7 +69,7 @@ export function NewsFeed() {
           ))}
         </div>
       ) : (
-        <p className="rounded-lg border border-dashed border-edge px-4 py-8 text-center text-sm text-dim">
+        <p className="surface-card rounded-2xl px-4 py-8 text-center text-sm text-dim">
           No “{tag}” headlines right now.
         </p>
       )}

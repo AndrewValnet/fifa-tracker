@@ -60,12 +60,20 @@ function FeaturedMatch({ match, live }: { match: Match; live: boolean }) {
   return (
     <TeamColorProvider homeCode={match.homeTeam?.code} awayCode={match.awayTeam?.code}>
       {live ? <GoalBanner match={match} /> : null}
-      <div className="team-gradient rounded-2xl border border-edge/70 px-4 py-8 md:px-10">
+      <div className="team-gradient premium-border surface-glass relative overflow-hidden rounded-[2rem] px-4 py-8 md:px-10">
+        <span
+          aria-hidden
+          className="pointer-events-none absolute inset-x-8 top-0 h-1 rounded-b-full bg-gradient-to-r from-[var(--home-color)] via-sky to-[var(--away-color)]"
+        />
+        <span
+          aria-hidden
+          className="pointer-events-none absolute left-1/2 top-0 h-32 w-2/3 -translate-x-1/2 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.16),transparent_62%)]"
+        />
         <p className="mb-6 text-center text-xs uppercase tracking-[0.3em] text-dim">
           {live ? "Live from" : "Next match"} · {stadium ? `${stadium.name}, ${stadium.city}` : "World Cup 2026"}
         </p>
 
-        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 md:gap-8">
+        <div className="grid grid-cols-1 items-center gap-5 md:grid-cols-[1fr_auto_1fr] md:gap-8">
           <HeroTeam match={match} side="home" />
 
           <div className="flex min-w-[150px] flex-col items-center gap-2 md:min-w-[260px]">
@@ -107,7 +115,7 @@ function FeaturedMatch({ match, live }: { match: Match; live: boolean }) {
           <Link
             href={`/match/${match.id}`}
             prefetch={false}
-            className="inline-block rounded-full bg-pitch px-6 py-2.5 font-display text-sm font-semibold uppercase tracking-wider text-navy transition-transform hover:scale-105"
+            className="inline-block rounded-full bg-gradient-to-r from-pitch via-sky to-gold px-6 py-2.5 font-display text-sm font-semibold uppercase tracking-wider text-navy shadow-xl shadow-pitch/20 transition-transform hover:scale-105"
           >
             {live ? "Open match centre" : "Match preview"}
           </Link>
@@ -134,10 +142,10 @@ export function HeroSection({
   const activeState = live.length ? liveState : upcomingState;
 
   return (
-    <section aria-label="Featured match" className="pitch-bg border-b border-edge">
-      <div className="mx-auto max-w-shell px-4 pb-8 pt-6 md:pt-10">
+    <section aria-label="Featured match" className="pitch-bg relative overflow-hidden border-b border-white/10">
+      <div className="mx-auto max-w-shell px-4 pb-10 pt-6 md:pt-12">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
-          <h1 className="font-display text-2xl font-bold uppercase tracking-wide md:text-3xl">
+          <h1 className="hero-copy-gradient font-display text-4xl font-bold uppercase leading-none tracking-wide md:text-6xl">
             World Cup <span className="text-pitch">2026</span> War Room
           </h1>
           <div className="flex flex-col items-end gap-1 text-right">
@@ -153,7 +161,7 @@ export function HeroSection({
         {featured ? (
           <FeaturedMatch match={featured} live={live.length > 0} />
         ) : (
-          <p className="rounded-xl border border-edge bg-panel px-4 py-10 text-center text-dim">
+          <p className="surface-card rounded-2xl px-4 py-10 text-center text-dim">
             The tournament schedule is loading…
           </p>
         )}

@@ -11,7 +11,7 @@ export function VenueCard({ stadium }: { stadium: Stadium }) {
   const osmLink = `https://www.openstreetmap.org/?mlat=${stadium.lat}&mlon=${stadium.lng}#map=15/${stadium.lat}/${stadium.lng}`;
 
   return (
-    <div className="overflow-hidden rounded-xl border border-edge bg-panel">
+    <div className="surface-card overflow-hidden rounded-2xl">
       <StadiumPhoto src={stadium.image} alt={stadium.name} />
       <div className="grid gap-4 p-4 md:grid-cols-2">
         <div>
@@ -40,7 +40,7 @@ export function VenueCard({ stadium }: { stadium: Stadium }) {
           title={`Map of ${stadium.name}`}
           src={osmEmbed}
           loading="lazy"
-          className="h-48 w-full rounded-lg border border-edge"
+          className="h-48 w-full rounded-xl border border-white/10"
         />
       </div>
     </div>

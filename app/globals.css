@@ -4,15 +4,18 @@
 
 :root {
   /* Base palette (PRD §8.1) */
-  --bg: #0a0e1a;
-  --surface: #131929;
-  --surface-2: #1c2540;
-  --border: #2a3354;
-  --text: #f0f4ff;
-  --text-dim: #8a97bf;
-  --pitch: #00d45e;
-  --live: #ff3b30;
-  --gold: #ffd700;
+  --bg: #060913;
+  --surface: #11192a;
+  --surface-2: #18243d;
+  --surface-3: #223155;
+  --border: #314063;
+  --text: #f7fbff;
+  --text-dim: #9aa9d1;
+  --pitch: #00e58b;
+  --live: #ff4357;
+  --gold: #ffd166;
+  --sky: #5cc8ff;
+  --violet: #a78bfa;
 
   /* Per-match team theming (overridden by TeamColorProvider) */
   --home-color: #00d45e;
@@ -25,8 +28,28 @@ html {
 
 body {
   background-color: var(--bg);
+  background-image:
+    linear-gradient(180deg, rgba(8, 13, 28, 0.08) 0%, rgba(6, 9, 19, 1) 48%, rgba(8, 7, 17, 1) 100%),
+    linear-gradient(115deg, rgba(0, 229, 139, 0.12) 0%, transparent 34%),
+    linear-gradient(245deg, rgba(255, 209, 102, 0.12) 0%, transparent 38%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 88px);
+  background-attachment: fixed;
   color: var(--text);
   min-height: 100dvh;
+  isolation: isolate;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(100deg, transparent 0 16%, rgba(92, 200, 255, 0.08) 17%, transparent 28%),
+    linear-gradient(260deg, transparent 0 18%, rgba(255, 209, 102, 0.08) 19%, transparent 31%);
+  mask-image: linear-gradient(to bottom, black, transparent 72%);
 }
 
 ::selection {
@@ -53,49 +76,77 @@ body {
 /* Stadium-at-night hero backdrop: subtle pitch stripes + floodlight glow */
 .pitch-bg {
   background-image:
-    radial-gradient(1200px 500px at 50% -200px, rgba(0, 212, 94, 0.18), transparent 65%),
+    linear-gradient(180deg, rgba(0, 229, 139, 0.12), transparent 62%),
+    linear-gradient(110deg, rgba(92, 200, 255, 0.08), transparent 46%),
     repeating-linear-gradient(
       90deg,
-      rgba(0, 212, 94, 0.04) 0px,
-      rgba(0, 212, 94, 0.04) 56px,
-      rgba(0, 212, 94, 0.014) 56px,
-      rgba(0, 212, 94, 0.014) 112px
+      rgba(0, 229, 139, 0.04) 0px,
+      rgba(0, 229, 139, 0.04) 56px,
+      rgba(92, 200, 255, 0.018) 56px,
+      rgba(92, 200, 255, 0.018) 112px
     );
-}
-
-/* Horizontal grass stripes like a real stadium pitch */
-.pitch-horizontal {
-  background-image:
-    radial-gradient(ellipse 100% 60% at 50% 0%, rgba(0, 212, 94, 0.12), transparent 70%),
-    repeating-linear-gradient(
-      0deg,
-      rgba(0, 212, 94, 0.04) 0px,
-      rgba(0, 212, 94, 0.04) 48px,
-      rgba(0, 212, 94, 0.012) 48px,
-      rgba(0, 212, 94, 0.012) 96px
-    );
-}
-
-/* Football hexagon panel watermark (pure CSS, no image) */
-.football-hex {
-  background-image:
-    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0, 212, 94, 0.1), transparent 70%),
-    radial-gradient(circle 1px at 0 0, rgba(255,255,255,0.06) 1px, transparent 0),
-    radial-gradient(circle 1px at 20px 0, rgba(255,255,255,0.03) 1px, transparent 0),
-    radial-gradient(circle 1px at 40px 0, rgba(255,255,255,0.06) 1px, transparent 0),
-    radial-gradient(circle 1px at 10px 17px, rgba(255,255,255,0.06) 1px, transparent 0),
-    radial-gradient(circle 1px at 30px 17px, rgba(255,255,255,0.06) 1px, transparent 0);
-  background-size: 40px 34px;
 }
 
 .team-gradient {
-  background-image: linear-gradient(
-    135deg,
-    color-mix(in srgb, var(--home-color) 16%, transparent),
-    transparent 45%,
-    transparent 55%,
-    color-mix(in srgb, var(--away-color) 16%, transparent)
-  );
+  background-image:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--home-color) 22%, transparent),
+      rgba(8, 12, 24, 0.35) 38%,
+      rgba(8, 12, 24, 0.42) 58%,
+      color-mix(in srgb, var(--away-color) 22%, transparent)
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 60%);
+}
+
+.surface-card {
+  border: 1px solid color-mix(in srgb, var(--border) 78%, white);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015)),
+    color-mix(in srgb, var(--surface) 86%, transparent);
+  box-shadow:
+    0 22px 70px -42px rgba(0, 0, 0, 0.95),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.surface-glass {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)),
+    rgba(13, 20, 36, 0.76);
+  box-shadow:
+    0 22px 80px -46px rgba(0, 0, 0, 0.95),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+  backdrop-filter: blur(18px);
+}
+
+.premium-border {
+  position: relative;
+}
+.premium-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(0, 229, 139, 0.78), rgba(92, 200, 255, 0.24), rgba(255, 209, 102, 0.64));
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+}
+
+.hero-copy-gradient {
+  background: linear-gradient(92deg, #ffffff 0%, #dffbf0 36%, #ffe8a8 68%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  overflow-wrap: anywhere;
 }
 
 @keyframes pulse-dot {
@@ -185,11 +236,12 @@ body {
   transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
 }
 .match-card-hover:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--home-color) 55%, var(--border));
   box-shadow:
-    0 8px 28px -10px color-mix(in srgb, var(--home-color) 35%, transparent),
-    0 2px 10px -4px rgba(0, 0, 0, 0.6);
+    0 22px 54px -28px color-mix(in srgb, var(--home-color) 50%, transparent),
+    0 18px 48px -30px color-mix(in srgb, var(--away-color) 45%, transparent),
+    0 6px 18px -8px rgba(0, 0, 0, 0.72);
 }
 
 /* Keyboard-navigable formation diagram (PRD §8.5) */
@@ -199,58 +251,6 @@ body {
 .formation-node:focus circle {
   stroke: var(--gold);
   stroke-width: 3.5;
-}
-
-/* Score stepper button hover */
-.score-stepper {
-  transition: background 0.12s, transform 0.1s;
-}
-.score-stepper:hover:not(:disabled) {
-  background: rgba(0, 212, 94, 0.18);
-  transform: scale(1.12);
-}
-.score-stepper:active:not(:disabled) {
-  transform: scale(0.92);
-}
-
-/* Net-shake: plays when a match pick is saved */
-@keyframes net-shake {
-  0%   { transform: scaleY(1) scaleX(1); }
-  15%  { transform: scaleY(1.05) scaleX(1.03) translateY(-3px); }
-  35%  { transform: scaleY(0.97) scaleX(1.01); }
-  55%  { transform: scaleY(1.02) scaleX(1.02); }
-  100% { transform: scaleY(1) scaleX(1); }
-}
-.animate-net-shake {
-  animation: net-shake 0.55s ease-out;
-}
-
-/* Slide-up entrance for list items */
-@keyframes slide-up {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.animate-slide-up {
-  animation: slide-up 0.3s ease-out both;
-}
-
-/* Gold crown pulse for leaderboard leader */
-@keyframes crown-glow {
-  0%, 100% { filter: drop-shadow(0 0 4px rgba(255, 215, 0, 0.6)); }
-  50%       { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.9)); }
-}
-.animate-crown-glow {
-  animation: crown-glow 2.2s ease-in-out infinite;
-}
-
-/* Prediction card highlight when saved */
-@keyframes pick-flash {
-  0%   { box-shadow: 0 0 0 0 rgba(0, 212, 94, 0.5); }
-  60%  { box-shadow: 0 0 0 6px rgba(0, 212, 94, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(0, 212, 94, 0); }
-}
-.animate-pick-flash {
-  animation: pick-flash 0.7s ease-out;
 }
 
 /* Accessibility: kill all motion on request (PRD §8.5) */

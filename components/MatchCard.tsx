@@ -52,19 +52,25 @@ export function MatchCard({
       prefetch={false}
       style={style}
       className={clsx(
-        "match-card-hover block rounded-xl border border-edge bg-panel p-4",
+        "match-card-hover surface-card group relative block overflow-hidden rounded-2xl p-4",
         className,
       )}
     >
+      <span
+        aria-hidden
+        className="absolute inset-x-4 top-0 h-1 rounded-b-full bg-gradient-to-r from-[var(--home-color)] via-sky to-[var(--away-color)] opacity-80"
+      />
       <div className="mb-2 flex items-center justify-between gap-2 text-[11px] text-dim">
-        <span className="truncate">{stageLabel(match.stage, match.group)}</span>
+        <span className="truncate font-mono uppercase tracking-wider">{stageLabel(match.stage, match.group)}</span>
         {kind === "live" ? (
           <span className="flex items-center gap-2">
             <MatchClock match={match} className="text-xs" />
             <LiveBadge tiny />
           </span>
         ) : kind === "finished" ? (
-          <span className="font-mono font-semibold text-dim">FT</span>
+          <span className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 font-mono font-semibold text-dim">
+            FT
+          </span>
         ) : (
           <LocalTime iso={match.utcDate} style="weekday" className="font-mono" />
         )}
@@ -74,7 +80,7 @@ export function MatchCard({
         <Flag code={match.homeTeam?.code} name={homeName} width={40} />
         <SideLabel name={homeName} code={match.homeTeam?.code ?? null} align="left" />
 
-        <div className="px-1 text-center">
+        <div className="rounded-xl border border-white/10 bg-black/20 px-2 py-1 text-center shadow-inner shadow-black/20">
           {kind === "upcoming" ? (
             <LocalTime iso={match.utcDate} style="time" className="font-display text-lg font-semibold" />
           ) : (
@@ -91,7 +97,7 @@ export function MatchCard({
       </div>
 
       {stadium ? (
-        <p className="mt-2 truncate text-[11px] text-dim">
+        <p className="mt-3 truncate border-t border-white/10 pt-2 text-[11px] text-dim">
           {stadium.name} · {stadium.city}
         </p>
       ) : null}

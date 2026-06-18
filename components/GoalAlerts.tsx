@@ -24,12 +24,12 @@ function NotificationBanner() {
   };
 
   return (
-    <div className="fixed bottom-20 right-4 z-50 flex items-center gap-3 rounded-xl border border-edge bg-panel px-4 py-3 shadow-2xl lg:bottom-6">
+    <div className="surface-glass fixed bottom-20 left-3 right-3 z-50 flex items-center gap-3 rounded-2xl px-4 py-3 shadow-2xl lg:bottom-6 lg:left-auto lg:right-4">
       <span className="shrink-0 text-lg" aria-hidden>🔔</span>
       <span className="text-sm text-dim">Goal alerts when you&rsquo;re away?</span>
       <button
         onClick={request}
-        className="shrink-0 rounded-lg bg-pitch px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-wider text-navy transition-opacity hover:opacity-80"
+        className="shrink-0 rounded-full bg-pitch px-3 py-1.5 font-display text-xs font-semibold uppercase tracking-wider text-navy transition-opacity hover:opacity-80"
       >
         Enable
       </button>

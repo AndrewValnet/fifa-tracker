@@ -24,7 +24,7 @@ export function TodayStrip({ initial }: { initial?: Sourced<Match[]> }) {
         }
       />
       {matches.length === 0 ? (
-        <p className="rounded-lg border border-dashed border-edge px-4 py-6 text-center text-sm text-dim">
+        <p className="surface-card rounded-2xl px-4 py-7 text-center text-sm text-dim">
           No matches in the next 24 hours.
         </p>
       ) : (

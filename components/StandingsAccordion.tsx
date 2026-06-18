@@ -11,9 +11,9 @@ export function StandingsAccordion({ standings }: { standings: GroupStanding[] }
         <details
           key={g.group}
           open={i === 0}
-          className="group rounded-xl border border-edge bg-panel open:bg-panel"
+          className="surface-card group rounded-2xl"
         >
-          <summary className="flex cursor-pointer select-none items-center justify-between rounded-xl px-4 py-3 text-sm font-semibold hover:bg-panel2/50">
+          <summary className="flex cursor-pointer select-none items-center justify-between rounded-2xl px-4 py-3 text-sm font-semibold transition hover:bg-white/5">
             <span className="font-display tracking-wide">
               GROUP <span className="text-gold">{g.group}</span>
             </span>

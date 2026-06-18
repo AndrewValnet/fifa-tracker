@@ -136,7 +136,7 @@ export function MatchNotificationSettings({
   const enabledCount = OPTIONS.filter((opt) => settings[opt.key]).length;
 
   return (
-    <section className="mx-auto mt-5 max-w-3xl rounded-xl border border-edge bg-panel/80 px-4 py-3">
+    <section className="surface-card mx-auto mt-5 max-w-3xl rounded-2xl px-4 py-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div>
           <h2 className="font-display text-sm font-semibold uppercase tracking-widest">Match Alerts</h2>
@@ -152,7 +152,7 @@ export function MatchNotificationSettings({
           type="button"
           onClick={save}
           disabled={disabled}
-          className="rounded-full border border-pitch/60 bg-pitch/10 px-3 py-1.5 text-xs font-semibold text-pitch transition disabled:cursor-not-allowed disabled:border-edge disabled:bg-panel2 disabled:text-dim"
+          className="rounded-full border border-pitch/60 bg-pitch/10 px-3 py-1.5 text-xs font-semibold text-pitch transition hover:bg-pitch/15 disabled:cursor-not-allowed disabled:border-edge disabled:bg-panel2 disabled:text-dim"
         >
           {state === "saving" ? "Saving..." : state === "on" ? "Save Alerts" : "Enable Alerts"}
         </button>
@@ -162,7 +162,7 @@ export function MatchNotificationSettings({
         {OPTIONS.map((opt) => (
           <label
             key={opt.key}
-            className="flex min-h-[64px] cursor-pointer items-start gap-2 rounded-lg border border-edge bg-panel2/50 px-3 py-2 text-sm"
+            className="flex min-h-[64px] cursor-pointer items-start gap-2 rounded-xl border border-white/10 bg-black/15 px-3 py-2 text-sm transition hover:bg-white/5"
           >
             <input
               type="checkbox"

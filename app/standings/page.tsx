@@ -47,7 +47,7 @@ async function GroupTables() {
           <section
             key={g.group}
             id={`group-${g.group}`}
-            className="scroll-mt-24 rounded-xl border border-edge bg-panel p-4"
+            className="surface-card scroll-mt-24 rounded-2xl p-4"
             aria-label={`Group ${g.group}`}
           >
             <h2 className="mb-2 font-display text-lg font-semibold tracking-wide">
@@ -76,7 +76,7 @@ async function Bracket() {
 async function Scorers() {
   const scorers = await getScorers(20);
   return (
-    <div className="rounded-xl border border-edge bg-panel px-4 py-2">
+    <div className="surface-card rounded-2xl px-4 py-2">
       <TopScorers scorers={scorers.data} />
     </div>
   );
@@ -109,7 +109,7 @@ async function UpsetWatch() {
 export default function StandingsPage() {
   return (
     <div className="mx-auto max-w-shell px-4 py-8">
-      <h1 className="mb-6 font-display text-2xl font-bold uppercase tracking-wide md:text-3xl">
+      <h1 className="hero-copy-gradient mb-6 font-display text-4xl font-bold uppercase leading-none tracking-wide md:text-5xl">
         Standings <span className="text-pitch">&amp; Bracket</span>
       </h1>
 
@@ -173,21 +173,21 @@ export default function StandingsPage() {
 
       <section className="mt-12 max-w-xl" aria-label="Top assists">
         <SectionHeader title="Top Assists" right="most assists this tournament" />
-        <div className="rounded-xl border border-edge bg-panel px-4 py-2">
+        <div className="surface-card rounded-2xl px-4 py-2">
           <AssistsLeaderboard />
         </div>
       </section>
 
       <section className="mt-12 max-w-xl" aria-label="Suspension tracker">
         <SectionHeader title="Card Watch" right="yellow card accumulation · FIFA rules" />
-        <div className="rounded-xl border border-edge bg-panel px-4 py-4">
+        <div className="surface-card rounded-2xl px-4 py-4">
           <SuspensionTracker />
         </div>
       </section>
 
       <section className="mt-12 max-w-xl" aria-label="Clean sheets">
         <SectionHeader title="Clean Sheet Leaders" right="goalkeepers shutting teams out" />
-        <div className="rounded-xl border border-edge bg-panel px-4 py-2">
+        <div className="surface-card rounded-2xl px-4 py-2">
           <CleanSheetsBoard />
         </div>
       </section>
@@ -199,7 +199,7 @@ export default function StandingsPage() {
 
       <section className="mt-12 max-w-xl" aria-label="Elimination watch">
         <SectionHeader title="Elimination Watch" right="teams at risk of going home" />
-        <div className="rounded-xl border border-edge bg-panel px-4 py-2">
+        <div className="surface-card rounded-2xl px-4 py-2">
           <EliminationWatch />
         </div>
       </section>
@@ -215,7 +215,7 @@ export default function StandingsPage() {
 
       <section className="mt-12 max-w-2xl" aria-label="Debut nations">
         <SectionHeader title="WC Debuts in 2026" right="nations appearing at their first World Cup" />
-        <div className="rounded-xl border border-edge bg-panel px-4 py-4">
+        <div className="surface-card rounded-2xl px-4 py-4">
           <DebutWatch />
         </div>
       </section>

@@ -17,7 +17,7 @@ export function BetsPanel({ matchId }: { matchId: string }) {
   if (!isLoading && (!bets || (!bets.top.length && !bets.weird.length))) return null;
 
   return (
-    <section className="rounded-xl border border-edge bg-panel/80 p-4 md:p-5">
+    <section className="surface-card rounded-2xl p-4 md:p-5">
       <SectionHeader title="Bets on This Match" right="Polymarket" />
       {bets ? (
         <BetsLists top={bets.top} weird={bets.weird} />

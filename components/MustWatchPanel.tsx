@@ -40,7 +40,7 @@ export function MustWatchPanel() {
   const matches = data?.matches ?? [];
   if (!matches.length) {
     return (
-      <p className="py-4 text-center text-sm text-dim">
+      <p className="surface-card rounded-2xl px-4 py-6 text-center text-sm text-dim">
         No upcoming matches with market data yet — check back closer to kickoff.
       </p>
     );
@@ -53,7 +53,7 @@ export function MustWatchPanel() {
           <Link
             href={`/match/${m.matchId}`}
             prefetch={false}
-            className="flex flex-col gap-1.5 rounded-xl border border-edge bg-panel/60 px-4 py-3 transition-colors hover:bg-panel"
+            className="surface-card flex flex-col gap-1.5 rounded-2xl px-4 py-3 transition hover:border-pitch/35"
           >
             <div className="flex items-center gap-2">
               {i === 0 && (

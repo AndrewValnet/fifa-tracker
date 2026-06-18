@@ -55,7 +55,7 @@ export function DataFreshness({
       {updated ? <span>Updated {updated}</span> : null}
       {cached ? (
         <span
-          className="rounded-full border border-edge bg-panel2 px-2 py-0.5 font-mono uppercase tracking-wider"
+          className="rounded-full border border-pitch/25 bg-pitch/10 px-2 py-0.5 font-mono uppercase tracking-wider text-pitch"
           title={cachedTitle}
           aria-label={cachedTitle}
         >

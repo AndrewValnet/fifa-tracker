@@ -22,7 +22,7 @@ function FixtureRow({ match }: { match: Match }) {
       <Link
         href={`/match/${match.id}`}
         prefetch={false}
-        className="flex items-center gap-2 rounded-md px-2 py-1.5 text-xs hover:bg-panel2/60"
+        className="flex items-center gap-2 rounded-xl px-2 py-1.5 text-xs transition hover:bg-white/5"
       >
         <LocalTime iso={match.utcDate} style="date" className="w-14 shrink-0 font-mono text-[10px] text-dim" />
         <span className="flex min-w-0 flex-1 items-center justify-end gap-1.5 truncate">
@@ -48,7 +48,7 @@ function FixtureRow({ match }: { match: Match }) {
 export function StadiumCard({ stadium, matches }: { stadium: Stadium; matches: Match[] }) {
   const played = matches.filter((m) => statusKind(m.status) === "finished").length;
   return (
-    <div className="match-card-hover overflow-hidden rounded-xl border border-edge bg-panel">
+    <div className="match-card-hover surface-card overflow-hidden rounded-2xl">
       <StadiumPhoto src={stadium.image} alt={stadium.name} className="h-40 w-full object-cover" />
       <div className="p-4">
         <div className="flex items-start justify-between gap-2">

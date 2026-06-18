@@ -36,7 +36,7 @@ function TeamPicker({
           setValue("");
           if (code) onPick(code);
         }}
-        className="max-w-[220px] rounded-full border border-edge bg-panel px-3 py-1.5 text-xs text-ink outline-none transition focus:border-pitch"
+        className="max-w-[220px] rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-xs text-ink outline-none transition focus:border-pitch focus:ring-2 focus:ring-pitch/20"
       >
         <option value="">Add country...</option>
         {options.map((t) => (
@@ -59,7 +59,7 @@ export function FollowedStrip() {
   if (!followed.length) {
     return (
       <section className="mx-auto max-w-shell px-4 pt-6">
-        <div className="flex flex-wrap items-center justify-center gap-3 rounded-xl border border-dashed border-edge px-4 py-3 text-center text-xs text-dim">
+        <div className="surface-card flex flex-wrap items-center justify-center gap-3 rounded-2xl px-4 py-3 text-center text-xs text-dim">
           <span>Build My Teams for next matches, news, standings, and live alerts.</span>
           <TeamPicker followed={followed} onPick={toggle} />
           <Link href="/teams" className="text-pitch hover:underline">
@@ -96,7 +96,7 @@ export function FollowedStrip() {
           return (
             <div
               key={code}
-              className="flex min-w-[230px] flex-col gap-1 rounded-xl border border-edge bg-panel px-3 py-2.5"
+              className="surface-card flex min-w-[230px] flex-col gap-1 rounded-2xl px-3 py-2.5"
             >
               <div className="flex items-center gap-2">
                 <Link href={`/teams/${code}`} className="flex min-w-0 items-center gap-2 hover:text-gold">

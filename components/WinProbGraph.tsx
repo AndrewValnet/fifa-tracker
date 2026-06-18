@@ -44,7 +44,7 @@ export function WinProbGraph({ match }: { match: Match }) {
   const awayNow = away?.length ? away[away.length - 1].p : odds?.away ?? null;
 
   return (
-    <section className="rounded-xl border border-edge bg-panel/80 p-4 md:p-5">
+    <section className="surface-card rounded-2xl p-4 md:p-5">
       <div className="mb-3 flex items-end justify-between gap-3">
         <h2 className="flex items-center gap-2 font-display text-lg font-semibold uppercase tracking-wider">
           <span aria-hidden className="inline-block h-4 w-1 rounded bg-gold" />

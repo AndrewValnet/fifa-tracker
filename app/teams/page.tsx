@@ -17,7 +17,7 @@ export default function TeamsPage() {
   return (
     <div className="mx-auto max-w-shell px-4 py-8">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
-        <h1 className="font-display text-2xl font-bold uppercase tracking-wide md:text-3xl">
+        <h1 className="hero-copy-gradient font-display text-4xl font-bold uppercase leading-none tracking-wide md:text-5xl">
           The <span className="text-pitch">48</span> Nations
         </h1>
       </div>
@@ -27,11 +27,11 @@ export default function TeamsPage() {
           <Link
             key={t.code}
             href={`/teams/${t.code}`}
-            className="match-card-hover flex flex-col items-center gap-2 rounded-xl border border-edge bg-panel px-3 py-5 text-center"
+            className="match-card-hover surface-card flex flex-col items-center gap-2 rounded-2xl px-3 py-5 text-center"
           >
             <Flag code={t.code} name={t.name} width={64} />
             <span className="text-sm font-semibold leading-tight">{t.name}</span>
-            <span className="rounded-full border border-edge px-2 py-0.5 font-mono text-[10px] text-dim">
+            <span className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[10px] text-dim">
               Group {t.group}
             </span>
           </Link>

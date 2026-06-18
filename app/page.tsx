@@ -55,7 +55,7 @@ async function ScorersLoader() {
   return (
     <>
       <SectionHeader title="Golden Boot" right={<SourceTag source={scorers.source} />} />
-      <div className="rounded-xl border border-edge bg-panel px-4 py-2">
+      <div className="surface-card rounded-2xl px-4 py-2">
         <TopScorers scorers={scorers.data} />
       </div>
     </>
@@ -64,10 +64,10 @@ async function ScorersLoader() {
 
 function HeroSkeleton() {
   return (
-    <section className="pitch-bg border-b border-edge">
+    <section className="pitch-bg border-b border-white/10">
       <div className="mx-auto max-w-shell px-4 pb-8 pt-6 md:pt-10">
         <div className="skeleton mb-6 h-9 w-72" aria-hidden />
-        <div className="skeleton h-72 w-full rounded-2xl" aria-hidden />
+        <div className="skeleton h-72 w-full rounded-[2rem]" aria-hidden />
       </div>
     </section>
   );
@@ -91,14 +91,14 @@ export default function HomePage() {
 
       <section aria-label="Title race" className="mx-auto max-w-shell px-4 pt-10">
         <SectionHeader title="Title Race" right="Polymarket — odds to win it all" />
-        <div className="rounded-xl border border-edge bg-panel p-4">
+        <div className="surface-card rounded-2xl p-4">
           <FavoritesPanel />
         </div>
       </section>
 
       <section aria-label="Betting buzz" className="mx-auto max-w-shell px-4 pt-8">
         <SectionHeader title="Betting Buzz" right="biggest &amp; weirdest markets · Polymarket" />
-        <div className="rounded-xl border border-edge bg-panel p-4">
+        <div className="surface-card rounded-2xl p-4">
           <BetsBuzzPanel />
         </div>
       </section>

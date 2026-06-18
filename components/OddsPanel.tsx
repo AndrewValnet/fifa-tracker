@@ -101,7 +101,7 @@ export function OddsPanel({ match }: { match: Match }) {
   return (
     <div>
       {odds.kind === "tournament" ? (
-        <p className="mb-3 rounded bg-panel2/70 px-3 py-2 text-xs text-dim">
+        <p className="mb-3 rounded-xl border border-white/10 bg-black/20 px-3 py-2 text-xs text-dim">
           No per-match market yet — showing <span className="text-ink">tournament winner</span> odds instead.
         </p>
       ) : null}
@@ -115,15 +115,15 @@ export function OddsPanel({ match }: { match: Match }) {
       />
 
       <dl className="mt-4 grid grid-cols-3 gap-2 text-center">
-        <div className="rounded-lg bg-panel2/70 px-2 py-2">
+        <div className="rounded-xl border border-white/10 bg-black/20 px-2 py-2">
           <dt className="text-[10px] uppercase tracking-wider text-dim">💰 Total traded</dt>
           <dd className="font-mono text-sm font-semibold text-gold">{fmtUsdCompact(odds.volume)}</dd>
         </div>
-        <div className="rounded-lg bg-panel2/70 px-2 py-2">
+        <div className="rounded-xl border border-white/10 bg-black/20 px-2 py-2">
           <dt className="text-[10px] uppercase tracking-wider text-dim">24h volume</dt>
           <dd className="font-mono text-sm font-semibold">{fmtUsdCompact(odds.volume24h)}</dd>
         </div>
-        <div className="rounded-lg bg-panel2/70 px-2 py-2">
+        <div className="rounded-xl border border-white/10 bg-black/20 px-2 py-2">
           <dt className="text-[10px] uppercase tracking-wider text-dim">Liquidity</dt>
           <dd className="font-mono text-sm font-semibold">{fmtUsdCompact(odds.liquidity)}</dd>
         </div>

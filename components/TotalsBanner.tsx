@@ -30,15 +30,15 @@ export function TotalsBanner() {
 
   return (
     <section aria-label="Betting totals" className="mx-auto max-w-shell px-4 pt-6">
-      <div className="rounded-xl border border-gold/25 bg-gradient-to-r from-panel via-panel2/70 to-panel">
-        <div className="flex flex-wrap items-stretch divide-x divide-edge/50">
+      <div className="premium-border surface-card overflow-hidden rounded-2xl">
+        <div className="flex flex-wrap items-stretch divide-x divide-white/10">
           <Tile label="Traded on WC26 markets" value={fmtUsdCompact(totals.traded)} accent />
           <Tile label="On match markets" value={fmtUsdCompact(totals.matchTraded)} />
           <Tile label="On futures (winner, groups…)" value={fmtUsdCompact(totals.futuresTraded)} />
           <Tile label="At stake right now" value={fmtUsdCompact(totals.atStake)} />
           <Tile label="Settled pools (paid out)" value={fmtUsdCompact(totals.settled)} />
         </div>
-        <p className="border-t border-edge/50 px-4 py-1.5 text-[10px] text-dim">
+        <p className="border-t border-white/10 bg-black/10 px-4 py-1.5 text-[10px] text-dim">
           Across {totals.openEvents} open and {totals.closedEvents} settled World Cup markets on Polymarket — the
           platform with free public betting data. Settled pools pay the winning side in full; individual profit and
           loss are not published.

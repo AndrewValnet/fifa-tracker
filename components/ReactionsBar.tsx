@@ -52,7 +52,7 @@ export function ReactionsBar({ matchId }: { matchId: string }) {
             key={e}
             type="button"
             onClick={() => react(e)}
-            className="flex items-center gap-1 rounded-full border border-edge bg-panel px-3 py-1.5 text-sm transition-colors hover:border-gold/50"
+            className="flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm shadow-lg shadow-black/10 transition hover:border-gold/50 hover:bg-gold/10"
             aria-label={`React ${e}`}
           >
             <span aria-hidden>{e}</span>
