@@ -265,7 +265,51 @@ export default function HomePage() {
         <HeroLoader />
       </Suspense>
       <TotalsBanner />
-      <FollowedStrip />
+      <section aria-label="Personal dashboard" className="mx-auto max-w-shell px-4 pt-6">
+        <div className="surface-card overflow-hidden rounded-[2rem]">
+          <div className="border-b border-white/10 bg-black/10 px-4 py-3 md:px-5">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-dim">Personal dashboard</p>
+                <h2 className="font-display text-xl font-bold uppercase tracking-wide text-ink">For you</h2>
+              </div>
+              <span className="rounded-full border border-pitch/25 bg-pitch/10 px-3 py-1 text-[11px] uppercase tracking-wider text-pitch">
+                Cache-first
+              </span>
+            </div>
+          </div>
+          <div className="grid gap-6 p-4 lg:grid-cols-[1.15fr_0.85fr]">
+            <FollowedStrip />
+            <div className="grid gap-6">
+              <section className="surface-card rounded-2xl p-4">
+                <SectionHeader title="Shortcuts" right="fast paths" />
+                <div className="grid gap-2 sm:grid-cols-2">
+                  <Link href="/predict" className="rounded-xl border border-white/10 bg-black/15 px-4 py-3 text-sm text-ink transition hover:border-pitch/50 hover:bg-pitch/10">
+                    Open prediction pool
+                  </Link>
+                  <Link href="/players" className="rounded-xl border border-white/10 bg-black/15 px-4 py-3 text-sm text-ink transition hover:border-pitch/50 hover:bg-pitch/10">
+                    Browse players
+                  </Link>
+                  <Link href="/compare" className="rounded-xl border border-white/10 bg-black/15 px-4 py-3 text-sm text-ink transition hover:border-pitch/50 hover:bg-pitch/10">
+                    Compare players
+                  </Link>
+                  <Link href="/notifications" className="rounded-xl border border-white/10 bg-black/15 px-4 py-3 text-sm text-ink transition hover:border-pitch/50 hover:bg-pitch/10">
+                    Alert settings
+                  </Link>
+                </div>
+              </section>
+              <section className="surface-card rounded-2xl p-4">
+                <SectionHeader title="Live signals" right="what to watch now" />
+                <ul className="grid gap-2 text-sm text-dim">
+                  <li className="rounded-xl border border-white/10 bg-black/15 px-4 py-3">Live matches, next kickoffs, and fixtures you follow are always surfaced first.</li>
+                  <li className="rounded-xl border border-white/10 bg-black/15 px-4 py-3">Prediction profiles now show per-match scoring and a daily best-predictor view.</li>
+                  <li className="rounded-xl border border-white/10 bg-black/15 px-4 py-3">Freshness badges explain when we are serving cached data to keep the site moving quickly.</li>
+                </ul>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
       <TodayStrip />
 
       <section aria-label="Must watch" className="mx-auto max-w-shell px-4 pt-8">
