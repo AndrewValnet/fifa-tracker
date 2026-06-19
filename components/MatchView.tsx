@@ -43,6 +43,7 @@ import { useLiveMatch } from "@/hooks/useLiveMatch";
 import { useMatchExtras } from "@/hooks/useMatchExtras";
 import { fmtNumber, stageLabel, statusKind } from "@/lib/format";
 import { matchPlayerByName, type EspnRosterPlayer } from "@/lib/espn";
+import { reconcileMatchScoreFromEvents } from "@/lib/match-score";
 import { getAccentColor } from "@/lib/team-meta";
 import type { Match, Scorer, Sourced, Stadium, TeamDetail, TeamSeasonStats } from "@/lib/types";
 
@@ -213,8 +214,10 @@ export function MatchView({
     kind === "finished",
     extrasEnabled,
   );
+  const liveEvents = extras?.timeline?.length ? extras.timeline : (match.events ?? []);
+  const displayMatch = reconcileMatchScoreFromEvents(match, liveEvents);
 
-  const referee = match.referees.find((r) => /referee/i.test(r.role)) ?? match.referees[0];
+  const referee = displayMatch.referees.find((r) => /referee/i.test(r.role)) ?? displayMatch.referees[0];
   const confirmedLineups = extras?.lineups.home?.players.length && extras?.lineups.away?.players.length;
   const homeXI = confirmedLineups ? null : predictedFor(homeDetail, homeRoster, match.homeTeam?.code ?? null);
   const awayXI = confirmedLineups ? null : predictedFor(awayDetail, awayRoster, match.awayTeam?.code ?? null);
@@ -229,8 +232,8 @@ export function MatchView({
   ].filter((link) => link.show);
 
   return (
-    <TeamColorProvider homeCode={match.homeTeam?.code} awayCode={match.awayTeam?.code}>
-      <GoalBanner match={match} />
+    <TeamColorProvider homeCode={displayMatch.homeTeam?.code} awayCode={displayMatch.awayTeam?.code}>
+      <GoalBanner match={displayMatch} />
       <div className="team-gradient min-h-dvh">
         <div className="mx-auto max-w-shell px-4 py-6">
           {/* breadcrumb + stage */}
@@ -259,7 +262,7 @@ export function MatchView({
               className="pointer-events-none absolute inset-x-8 top-0 h-1 rounded-b-full bg-gradient-to-r from-[var(--home-color)] via-sky to-[var(--away-color)]"
             />
             <div className="grid grid-cols-1 items-center gap-6 md:grid-cols-[1fr_auto_1fr] md:gap-10">
-            <TeamHeader match={match} side="home" detail={homeDetail} />
+            <TeamHeader match={displayMatch} side="home" detail={homeDetail} />
 
             <div className="order-first flex min-w-[220px] flex-col items-center gap-3 md:order-none md:min-w-[280px]">
               <div className="text-center text-xs text-dim">
@@ -267,11 +270,11 @@ export function MatchView({
                   <p>
                     🏟️ {stadium.name} · {stadium.city}
                   </p>
-                ) : match.venue ? (
-                  <p>🏟️ {match.venue}</p>
+                ) : displayMatch.venue ? (
+                  <p>🏟️ {displayMatch.venue}</p>
                 ) : null}
                 <p>
-                  <LocalTime iso={match.utcDate} style="datetime" />
+                  <LocalTime iso={displayMatch.utcDate} style="datetime" />
                 </p>
                 {referee ? (
                   <p>
@@ -279,8 +282,8 @@ export function MatchView({
                     {referee.nationality ? ` (${referee.nationality})` : ""}
                   </p>
                 ) : null}
-                {kind === "upcoming" && match.stadiumId ? (
-                  <WeatherWidget stadiumId={match.stadiumId} utcDate={match.utcDate} />
+                {kind === "upcoming" && displayMatch.stadiumId ? (
+                  <WeatherWidget stadiumId={displayMatch.stadiumId} utcDate={displayMatch.utcDate} />
                 ) : null}
                 {extras?.attendance ? <p>🎟️ Attendance: {fmtNumber(extras.attendance)}</p> : null}
                 {ticket?.averagePrice ? (
@@ -301,7 +304,7 @@ export function MatchView({
 
               {kind === "upcoming" ? (
                 <MatchFaceoffBanner
-                  match={match}
+                  match={displayMatch}
                   homeDetail={homeDetail}
                   awayDetail={awayDetail}
                   liveClock={extras?.liveClock ?? null}
@@ -309,11 +312,11 @@ export function MatchView({
               ) : null}
               {kind === "upcoming" ? (
                 <>
-                  <CountdownTimer targetIso={match.utcDate} />
+                  <CountdownTimer targetIso={displayMatch.utcDate} />
                   <p className="text-[10px] uppercase tracking-[0.25em] text-dim">to kickoff</p>
                 </>
               ) : (
-                <Scoreboard match={match} accurateClock={extras?.liveClock ?? null} />
+                <Scoreboard match={displayMatch} accurateClock={extras?.liveClock ?? null} />
               )}
               {extras?.coolingBreakActive ? (
                 <p className="animate-pulse-dot rounded-full border border-gold/50 bg-gold/10 px-3 py-1 text-xs font-semibold text-gold">
@@ -322,20 +325,20 @@ export function MatchView({
               ) : null}
             </div>
 
-            <TeamHeader match={match} side="away" detail={awayDetail} />
+            <TeamHeader match={displayMatch} side="away" detail={awayDetail} />
             </div>
           </header>
 
-          <ReactionsBar matchId={match.id} />
+          <ReactionsBar matchId={displayMatch.id} />
           <MatchNotificationSettings
-            matchId={match.id}
-            homeCode={match.homeTeam?.code}
-            awayCode={match.awayTeam?.code}
+            matchId={displayMatch.id}
+            homeCode={displayMatch.homeTeam?.code}
+            awayCode={displayMatch.awayTeam?.code}
           />
 
           <div className="mt-6">
             <Card id="your-pick" title="Office Prediction">
-              <MatchPredictionWidget match={match} />
+              <MatchPredictionWidget match={displayMatch} />
             </Card>
           </div>
 
@@ -363,7 +366,7 @@ export function MatchView({
             <div className="min-w-0 flex flex-col gap-6 lg:col-span-2">
               {kind !== "upcoming" ? (
                 <Card id="events" title="Match Events" right={<span>tap a scorer for clips</span>}>
-                  <EventTimeline events={extras?.timeline?.length ? extras.timeline : match.events} match={match} />
+                  <EventTimeline events={liveEvents} match={displayMatch} />
                   {extras && (extras.addedTime.firstHalf !== null || extras.addedTime.secondHalf !== null) ? (
                     <p className="mt-3 border-t border-edge/50 pt-2 text-[11px] text-dim">
                       ⏱ Added time —
@@ -406,21 +409,21 @@ export function MatchView({
                 <section aria-label="Match momentum">
                   <SectionHeader title="Match Momentum" />
                   <MatchMomentumGraph
-                    events={extras?.timeline?.length ? extras.timeline : (match.events ?? [])}
-                    homeCode={match.homeTeam?.code ?? null}
-                    awayCode={match.awayTeam?.code ?? null}
-                    homeScore={match.score?.home ?? null}
-                    awayScore={match.score?.away ?? null}
-                    isLive={statusKind(match.status) === "live"}
+                    events={liveEvents}
+                    homeCode={displayMatch.homeTeam?.code ?? null}
+                    awayCode={displayMatch.awayTeam?.code ?? null}
+                    homeScore={displayMatch.score?.home ?? null}
+                    awayScore={displayMatch.score?.away ?? null}
+                    isLive={statusKind(displayMatch.status) === "live"}
                   />
                 </section>
               ) : null}
 
-              {kind !== "upcoming" ? <WinProbGraph match={match} /> : null}
+              {kind !== "upcoming" ? <WinProbGraph match={displayMatch} /> : null}
 
               {confirmedLineups ? (
                 <Card id="lineups" title={kind === "upcoming" ? "Starting Lineups" : "Lineups"} right="confirmed · via ESPN">
-                  <LineupSection match={match} home={extras!.lineups.home!} away={extras!.lineups.away!} />
+                  <LineupSection match={displayMatch} home={extras!.lineups.home!} away={extras!.lineups.away!} />
                 </Card>
               ) : homeXI || awayXI ? (
                 <Card id="lineups" title="Predicted XI" right="squad-based projection — confirmed lineups appear ~1h before kickoff">
@@ -471,36 +474,36 @@ export function MatchView({
 
               <Card id="past-matches" title="Past Matches / Head to Head">
                 <HeadToHead
-                  homeCode={match.homeTeam?.code}
-                  awayCode={match.awayTeam?.code}
-                  homeName={match.homeTeam?.name ?? "Home"}
-                  awayName={match.awayTeam?.name ?? "Away"}
+                  homeCode={displayMatch.homeTeam?.code}
+                  awayCode={displayMatch.awayTeam?.code}
+                  homeName={displayMatch.homeTeam?.name ?? "Home"}
+                  awayName={displayMatch.awayTeam?.name ?? "Away"}
                 />
               </Card>
 
               {kind === "finished" ? (
                 <Card title="Rate This Match">
-                  <MatchRatingWidget matchId={match.id} status={match.status} />
+                  <MatchRatingWidget matchId={displayMatch.id} status={displayMatch.status} />
                 </Card>
               ) : null}
 
               <Suspense fallback={null}>
                 <section aria-label="Match chat">
-                  <MatchBanterBoard matchId={match.id} />
+                  <MatchBanterBoard matchId={displayMatch.id} />
                 </section>
               </Suspense>
             </div>
 
             <aside className="min-w-0 flex flex-col gap-6">
               <Card title="Audience" right={kind === "live" ? "live" : undefined}>
-                <AudiencePanel match={match} />
+                <AudiencePanel match={displayMatch} />
               </Card>
 
               <Card title="Polymarket Odds">
-                <OddsPanel match={match} />
+                <OddsPanel match={displayMatch} />
               </Card>
 
-              <BetsPanel matchId={match.id} />
+              <BetsPanel matchId={displayMatch.id} />
 
               <Card title="Where to Watch">
                 <WhereToWatch />
@@ -523,8 +526,8 @@ export function MatchView({
                   <MatchStatsPanel
                     home={extras.stats.home}
                     away={extras.stats.away}
-                    homeName={match.homeTeam?.code ?? "Home"}
-                    awayName={match.awayTeam?.code ?? "Away"}
+                    homeName={displayMatch.homeTeam?.code ?? "Home"}
+                    awayName={displayMatch.awayTeam?.code ?? "Away"}
                   />
                 ) : (
                   <EmptyState
@@ -539,10 +542,10 @@ export function MatchView({
                   <MatchDominanceChart
                     homeStats={extras.stats.home}
                     awayStats={extras.stats.away}
-                    homeScore={match.score?.home ?? null}
-                    awayScore={match.score?.away ?? null}
-                    homeCode={match.homeTeam?.code ?? null}
-                    awayCode={match.awayTeam?.code ?? null}
+                    homeScore={displayMatch.score?.home ?? null}
+                    awayScore={displayMatch.score?.away ?? null}
+                    homeCode={displayMatch.homeTeam?.code ?? null}
+                    awayCode={displayMatch.awayTeam?.code ?? null}
                   />
                 </Card>
               ) : null}
@@ -550,8 +553,8 @@ export function MatchView({
               {extras?.stats ? (
                 <Card title="Shot Quality">
                   <ShotQualityChart
-                    homeCode={match.homeTeam?.code ?? null}
-                    awayCode={match.awayTeam?.code ?? null}
+                    homeCode={displayMatch.homeTeam?.code ?? null}
+                    awayCode={displayMatch.awayTeam?.code ?? null}
                     homeStats={extras.stats.home}
                     awayStats={extras.stats.away}
                   />
@@ -563,14 +566,14 @@ export function MatchView({
                   <StatComparison
                     home={homeStats}
                     away={awayStats}
-                    homeName={match.homeTeam?.code ?? "Home"}
-                    awayName={match.awayTeam?.code ?? "Away"}
+                    homeName={displayMatch.homeTeam?.code ?? "Home"}
+                    awayName={displayMatch.awayTeam?.code ?? "Away"}
                   />
                 </Card>
               ) : null}
 
               <Card title="Match News">
-                <MatchNews home={match.homeTeam?.name ?? null} away={match.awayTeam?.name ?? null} />
+                <MatchNews home={displayMatch.homeTeam?.name ?? null} away={displayMatch.awayTeam?.name ?? null} />
               </Card>
 
               {stadium ? (

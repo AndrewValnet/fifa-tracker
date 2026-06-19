@@ -19,8 +19,9 @@ import { useMatchExtras } from "@/hooks/useMatchExtras";
 import { useLiveMatches, useUpcomingMatches } from "@/hooks/useFixtures";
 import { useMatchOdds } from "@/hooks/useMatchOdds";
 import { stageLabel, statusKind } from "@/lib/format";
+import { reconcileMatchScoreFromEvents } from "@/lib/match-score";
 import { getStadium } from "@/lib/schedule";
-import type { Match, Sourced } from "@/lib/types";
+import type { Match, MatchEvent, Sourced } from "@/lib/types";
 
 function HeroTeam({ match, side }: { match: Match; side: "home" | "away" }) {
   const team = side === "home" ? match.homeTeam : match.awayTeam;
@@ -59,17 +60,21 @@ function FeaturedMatch({
   match,
   live,
   liveClock,
+  liveEvents,
 }: {
   match: Match;
   live: boolean;
   liveClock?: string | null;
+  liveEvents?: MatchEvent[] | null;
 }) {
+  const displayEvents = liveEvents?.length ? liveEvents : match.events;
+  const displayMatch = reconcileMatchScoreFromEvents(match, displayEvents);
   const stadium = getStadium(match.stadiumId);
-  const recentGoals = match.events.filter((e) => e.type === "GOAL").slice(-3).reverse();
+  const recentGoals = displayMatch.events.filter((e) => e.type === "GOAL").slice(-3).reverse();
 
   return (
-    <TeamColorProvider homeCode={match.homeTeam?.code} awayCode={match.awayTeam?.code}>
-      {live ? <GoalBanner match={match} /> : null}
+    <TeamColorProvider homeCode={displayMatch.homeTeam?.code} awayCode={displayMatch.awayTeam?.code}>
+      {live ? <GoalBanner match={displayMatch} /> : null}
       <div className="team-gradient premium-border surface-glass relative overflow-hidden rounded-[2rem] px-4 py-8 md:px-10">
         <span
           aria-hidden
@@ -84,11 +89,11 @@ function FeaturedMatch({
         </p>
 
         <div className="grid grid-cols-1 items-center gap-5 md:grid-cols-[1fr_auto_1fr] md:gap-8">
-          <HeroTeam match={match} side="home" />
+          <HeroTeam match={displayMatch} side="home" />
 
           <div className="flex min-w-[150px] flex-col items-center gap-2 md:min-w-[260px]">
             {live ? (
-              <Scoreboard match={match} accurateClock={liveClock ?? null} />
+              <Scoreboard match={displayMatch} accurateClock={liveClock ?? null} />
             ) : (
               <>
                 <p className="font-mono text-xs uppercase tracking-widest text-dim">
@@ -100,7 +105,7 @@ function FeaturedMatch({
             )}
           </div>
 
-          <HeroTeam match={match} side="away" />
+          <HeroTeam match={displayMatch} side="away" />
         </div>
 
         {live && recentGoals.length ? (
@@ -110,8 +115,8 @@ function FeaturedMatch({
                 <span aria-hidden>⚽</span> {g.minute}’{" "}
                 <ClipLink
                   player={g.player}
-                  home={match.homeTeam?.name ?? "Home"}
-                  away={match.awayTeam?.name ?? "Away"}
+                  home={displayMatch.homeTeam?.name ?? "Home"}
+                  away={displayMatch.awayTeam?.name ?? "Away"}
                 />
                 {g.secondary ? <span className="text-dim/70"> ({g.secondary})</span> : null}
               </li>
@@ -119,7 +124,7 @@ function FeaturedMatch({
           </ul>
         ) : null}
 
-        <HeroOdds match={match} />
+        <HeroOdds match={displayMatch} />
 
         <div className="mt-6 text-center">
           <Link
@@ -192,6 +197,7 @@ export function HeroSection({
             match={featuredMatch ?? featured}
             live={featuredIsLive}
             liveClock={featuredExtras.extras?.liveClock ?? null}
+            liveEvents={featuredExtras.extras?.timeline ?? null}
           />
         ) : (
           <p className="surface-card rounded-2xl px-4 py-10 text-center text-dim">
