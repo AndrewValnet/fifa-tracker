@@ -45,6 +45,7 @@ import {
 } from "@/lib/schedule";
 import { TEAMS, flagUrl, resolveTeamCode } from "@/lib/team-meta";
 import { wc26GetMatch, wc26GetMatches } from "@/lib/worldcup26";
+import { reconcileMatchScoreFromEvents } from "@/lib/match-score";
 import type {
   GroupStanding,
   Match,
@@ -90,7 +91,7 @@ async function overlayWc26Events(matches: Match[]): Promise<Match[]> {
       const entry = findScheduleEntryByTeams(m.homeTeam?.code, m.awayTeam?.code, m.utcDate);
       const w = entry ? byId.get(`wc26-${entry.id}`) : undefined;
       if (!w?.events.length) return m;
-      return { ...m, events: w.events, minute: m.minute ?? w.minute };
+      return reconcileMatchScoreFromEvents({ ...m, events: w.events, minute: m.minute ?? w.minute }, w.events);
     });
   } catch {
     return matches;
@@ -104,13 +105,13 @@ async function overlayWc26Events(matches: Match[]): Promise<Match[]> {
 export const getAllMatches = cache(async (): Promise<Sourced<Match[]>> => {
   try {
     const matches = await fdGetMatches();
-    if (matches.length) return sourced(await overlayWc26Events(matches), "football-data");
+    if (matches.length) return sourced((await overlayWc26Events(matches)).map((m) => reconcileMatchScoreFromEvents(m, m.events ?? [])), "football-data");
     throw new Error("football-data returned no matches");
   } catch (err) {
     if (!(err instanceof FootballDataDisabled)) logOnce("fd:matches", err);
   }
   try {
-    return sourced(await wc26GetMatches(), "worldcup26");
+    return sourced((await wc26GetMatches()).map((m) => reconcileMatchScoreFromEvents(m, m.events ?? [])), "worldcup26");
   } catch (err) {
     logOnce("wc26:matches", err);
   }
@@ -142,7 +143,7 @@ export async function getMatchById(id: string): Promise<Sourced<Match> | null> {
   if (prefix === "fd") {
     try {
       const [enriched] = await overlayWc26Events([await fdGetMatch(rawId)]);
-      return sourced(enriched, "football-data");
+      return sourced(reconcileMatchScoreFromEvents(enriched, enriched.events ?? []), "football-data");
     } catch (err) {
       // cached() already served stale data if any existed; nothing else maps
       // a football-data id reliably once the API is unreachable.
@@ -154,7 +155,7 @@ export async function getMatchById(id: string): Promise<Sourced<Match> | null> {
   if (prefix === "wc26") {
     try {
       const m = await wc26GetMatch(rawId);
-      if (m) return sourced(m, "worldcup26");
+      if (m) return sourced(reconcileMatchScoreFromEvents(m, m.events ?? []), "worldcup26");
     } catch (err) {
       logOnce("wc26:match", err);
     }
@@ -166,12 +167,12 @@ export async function getMatchById(id: string): Promise<Sourced<Match> | null> {
     // Prefer a live overlay if worldcup26 is reachable (ids align).
     try {
       const m = await wc26GetMatch(rawId);
-      if (m) return sourced({ ...m, id }, "worldcup26");
+      if (m) return sourced(reconcileMatchScoreFromEvents({ ...m, id }, m.events ?? []), "worldcup26");
     } catch {
       /* offline */
     }
     const m = demoMatch(rawId);
-    return m ? sourced(m, "demo") : null;
+    return m ? sourced(reconcileMatchScoreFromEvents(m, m.events ?? []), "demo") : null;
   }
 
   return null;

@@ -56,6 +56,37 @@ export default async function PredictionProfilePage({ params }: { params: { id: 
       </section>
 
       <section className="mt-6">
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="surface-card rounded-2xl p-4">
+            <p className="text-[10px] uppercase tracking-wider text-dim">Prediction accuracy</p>
+            <p className="mt-2 font-display text-3xl font-bold text-gold">
+              {profile.score.picked ? Math.round((profile.score.correct / profile.score.picked) * 100) : 0}%
+            </p>
+            <p className="mt-1 text-xs text-dim">Correct results across all saved picks.</p>
+          </div>
+          <div className="surface-card rounded-2xl p-4">
+            <p className="text-[10px] uppercase tracking-wider text-dim">Exact hit rate</p>
+            <p className="mt-2 font-display text-3xl font-bold text-pitch">
+              {profile.score.picked ? Math.round((profile.score.exact / profile.score.picked) * 100) : 0}%
+            </p>
+            <p className="mt-1 text-xs text-dim">How often the scoreline was spot on.</p>
+          </div>
+          <div className="surface-card rounded-2xl p-4">
+            <p className="text-[10px] uppercase tracking-wider text-dim">Per-match pace</p>
+            <p className="mt-2 font-display text-3xl font-bold text-sky">
+              {profile.score.picked ? (profile.score.points / profile.score.picked).toFixed(1) : "0.0"}
+            </p>
+            <p className="mt-1 text-xs text-dim">Average points per prediction.</p>
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <h2 className="font-display text-2xl font-bold uppercase tracking-wide">Score breakdown</h2>
+          <p className="mt-1 text-sm text-dim">
+            Each row shows the pick, the live or final result, and what the scoring system awarded.
+          </p>
+        </div>
+
         <h2 className="font-display text-2xl font-bold uppercase tracking-wide">Match Predictions</h2>
         {profile.picks.length ? (
           <div className="mt-3 grid gap-3 lg:grid-cols-2">
@@ -85,11 +116,23 @@ export default async function PredictionProfilePage({ params }: { params: { id: 
                       </div>
                     </div>
                   </div>
-                  <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-dim">
-                    <span>{outcomeText(pick.outcome, match.homeTeam?.code, match.awayTeam?.code)}</span>
-                    <span className="rounded-full border border-gold/40 bg-gold/10 px-2 py-0.5 font-mono text-gold">
-                      {points} pts{exact ? " / exact" : correctResult ? " / result" : ""}
-                    </span>
+                  <div className="mt-3 grid gap-2 text-xs text-dim">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span>{outcomeText(pick.outcome, match.homeTeam?.code, match.awayTeam?.code)}</span>
+                      <span className="rounded-full border border-gold/40 bg-gold/10 px-2 py-0.5 font-mono text-gold">
+                        {points} pts{exact ? " / exact" : correctResult ? " / result" : ""}
+                      </span>
+                    </div>
+                    <div className="rounded-xl border border-white/10 bg-black/15 px-3 py-2">
+                      <p className="text-[10px] uppercase tracking-wider text-dim">Breakdown</p>
+                      <p className="mt-1 text-sm text-ink">
+                        {exact
+                          ? "Exact score hit."
+                          : correctResult
+                            ? "Correct result, with goal difference or team-goal bonus where applicable."
+                            : "No result points on this match."}
+                      </p>
+                    </div>
                   </div>
                 </article>
               );

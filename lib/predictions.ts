@@ -14,6 +14,7 @@ import { getUserById } from "@/lib/accounts";
 import { poolDbEnabled, poolQuery } from "@/lib/pool-db";
 import { redis, redisEnabled, redisPipe, sanitizeKey } from "@/lib/redis";
 import { goldenBallWinner, GOLDEN_BALL_BONUS } from "@/data/ballon-dor-candidates";
+import { dateStringInTz } from "@/lib/time";
 import type { Match } from "@/lib/types";
 
 export const CHAMPION_BONUS = 25;
@@ -81,6 +82,17 @@ export interface PublicProfile {
     exact: boolean;
     correctResult: boolean;
   }[];
+}
+
+export interface TodayLeaderRow {
+  userId: string;
+  name: string;
+  todayPoints: number;
+  todayExact: number;
+  todayCorrect: number;
+  todayPicked: number;
+  totalPoints: number;
+  matchedPicks: number;
 }
 
 export interface PoolSummary {
@@ -626,4 +638,43 @@ export async function getPoolSummary(): Promise<PoolSummary> {
     averagePicks: rows.length ? totalPicks / rows.length : 0,
     leader: rows[0] ?? null,
   };
+}
+
+export async function getTodayLeaderboard(tz = "America/New_York"): Promise<TodayLeaderRow[]> {
+  const matches = await getAllMatches().then((x) => x.data);
+  const today = dateStringInTz(new Date(), tz);
+  const todaysMatches = matches.filter((match) => dateStringInTz(match.utcDate, tz) === today);
+  if (!todaysMatches.length) return [];
+
+  const leaderboard = await getLeaderboard();
+  const rows: TodayLeaderRow[] = [];
+
+  for (const entry of leaderboard) {
+    const profile = await getPublicProfile(entry.userId);
+    if (!profile) continue;
+    let todayPoints = 0;
+    let todayExact = 0;
+    let todayCorrect = 0;
+    let todayPicked = 0;
+    for (const row of profile.picks) {
+      if (!todaysMatches.some((match) => match.id === row.match.id)) continue;
+      todayPoints += row.points;
+      todayPicked += 1;
+      if (row.exact) todayExact += 1;
+      if (row.correctResult) todayCorrect += 1;
+    }
+    if (!todayPicked) continue;
+    rows.push({
+      userId: entry.userId,
+      name: entry.name,
+      todayPoints,
+      todayExact,
+      todayCorrect,
+      todayPicked,
+      totalPoints: entry.points,
+      matchedPicks: entry.picked,
+    });
+  }
+
+  return rows.sort((a, b) => b.todayPoints - a.todayPoints || b.todayExact - a.todayExact || b.todayCorrect - a.todayCorrect);
 }

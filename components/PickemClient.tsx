@@ -13,7 +13,7 @@ import type { Match, Sourced } from "@/lib/types";
 
 type Mode = "signin" | "register";
 type Outcome = "HOME" | "DRAW" | "AWAY";
-type View = "open" | "mine" | "community" | "leaderboard" | "rules";
+type View = "open" | "mine" | "community" | "leaderboard" | "today" | "rules";
 
 interface PoolUser {
   id: string;
@@ -84,6 +84,22 @@ interface MatchPredictionsPayload {
   rows: PublicMatchPrediction[];
 }
 
+interface TodayRow {
+  userId: string;
+  name: string;
+  todayPoints: number;
+  todayExact: number;
+  todayCorrect: number;
+  todayPicked: number;
+  totalPoints: number;
+  matchedPicks: number;
+}
+
+interface TodayLeaderboardPayload {
+  enabled: boolean;
+  rows: TodayRow[];
+}
+
 const SORTED_TEAMS = [...TEAMS].sort((a, b) => a.name.localeCompare(b.name));
 
 function outcomeFor(home: number, away: number): Outcome {
@@ -110,6 +126,51 @@ function rankLabel(index: number): string {
   if (index === 1) return "Second";
   if (index === 2) return "Third";
   return `#${index + 1}`;
+}
+
+function HistoryBreakdown({ score }: { score?: ScoreInfo | null }) {
+  const byMatch = Object.entries(score?.byMatch ?? {}).slice(0, 8);
+  if (!score) return null;
+  return (
+    <section className="surface-card rounded-2xl p-4">
+      <div className="flex items-center justify-between gap-3">
+        <h3 className="font-display text-xl font-bold uppercase tracking-wide">Accuracy history</h3>
+        <span className="rounded-full border border-white/10 bg-white/5 px-2 py-1 text-[11px] text-dim">
+          {score.exact} exact / {score.correct} correct
+        </span>
+      </div>
+      <div className="mt-3 grid gap-2 md:grid-cols-2 xl:grid-cols-4">
+        <div className="rounded-xl border border-white/10 bg-black/20 px-3 py-3">
+          <p className="text-[10px] uppercase tracking-wider text-dim">Total points</p>
+          <p className="mt-1 font-display text-3xl font-bold text-gold">{score.points}</p>
+        </div>
+        <div className="rounded-xl border border-white/10 bg-black/20 px-3 py-3">
+          <p className="text-[10px] uppercase tracking-wider text-dim">Matches picked</p>
+          <p className="mt-1 font-display text-3xl font-bold text-ink">{score.picked}</p>
+        </div>
+        <div className="rounded-xl border border-white/10 bg-black/20 px-3 py-3">
+          <p className="text-[10px] uppercase tracking-wider text-dim">Exact scores</p>
+          <p className="mt-1 font-display text-3xl font-bold text-pitch">{score.exact}</p>
+        </div>
+        <div className="rounded-xl border border-white/10 bg-black/20 px-3 py-3">
+          <p className="text-[10px] uppercase tracking-wider text-dim">Correct results</p>
+          <p className="mt-1 font-display text-3xl font-bold text-sky">{score.correct}</p>
+        </div>
+      </div>
+      {byMatch.length ? (
+        <div className="mt-4 grid gap-2">
+          {byMatch.map(([matchId, entry]) => (
+            <div key={matchId} className="flex items-center justify-between rounded-xl border border-white/10 bg-black/15 px-3 py-2 text-sm">
+              <span className="text-dim">{matchId}</span>
+              <span className="font-mono text-gold">
+                {entry.points} pts{entry.exact ? " · exact" : entry.correctResult ? " · result" : ""}
+              </span>
+            </div>
+          ))}
+        </div>
+      ) : null}
+    </section>
+  );
 }
 
 function AuthPanel({ onDone }: { onDone: () => void }) {
@@ -545,6 +606,9 @@ export function PickemClient() {
   const { data: boardData, mutate: mutateBoard } = useSWR<LeaderboardPayload>("/api/leaderboard", jsonFetcher, {
     refreshInterval: 30_000,
   });
+  const { data: todayData } = useSWR<TodayLeaderboardPayload>("/api/pool/today", jsonFetcher, {
+    refreshInterval: 60_000,
+  });
   const [drafts, setDrafts] = useState<Record<string, MatchPick>>({});
   const [champion, setChampion] = useState("");
   const [view, setView] = useState<View>("open");
@@ -642,6 +706,7 @@ export function PickemClient() {
   const score = predData.score;
   const board = boardData.rows ?? [];
   const summary = boardData.summary;
+  const todayRows = todayData?.rows ?? [];
   const visibleMatches = view === "mine" ? myMatches : openMatches;
 
   return (
@@ -718,12 +783,15 @@ export function PickemClient() {
         {notice ? <p className="mx-4 mb-4 rounded border border-gold/40 bg-gold/10 px-3 py-2 text-xs text-gold md:mx-5">{notice}</p> : null}
       </section>
 
+      <HistoryBreakdown score={score} />
+
       <nav className="surface-glass sticky top-0 z-20 -mx-4 flex gap-2 overflow-x-auto rounded-none border-x-0 px-4 py-2 md:static md:mx-0 md:rounded-full md:border md:p-1">
         {[
           ["open", `Open picks (${openMatches.length})`],
           ["mine", `My picks (${myMatches.length})`],
           ["community", "Pool picks"],
           ["leaderboard", "Leaderboard"],
+          ["today", "Today"],
           ["rules", "Rules"],
         ].map(([key, label]) => (
           <button
@@ -743,6 +811,40 @@ export function PickemClient() {
 
       {view === "leaderboard" ? (
         <Leaderboard rows={board} userId={user.id} />
+      ) : view === "today" ? (
+        todayRows.length ? (
+          <section className="grid gap-3">
+            <div className="surface-card rounded-2xl p-4">
+              <h2 className="font-display text-2xl font-bold uppercase tracking-wide">Best predictor today</h2>
+              <p className="mt-1 text-sm text-dim">Ranks people by today&apos;s finished matches, so the office has a live daily race too.</p>
+            </div>
+            <div className="grid gap-3 md:grid-cols-2">
+              {todayRows.slice(0, 8).map((row, index) => (
+                <article key={row.userId} className="surface-card rounded-2xl p-4">
+                  <p className="text-[11px] uppercase tracking-[0.22em] text-dim">#{index + 1}</p>
+                  <Link href={`/predict/${row.userId}`} className="mt-2 block truncate font-display text-2xl font-bold uppercase hover:text-pitch">
+                    {row.name}
+                  </Link>
+                  <div className="mt-3 grid grid-cols-2 gap-2 text-sm">
+                    <div className="rounded-xl border border-white/10 bg-black/15 px-3 py-2">
+                      <p className="text-[10px] uppercase tracking-wider text-dim">Today points</p>
+                      <p className="font-display text-2xl font-bold text-gold">{row.todayPoints}</p>
+                    </div>
+                    <div className="rounded-xl border border-white/10 bg-black/15 px-3 py-2">
+                      <p className="text-[10px] uppercase tracking-wider text-dim">Today picks</p>
+                      <p className="font-display text-2xl font-bold text-ink">{row.todayPicked}</p>
+                    </div>
+                  </div>
+                  <p className="mt-2 text-xs text-dim">
+                    {row.todayExact} exact / {row.todayCorrect} correct · {row.totalPoints} total
+                  </p>
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : (
+          <EmptyState title="No finished matches today yet." description="The daily ranking will populate once today&apos;s matches start producing results." />
+        )
       ) : view === "community" ? (
         <MatchPredictionBoard
           matches={pickableMatches}
