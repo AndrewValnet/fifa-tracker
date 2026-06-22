@@ -69652,9 +69652,9 @@
   },
   "MAR-SCO": {
     "played": 1,
-    "aWins": 0,
+    "aWins": 1,
     "draws": 0,
-    "bWins": 1,
+    "bWins": 0,
     "lastMeeting": "1998 FIFA World Cup - SCO 0-3 MAR",
     "note": "Filtered from Kaggle international football results; venue/location are dataset-derived when available.",
     "meetings": [

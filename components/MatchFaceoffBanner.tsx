@@ -9,6 +9,7 @@ interface MatchFaceoffBannerProps {
   homeDetail: TeamDetail | null;
   awayDetail: TeamDetail | null;
   liveClock?: string | null;
+  highlightsHref?: string | null;
 }
 
 function formatMatchDate(utcDate: string): string {
@@ -24,7 +25,7 @@ function formatMatchDate(utcDate: string): string {
   return `${month} ${day} · ${time} ET`;
 }
 
-export function MatchFaceoffBanner({ match, liveClock }: MatchFaceoffBannerProps) {
+export function MatchFaceoffBanner({ match, liveClock, highlightsHref }: MatchFaceoffBannerProps) {
   const homeCode = resolveTeamCode(match.homeTeam?.code, match.homeTeam?.name);
   const awayCode = resolveTeamCode(match.awayTeam?.code, match.awayTeam?.name);
 
@@ -138,6 +139,18 @@ export function MatchFaceoffBanner({ match, liveClock }: MatchFaceoffBannerProps
 
           {match.venue ? (
             <span className="max-w-[160px] text-center font-mono text-xs leading-snug text-white/50">{match.venue}</span>
+          ) : null}
+
+          {isFinished ? (
+            <a
+              href={highlightsHref ?? `https://www.youtube.com/results?search_query=${encodeURIComponent(`${homeName} vs ${awayName} highlights ${new Date(match.utcDate).getFullYear()}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/25 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-white/90 transition hover:border-pitch/60 hover:text-pitch"
+            >
+              Highlights
+              <span aria-hidden>↗</span>
+            </a>
           ) : null}
         </div>
 

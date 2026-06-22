@@ -39,6 +39,17 @@ export function DataFreshness({
   const label = sourceName ?? (source ? SOURCE_LABELS[source] : null);
   if (!label && !fetchedAt && !cached) return null;
   const updated = fetchedAt ? timeAgo(fetchedAt) : null;
+  const minutes = fetchedAt ? Math.max(0, Math.round((Date.now() - new Date(fetchedAt).getTime()) / 60_000)) : null;
+  const tone =
+    minutes === null
+      ? "Fresh"
+      : minutes < 1
+        ? "Fresh"
+        : minutes < 5
+          ? "Cached"
+          : minutes < 30
+            ? "Lagging"
+            : "Stale";
   const cachedTitle = updated
     ? `Serving cached data to stay within API limits. Last live check ${updated}.`
     : "Serving cached data to stay within API limits.";
@@ -59,7 +70,7 @@ export function DataFreshness({
           title={cachedTitle}
           aria-label={cachedTitle}
         >
-          Cached
+          {tone}
         </span>
       ) : null}
     </span>

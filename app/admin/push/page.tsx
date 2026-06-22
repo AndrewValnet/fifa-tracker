@@ -36,6 +36,7 @@ export default async function PushAdminPage() {
     { label: "Push enabled", ok: diag.enabled },
     { label: "Cron route deployed", ok: true },
   ];
+  const allReady = checklist.every((item) => item.ok);
 
   return (
     <main className="mx-auto max-w-shell px-4 py-8">
@@ -64,7 +65,9 @@ export default async function PushAdminPage() {
       </section>
 
       <section className="mt-6 rounded-lg border border-edge bg-panel p-4">
-        <h2 className="font-display text-lg font-semibold uppercase tracking-wider">What still needs to be true</h2>
+        <h2 className="font-display text-lg font-semibold uppercase tracking-wider">
+          {allReady ? "Push is ready" : "What still needs to be true"}
+        </h2>
         <ul className="mt-3 grid gap-2 text-sm text-dim">
           {checklist.map((item) => (
             <li key={item.label} className="flex items-center justify-between rounded-md border border-edge/60 px-3 py-2">
@@ -74,7 +77,17 @@ export default async function PushAdminPage() {
           ))}
         </ul>
         <p className="mt-4 text-xs text-dim">
-          Alerts fire from <code>/api/cron/alerts</code>. For minute-level live alerts, that route should be called every minute by Vercel Cron or an external scheduler.
+          {allReady ? (
+            <>
+              Everything required for push alerts is set. <code>/api/cron/alerts</code> still needs to be called on a schedule
+              if you want live alerts to keep flowing.
+            </>
+          ) : (
+            <>
+              Alerts fire from <code>/api/cron/alerts</code>. For minute-level live alerts, that route should be called every
+              minute by Vercel Cron or an external scheduler.
+            </>
+          )}
         </p>
       </section>
     </main>

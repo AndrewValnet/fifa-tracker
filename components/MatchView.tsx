@@ -216,6 +216,7 @@ export function MatchView({
   );
   const liveEvents = extras?.timeline?.length ? extras.timeline : (match.events ?? []);
   const displayMatch = reconcileMatchScoreFromEvents(match, liveEvents);
+  const highlightsHref = kind === "finished" ? extras?.videos.find((v) => v.href)?.href ?? null : null;
 
   const referee = displayMatch.referees.find((r) => /referee/i.test(r.role)) ?? displayMatch.referees[0];
   const confirmedLineups = extras?.lineups.home?.players.length && extras?.lineups.away?.players.length;
@@ -308,6 +309,7 @@ export function MatchView({
                   homeDetail={homeDetail}
                   awayDetail={awayDetail}
                   liveClock={extras?.liveClock ?? null}
+                  highlightsHref={highlightsHref}
                 />
               ) : null}
               {kind === "upcoming" ? (
@@ -361,8 +363,27 @@ export function MatchView({
             </nav>
           ) : null}
 
+          {sectionLinks.length ? (
+            <nav
+              aria-label="Match sections mobile"
+              className="surface-glass fixed inset-x-3 bottom-3 z-40 rounded-2xl border border-white/10 px-3 py-2 shadow-2xl shadow-black/40 md:hidden"
+            >
+              <div className="flex snap-x gap-2 overflow-x-auto pb-0.5">
+                {sectionLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="shrink-0 snap-start whitespace-nowrap rounded-full border border-white/10 bg-white/5 px-3 py-2 text-[11px] uppercase tracking-wider text-dim transition hover:border-pitch/60 hover:bg-pitch/10 hover:text-ink"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </nav>
+          ) : null}
+
           {/* content grid */}
-          <div className="mt-10 grid min-w-0 gap-6 lg:grid-cols-3">
+          <div className="mt-10 grid min-w-0 gap-6 pb-20 lg:grid-cols-3 md:pb-0">
             <div className="min-w-0 flex flex-col gap-6 lg:col-span-2">
               {kind !== "upcoming" ? (
                 <Card id="events" title="Match Events" right={<span>tap a scorer for clips</span>}>

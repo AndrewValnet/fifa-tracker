@@ -246,6 +246,85 @@ async function CacheStatusLoader() {
   );
 }
 
+async function RecentActivityLoader() {
+  const [matchesRes, leaderboard] = await Promise.all([getAllMatches(), getScorers(5)]);
+  const matches = matchesRes.data;
+  const live = matches.filter((m) => statusKind(m.status) === "live").slice(0, 2);
+  const finished = matches
+    .filter((m) => statusKind(m.status) === "finished")
+    .sort((a, b) => +new Date(b.utcDate) - +new Date(a.utcDate))
+    .slice(0, 2);
+  const topScorer = leaderboard.data[0] ?? null;
+  const newestGoal = finished.find((m) => (m.events ?? []).some((e) => e.type === "GOAL")) ?? null;
+
+  return (
+    <section className="surface-card rounded-2xl p-4 md:p-5">
+      <SectionHeader title="Recent Activity" right="what just changed" />
+      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <div className="rounded-xl border border-white/10 bg-black/15 px-4 py-3">
+          <p className="text-[10px] uppercase tracking-wider text-dim">Live right now</p>
+          {live.length ? (
+            <ul className="mt-2 grid gap-2 text-sm">
+              {live.map((m) => (
+                <li key={m.id} className="text-ink">
+                  {m.homeTeam?.code ?? m.homeLabel ?? "Home"} {m.score.home ?? 0}-{m.score.away ?? 0} {m.awayTeam?.code ?? m.awayLabel ?? "Away"}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-2 text-sm text-dim">No live matches at the moment.</p>
+          )}
+        </div>
+
+        <div className="rounded-xl border border-white/10 bg-black/15 px-4 py-3">
+          <p className="text-[10px] uppercase tracking-wider text-dim">Latest finish</p>
+          {finished.length ? (
+            <div className="mt-2 text-sm">
+              <p className="text-ink">
+                {finished[0].homeTeam?.code ?? finished[0].homeLabel ?? "Home"} {finished[0].score.home ?? 0}-{finished[0].score.away ?? 0}{" "}
+                {finished[0].awayTeam?.code ?? finished[0].awayLabel ?? "Away"}
+              </p>
+              <p className="mt-1 text-dim">Finished {new Date(finished[0].utcDate).toLocaleDateString()}</p>
+            </div>
+          ) : (
+            <p className="mt-2 text-sm text-dim">No finished match yet.</p>
+          )}
+        </div>
+
+        <div className="rounded-xl border border-white/10 bg-black/15 px-4 py-3">
+          <p className="text-[10px] uppercase tracking-wider text-dim">Latest goal</p>
+          {newestGoal ? (
+            <div className="mt-2 text-sm">
+              <p className="text-ink">
+                {newestGoal.homeTeam?.code ?? newestGoal.homeLabel ?? "Home"} vs {newestGoal.awayTeam?.code ?? newestGoal.awayLabel ?? "Away"}
+              </p>
+              <p className="mt-1 text-dim">
+                {newestGoal.events.find((e) => e.type === "GOAL")?.player ?? "Goal"} at {newestGoal.events.find((e) => e.type === "GOAL")?.minute ?? "?"}’
+              </p>
+            </div>
+          ) : (
+            <p className="mt-2 text-sm text-dim">No recent goals to report.</p>
+          )}
+        </div>
+
+        <div className="rounded-xl border border-white/10 bg-black/15 px-4 py-3">
+          <p className="text-[10px] uppercase tracking-wider text-dim">Top scorer</p>
+          {topScorer ? (
+            <div className="mt-2 text-sm">
+              <p className="text-ink">{topScorer.player}</p>
+              <p className="mt-1 text-dim">
+                {topScorer.team.name} · {topScorer.goals} goals
+              </p>
+            </div>
+          ) : (
+            <p className="mt-2 text-sm text-dim">No scoring data yet.</p>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function HeroSkeleton() {
   return (
     <section className="pitch-bg border-b border-white/10">
@@ -309,6 +388,9 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+      </section>
+      <section aria-label="Recent activity" className="mx-auto max-w-shell px-4 pt-6">
+        <RecentActivityLoader />
       </section>
       <TodayStrip />
 
