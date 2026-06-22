@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import useSWR from "swr";
 import { EmptyState } from "@/components/EmptyState";
@@ -128,9 +128,107 @@ function rankLabel(index: number): string {
   return `#${index + 1}`;
 }
 
-function HistoryBreakdown({ score }: { score?: ScoreInfo | null }) {
+function ChampionPicker({
+  value,
+  onChange,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const selected = SORTED_TEAMS.find((team) => team.code === value) ?? null;
+
+  useEffect(() => {
+    function onPointerDown(event: PointerEvent) {
+      if (panelRef.current && !panelRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setOpen(false);
+    }
+
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, []);
+
+  return (
+    <div ref={panelRef} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((prev) => !prev)}
+        aria-expanded={open}
+        aria-haspopup="listbox"
+        className={`flex w-full items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-left transition focus:outline-none focus:ring-2 focus:ring-pitch/20 ${
+          open ? "border-pitch/80 bg-black/35 shadow-lg shadow-pitch/10" : "border-white/10 bg-black/20 hover:border-pitch/30"
+        }`}
+      >
+        <span className="min-w-0">
+          <span className="block text-[11px] uppercase tracking-[0.22em] text-dim">Champion pick (+25)</span>
+          <span className="mt-1 block truncate font-display text-lg font-bold uppercase text-ink">
+            {selected ? selected.name : "Pick a champion..."}
+          </span>
+        </span>
+        <span className={`shrink-0 text-dim transition ${open ? "rotate-180 text-pitch" : ""}`}>⌄</span>
+      </button>
+
+      {open ? (
+        <div className="absolute left-0 right-0 top-[calc(100%+0.5rem)] z-30 overflow-hidden rounded-2xl border border-white/10 bg-[#101826] shadow-2xl shadow-black/40">
+          <div className="border-b border-white/10 bg-white/5 px-4 py-3">
+            <p className="text-[11px] uppercase tracking-[0.22em] text-dim">Select a country</p>
+            <p className="mt-1 text-xs text-dim">Your tournament champion earns a big bonus if they win it all.</p>
+          </div>
+          <div className="max-h-72 overflow-y-auto p-2">
+            <button
+              type="button"
+              onClick={() => {
+                onChange("");
+                setOpen(false);
+              }}
+              className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-left transition hover:bg-white/5 ${
+                !value ? "bg-pitch/15 text-ink" : "text-dim"
+              }`}
+            >
+              <span className="truncate">No champion selected</span>
+              {!value ? <span className="text-pitch">Selected</span> : null}
+            </button>
+            {SORTED_TEAMS.map((team) => {
+              const active = team.code === value;
+              return (
+                <button
+                  type="button"
+                  key={team.code}
+                  onClick={() => {
+                    onChange(team.code);
+                    setOpen(false);
+                  }}
+                  className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left transition hover:bg-white/5 ${
+                    active ? "bg-pitch/15 text-ink" : "text-ink"
+                  }`}
+                >
+                  <Flag code={team.code} name={team.name} width={26} />
+                  <span className="min-w-0 flex-1 truncate">{team.name}</span>
+                  {active ? <span className="shrink-0 rounded-full border border-pitch/30 bg-pitch/10 px-2 py-0.5 text-[11px] text-pitch">Chosen</span> : null}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function HistoryBreakdown({ score, matches }: { score?: ScoreInfo | null; matches: Match[] }) {
   const byMatch = Object.entries(score?.byMatch ?? {}).slice(0, 8);
   if (!score) return null;
+  const matchById = new Map(matches.map((match) => [match.id, match]));
   return (
     <section className="surface-card rounded-2xl p-4">
       <div className="flex items-center justify-between gap-3">
@@ -159,14 +257,29 @@ function HistoryBreakdown({ score }: { score?: ScoreInfo | null }) {
       </div>
       {byMatch.length ? (
         <div className="mt-4 grid gap-2">
-          {byMatch.map(([matchId, entry]) => (
-            <div key={matchId} className="flex items-center justify-between rounded-xl border border-white/10 bg-black/15 px-3 py-2 text-sm">
-              <span className="text-dim">{matchId}</span>
-              <span className="font-mono text-gold">
-                {entry.points} pts{entry.exact ? " · exact" : entry.correctResult ? " · result" : ""}
-              </span>
-            </div>
-          ))}
+          {byMatch.map(([matchId, entry]) => {
+            const match = matchById.get(matchId);
+            const home = match?.homeTeam?.name ?? match?.homeLabel ?? "Home";
+            const away = match?.awayTeam?.name ?? match?.awayLabel ?? "Away";
+            const stage = match ? (match.group ? `Group ${match.group}` : match.stage.replace(/_/g, " ")) : "Match";
+            const date = match
+              ? new Date(match.utcDate).toLocaleDateString(undefined, { month: "short", day: "numeric" })
+              : matchId;
+
+            return (
+              <div key={matchId} className="rounded-xl border border-white/10 bg-black/15 px-3 py-2 text-sm">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="truncate font-semibold text-ink">{match ? `${home} vs ${away}` : matchId}</p>
+                    <p className="text-[11px] text-dim">{match ? `${stage} · ${date}` : "Match details unavailable"}</p>
+                  </div>
+                  <span className="shrink-0 font-mono text-gold">
+                    {entry.points} pts{entry.exact ? " · exact" : entry.correctResult ? " · result" : ""}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
         </div>
       ) : null}
     </section>
@@ -751,22 +864,8 @@ export function PickemClient() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-navy/70 p-4 shadow-xl shadow-black/20">
-          <label className="flex flex-col gap-1 text-xs text-dim">
-            Champion pick (+25)
-            <select
-              value={champion}
-              onChange={(e) => setChampion(e.target.value)}
-              className="mt-1 rounded-xl border border-white/10 bg-black/20 px-3 py-3 text-sm text-ink outline-none transition focus:border-pitch focus:ring-2 focus:ring-pitch/20"
-            >
-              <option value="">Pick a champion...</option>
-              {SORTED_TEAMS.map((team) => (
-                <option key={team.code} value={team.code}>
-                  {team.name}
-                </option>
-              ))}
-            </select>
-          </label>
+          <div className="rounded-2xl border border-white/10 bg-[radial-gradient(circle_at_top,rgba(0,229,139,0.12),transparent_25%),linear-gradient(180deg,rgba(8,15,28,0.92),rgba(7,11,18,0.96))] p-4 shadow-xl shadow-black/20">
+          <ChampionPicker value={champion} onChange={setChampion} />
           <button
             type="button"
             onClick={save}
@@ -783,7 +882,7 @@ export function PickemClient() {
         {notice ? <p className="mx-4 mb-4 rounded border border-gold/40 bg-gold/10 px-3 py-2 text-xs text-gold md:mx-5">{notice}</p> : null}
       </section>
 
-      <HistoryBreakdown score={score} />
+      <HistoryBreakdown score={score} matches={matches} />
 
       <nav className="surface-glass sticky top-0 z-20 -mx-4 flex gap-2 overflow-x-auto rounded-none border-x-0 px-4 py-2 md:static md:mx-0 md:rounded-full md:border md:p-1">
         {[
