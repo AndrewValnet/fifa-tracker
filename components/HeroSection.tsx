@@ -129,7 +129,7 @@ function FeaturedMatch({
         <div className="mt-6 text-center">
           <Link
             href={`/match/${match.id}`}
-            prefetch={false}
+            prefetch
             className="inline-block rounded-full bg-gradient-to-r from-pitch via-sky to-gold px-6 py-2.5 font-display text-sm font-semibold uppercase tracking-wider text-navy shadow-xl shadow-pitch/20 transition-transform hover:scale-105"
           >
             {live ? "Open match centre" : "Match preview"}
@@ -212,7 +212,7 @@ export function HeroSection({
               <Link
                 key={m.id}
                 href={`/match/${m.id}`}
-                prefetch={false}
+                prefetch
                 className="rounded-full border border-live/40 bg-live/10 px-3 py-1.5 font-mono text-xs hover:bg-live/20"
               >
                 {(m.homeTeam?.code ?? "TBD")} {m.score.home ?? "–"}:{m.score.away ?? "–"} {(m.awayTeam?.code ?? "TBD")}

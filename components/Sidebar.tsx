@@ -77,7 +77,7 @@ export function Sidebar() {
                 <li key={m.id}>
                   <Link
                     href={`/match/${m.id}`}
-                    prefetch={false}
+                    prefetch
                     className="block rounded-xl border border-edge/70 bg-black/20 px-3 py-2 text-xs transition hover:border-pitch/50 hover:bg-pitch/5"
                   >
                     <span className="flex items-center justify-between gap-2">

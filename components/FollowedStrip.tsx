@@ -99,7 +99,7 @@ export function FollowedStrip() {
               className="surface-card flex min-w-[230px] flex-col gap-1 rounded-2xl px-3 py-2.5"
             >
               <div className="flex items-center gap-2">
-                <Link href={`/teams/${code}`} className="flex min-w-0 items-center gap-2 hover:text-gold">
+                <Link href={`/teams/${code}`} prefetch className="flex min-w-0 items-center gap-2 hover:text-gold">
                   <Flag code={code} name={teamName(code)} width={22} />
                   <span className="truncate text-sm font-semibold">{teamName(code) ?? code}</span>
                 </Link>
@@ -113,7 +113,7 @@ export function FollowedStrip() {
                 </button>
               </div>
               {focus ? (
-                <Link href={`/match/${focus.id}`} className="text-[11px] text-dim hover:text-ink">
+                <Link href={`/match/${focus.id}`} prefetch className="text-[11px] text-dim hover:text-ink">
                   {live ? <span className="font-semibold text-live">LIVE </span> : null}
                   vs {opp?.code ?? opp?.name ?? "TBD"}{" "}
                   {live ? (
@@ -128,10 +128,10 @@ export function FollowedStrip() {
                 <span className="text-[11px] text-dim">No upcoming fixtures</span>
               )}
               <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-[10px] uppercase tracking-wider text-dim">
-                <Link href={`/teams/${code}`} className="hover:text-pitch">
+                <Link href={`/teams/${code}`} prefetch className="hover:text-pitch">
                   Team news
                 </Link>
-                <Link href={`/standings${group ? `#group-${group}` : ""}`} className="hover:text-pitch">
+                <Link href={`/standings${group ? `#group-${group}` : ""}`} prefetch className="hover:text-pitch">
                   Standings
                 </Link>
               </div>

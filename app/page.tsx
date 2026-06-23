@@ -12,6 +12,7 @@ import { HeroSection } from "@/components/HeroSection";
 import { NewsFeed } from "@/components/NewsFeed";
 import { OfflineNotice } from "@/components/OfflineNotice";
 import { SectionHeader } from "@/components/SectionHeader";
+import { DataFreshness } from "@/components/DataFreshness";
 import { SourceTag } from "@/components/SourceTag";
 import { StandingsAccordion } from "@/components/StandingsAccordion";
 import { TodayStrip } from "@/components/TodayStrip";
@@ -216,10 +217,20 @@ async function CacheStatusLoader() {
     (usage.remoteDaily?.["cache:espn:remoteMisses"] ?? 0);
   const hitRate = redisHits + redisMisses > 0 ? Math.round((redisHits / (redisHits + redisMisses)) * 100) : null;
   const payloadSkips = Object.values(usage.cache ?? {}).reduce((sum, row) => sum + row.remoteWriteSkips, 0);
+  const lastTouched = usage.startedAt;
 
   return (
     <section className="surface-card rounded-2xl p-4 md:p-5">
       <SectionHeader title="Staleness &amp; Cache Status" right="Why the dashboard looks fresh" />
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/10 bg-black/15 px-4 py-3">
+        <div>
+          <p className="text-[10px] uppercase tracking-[0.25em] text-dim">Trust signal</p>
+          <p className="mt-1 text-sm text-ink">
+            Live and cached data are blended so the page stays quick without pretending stale data is live.
+          </p>
+        </div>
+        <DataFreshness source="football-data" fetchedAt={lastTouched} prefix="Live source" />
+      </div>
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
         <div className="rounded-xl border border-white/10 bg-black/15 px-4 py-3">
           <p className="text-[10px] uppercase tracking-wider text-dim">football-data calls</p>
@@ -239,8 +250,8 @@ async function CacheStatusLoader() {
         </div>
       </div>
       <div className="mt-4 rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-dim">
-        <span className="font-semibold text-ink">Cached</span> when possible, with live-source fallbacks only when needed.
-        That keeps the page quick and saves API calls.
+        <span className="font-semibold text-ink">Cache-first</span> means we show the fastest trustworthy version first,
+        then refresh from live sources in the background when needed.
       </div>
     </section>
   );
@@ -329,8 +340,17 @@ function HeroSkeleton() {
   return (
     <section className="pitch-bg border-b border-white/10">
       <div className="mx-auto max-w-shell px-4 pb-8 pt-6 md:pt-10">
-        <div className="skeleton mb-6 h-9 w-72" aria-hidden />
-        <div className="skeleton h-72 w-full rounded-[2rem]" aria-hidden />
+        <div className="flex items-end justify-between gap-4">
+          <div className="skeleton h-10 w-72" aria-hidden />
+          <div className="skeleton h-9 w-48" aria-hidden />
+        </div>
+        <div className="mt-5 grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="skeleton h-[24rem] rounded-[2rem]" aria-hidden />
+          <div className="grid gap-4">
+            <div className="skeleton h-40 rounded-[1.5rem]" aria-hidden />
+            <div className="skeleton h-40 rounded-[1.5rem]" aria-hidden />
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -353,7 +373,7 @@ export default function HomePage() {
                 <h2 className="font-display text-xl font-bold uppercase tracking-wide text-ink">For you</h2>
               </div>
               <span className="rounded-full border border-pitch/25 bg-pitch/10 px-3 py-1 text-[11px] uppercase tracking-wider text-pitch">
-                Cache-first
+                Cache-first · personalized
               </span>
             </div>
           </div>
@@ -363,16 +383,16 @@ export default function HomePage() {
               <section className="surface-card rounded-2xl p-4">
                 <SectionHeader title="Shortcuts" right="fast paths" />
                 <div className="grid gap-2 sm:grid-cols-2">
-                  <Link href="/predict" className="rounded-xl border border-white/10 bg-black/15 px-4 py-3 text-sm text-ink transition hover:border-pitch/50 hover:bg-pitch/10">
+                  <Link href="/predict" prefetch className="rounded-xl border border-white/10 bg-black/15 px-4 py-3 text-sm text-ink transition hover:border-pitch/50 hover:bg-pitch/10">
                     Open prediction pool
                   </Link>
-                  <Link href="/players" className="rounded-xl border border-white/10 bg-black/15 px-4 py-3 text-sm text-ink transition hover:border-pitch/50 hover:bg-pitch/10">
+                  <Link href="/players" prefetch className="rounded-xl border border-white/10 bg-black/15 px-4 py-3 text-sm text-ink transition hover:border-pitch/50 hover:bg-pitch/10">
                     Browse players
                   </Link>
-                  <Link href="/compare" className="rounded-xl border border-white/10 bg-black/15 px-4 py-3 text-sm text-ink transition hover:border-pitch/50 hover:bg-pitch/10">
+                  <Link href="/compare" prefetch className="rounded-xl border border-white/10 bg-black/15 px-4 py-3 text-sm text-ink transition hover:border-pitch/50 hover:bg-pitch/10">
                     Compare players
                   </Link>
-                  <Link href="/notifications" className="rounded-xl border border-white/10 bg-black/15 px-4 py-3 text-sm text-ink transition hover:border-pitch/50 hover:bg-pitch/10">
+                  <Link href="/notifications" prefetch className="rounded-xl border border-white/10 bg-black/15 px-4 py-3 text-sm text-ink transition hover:border-pitch/50 hover:bg-pitch/10">
                     Alert settings
                   </Link>
                 </div>

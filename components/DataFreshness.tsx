@@ -45,13 +45,15 @@ export function DataFreshness({
       ? "Fresh"
       : minutes < 1
         ? "Fresh"
-        : minutes < 5
-          ? "Cached"
-          : minutes < 30
-            ? "Lagging"
-            : "Stale";
+        : minutes < 2
+          ? "Warm"
+          : minutes < 10
+            ? "Cached"
+            : minutes < 30
+              ? "Lagging"
+              : "Stale";
   const cachedTitle = updated
-    ? `Serving cached data to stay within API limits. Last live check ${updated}.`
+    ? `Serving cached data to stay within API limits. Live source last checked ${updated}.`
     : "Serving cached data to stay within API limits.";
 
   return (
@@ -66,7 +68,17 @@ export function DataFreshness({
       {updated ? <span>Updated {updated}</span> : null}
       {cached ? (
         <span
-          className="rounded-full border border-pitch/25 bg-pitch/10 px-2 py-0.5 font-mono uppercase tracking-wider text-pitch"
+          className={`rounded-full border px-2 py-0.5 font-mono uppercase tracking-wider ${
+            tone === "Fresh"
+              ? "border-pitch/25 bg-pitch/10 text-pitch"
+              : tone === "Warm"
+                ? "border-sky/25 bg-sky/10 text-sky"
+                : tone === "Cached"
+                  ? "border-gold/25 bg-gold/10 text-gold"
+                  : tone === "Lagging"
+                    ? "border-orange-400/25 bg-orange-400/10 text-orange-200"
+                    : "border-live/25 bg-live/10 text-live"
+          }`}
           title={cachedTitle}
           aria-label={cachedTitle}
         >
