@@ -11,7 +11,7 @@ import { LocalTime } from "@/components/LocalTime";
 import { MatchClock } from "@/components/MatchClock";
 import { OddsBar } from "@/components/OddsBar";
 import { useMatchOdds } from "@/hooks/useMatchOdds";
-import { stageLabel, statusKind } from "@/lib/format";
+import { effectiveStatusKind, stageLabel } from "@/lib/format";
 import { getStadium } from "@/lib/schedule";
 import { getAccentColor } from "@/lib/team-meta";
 import type { Match } from "@/lib/types";
@@ -34,7 +34,7 @@ export function MatchCard({
   withOdds?: boolean;
   className?: string;
 }) {
-  const kind = statusKind(match.status);
+  const kind = effectiveStatusKind(match);
   const { odds } = useMatchOdds(withOdds ? match.id : null, withOdds);
 
   const homeName = match.homeTeam?.name ?? match.homeLabel ?? "TBD";

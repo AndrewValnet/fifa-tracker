@@ -18,7 +18,7 @@ import { useLiveMatch } from "@/hooks/useLiveMatch";
 import { useMatchExtras } from "@/hooks/useMatchExtras";
 import { useLiveMatches, useUpcomingMatches } from "@/hooks/useFixtures";
 import { useMatchOdds } from "@/hooks/useMatchOdds";
-import { stageLabel, statusKind } from "@/lib/format";
+import { effectiveStatusKind, stageLabel } from "@/lib/format";
 import { reconcileMatchScoreFromEvents } from "@/lib/match-score";
 import { getStadium } from "@/lib/schedule";
 import type { Match, MatchEvent, Sourced } from "@/lib/types";
@@ -167,11 +167,11 @@ export function HeroSection({
       : undefined,
   );
   const featuredMatch = featuredLive.match ?? featured;
-  const featuredIsLive = featuredMatch ? statusKind(featuredMatch.status) === "live" : false;
+  const featuredIsLive = featuredMatch ? effectiveStatusKind(featuredMatch) === "live" : false;
   const featuredExtras = useMatchExtras(
     featuredMatch?.id ?? "",
     featuredIsLive,
-    featuredMatch ? statusKind(featuredMatch.status) === "finished" : false,
+    featuredMatch ? effectiveStatusKind(featuredMatch) === "finished" : false,
     Boolean(featuredMatch && featuredIsLive),
   );
 

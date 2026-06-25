@@ -43,6 +43,29 @@ export function statusKind(status: MatchStatus): "live" | "upcoming" | "finished
   return "other";
 }
 
+/**
+ * Provider status can lag behind the clock/timeline. Treat a match as live if
+ * the provider says so, or if the match is clearly in-progress by minute/event
+ * data even when the raw status still says finished/upcoming.
+ */
+export function effectiveStatusKind(match: Match, now: number = Date.now()): "live" | "upcoming" | "finished" | "other" {
+  const kind = statusKind(match.status);
+  if (kind === "live") return "live";
+
+  const kickoff = new Date(match.utcDate).getTime();
+  const elapsedMinutes = Math.floor((now - kickoff) / 60_000);
+  const hasLiveMinute = typeof match.minute === "number" && match.minute > 0 && match.minute < 125;
+  const hasInProgressEvents = match.events.some((event) => event.type === "GOAL" || event.type === "YELLOW" || event.type === "RED" || event.type === "SUB");
+  const scoreChangedSinceKickoff =
+    kind !== "upcoming" && (match.score.home !== null || match.score.away !== null) && elapsedMinutes >= 0 && elapsedMinutes <= 180;
+
+  if (elapsedMinutes >= -30 && elapsedMinutes <= 180 && (hasLiveMinute || hasInProgressEvents || scoreChangedSinceKickoff)) {
+    return "live";
+  }
+
+  return kind;
+}
+
 export function timeAgo(iso: string): string {
   const ms = Date.now() - new Date(iso).getTime();
   const min = Math.round(ms / 60_000);

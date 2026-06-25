@@ -12,7 +12,7 @@ import { PushButton } from "@/components/PushButton";
 import { jsonFetcher } from "@/hooks/fetcher";
 import { useFollowedTeams } from "@/hooks/useFollowedTeams";
 import { useMounted } from "@/hooks/useMounted";
-import { statusKind } from "@/lib/format";
+import { effectiveStatusKind } from "@/lib/format";
 import { TEAMS, teamGroup, teamName } from "@/lib/team-meta";
 import type { Match, Sourced } from "@/lib/types";
 
@@ -85,9 +85,9 @@ export function FollowedStrip() {
       <div className="flex gap-3 overflow-x-auto pb-1">
         {followed.map((code) => {
           const tm = matches.filter((m) => m.homeTeam?.code === code || m.awayTeam?.code === code);
-          const live = tm.find((m) => statusKind(m.status) === "live");
+          const live = tm.find((m) => effectiveStatusKind(m) === "live");
           const next = tm
-            .filter((m) => statusKind(m.status) === "upcoming")
+            .filter((m) => effectiveStatusKind(m) === "upcoming")
             .sort((a, b) => +new Date(a.utcDate) - +new Date(b.utcDate))[0];
           const focus = live ?? next;
           const opp = focus ? (focus.homeTeam?.code === code ? focus.awayTeam : focus.homeTeam) : null;

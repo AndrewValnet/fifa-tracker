@@ -6,7 +6,7 @@
 import useSWR from "swr";
 import { jsonFetcher } from "@/hooks/fetcher";
 import { Flag } from "@/components/Flag";
-import { statusKind } from "@/lib/format";
+import { effectiveStatusKind, statusKind } from "@/lib/format";
 import type { Match, Sourced } from "@/lib/types";
 
 export function LiveScoresTicker() {
@@ -65,7 +65,7 @@ export function LiveScoresTicker() {
 
       <div className="ticker-track h-full">
         {items.map((match, i) => {
-          const isLive = statusKind(match.status) === "live";
+          const isLive = effectiveStatusKind(match) === "live";
           const homeScore = match.score.home ?? 0;
           const awayScore = match.score.away ?? 0;
           const scoreStr = `${homeScore}-${awayScore}`;

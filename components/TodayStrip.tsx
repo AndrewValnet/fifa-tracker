@@ -11,6 +11,8 @@ import type { Match, Sourced } from "@/lib/types";
 
 export function TodayStrip({ initial }: { initial?: Sourced<Match[]> }) {
   const { matches, source, fetchedAt } = useTodayMatches(initial);
+  const liveMatches = matches.filter((m) => m.status === "IN_PLAY" || m.status === "PAUSED" || (m.minute !== null && m.minute > 0));
+  const hasLive = liveMatches.length > 0;
 
   return (
     <section aria-label="Today's matches" className="mx-auto max-w-shell px-4 pt-8">
@@ -19,6 +21,7 @@ export function TodayStrip({ initial }: { initial?: Sourced<Match[]> }) {
         right={
           <span className="flex flex-wrap items-center justify-end gap-2">
             <SourceTag source={source} />
+            {hasLive ? <span className="rounded-full border border-live/30 bg-live/10 px-2 py-0.5 text-[10px] uppercase tracking-wider text-live">Live now</span> : null}
             <DataFreshness source={source} fetchedAt={fetchedAt} prefix="Source" />
           </span>
         }
