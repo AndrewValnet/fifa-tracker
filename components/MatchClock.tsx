@@ -4,7 +4,7 @@
 // estimate when the provider does not report an official minute.
 
 import { useEffect, useState } from "react";
-import { liveClock, statusKind } from "@/lib/format";
+import { effectiveStatusKind, liveClock } from "@/lib/format";
 import type { Match } from "@/lib/types";
 
 function clockMinuteValue(minute: string | null | undefined): number {
@@ -38,7 +38,7 @@ export function MatchClock({
 }) {
   const [now, setNow] = useState<number | null>(null);
 
-  const live = statusKind(match.status) === "live";
+  const live = effectiveStatusKind(match) === "live";
 
   useEffect(() => {
     if (!live) return;

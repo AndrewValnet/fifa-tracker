@@ -1,7 +1,7 @@
 import { Flag } from "@/components/Flag";
 import { MatchClock } from "@/components/MatchClock";
 import { contrastText, getTeamColors, resolveTeamCode } from "@/lib/team-meta";
-import { stageLabel, statusKind } from "@/lib/format";
+import { effectiveStatusKind, stageLabel } from "@/lib/format";
 import type { Match, TeamDetail } from "@/lib/types";
 
 interface MatchFaceoffBannerProps {
@@ -35,7 +35,7 @@ export function MatchFaceoffBanner({ match, liveClock, highlightsHref }: MatchFa
   const homeTextColor = contrastText(homeColors.primary);
   const awayTextColor = contrastText(awayColors.primary);
 
-  const kind = statusKind(match.status);
+  const kind = effectiveStatusKind(match);
   const isLive = kind === "live";
   const isFinished = kind === "finished";
   const isUpcoming = kind === "upcoming";

@@ -41,7 +41,7 @@ import { WeatherWidget } from "@/components/WeatherWidget";
 import { WhereToWatch } from "@/components/WhereToWatch";
 import { useLiveMatch } from "@/hooks/useLiveMatch";
 import { useMatchExtras } from "@/hooks/useMatchExtras";
-import { fmtNumber, stageLabel, statusKind } from "@/lib/format";
+import { effectiveStatusKind, fmtNumber, stageLabel } from "@/lib/format";
 import { matchPlayerByName, type EspnRosterPlayer } from "@/lib/espn";
 import { reconcileMatchScoreFromEvents } from "@/lib/match-score";
 import { getAccentColor } from "@/lib/team-meta";
@@ -202,7 +202,7 @@ export function MatchView({
 }) {
   const { match: polled, source, fetchedAt } = useLiveMatch(initial.data.id, initial);
   const match = polled ?? initial.data;
-  const kind = statusKind(match.status);
+  const kind = effectiveStatusKind(match);
   const kickoffMs = new Date(match.utcDate).getTime();
   const extrasEnabled =
     kind === "live" ||
@@ -435,7 +435,7 @@ export function MatchView({
                     awayCode={displayMatch.awayTeam?.code ?? null}
                     homeScore={displayMatch.score?.home ?? null}
                     awayScore={displayMatch.score?.away ?? null}
-                    isLive={statusKind(displayMatch.status) === "live"}
+                    isLive={effectiveStatusKind(displayMatch) === "live"}
                   />
                 </section>
               ) : null}
